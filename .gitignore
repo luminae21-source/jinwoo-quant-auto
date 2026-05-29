@@ -1,0 +1,45 @@
+﻿# DART API key 절대 보호
+.dart_key
+dart_config.json
+dart_corp_codes.json
+
+# 학술 PDF (큰 파일, 67편)
+*.pdf
+
+# 캐시 데이터
+quality_data_cache.json
+quality_timeseries_cache.json
+quality_summary.csv
+quality_timeseries_summary.csv
+
+# 백테스트 결과 (큰 파일, 매번 갱신)
+backtest_*.json
+validate_*.json
+factor_correlation_*.json
+factor_correlation_*.csv
+attribution_v37_*.json
+attribution_v37_*.html
+attribution_panel_SAMPLE.html
+
+# 점수 결과 (GitHub Actions에서 자동 생성)
+v3*_scores_latest.csv
+v3*_summary_latest.json
+
+# Dashboard HTML (자동 생성, docs/에 배포됨)
+dashboard_v37.html
+dashboard_v37_*.html
+dashboard_v38_*.html
+
+# Python
+__pycache__/
+*.pyc
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Optional: github_setup 폴더가 별도 v3.6 setup용이면 제외
+# github_setup/

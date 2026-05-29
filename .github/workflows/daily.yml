@@ -1,4 +1,4 @@
-name: 진우퀀트 v3.6 자동 점수 갱신
+name: 진우퀀트 v3.6 + v3.7.2 자동 점수 갱신
 
 on:
   schedule:
@@ -14,7 +14,7 @@ permissions:
 jobs:
   update-scores:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Checkout repo
@@ -30,19 +30,72 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run score_v36.py
+      # ============================================
+      # v3.6 baseline (기존 production, 비교용 유지)
+      # ============================================
+      - name: Run score_v36.py (baseline)
         env:
           DART_API_KEY: ${{ secrets.DART_API_KEY }}
           TZ: Asia/Seoul
         run: |
           python score_v36.py
+          echo "✅ v3.6 baseline 완료"
+
+      # ============================================
+      # v3.7.1 backup (안전망)
+      # ============================================
+      - name: Run score_v37_1.py (backup)
+        continue-on-error: true
+        env:
+          DART_API_KEY: ${{ secrets.DART_API_KEY }}
+          TZ: Asia/Seoul
+        run: |
+          python score_v37_1.py
+          echo "✅ v3.7.1 backup 완료"
+
+      # ============================================
+      # v3.7.2 production (Echo Momentum, 신규 primary)
+      # CAGR 71.54%, Sharpe 2.78, IR 1.54
+      # ============================================
+      - name: Run score_v37_2.py (production)
+        env:
+          DART_API_KEY: ${{ secrets.DART_API_KEY }}
+          TZ: Asia/Seoul
+        run: |
+          python score_v37_2.py
+          echo "✅ v3.7.2 production 완료"
+
+      # ============================================
+      # Dashboard 파일을 docs/ 폴더로 정리
+      # v3.7.2가 primary (index.html), v3.6/v3.7.1은 reference
+      # ============================================
+      - name: Update dashboards
+        run: |
+          mkdir -p docs
+          # v3.7.2 primary
+          cp dashboard_v37_2.html docs/index.html 2>/dev/null || true
+          cp dashboard_v37_2.html docs/v37_2.html 2>/dev/null || true
+          # v3.6 baseline reference (기존 dashboard.html 유지)
+          cp dashboard_v36.html docs/v36.html 2>/dev/null || true
+          cp dashboard_v36.html docs/dashboard.html 2>/dev/null || true
+          # v3.7.1 backup
+          cp dashboard_v37_1.html docs/v37_1.html 2>/dev/null || true
+          # 점수 CSV·JSON 함께 배포 (v3.6 + v3.7.2)
+          cp v37_2_scores_latest.csv docs/v37_2_scores.csv 2>/dev/null || true
+          cp v37_2_summary_latest.json docs/v37_2_summary.json 2>/dev/null || true
+          cp v36_scores_latest.csv docs/v36_scores.csv 2>/dev/null || true
+          cp v36_summary_latest.json docs/v36_summary.json 2>/dev/null || true
+          # v3.7.1 backup 데이터
+          cp v37_1_scores_latest.csv docs/v37_1_scores.csv 2>/dev/null || true
+          cp v37_1_summary_latest.json docs/v37_1_summary.json 2>/dev/null || true
+          echo "✅ Dashboard 정리 완료"
 
       - name: Commit dashboard updates
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add docs/
-          git diff --staged --quiet || git commit -m "🤖 v3.6 자동 갱신 $(date +'%Y-%m-%d %H:%M KST')"
+          git diff --staged --quiet || git commit -m "🤖 v3.6 + v3.7.2 자동 갱신 $(date +'%Y-%m-%d %H:%M KST')"
           git pull --rebase origin main
           git push
 
@@ -57,7 +110,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
-          
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
