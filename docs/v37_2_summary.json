@@ -2,13 +2,13 @@
   "version": "v3.7.2",
   "factors": "v3.7.1 + Echo Momentum (Novy-Marx 2012)",
   "echo_weight": 1.0,
-  "timestamp": "2026-05-31T19:02:17.698801",
+  "timestamp": "2026-06-01T22:13:36.168198",
   "등급_분포": {
     "S+": 7,
     "S": 3,
+    "A": 3,
     "B": 3,
-    "A": 2,
-    "C": 2,
+    "C": 1,
     "D": 1
   },
   "Echo_분포": {
