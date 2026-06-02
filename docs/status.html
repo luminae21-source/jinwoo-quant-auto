@@ -2,77 +2,91 @@
 <html lang="ko"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>진우퀀트 — 검증·현황 (정직 기준)</title>
+<title>진우퀀트 — 쉽게 보는 현황</title>
 <style>
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f1419;color:#e0e6ed;line-height:1.6;padding:14px;margin:0;max-width:860px;margin:0 auto;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f1419;color:#e0e6ed;line-height:1.65;padding:14px;margin:0 auto;max-width:840px;}
   h1{color:#4fc3f7;font-size:21px;margin:0 0 2px;}
-  h2{color:#ffd54f;font-size:15px;margin:22px 0 8px;border-bottom:1px solid #2a3441;padding-bottom:4px;}
+  h2{color:#ffd54f;font-size:16px;margin:24px 0 8px;border-bottom:1px solid #2a3441;padding-bottom:5px;}
   .meta{font-size:11px;color:#6c757d;margin-bottom:14px;}
-  .card{background:#1a232e;border-radius:10px;padding:13px 15px;margin:10px 0;font-size:13px;}
-  .hi{background:linear-gradient(135deg,#15311f,#1e4a30);border-left:4px solid #81c784;}
-  table{width:100%;border-collapse:collapse;font-size:12px;background:#1a232e;border-radius:8px;overflow:hidden;margin:6px 0;}
+  .card{background:#1a232e;border-radius:10px;padding:14px 16px;margin:10px 0;font-size:14px;}
+  .hero{background:linear-gradient(135deg,#15311f,#1e4a30);border-left:4px solid #81c784;font-size:15px;}
+  table{width:100%;border-collapse:collapse;font-size:12px;background:#1a232e;border-radius:8px;overflow:hidden;margin:8px 0;}
   th{background:#2a3441;color:#ffd54f;padding:7px 6px;text-align:left;font-size:11px;}
-  td{padding:6px;border-bottom:1px solid #2a3441;}
-  .g{color:#81c784;} .w{color:#ffb74d;} .b{color:#e57373;} .mut{color:#6c757d;}
+  td{padding:7px 6px;border-bottom:1px solid #2a3441;}
+  .g{color:#81c784;}.w{color:#ffb74d;}.b{color:#e57373;}.mut{color:#6c757d;}
   b.k{color:#4fc3f7;} a{color:#4fc3f7;}
-  .pill{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;margin-right:4px;}
+  .term{display:grid;grid-template-columns:84px 1fr;gap:6px 12px;font-size:13px;}
+  .term .t{font-weight:bold;color:#4fc3f7;}
 </style></head><body>
 
-<h1>진우퀀트 — 검증·현황 (정직 기준)</h1>
-<div class="meta">2026-06-03 검증 세션 반영 · <a href="index.html">← 일일 점수 대시보드</a> · 출처: 진우퀀트_v372_검증핸드오프</div>
+<h1>진우퀀트 — 쉽게 보는 현황</h1>
+<div class="meta">2026-06-03 검증 반영 · <a href="index.html">← 매일 점수 대시보드로</a></div>
 
-<div class="card hi">
-<b class="k">forward 기대치 (정직)</b><br>
-백테스트 CAGR 76%는 <b>forward 기대치가 아닙니다.</b> 검증 결과 합리적 기대는
-<b class="g">시장 대비 +약5~10%p/년 · CAGR 17~25%대 · Sharpe 0.8~1.3</b>.<br>
-시장을 이기는 <b>반복가능한 엣지는 실재</b>(White RC p=0.019)하나, 백테스트의 큰 초과수익은 상당부분 종목 재량선택(hindsight)에서 옴.
+<div class="card hero">
+<b>한 줄 요약.</b> 이 전략은 시장을 이기는 <b>진짜 실력</b>이 있습니다. 다만 과거 시뮬레이션의 "연 76%"는 <b>과장</b>이에요 — 지나고 나서 잘된 종목을 골라 담은 효과가 크기 때문입니다.
+현실적으로 기대할 수익은 <b class="g">시장보다 연 5~10%p 더, CAGR 17~25%대</b> 정도입니다.
 </div>
 
-<h2>1. 4대 검증 (모두 실데이터, 2026-06)</h2>
-<table>
-<tr><th>검증</th><th>수치</th><th>판정</th></tr>
-<tr><td>White RC (vs KOSPI)</td><td>p = 0.019</td><td class="g">✅ 시장초과 우연 아님</td></tr>
-<tr><td>DSR (n_trials 민감도)</td><td>1.000</td><td class="g">✅ 다중검정 패널티 미미</td></tr>
-<tr><td>PBO (배포 7변종)</td><td>0.571</td><td class="w">⚠ 버전 미세우열은 노이즈 → 미세조정 무의미</td></tr>
-<tr><td>PIT universe</td><td>체계 +9.7%p vs 선택 +25.9%p</td><td class="w">⚠ 초과수익의 ~63% 종목선택(hindsight)</td></tr>
-</table>
-
-<h2>2. 종목 수(K) 프론티어 — "18개를 늘리면?" (실측)</h2>
-<table>
-<tr><th>전략</th><th>CAGR</th><th>Sharpe</th><th>MDD</th><th>시장초과</th></tr>
-<tr><td>PIT top-18</td><td>16.3%</td><td>0.70</td><td>−21.6%</td><td>+4.9%p</td></tr>
-<tr><td>PIT top-30</td><td>17.1%</td><td>0.80</td><td>−22.5%</td><td>+5.7%p</td></tr>
-<tr><td class="g">PIT top-50 (룰 최선)</td><td>16.9%</td><td class="g">0.85</td><td class="g">−18.5%</td><td>+5.4%p</td></tr>
-<tr><td>PIT top-100</td><td>15.3%</td><td>0.83</td><td>−20.0%</td><td>+3.8%p</td></tr>
-<tr><td class="w">fixed-16 (재량)</td><td class="w">41.3%</td><td>1.42</td><td>−21.6%</td><td class="w">+23.7%p</td></tr>
-<tr><td class="mut">시장 (EW)</td><td>17.6%</td><td>0.84</td><td>−25.2%</td><td>—</td></tr>
-</table>
-<div class="card"><b>종목 수는 레버가 아님</b> — 룰 기반은 K=18~100 내내 16~17%(≈시장). 확장은 수익이 아니라 분산(Sharpe·MDD)만 개선 → top-50이 룰 최선, 200은 준-인덱스라 무의미. <b class="w">재량 41% − 룰 17% = +24%p가 선택효과(hindsight).</b></div>
-
-<h2>3. universe 규칙화 — 현재 18종목 분류 (2026-06, 섹터 88% 병합)</h2>
-<div class="card">규칙 정당성 <b>25%</b> · 룰=후보생성·가드레일, 결정=사람(propose-not-replace)
-<table>
-<tr><th>트랙</th><th>종목</th></tr>
-<tr><td class="g">유지 (룰 정당) 4</td><td>삼성전자 · SK하이닉스 · 한미반도체 · 한화에어로</td></tr>
-<tr><td class="b">제외후보 8</td><td>NH투자증권 · 삼성SDI · LIG넥스원 · KT&G · 삼양식품 · KB금융 · 아모레퍼시픽 · 기아</td></tr>
-<tr><td class="w">관찰=재량 hold 4</td><td>NAVER · 두산에너빌리티 · 삼성물산 · 카카오</td></tr>
-<tr><td class="mut">데이터없음 2</td><td>알테오젠 · ISC (KOSDAQ, 스크린 밖)</td></tr>
-</table>
-<b>룰 편입후보</b>(대형·유동·섹터분산): 삼성바이오로직스 · LG전자 · 삼성중공업 · LG디스플레이 · HL만도 · GS리테일 · 롯데쇼핑 …<br>
-<span class="w">주의</span>: 아모레·기아는 순위 중간이나 <b>재무악화 플래그</b>(실제 재무 확인 요). <b class="k">LIG넥스원</b>은 hindsight 케이스 → 자동 제외 금지, 방산 thesis를 사람이 판정.
-</div>
-
-<h2>4. 권장 경로 — 하이브리드</h2>
+<h2>1. 왜 "76%"를 믿으면 안 되나</h2>
 <div class="card">
-<span class="pill" style="background:#1e3a5f;color:#9fd3ff;">1</span> 스테이-18 위생교체 — 바닥권(NH투자증권·삼성SDI 등) 분기 ≤2종목 검토<br>
-<span class="pill" style="background:#1e3a5f;color:#9fd3ff;">2</span> 분기마다 룰 위성 1~2개 추가 → 단일종목·hindsight 리스크 희석<br>
-<span class="pill" style="background:#1e3a5f;color:#9fd3ff;">3</span> 자연스럽게 <b>하이브리드 30~50종목</b>으로 수렴 (재량 코어 + 룰 위성)<br>
-<span class="mut">재량 41%(취약)와 룰 17%(정직)의 다리. forward는 시장+5~10%p로 운영.</span>
+과거 18종목 시뮬레이션은 연 41~76%가 나옵니다. 그런데 <b>똑같은 점수 규칙</b>으로 "그때 정보만 가지고" 다시 골라보면 연 16~17%(시장과 비슷)밖에 안 나와요.<br><br>
+차이의 대부분은 <b class="w">"지나고 나서 좋았던 종목을 골라 담은 효과"</b>입니다 — 이건 <b>미래엔 그대로 반복되지 않습니다.</b> 그래도 시장을 꾸준히 이기는 부분(연 +5%p 안팎)은 통계 검정을 통과했어요(우연이 아님). 그래서 "실력은 진짜, 단 76%는 과장"이 정직한 결론입니다.
 </div>
 
-<h2>5. 라이브 추적 (월간)</h2>
-<div class="card">매월 실현 포트·KOSPI 수익을 기록해 실현 alpha가 체계적 경로(시장+약10%p)인지 검증(<code>live_tracker.py</code>, 자동 예약). 통계적 확신엔 수년 필요 — 그래서 PIT 검증이 더 빠른 답을 이미 줌.<br>
-<span class="mut">아래 일일 대시보드의 등급·점수는 원점수 산출일 뿐, forward 기대치가 아님.</span></div>
+<h2>2. "18개를 30·50·100개로 늘리면?" (실제 측정)</h2>
+<table>
+<tr><th>방식</th><th>연수익(CAGR)</th><th>안정성*</th><th>최대낙폭**</th></tr>
+<tr><td>규칙대로 18개</td><td>16.3%</td><td>0.70</td><td>−21.6%</td></tr>
+<tr><td>규칙대로 30개</td><td>17.1%</td><td>0.80</td><td>−22.5%</td></tr>
+<tr><td class="g">규칙대로 50개 (가장 무난)</td><td>16.9%</td><td class="g">0.85</td><td class="g">−18.5%</td></tr>
+<tr><td>규칙대로 100개</td><td>15.3%</td><td>0.83</td><td>−20.0%</td></tr>
+<tr><td class="mut">시장 전체</td><td>17.6%</td><td>0.84</td><td>−25.2%</td></tr>
+</table>
+<div class="card"><b>결론: 개수는 핵심이 아닙니다.</b> 몇 개로 늘려도 수익은 16~17%로 비슷해요. 대신 <b>50개쯤</b>이 출렁임·낙폭이 가장 안정적입니다. 100개를 넘기면 사실상 지수와 똑같아져 의미가 없습니다.<br>
+<span class="mut">*안정성 = 위험 대비 수익(Sharpe), 높을수록 좋음. **최대낙폭 = 고점 대비 최대 하락, 0에 가까울수록 좋음.</span></div>
 
-<div class="meta" style="margin-top:18px;">백테스트 ≠ forward · 이 페이지는 정직한 검증 결과 요약이며 투자 자문이 아님 · 매매 결정은 본인 책임.</div>
+<h2>3. 지금 18종목, 규칙이 보는 시선</h2>
+<div class="card">현재 18개 중 <b>규칙이 "근거 충분"이라 인정한 건 4개뿐</b>입니다(나머지는 사람 판단 비중이 큼).
+<table>
+<tr><th>분류</th><th>종목</th><th>뜻</th></tr>
+<tr><td class="g">유지 4</td><td>삼성전자·SK하이닉스·한미반도체·한화에어로</td><td>규칙도 인정하는 핵심</td></tr>
+<tr><td class="b">제외후보 8</td><td>NH투자증권·삼성SDI·LIG넥스원·KT&G·삼양식품·KB금융·아모레퍼시픽·기아</td><td>점수 낮음/재무 악화 — 다시 볼 대상</td></tr>
+<tr><td class="w">관찰 4</td><td>NAVER·두산에너빌리티·삼성물산·카카오</td><td>보유 중이나 근거 약함 — 비중 점검</td></tr>
+<tr><td class="mut">제외(데이터밖) 2</td><td>알테오젠·ISC</td><td>코스닥이라 이 분석 범위 밖</td></tr>
+</table>
+<b class="w">바로 팔라는 뜻이 아닙니다.</b> 제외후보 중 아모레·기아는 재무 신호가 켜진 거라 실제 재무를 확인해 볼 것, <b class="k">LIG넥스원</b>은 방산 사이클 판단을 사람이 직접 내릴 자리입니다.
+</div>
+
+<h2>4. 앞으로 (서두르지 않아도 됨)</h2>
+<div class="card">
+① 지금은 <b>18개 그대로 유지</b>하며 관찰.<br>
+② 분기마다 근거 약한 1~2개만 사람이 검토해 교체/축소.<br>
+③ 원하면 규칙이 뽑은 대형 우량주(삼성바이오로직스·LG전자·삼성중공업 등)를 조금씩 더해 <b>30~50개로 천천히 분산</b>.<br>
+<span class="mut">규칙은 후보를 제안할 뿐, 최종 결정은 늘 사람이 합니다. 되돌릴 수 있는 점진적 변화예요.</span>
+</div>
+
+<h2>5. 매일 대시보드 표 — 용어 해설</h2>
+<div class="card">
+<b>점수 항목</b> (높을수록 좋음, 합치면 체력→등급):
+<div class="term" style="margin:8px 0;">
+<div class="t">F</div><div>재무 건강·품질(0~9). 돈 잘 벌고 빚 적고 안정적인가. <b>핵심 점수.</b></div>
+<div class="t">Mod</div><div>업종 보정. 같은 업종 안에서 우수하면 +.</div>
+<div class="t">FAR</div><div>과대낙폭 반등 신호. 많이 빠졌다 돌아설 자리면 +2(매수).</div>
+<div class="t">Sl</div><div>이익의 질. 장부이익이 실제 현금과 맞으면 +, 부풀림 의심이면 −.</div>
+<div class="t">Mom</div><div>1년 추세. 최근 1년 오름세면 +.</div>
+<div class="t">BAB</div><div>안정성 우대. 덜 출렁이는 주식이면 +, 많이 출렁이면 −.</div>
+<div class="t">NOA</div><div>자산 효율. 자산을 방만하게 안 늘렸으면 0 유지.</div>
+<div class="t g">체력</div><div>위 항목 합산 종합점수.</div>
+<div class="t g">등급</div><div>체력 구간: S+ &gt; S &gt; A &gt; B &gt; C &gt; D &gt; F. 높을수록 비중 후보.</div>
+</div>
+<b>시장 정보</b> (참고):
+<div class="term" style="margin:8px 0 0;">
+<div class="t mut">1M% / 12M%</div><div>최근 1개월 / 12개월 수익률.</div>
+<div class="t mut">β 베타</div><div>시장 대비 출렁임. 1=시장만큼, &gt;1 공격적, &lt;1 방어적.</div>
+<div class="t mut">신호</div><div>🎯 BUY = 낙폭 매수신호 · ↗ 등급상향 · ↘ 등급하향.</div>
+</div>
+<div style="margin-top:10px;color:#ffb74d;">등급·체력은 "우리 규칙이 매긴 선별 점수"일 뿐 "반드시 오른다"는 보장이 아닙니다.</div>
+</div>
+
+<div class="meta" style="margin-top:18px;">과거 시뮬레이션 ≠ 미래 수익 · 이 페이지는 검증 결과 요약이며 투자 자문이 아닙니다 · 매매 결정은 본인 책임.</div>
 </body></html>
