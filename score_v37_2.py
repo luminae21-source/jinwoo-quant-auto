@@ -197,6 +197,9 @@ def compute_scores(panel):
     return df
 
 
+_STATUS_BANNER = '<div style="background:#15241a;border-left:4px solid #ffb74d;padding:12px 14px;border-radius:8px;margin-bottom:14px;font-size:13px;line-height:1.65;color:#cdd6e0;">\n<b style="color:#ffd54f;">⚠ forward 기대치(정직)</b> — 백테스트 CAGR 76%는 forward가 아님. 검증 결과 <b style="color:#81c784;">시장 +약5~10%p/년 · CAGR 17~25%대 · Sharpe 0.8~1.3</b> (White RC p=0.019: 엣지 실재).<br>\n종목선택(hindsight)이 백테스트 초과수익의 ~3/4 — PIT 룰 기반은 시장+약5%p 수준.<br>\n<b style="color:#4fc3f7;">universe 규칙화(2026-06)</b>: 룰 정당성 25% · 유지 4 / 제외후보 8 / 관찰 4 / KOSDAQ 2 · <a href="status.html" style="color:#4fc3f7;font-weight:bold;">→ 검증·현황 상세</a>\n</div>\n'
+
+
 def main():
     print("=" * 80)
     print(f"진우퀀트 v3.7.2 자동 실행  (v3.7.1 + Echo Momentum 단독)")
@@ -232,6 +235,7 @@ def main():
     html = _generate_html_v37(df, changes, far_signals)
     html = html.replace('진우퀀트 v3.7 (Mom12·BAB·NOA)',
                         '진우퀀트 v3.7.2 (Echo 추가)')
+    html = html.replace('<div class="summary">', _STATUS_BANNER + '<div class="summary">', 1)
     (BASE / 'dashboard_v37_2.html').write_text(html, encoding='utf-8')
 
     summary = {
