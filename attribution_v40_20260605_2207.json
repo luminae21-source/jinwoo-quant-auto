@@ -1,0 +1,3635 @@
+{
+  "generated_at": "2026-06-05T22:07",
+  "phase": 1,
+  "method": "CAPM single-factor (market = KOSPI)",
+  "lookback_days": 20,
+  "stocks": {
+    "삼성전자": {
+      "beta_now": 1.322720245910335,
+      "cum_stock_%": 21.256,
+      "cum_market_contrib_%": 11.693,
+      "cum_idio_%": 9.563,
+      "max_abs_idio_z": 3.0376342506579865,
+      "daily_tail": [
+        {
+          "date": "2026-05-07",
+          "r_stock_%": 2.047,
+          "r_market_%": 1.418,
+          "beta": 1.257,
+          "market_contrib_%": 1.783,
+          "idio_%": 0.263,
+          "idio_z": 0.09
+        },
+        {
+          "date": "2026-05-08",
+          "r_stock_%": -1.111,
+          "r_market_%": 0.106,
+          "beta": 1.259,
+          "market_contrib_%": 0.134,
+          "idio_%": -1.245,
+          "idio_z": -0.82
+        },
+        {
+          "date": "2026-05-11",
+          "r_stock_%": 6.139,
+          "r_market_%": 4.233,
+          "beta": 1.253,
+          "market_contrib_%": 5.306,
+          "idio_%": 0.833,
+          "idio_z": 0.46
+        },
+        {
+          "date": "2026-05-12",
+          "r_stock_%": -2.303,
+          "r_market_%": -2.316,
+          "beta": 1.26,
+          "market_contrib_%": -2.919,
+          "idio_%": 0.616,
+          "idio_z": 0.31
+        },
+        {
+          "date": "2026-05-13",
+          "r_stock_%": 1.776,
+          "r_market_%": 2.594,
+          "beta": 1.26,
+          "market_contrib_%": 3.268,
+          "idio_%": -1.491,
+          "idio_z": -0.97
+        },
+        {
+          "date": "2026-05-14",
+          "r_stock_%": 4.139,
+          "r_market_%": 1.736,
+          "beta": 1.255,
+          "market_contrib_%": 2.18,
+          "idio_%": 1.958,
+          "idio_z": 1.11
+        },
+        {
+          "date": "2026-05-15",
+          "r_stock_%": -9.009,
+          "r_market_%": -6.312,
+          "beta": 1.258,
+          "market_contrib_%": -7.941,
+          "idio_%": -1.068,
+          "idio_z": -0.7
+        },
+        {
+          "date": "2026-05-18",
+          "r_stock_%": 3.808,
+          "r_market_%": 0.305,
+          "beta": 1.261,
+          "market_contrib_%": 0.384,
+          "idio_%": 3.424,
+          "idio_z": 1.97
+        },
+        {
+          "date": "2026-05-19",
+          "r_stock_%": -1.977,
+          "r_market_%": -3.305,
+          "beta": 1.261,
+          "market_contrib_%": -4.17,
+          "idio_%": 2.193,
+          "idio_z": 1.21
+        },
+        {
+          "date": "2026-05-20",
+          "r_stock_%": 0.181,
+          "r_market_%": -0.866,
+          "beta": 1.25,
+          "market_contrib_%": -1.082,
+          "idio_%": 1.264,
+          "idio_z": 0.64
+        },
+        {
+          "date": "2026-05-21",
+          "r_stock_%": 8.171,
+          "r_market_%": 8.08,
+          "beta": 1.255,
+          "market_contrib_%": 10.137,
+          "idio_%": -1.965,
+          "idio_z": -1.28
+        },
+        {
+          "date": "2026-05-22",
+          "r_stock_%": -2.365,
+          "r_market_%": 0.41,
+          "beta": 1.237,
+          "market_contrib_%": 0.507,
+          "idio_%": -2.872,
+          "idio_z": -1.74
+        },
+        {
+          "date": "2026-05-26",
+          "r_stock_%": 2.198,
+          "r_market_%": 2.514,
+          "beta": 1.235,
+          "market_contrib_%": 3.106,
+          "idio_%": -0.908,
+          "idio_z": -0.6
+        },
+        {
+          "date": "2026-05-27",
+          "r_stock_%": 2.64,
+          "r_market_%": 2.227,
+          "beta": 1.234,
+          "market_contrib_%": 2.748,
+          "idio_%": -0.107,
+          "idio_z": -0.11
+        },
+        {
+          "date": "2026-05-28",
+          "r_stock_%": -2.473,
+          "r_market_%": -0.529,
+          "beta": 1.225,
+          "market_contrib_%": -0.648,
+          "idio_%": -1.825,
+          "idio_z": -1.09
+        },
+        {
+          "date": "2026-05-29",
+          "r_stock_%": 5.679,
+          "r_market_%": 3.492,
+          "beta": 1.228,
+          "market_contrib_%": 4.289,
+          "idio_%": 1.39,
+          "idio_z": 0.77
+        },
+        {
+          "date": "2026-06-01",
+          "r_stock_%": 9.617,
+          "r_market_%": 3.617,
+          "beta": 1.222,
+          "market_contrib_%": 4.42,
+          "idio_%": 5.197,
+          "idio_z": 3.04
+        },
+        {
+          "date": "2026-06-02",
+          "r_stock_%": 3.242,
+          "r_market_%": 0.149,
+          "beta": 1.309,
+          "market_contrib_%": 0.195,
+          "idio_%": 3.047,
+          "idio_z": 1.69
+        },
+        {
+          "date": "2026-06-04",
+          "r_stock_%": -2.528,
+          "r_market_%": -1.859,
+          "beta": 1.324,
+          "market_contrib_%": -2.462,
+          "idio_%": -0.067,
+          "idio_z": -0.12
+        },
+        {
+          "date": "2026-06-05",
+          "r_stock_%": -6.615,
+          "r_market_%": -5.702,
+          "beta": 1.323,
+          "market_contrib_%": -7.542,
+          "idio_%": 0.927,
+          "idio_z": 0.44
+        }
+      ]
+    },
+    "SK하이닉스": {
+      "beta_now": 1.5594117367491644,
+      "cum_stock_%": 25.692,
+      "cum_market_contrib_%": 12.821,
+      "cum_idio_%": 12.871,
+      "max_abs_idio_z": 2.0649955716668993,
+      "daily_tail": [
+        {
+          "date": "2026-05-07",
+          "r_stock_%": 3.257,
+          "r_market_%": 1.418,
+          "beta": 1.392,
+          "market_contrib_%": 1.975,
+          "idio_%": 1.282,
+          "idio_z": 0.41
+        },
+        {
+          "date": "2026-05-08",
+          "r_stock_%": 1.916,
+          "r_market_%": 0.106,
+          "beta": 1.397,
+          "market_contrib_%": 0.148,
+          "idio_%": 1.768,
+          "idio_z": 0.6
+        },
+        {
+          "date": "2026-05-11",
+          "r_stock_%": 10.891,
+          "r_market_%": 4.233,
+          "beta": 1.388,
+          "market_contrib_%": 5.877,
+          "idio_%": 5.014,
+          "idio_z": 1.88
+        },
+        {
+          "date": "2026-05-12",
+          "r_stock_%": -2.423,
+          "r_market_%": -2.316,
+          "beta": 1.413,
+          "market_contrib_%": -3.272,
+          "idio_%": 0.849,
+          "idio_z": 0.18
+        },
+        {
+          "date": "2026-05-13",
+          "r_stock_%": 7.403,
+          "r_market_%": 2.594,
+          "beta": 1.413,
+          "market_contrib_%": 3.665,
+          "idio_%": 3.738,
+          "idio_z": 1.3
+        },
+        {
+          "date": "2026-05-14",
+          "r_stock_%": -0.304,
+          "r_market_%": 1.736,
+          "beta": 1.42,
+          "market_contrib_%": 2.465,
+          "idio_%": -2.769,
+          "idio_z": -1.32
+        },
+        {
+          "date": "2026-05-15",
+          "r_stock_%": -7.975,
+          "r_market_%": -6.312,
+          "beta": 1.417,
+          "market_contrib_%": -8.944,
+          "idio_%": 0.969,
+          "idio_z": 0.17
+        },
+        {
+          "date": "2026-05-18",
+          "r_stock_%": 1.148,
+          "r_market_%": 0.305,
+          "beta": 1.418,
+          "market_contrib_%": 0.432,
+          "idio_%": 0.716,
+          "idio_z": 0.06
+        },
+        {
+          "date": "2026-05-19",
+          "r_stock_%": -5.301,
+          "r_market_%": -3.305,
+          "beta": 1.417,
+          "market_contrib_%": -4.682,
+          "idio_%": -0.619,
+          "idio_z": -0.51
+        },
+        {
+          "date": "2026-05-20",
+          "r_stock_%": 0.0,
+          "r_market_%": -0.866,
+          "beta": 1.431,
+          "market_contrib_%": -1.24,
+          "idio_%": 1.24,
+          "idio_z": 0.27
+        },
+        {
+          "date": "2026-05-21",
+          "r_stock_%": 10.593,
+          "r_market_%": 8.08,
+          "beta": 1.425,
+          "market_contrib_%": 11.517,
+          "idio_%": -0.923,
+          "idio_z": -0.63
+        },
+        {
+          "date": "2026-05-22",
+          "r_stock_%": 0.052,
+          "r_market_%": 0.41,
+          "beta": 1.414,
+          "market_contrib_%": 0.58,
+          "idio_%": -0.528,
+          "idio_z": -0.45
+        },
+        {
+          "date": "2026-05-26",
+          "r_stock_%": 5.561,
+          "r_market_%": 2.514,
+          "beta": 1.41,
+          "market_contrib_%": 3.545,
+          "idio_%": 2.016,
+          "idio_z": 0.6
+        },
+        {
+          "date": "2026-05-27",
+          "r_stock_%": 8.9,
+          "r_market_%": 2.227,
+          "beta": 1.416,
+          "market_contrib_%": 3.154,
+          "idio_%": 5.746,
+          "idio_z": 2.06
+        },
+        {
+          "date": "2026-05-28",
+          "r_stock_%": 2.03,
+          "r_market_%": -0.529,
+          "beta": 1.42,
+          "market_contrib_%": -0.751,
+          "idio_%": 2.781,
+          "idio_z": 0.83
+        },
+        {
+          "date": "2026-05-29",
+          "r_stock_%": 1.904,
+          "r_market_%": 3.492,
+          "beta": 1.413,
+          "market_contrib_%": 4.934,
+          "idio_%": -3.03,
+          "idio_z": -1.49
+        },
+        {
+          "date": "2026-06-01",
+          "r_stock_%": 1.278,
+          "r_market_%": 3.617,
+          "beta": 1.379,
+          "market_contrib_%": 4.988,
+          "idio_%": -3.71,
+          "idio_z": -1.86
+        },
+        {
+          "date": "2026-06-02",
+          "r_stock_%": -0.127,
+          "r_market_%": 0.149,
+          "beta": 1.506,
+          "market_contrib_%": 0.224,
+          "idio_%": -0.352,
+          "idio_z": -0.37
+        },
+        {
+          "date": "2026-06-04",
+          "r_stock_%": -2.662,
+          "r_market_%": -1.859,
+          "beta": 1.562,
+          "market_contrib_%": -2.902,
+          "idio_%": 0.24,
+          "idio_z": -0.12
+        },
+        {
+          "date": "2026-06-05",
+          "r_stock_%": -10.449,
+          "r_market_%": -5.702,
+          "beta": 1.559,
+          "market_contrib_%": -8.891,
+          "idio_%": -1.558,
+          "idio_z": -0.95
+        }
+      ]
+    },
+    "한미반도체": {
+      "beta_now": 1.1770448738653774,
+      "cum_stock_%": -33.217,
+      "cum_market_contrib_%": 12.902,
+      "cum_idio_%": -46.119,
+      "max_abs_idio_z": 2.759549883328524,
+      "daily_tail": [
+        {
+          "date": "2026-05-07",
+          "r_stock_%": -0.381,
+          "r_market_%": 1.418,
+          "beta": 1.171,
+          "market_contrib_%": 1.661,
+          "idio_%": -2.042,
+          "idio_z": -0.46
+        },
+        {
+          "date": "2026-05-08",
+          "r_stock_%": -0.766,
+          "r_market_%": 0.106,
+          "beta": 1.169,
+          "market_contrib_%": 0.124,
+          "idio_%": -0.89,
+          "idio_z": -0.24
+        },
+        {
+          "date": "2026-05-11",
+          "r_stock_%": 2.532,
+          "r_market_%": 4.233,
+          "beta": 1.168,
+          "market_contrib_%": 4.943,
+          "idio_%": -2.411,
+          "idio_z": -0.5
+        },
+        {
+          "date": "2026-05-12",
+          "r_stock_%": -5.789,
+          "r_market_%": -2.316,
+          "beta": 1.162,
+          "market_contrib_%": -2.691,
+          "idio_%": -3.098,
+          "idio_z": -0.64
+        },
+        {
+          "date": "2026-05-13",
+          "r_stock_%": 5.914,
+          "r_market_%": 2.594,
+          "beta": 1.192,
+          "market_contrib_%": 3.093,
+          "idio_%": 2.822,
+          "idio_z": 0.43
+        },
+        {
+          "date": "2026-05-14",
+          "r_stock_%": 2.222,
+          "r_market_%": 1.736,
+          "beta": 1.197,
+          "market_contrib_%": 2.078,
+          "idio_%": 0.144,
+          "idio_z": -0.07
+        },
+        {
+          "date": "2026-05-15",
+          "r_stock_%": -10.414,
+          "r_market_%": -6.312,
+          "beta": 1.198,
+          "market_contrib_%": -7.562,
+          "idio_%": -2.852,
+          "idio_z": -0.6
+        },
+        {
+          "date": "2026-05-18",
+          "r_stock_%": -15.189,
+          "r_market_%": 0.305,
+          "beta": 1.209,
+          "market_contrib_%": 0.368,
+          "idio_%": -15.558,
+          "idio_z": -2.71
+        },
+        {
+          "date": "2026-05-19",
+          "r_stock_%": -9.594,
+          "r_market_%": -3.305,
+          "beta": 1.21,
+          "market_contrib_%": -3.998,
+          "idio_%": -5.596,
+          "idio_z": -0.99
+        },
+        {
+          "date": "2026-05-20",
+          "r_stock_%": -0.174,
+          "r_market_%": -0.866,
+          "beta": 1.248,
+          "market_contrib_%": -1.081,
+          "idio_%": 0.907,
+          "idio_z": 0.11
+        },
+        {
+          "date": "2026-05-21",
+          "r_stock_%": 14.542,
+          "r_market_%": 8.08,
+          "beta": 1.254,
+          "market_contrib_%": 10.135,
+          "idio_%": 4.407,
+          "idio_z": 0.7
+        },
+        {
+          "date": "2026-05-22",
+          "r_stock_%": -3.676,
+          "r_market_%": 0.41,
+          "beta": 1.29,
+          "market_contrib_%": 0.529,
+          "idio_%": -4.205,
+          "idio_z": -0.76
+        },
+        {
+          "date": "2026-05-26",
+          "r_stock_%": 2.618,
+          "r_market_%": 2.514,
+          "beta": 1.29,
+          "market_contrib_%": 3.243,
+          "idio_%": -0.626,
+          "idio_z": -0.15
+        },
+        {
+          "date": "2026-05-27",
+          "r_stock_%": -3.087,
+          "r_market_%": 2.227,
+          "beta": 1.289,
+          "market_contrib_%": 2.87,
+          "idio_%": -5.957,
+          "idio_z": -1.09
+        },
+        {
+          "date": "2026-05-28",
+          "r_stock_%": -8.673,
+          "r_market_%": -0.529,
+          "beta": 1.206,
+          "market_contrib_%": -0.638,
+          "idio_%": -8.035,
+          "idio_z": -1.53
+        },
+        {
+          "date": "2026-05-29",
+          "r_stock_%": -3.656,
+          "r_market_%": 3.492,
+          "beta": 1.243,
+          "market_contrib_%": 4.339,
+          "idio_%": -7.995,
+          "idio_z": -1.47
+        },
+        {
+          "date": "2026-06-01",
+          "r_stock_%": 3.827,
+          "r_market_%": 3.617,
+          "beta": 1.183,
+          "market_contrib_%": 4.278,
+          "idio_%": -0.452,
+          "idio_z": 0.1
+        },
+        {
+          "date": "2026-06-02",
+          "r_stock_%": -6.158,
+          "r_market_%": 0.149,
+          "beta": 1.338,
+          "market_contrib_%": 0.199,
+          "idio_%": -6.358,
+          "idio_z": -1.15
+        },
+        {
+          "date": "2026-06-04",
+          "r_stock_%": 9.844,
+          "r_market_%": -1.859,
+          "beta": 1.226,
+          "market_contrib_%": -2.279,
+          "idio_%": 12.123,
+          "idio_z": 2.76
+        },
+        {
+          "date": "2026-06-05",
+          "r_stock_%": -7.158,
+          "r_market_%": -5.702,
+          "beta": 1.177,
+          "market_contrib_%": -6.711,
+          "idio_%": -0.447,
+          "idio_z": 0.13
+        }
+      ]
+    },
+    "알테오젠": {
+      "beta_now": 0.36236704638180767,
+      "cum_stock_%": -8.914,
+      "cum_market_contrib_%": 8.271,
+      "cum_idio_%": -17.185,
+      "max_abs_idio_z": 2.2599767061553733,
+      "daily_tail": [
+        {
+          "date": "2026-05-07",
+          "r_stock_%": -1.945,
+          "r_market_%": 1.418,
+          "beta": 0.758,
+          "market_contrib_%": 1.075,
+          "idio_%": -3.019,
+          "idio_z": -0.77
+        },
+        {
+          "date": "2026-05-08",
+          "r_stock_%": -4.592,
+          "r_market_%": 0.106,
+          "beta": 0.758,
+          "market_contrib_%": 0.08,
+          "idio_%": -4.672,
+          "idio_z": -1.29
+        },
+        {
+          "date": "2026-05-11",
+          "r_stock_%": -4.659,
+          "r_market_%": 4.233,
+          "beta": 0.754,
+          "market_contrib_%": 3.191,
+          "idio_%": -7.85,
+          "idio_z": -2.2
+        },
+        {
+          "date": "2026-05-12",
+          "r_stock_%": 5.099,
+          "r_market_%": -2.316,
+          "beta": 0.715,
+          "market_contrib_%": -1.657,
+          "idio_%": 6.756,
+          "idio_z": 2.26
+        },
+        {
+          "date": "2026-05-13",
+          "r_stock_%": 3.449,
+          "r_market_%": 2.594,
+          "beta": 0.669,
+          "market_contrib_%": 1.735,
+          "idio_%": 1.713,
+          "idio_z": 0.71
+        },
+        {
+          "date": "2026-05-14",
+          "r_stock_%": 8.395,
+          "r_market_%": 1.736,
+          "beta": 0.673,
+          "market_contrib_%": 1.169,
+          "idio_%": 7.225,
+          "idio_z": 2.25
+        },
+        {
+          "date": "2026-05-15",
+          "r_stock_%": -4.245,
+          "r_market_%": -6.312,
+          "beta": 0.683,
+          "market_contrib_%": -4.312,
+          "idio_%": 0.067,
+          "idio_z": 0.17
+        },
+        {
+          "date": "2026-05-18",
+          "r_stock_%": -3.166,
+          "r_market_%": 0.305,
+          "beta": 0.68,
+          "market_contrib_%": 0.207,
+          "idio_%": -3.373,
+          "idio_z": -0.82
+        },
+        {
+          "date": "2026-05-19",
+          "r_stock_%": 2.486,
+          "r_market_%": -3.305,
+          "beta": 0.679,
+          "market_contrib_%": -2.246,
+          "idio_%": 4.732,
+          "idio_z": 1.54
+        },
+        {
+          "date": "2026-05-20",
+          "r_stock_%": -1.928,
+          "r_market_%": -0.866,
+          "beta": 0.639,
+          "market_contrib_%": -0.553,
+          "idio_%": -1.375,
+          "idio_z": -0.25
+        },
+        {
+          "date": "2026-05-21",
+          "r_stock_%": -2.25,
+          "r_market_%": 8.08,
+          "beta": 0.648,
+          "market_contrib_%": 5.232,
+          "idio_%": -7.482,
+          "idio_z": -1.94
+        },
+        {
+          "date": "2026-05-22",
+          "r_stock_%": 3.632,
+          "r_market_%": 0.41,
+          "beta": 0.588,
+          "market_contrib_%": 0.241,
+          "idio_%": 3.39,
+          "idio_z": 1.12
+        },
+        {
+          "date": "2026-05-26",
+          "r_stock_%": 0.274,
+          "r_market_%": 2.514,
+          "beta": 0.588,
+          "market_contrib_%": 1.479,
+          "idio_%": -1.205,
+          "idio_z": -0.18
+        },
+        {
+          "date": "2026-05-27",
+          "r_stock_%": 5.587,
+          "r_market_%": 2.227,
+          "beta": 0.59,
+          "market_contrib_%": 1.314,
+          "idio_%": 4.273,
+          "idio_z": 1.31
+        },
+        {
+          "date": "2026-05-28",
+          "r_stock_%": -4.498,
+          "r_market_%": -0.529,
+          "beta": 0.605,
+          "market_contrib_%": -0.32,
+          "idio_%": -4.178,
+          "idio_z": -1.0
+        },
+        {
+          "date": "2026-05-29",
+          "r_stock_%": -0.135,
+          "r_market_%": 3.492,
+          "beta": 0.612,
+          "market_contrib_%": 2.137,
+          "idio_%": -2.273,
+          "idio_z": -0.47
+        },
+        {
+          "date": "2026-06-01",
+          "r_stock_%": -0.816,
+          "r_market_%": 3.617,
+          "beta": 0.595,
+          "market_contrib_%": 2.151,
+          "idio_%": -2.967,
+          "idio_z": -0.69
+        },
+        {
+          "date": "2026-06-02",
+          "r_stock_%": -2.49,
+          "r_market_%": 0.149,
+          "beta": 0.456,
+          "market_contrib_%": 0.068,
+          "idio_%": -2.558,
+          "idio_z": -0.55
+        },
+        {
+          "date": "2026-06-04",
+          "r_stock_%": -2.985,
+          "r_market_%": -1.859,
+          "beta": 0.353,
+          "market_contrib_%": -0.656,
+          "idio_%": -2.329,
+          "idio_z": -0.47
+        },
+        {
+          "date": "2026-06-05",
+          "r_stock_%": -4.124,
+          "r_market_%": -5.702,
+          "beta": 0.362,
+          "market_contrib_%": -2.066,
+          "idio_%": -2.058,
+          "idio_z": -0.37
+        }
+      ]
+    },
+    "기아": {
+      "beta_now": 0.8835383140653827,
+      "cum_stock_%": 4.118,
+      "cum_market_contrib_%": 9.968,
+      "cum_idio_%": -5.85,
+      "max_abs_idio_z": 1.7500541557439464,
+      "daily_tail": [
+        {
+          "date": "2026-05-07",
+          "r_stock_%": 1.922,
+          "r_market_%": 1.418,
+          "beta": 0.904,
+          "market_contrib_%": 1.282,
+          "idio_%": 0.64,
+          "idio_z": 0.42
+        },
+        {
+          "date": "2026-05-08",
+          "r_stock_%": 4.285,
+          "r_market_%": 0.106,
+          "beta": 0.904,
+          "market_contrib_%": 0.096,
+          "idio_%": 4.189,
+          "idio_z": 1.75
+        },
+        {
+          "date": "2026-05-11",
+          "r_stock_%": 6.016,
+          "r_market_%": 4.233,
+          "beta": 0.922,
+          "market_contrib_%": 3.904,
+          "idio_%": 2.112,
+          "idio_z": 0.93
+        },
+        {
+          "date": "2026-05-12",
+          "r_stock_%": -3.732,
+          "r_market_%": -2.316,
+          "beta": 0.931,
+          "market_contrib_%": -2.156,
+          "idio_%": -1.576,
+          "idio_z": -0.46
+        },
+        {
+          "date": "2026-05-13",
+          "r_stock_%": 6.443,
+          "r_market_%": 2.594,
+          "beta": 0.944,
+          "market_contrib_%": 2.449,
+          "idio_%": 3.994,
+          "idio_z": 1.59
+        },
+        {
+          "date": "2026-05-14",
+          "r_stock_%": -0.783,
+          "r_market_%": 1.736,
+          "beta": 0.955,
+          "market_contrib_%": 1.659,
+          "idio_%": -2.442,
+          "idio_z": -0.77
+        },
+        {
+          "date": "2026-05-15",
+          "r_stock_%": -5.838,
+          "r_market_%": -6.312,
+          "beta": 0.951,
+          "market_contrib_%": -6.004,
+          "idio_%": 0.165,
+          "idio_z": 0.22
+        },
+        {
+          "date": "2026-05-18",
+          "r_stock_%": -3.329,
+          "r_market_%": 0.305,
+          "beta": 0.945,
+          "market_contrib_%": 0.288,
+          "idio_%": -3.616,
+          "idio_z": -1.18
+        },
+        {
+          "date": "2026-05-19",
+          "r_stock_%": -4.79,
+          "r_market_%": -3.305,
+          "beta": 0.945,
+          "market_contrib_%": -3.125,
+          "idio_%": -1.665,
+          "idio_z": -0.43
+        },
+        {
+          "date": "2026-05-20",
+          "r_stock_%": -3.615,
+          "r_market_%": -0.866,
+          "beta": 0.947,
+          "market_contrib_%": -0.82,
+          "idio_%": -2.795,
+          "idio_z": -0.83
+        },
+        {
+          "date": "2026-05-21",
+          "r_stock_%": 11.674,
+          "r_market_%": 8.08,
+          "beta": 0.951,
+          "market_contrib_%": 7.686,
+          "idio_%": 3.988,
+          "idio_z": 1.64
+        },
+        {
+          "date": "2026-05-22",
+          "r_stock_%": -1.864,
+          "r_market_%": 0.41,
+          "beta": 0.989,
+          "market_contrib_%": 0.406,
+          "idio_%": -2.269,
+          "idio_z": -0.63
+        },
+        {
+          "date": "2026-05-26",
+          "r_stock_%": 1.326,
+          "r_market_%": 2.514,
+          "beta": 0.991,
+          "market_contrib_%": 2.491,
+          "idio_%": -1.165,
+          "idio_z": -0.19
+        },
+        {
+          "date": "2026-05-27",
+          "r_stock_%": -1.387,
+          "r_market_%": 2.227,
+          "beta": 0.973,
+          "market_contrib_%": 2.166,
+          "idio_%": -3.553,
+          "idio_z": -1.19
+        },
+        {
+          "date": "2026-05-28",
+          "r_stock_%": -0.243,
+          "r_market_%": -0.529,
+          "beta": 0.96,
+          "market_contrib_%": -0.508,
+          "idio_%": 0.264,
+          "idio_z": 0.48
+        },
+        {
+          "date": "2026-05-29",
+          "r_stock_%": 2.939,
+          "r_market_%": 3.492,
+          "beta": 0.961,
+          "market_contrib_%": 3.356,
+          "idio_%": -0.417,
+          "idio_z": 0.15
+        },
+        {
+          "date": "2026-06-01",
+          "r_stock_%": 0.413,
+          "r_market_%": 3.617,
+          "beta": 0.924,
+          "market_contrib_%": 3.343,
+          "idio_%": -2.93,
+          "idio_z": -1.03
+        },
+        {
+          "date": "2026-06-02",
+          "r_stock_%": -0.65,
+          "r_market_%": 0.149,
+          "beta": 0.862,
+          "market_contrib_%": 0.129,
+          "idio_%": -0.778,
+          "idio_z": -0.05
+        },
+        {
+          "date": "2026-06-04",
+          "r_stock_%": -2.702,
+          "r_market_%": -1.859,
+          "beta": 0.881,
+          "market_contrib_%": -1.637,
+          "idio_%": -1.065,
+          "idio_z": -0.17
+        },
+        {
+          "date": "2026-06-05",
+          "r_stock_%": -1.967,
+          "r_market_%": -5.702,
+          "beta": 0.884,
+          "market_contrib_%": -5.038,
+          "idio_%": 3.071,
+          "idio_z": 1.71
+        }
+      ]
+    },
+    "NAVER": {
+      "beta_now": 0.6269224426582205,
+      "cum_stock_%": 20.568,
+      "cum_market_contrib_%": 6.552,
+      "cum_idio_%": 14.017,
+      "max_abs_idio_z": 4.47856306921038,
+      "daily_tail": [
+        {
+          "date": "2026-05-07",
+          "r_stock_%": -0.241,
+          "r_market_%": 1.418,
+          "beta": 0.646,
+          "market_contrib_%": 0.916,
+          "idio_%": -1.156,
+          "idio_z": -0.22
+        },
+        {
+          "date": "2026-05-08",
+          "r_stock_%": 3.551,
+          "r_market_%": 0.106,
+          "beta": 0.648,
+          "market_contrib_%": 0.069,
+          "idio_%": 3.482,
+          "idio_z": 2.26
+        },
+        {
+          "date": "2026-05-11",
+          "r_stock_%": -1.641,
+          "r_market_%": 4.233,
+          "beta": 0.647,
+          "market_contrib_%": 2.74,
+          "idio_%": -4.382,
+          "idio_z": -1.93
+        },
+        {
+          "date": "2026-05-12",
+          "r_stock_%": -3.611,
+          "r_market_%": -2.316,
+          "beta": 0.627,
+          "market_contrib_%": -1.452,
+          "idio_%": -2.158,
+          "idio_z": -0.75
+        },
+        {
+          "date": "2026-05-13",
+          "r_stock_%": -1.233,
+          "r_market_%": 2.594,
+          "beta": 0.638,
+          "market_contrib_%": 1.656,
+          "idio_%": -2.889,
+          "idio_z": -1.1
+        },
+        {
+          "date": "2026-05-14",
+          "r_stock_%": 5.55,
+          "r_market_%": 1.736,
+          "beta": 0.635,
+          "market_contrib_%": 1.102,
+          "idio_%": 4.448,
+          "idio_z": 2.59
+        },
+        {
+          "date": "2026-05-15",
+          "r_stock_%": -4.563,
+          "r_market_%": -6.312,
+          "beta": 0.641,
+          "market_contrib_%": -4.047,
+          "idio_%": -0.516,
+          "idio_z": 0.1
+        },
+        {
+          "date": "2026-05-18",
+          "r_stock_%": -1.735,
+          "r_market_%": 0.305,
+          "beta": 0.645,
+          "market_contrib_%": 0.197,
+          "idio_%": -1.931,
+          "idio_z": -0.6
+        },
+        {
+          "date": "2026-05-19",
+          "r_stock_%": -0.955,
+          "r_market_%": -3.305,
+          "beta": 0.645,
+          "market_contrib_%": -2.133,
+          "idio_%": 1.179,
+          "idio_z": 0.93
+        },
+        {
+          "date": "2026-05-20",
+          "r_stock_%": -3.388,
+          "r_market_%": -0.866,
+          "beta": 0.64,
+          "market_contrib_%": -0.555,
+          "idio_%": -2.834,
+          "idio_z": -1.03
+        },
+        {
+          "date": "2026-05-21",
+          "r_stock_%": 4.093,
+          "r_market_%": 8.08,
+          "beta": 0.644,
+          "market_contrib_%": 5.203,
+          "idio_%": -1.11,
+          "idio_z": -0.18
+        },
+        {
+          "date": "2026-05-22",
+          "r_stock_%": 1.739,
+          "r_market_%": 0.41,
+          "beta": 0.64,
+          "market_contrib_%": 0.263,
+          "idio_%": 1.477,
+          "idio_z": 1.07
+        },
+        {
+          "date": "2026-05-26",
+          "r_stock_%": -1.489,
+          "r_market_%": 2.514,
+          "beta": 0.642,
+          "market_contrib_%": 1.614,
+          "idio_%": -3.102,
+          "idio_z": -1.15
+        },
+        {
+          "date": "2026-05-27",
+          "r_stock_%": -0.602,
+          "r_market_%": 2.227,
+          "beta": 0.638,
+          "market_contrib_%": 1.421,
+          "idio_%": -2.023,
+          "idio_z": -0.6
+        },
+        {
+          "date": "2026-05-28",
+          "r_stock_%": 3.071,
+          "r_market_%": -0.529,
+          "beta": 0.631,
+          "market_contrib_%": -0.334,
+          "idio_%": 3.405,
+          "idio_z": 1.93
+        },
+        {
+          "date": "2026-05-29",
+          "r_stock_%": 13.231,
+          "r_market_%": 3.492,
+          "beta": 0.625,
+          "market_contrib_%": 2.183,
+          "idio_%": 11.048,
+          "idio_z": 4.48
+        },
+        {
+          "date": "2026-06-01",
+          "r_stock_%": 14.864,
+          "r_market_%": 3.617,
+          "beta": 0.643,
+          "market_contrib_%": 2.327,
+          "idio_%": 12.537,
+          "idio_z": 4.24
+        },
+        {
+          "date": "2026-06-02",
+          "r_stock_%": 3.261,
+          "r_market_%": 0.149,
+          "beta": 0.615,
+          "market_contrib_%": 0.092,
+          "idio_%": 3.17,
+          "idio_z": 1.08
+        },
+        {
+          "date": "2026-06-04",
+          "r_stock_%": -4.745,
+          "r_market_%": -1.859,
+          "beta": 0.61,
+          "market_contrib_%": -1.134,
+          "idio_%": -3.611,
+          "idio_z": -1.13
+        },
+        {
+          "date": "2026-06-05",
+          "r_stock_%": -4.59,
+          "r_market_%": -5.702,
+          "beta": 0.627,
+          "market_contrib_%": -3.575,
+          "idio_%": -1.015,
+          "idio_z": -0.26
+        }
+      ]
+    },
+    "카카오": {
+      "beta_now": 0.5761728582615607,
+      "cum_stock_%": -14.003,
+      "cum_market_contrib_%": 9.781,
+      "cum_idio_%": -23.784,
+      "max_abs_idio_z": 2.4416718125347945,
+      "daily_tail": [
+        {
+          "date": "2026-05-07",
+          "r_stock_%": -2.294,
+          "r_market_%": 1.418,
+          "beta": 0.837,
+          "market_contrib_%": 1.187,
+          "idio_%": -3.481,
+          "idio_z": -1.09
+        },
+        {
+          "date": "2026-05-08",
+          "r_stock_%": 1.644,
+          "r_market_%": 0.106,
+          "beta": 0.836,
+          "market_contrib_%": 0.089,
+          "idio_%": 1.555,
+          "idio_z": 1.05
+        },
+        {
+          "date": "2026-05-11",
+          "r_stock_%": -2.867,
+          "r_market_%": 4.233,
+          "beta": 0.855,
+          "market_contrib_%": 3.622,
+          "idio_%": -6.488,
+          "idio_z": -2.25
+        },
+        {
+          "date": "2026-05-12",
+          "r_stock_%": -2.606,
+          "r_market_%": -2.316,
+          "beta": 0.827,
+          "market_contrib_%": -1.916,
+          "idio_%": -0.69,
+          "idio_z": 0.12
+        },
+        {
+          "date": "2026-05-13",
+          "r_stock_%": -1.387,
+          "r_market_%": 2.594,
+          "beta": 0.827,
+          "market_contrib_%": 2.144,
+          "idio_%": -3.532,
+          "idio_z": -1.01
+        },
+        {
+          "date": "2026-05-14",
+          "r_stock_%": 6.752,
+          "r_market_%": 1.736,
+          "beta": 0.822,
+          "market_contrib_%": 1.428,
+          "idio_%": 5.324,
+          "idio_z": 2.44
+        },
+        {
+          "date": "2026-05-15",
+          "r_stock_%": -4.336,
+          "r_market_%": -6.312,
+          "beta": 0.83,
+          "market_contrib_%": -5.24,
+          "idio_%": 0.904,
+          "idio_z": 0.71
+        },
+        {
+          "date": "2026-05-18",
+          "r_stock_%": -3.586,
+          "r_market_%": 0.305,
+          "beta": 0.82,
+          "market_contrib_%": 0.25,
+          "idio_%": -3.836,
+          "idio_z": -1.1
+        },
+        {
+          "date": "2026-05-19",
+          "r_stock_%": -2.023,
+          "r_market_%": -3.305,
+          "beta": 0.82,
+          "market_contrib_%": -2.71,
+          "idio_%": 0.688,
+          "idio_z": 0.62
+        },
+        {
+          "date": "2026-05-20",
+          "r_stock_%": -3.548,
+          "r_market_%": -0.866,
+          "beta": 0.817,
+          "market_contrib_%": -0.707,
+          "idio_%": -2.84,
+          "idio_z": -0.71
+        },
+        {
+          "date": "2026-05-21",
+          "r_stock_%": 4.027,
+          "r_market_%": 8.08,
+          "beta": 0.821,
+          "market_contrib_%": 6.63,
+          "idio_%": -2.603,
+          "idio_z": -0.6
+        },
+        {
+          "date": "2026-05-22",
+          "r_stock_%": 0.12,
+          "r_market_%": 0.41,
+          "beta": 0.806,
+          "market_contrib_%": 0.331,
+          "idio_%": -0.211,
+          "idio_z": 0.29
+        },
+        {
+          "date": "2026-05-26",
+          "r_stock_%": -0.96,
+          "r_market_%": 2.514,
+          "beta": 0.808,
+          "market_contrib_%": 2.032,
+          "idio_%": -2.992,
+          "idio_z": -0.75
+        },
+        {
+          "date": "2026-05-27",
+          "r_stock_%": -2.319,
+          "r_market_%": 2.227,
+          "beta": 0.806,
+          "market_contrib_%": 1.794,
+          "idio_%": -4.113,
+          "idio_z": -1.15
+        },
+        {
+          "date": "2026-05-28",
+          "r_stock_%": -0.993,
+          "r_market_%": -0.529,
+          "beta": 0.783,
+          "market_contrib_%": -0.414,
+          "idio_%": -0.579,
+          "idio_z": 0.25
+        },
+        {
+          "date": "2026-05-29",
+          "r_stock_%": 4.51,
+          "r_market_%": 3.492,
+          "beta": 0.788,
+          "market_contrib_%": 2.75,
+          "idio_%": 1.76,
+          "idio_z": 1.14
+        },
+        {
+          "date": "2026-06-01",
+          "r_stock_%": 1.772,
+          "r_market_%": 3.617,
+          "beta": 0.765,
+          "market_contrib_%": 2.769,
+          "idio_%": -0.997,
+          "idio_z": -0.02
+        },
+        {
+          "date": "2026-06-02",
+          "r_stock_%": -0.352,
+          "r_market_%": 0.149,
+          "beta": 0.621,
+          "market_contrib_%": 0.093,
+          "idio_%": -0.445,
+          "idio_z": 0.22
+        },
+        {
+          "date": "2026-06-04",
+          "r_stock_%": -1.301,
+          "r_market_%": -1.859,
+          "beta": 0.572,
+          "market_contrib_%": -1.063,
+          "idio_%": -0.238,
+          "idio_z": 0.36
+        },
+        {
+          "date": "2026-06-05",
+          "r_stock_%": -4.256,
+          "r_market_%": -5.702,
+          "beta": 0.576,
+          "market_contrib_%": -3.285,
+          "idio_%": -0.971,
+          "idio_z": 0.03
+        }
+      ]
+    },
+    "한화에어로": {
+      "beta_now": 0.22623983299534167,
+      "cum_stock_%": -31.193,
+      "cum_market_contrib_%": 1.539,
+      "cum_idio_%": -32.732,
+      "max_abs_idio_z": 1.7291806250008013,
+      "daily_tail": [
+        {
+          "date": "2026-05-07",
+          "r_stock_%": -8.441,
+          "r_market_%": 1.418,
+          "beta": 0.202,
+          "market_contrib_%": 0.286,
+          "idio_%": -8.727,
+          "idio_z": -1.73
+        },
+        {
+          "date": "2026-05-08",
+          "r_stock_%": -0.762,
+          "r_market_%": 0.106,
+          "beta": 0.19,
+          "market_contrib_%": 0.02,
+          "idio_%": -0.782,
+          "idio_z": -0.1
+        },
+        {
+          "date": "2026-05-11",
+          "r_stock_%": 0.61,
+          "r_market_%": 4.233,
+          "beta": 0.152,
+          "market_contrib_%": 0.644,
+          "idio_%": -0.033,
+          "idio_z": 0.04
+        },
+        {
+          "date": "2026-05-12",
+          "r_stock_%": -2.386,
+          "r_market_%": -2.316,
+          "beta": 0.142,
+          "market_contrib_%": -0.329,
+          "idio_%": -2.057,
+          "idio_z": -0.38
+        },
+        {
+          "date": "2026-05-13",
+          "r_stock_%": 0.156,
+          "r_market_%": 2.594,
+          "beta": 0.148,
+          "market_contrib_%": 0.385,
+          "idio_%": -0.229,
+          "idio_z": -0.02
+        },
+        {
+          "date": "2026-05-14",
+          "r_stock_%": 1.543,
+          "r_market_%": 1.736,
+          "beta": 0.145,
+          "market_contrib_%": 0.251,
+          "idio_%": 1.292,
+          "idio_z": 0.29
+        },
+        {
+          "date": "2026-05-15",
+          "r_stock_%": -7.14,
+          "r_market_%": -6.312,
+          "beta": 0.147,
+          "market_contrib_%": -0.928,
+          "idio_%": -6.212,
+          "idio_z": -1.26
+        },
+        {
+          "date": "2026-05-18",
+          "r_stock_%": 0.901,
+          "r_market_%": 0.305,
+          "beta": 0.2,
+          "market_contrib_%": 0.061,
+          "idio_%": 0.84,
+          "idio_z": 0.19
+        },
+        {
+          "date": "2026-05-19",
+          "r_stock_%": 4.696,
+          "r_market_%": -3.305,
+          "beta": 0.198,
+          "market_contrib_%": -0.653,
+          "idio_%": 5.349,
+          "idio_z": 1.1
+        },
+        {
+          "date": "2026-05-20",
+          "r_stock_%": -2.919,
+          "r_market_%": -0.866,
+          "beta": 0.165,
+          "market_contrib_%": -0.142,
+          "idio_%": -2.777,
+          "idio_z": -0.55
+        },
+        {
+          "date": "2026-05-21",
+          "r_stock_%": -0.08,
+          "r_market_%": 8.08,
+          "beta": 0.152,
+          "market_contrib_%": 1.229,
+          "idio_%": -1.309,
+          "idio_z": -0.24
+        },
+        {
+          "date": "2026-05-22",
+          "r_stock_%": 1.036,
+          "r_market_%": 0.41,
+          "beta": 0.142,
+          "market_contrib_%": 0.058,
+          "idio_%": 0.978,
+          "idio_z": 0.22
+        },
+        {
+          "date": "2026-05-26",
+          "r_stock_%": -0.796,
+          "r_market_%": 2.514,
+          "beta": 0.141,
+          "market_contrib_%": 0.355,
+          "idio_%": -1.152,
+          "idio_z": -0.24
+        },
+        {
+          "date": "2026-05-27",
+          "r_stock_%": -0.561,
+          "r_market_%": 2.227,
+          "beta": 0.143,
+          "market_contrib_%": 0.318,
+          "idio_%": -0.879,
+          "idio_z": -0.2
+        },
+        {
+          "date": "2026-05-28",
+          "r_stock_%": -3.601,
+          "r_market_%": -0.529,
+          "beta": 0.148,
+          "market_contrib_%": -0.078,
+          "idio_%": -3.523,
+          "idio_z": -0.73
+        },
+        {
+          "date": "2026-05-29",
+          "r_stock_%": -2.276,
+          "r_market_%": 3.492,
+          "beta": 0.152,
+          "market_contrib_%": 0.532,
+          "idio_%": -2.808,
+          "idio_z": -0.7
+        },
+        {
+          "date": "2026-06-01",
+          "r_stock_%": -3.029,
+          "r_market_%": 3.617,
+          "beta": 0.33,
+          "market_contrib_%": 1.193,
+          "idio_%": -4.222,
+          "idio_z": -1.13
+        },
+        {
+          "date": "2026-06-02",
+          "r_stock_%": -6.161,
+          "r_market_%": 0.149,
+          "beta": 0.25,
+          "market_contrib_%": 0.037,
+          "idio_%": -6.199,
+          "idio_z": -1.65
+        },
+        {
+          "date": "2026-06-04",
+          "r_stock_%": -0.187,
+          "r_market_%": -1.859,
+          "beta": 0.221,
+          "market_contrib_%": -0.41,
+          "idio_%": 0.223,
+          "idio_z": 0.29
+        },
+        {
+          "date": "2026-06-05",
+          "r_stock_%": -1.795,
+          "r_market_%": -5.702,
+          "beta": 0.226,
+          "market_contrib_%": -1.29,
+          "idio_%": -0.505,
+          "idio_z": 0.07
+        }
+      ]
+    },
+    "LIG넥스원": {
+      "beta_now": 0.5840957125744008,
+      "cum_stock_%": -29.898,
+      "cum_market_contrib_%": 5.208,
+      "cum_idio_%": -35.107,
+      "max_abs_idio_z": 1.7991444911265217,
+      "daily_tail": [
+        {
+          "date": "2026-05-07",
+          "r_stock_%": -12.265,
+          "r_market_%": 1.418,
+          "beta": 0.546,
+          "market_contrib_%": 0.774,
+          "idio_%": -13.039,
+          "idio_z": -1.8
+        },
+        {
+          "date": "2026-05-08",
+          "r_stock_%": -3.048,
+          "r_market_%": 0.106,
+          "beta": 0.532,
+          "market_contrib_%": 0.056,
+          "idio_%": -3.105,
+          "idio_z": -0.48
+        },
+        {
+          "date": "2026-05-11",
+          "r_stock_%": 4.082,
+          "r_market_%": 4.233,
+          "beta": 0.498,
+          "market_contrib_%": 2.109,
+          "idio_%": 1.974,
+          "idio_z": 0.19
+        },
+        {
+          "date": "2026-05-12",
+          "r_stock_%": 0.456,
+          "r_market_%": -2.316,
+          "beta": 0.498,
+          "market_contrib_%": -1.154,
+          "idio_%": 1.61,
+          "idio_z": 0.14
+        },
+        {
+          "date": "2026-05-13",
+          "r_stock_%": -0.685,
+          "r_market_%": 2.594,
+          "beta": 0.487,
+          "market_contrib_%": 1.264,
+          "idio_%": -1.949,
+          "idio_z": -0.33
+        },
+        {
+          "date": "2026-05-14",
+          "r_stock_%": 0.571,
+          "r_market_%": 1.736,
+          "beta": 0.482,
+          "market_contrib_%": 0.837,
+          "idio_%": -0.266,
+          "idio_z": -0.11
+        },
+        {
+          "date": "2026-05-15",
+          "r_stock_%": -5.141,
+          "r_market_%": -6.312,
+          "beta": 0.481,
+          "market_contrib_%": -3.039,
+          "idio_%": -2.103,
+          "idio_z": -0.35
+        },
+        {
+          "date": "2026-05-18",
+          "r_stock_%": 0.598,
+          "r_market_%": 0.305,
+          "beta": 0.513,
+          "market_contrib_%": 0.156,
+          "idio_%": 0.442,
+          "idio_z": -0.01
+        },
+        {
+          "date": "2026-05-19",
+          "r_stock_%": 2.704,
+          "r_market_%": -3.305,
+          "beta": 0.513,
+          "market_contrib_%": -1.696,
+          "idio_%": 4.401,
+          "idio_z": 0.5
+        },
+        {
+          "date": "2026-05-20",
+          "r_stock_%": -3.422,
+          "r_market_%": -0.866,
+          "beta": 0.502,
+          "market_contrib_%": -0.435,
+          "idio_%": -2.987,
+          "idio_z": -0.47
+        },
+        {
+          "date": "2026-05-21",
+          "r_stock_%": 3.422,
+          "r_market_%": 8.08,
+          "beta": 0.501,
+          "market_contrib_%": 4.048,
+          "idio_%": -0.626,
+          "idio_z": -0.16
+        },
+        {
+          "date": "2026-05-22",
+          "r_stock_%": 7.054,
+          "r_market_%": 0.41,
+          "beta": 0.49,
+          "market_contrib_%": 0.201,
+          "idio_%": 6.853,
+          "idio_z": 0.83
+        },
+        {
+          "date": "2026-05-26",
+          "r_stock_%": -1.306,
+          "r_market_%": 2.514,
+          "beta": 0.481,
+          "market_contrib_%": 1.21,
+          "idio_%": -2.516,
+          "idio_z": -0.42
+        },
+        {
+          "date": "2026-05-27",
+          "r_stock_%": -4.251,
+          "r_market_%": 2.227,
+          "beta": 0.48,
+          "market_contrib_%": 1.07,
+          "idio_%": -5.321,
+          "idio_z": -0.79
+        },
+        {
+          "date": "2026-05-28",
+          "r_stock_%": -2.195,
+          "r_market_%": -0.529,
+          "beta": 0.481,
+          "market_contrib_%": -0.255,
+          "idio_%": -1.941,
+          "idio_z": -0.33
+        },
+        {
+          "date": "2026-05-29",
+          "r_stock_%": -6.641,
+          "r_market_%": 3.492,
+          "beta": 0.486,
+          "market_contrib_%": 1.696,
+          "idio_%": -8.337,
+          "idio_z": -1.29
+        },
+        {
+          "date": "2026-06-01",
+          "r_stock_%": -3.171,
+          "r_market_%": 3.617,
+          "beta": 0.737,
+          "market_contrib_%": 2.666,
+          "idio_%": -5.837,
+          "idio_z": -0.91
+        },
+        {
+          "date": "2026-06-02",
+          "r_stock_%": -6.66,
+          "r_market_%": 0.149,
+          "beta": 0.777,
+          "market_contrib_%": 0.116,
+          "idio_%": -6.776,
+          "idio_z": -1.07
+        },
+        {
+          "date": "2026-06-04",
+          "r_stock_%": 0.96,
+          "r_market_%": -1.859,
+          "beta": 0.584,
+          "market_contrib_%": -1.086,
+          "idio_%": 2.045,
+          "idio_z": 0.48
+        },
+        {
+          "date": "2026-06-05",
+          "r_stock_%": -0.96,
+          "r_market_%": -5.702,
+          "beta": 0.584,
+          "market_contrib_%": -3.33,
+          "idio_%": 2.371,
+          "idio_z": 0.52
+        }
+      ]
+    },
+    "KB금융": {
+      "beta_now": 0.37368755881420473,
+      "cum_stock_%": 7.689,
+      "cum_market_contrib_%": 6.525,
+      "cum_idio_%": 1.164,
+      "max_abs_idio_z": 3.0879616896178983,
+      "daily_tail": [
+        {
+          "date": "2026-05-07",
+          "r_stock_%": 1.437,
+          "r_market_%": 1.418,
+          "beta": 0.57,
+          "market_contrib_%": 0.809,
+          "idio_%": 0.628,
+          "idio_z": 0.35
+        },
+        {
+          "date": "2026-05-08",
+          "r_stock_%": 0.31,
+          "r_market_%": 0.106,
+          "beta": 0.569,
+          "market_contrib_%": 0.06,
+          "idio_%": 0.249,
+          "idio_z": 0.18
+        },
+        {
+          "date": "2026-05-11",
+          "r_stock_%": -1.81,
+          "r_market_%": 4.233,
+          "beta": 0.572,
+          "market_contrib_%": 2.421,
+          "idio_%": -4.231,
+          "idio_z": -1.97
+        },
+        {
+          "date": "2026-05-12",
+          "r_stock_%": -3.329,
+          "r_market_%": -2.316,
+          "beta": 0.575,
+          "market_contrib_%": -1.331,
+          "idio_%": -1.998,
+          "idio_z": -0.83
+        },
+        {
+          "date": "2026-05-13",
+          "r_stock_%": -1.047,
+          "r_market_%": 2.594,
+          "beta": 0.583,
+          "market_contrib_%": 1.513,
+          "idio_%": -2.561,
+          "idio_z": -1.07
+        },
+        {
+          "date": "2026-05-14",
+          "r_stock_%": 2.598,
+          "r_market_%": 1.736,
+          "beta": 0.58,
+          "market_contrib_%": 1.008,
+          "idio_%": 1.59,
+          "idio_z": 1.13
+        },
+        {
+          "date": "2026-05-15",
+          "r_stock_%": -0.257,
+          "r_market_%": -6.312,
+          "beta": 0.581,
+          "market_contrib_%": -3.665,
+          "idio_%": 3.409,
+          "idio_z": 2.04
+        },
+        {
+          "date": "2026-05-18",
+          "r_stock_%": -1.685,
+          "r_market_%": 0.305,
+          "beta": 0.546,
+          "market_contrib_%": 0.166,
+          "idio_%": -1.851,
+          "idio_z": -0.71
+        },
+        {
+          "date": "2026-05-19",
+          "r_stock_%": -0.131,
+          "r_market_%": -3.305,
+          "beta": 0.547,
+          "market_contrib_%": -1.807,
+          "idio_%": 1.676,
+          "idio_z": 1.1
+        },
+        {
+          "date": "2026-05-20",
+          "r_stock_%": -0.722,
+          "r_market_%": -0.866,
+          "beta": 0.544,
+          "market_contrib_%": -0.471,
+          "idio_%": -0.252,
+          "idio_z": 0.1
+        },
+        {
+          "date": "2026-05-21",
+          "r_stock_%": 2.667,
+          "r_market_%": 8.08,
+          "beta": 0.542,
+          "market_contrib_%": 4.382,
+          "idio_%": -1.716,
+          "idio_z": -0.65
+        },
+        {
+          "date": "2026-05-22",
+          "r_stock_%": 2.66,
+          "r_market_%": 0.41,
+          "beta": 0.531,
+          "market_contrib_%": 0.218,
+          "idio_%": 2.442,
+          "idio_z": 1.46
+        },
+        {
+          "date": "2026-05-26",
+          "r_stock_%": -1.702,
+          "r_market_%": 2.514,
+          "beta": 0.534,
+          "market_contrib_%": 1.344,
+          "idio_%": -3.046,
+          "idio_z": -1.31
+        },
+        {
+          "date": "2026-05-27",
+          "r_stock_%": -2.25,
+          "r_market_%": 2.227,
+          "beta": 0.528,
+          "market_contrib_%": 1.177,
+          "idio_%": -3.427,
+          "idio_z": -1.49
+        },
+        {
+          "date": "2026-05-28",
+          "r_stock_%": -2.702,
+          "r_market_%": -0.529,
+          "beta": 0.533,
+          "market_contrib_%": -0.282,
+          "idio_%": -2.42,
+          "idio_z": -1.01
+        },
+        {
+          "date": "2026-05-29",
+          "r_stock_%": 0.599,
+          "r_market_%": 3.492,
+          "beta": 0.53,
+          "market_contrib_%": 1.852,
+          "idio_%": -1.252,
+          "idio_z": -0.41
+        },
+        {
+          "date": "2026-06-01",
+          "r_stock_%": 0.991,
+          "r_market_%": 3.617,
+          "beta": 0.535,
+          "market_contrib_%": 1.935,
+          "idio_%": -0.944,
+          "idio_z": -0.32
+        },
+        {
+          "date": "2026-06-02",
+          "r_stock_%": 2.916,
+          "r_market_%": 0.149,
+          "beta": 0.458,
+          "market_contrib_%": 0.068,
+          "idio_%": 2.847,
+          "idio_z": 1.75
+        },
+        {
+          "date": "2026-06-04",
+          "r_stock_%": 4.739,
+          "r_market_%": -1.859,
+          "beta": 0.399,
+          "market_contrib_%": -0.742,
+          "idio_%": 5.481,
+          "idio_z": 2.89
+        },
+        {
+          "date": "2026-06-05",
+          "r_stock_%": 4.408,
+          "r_market_%": -5.702,
+          "beta": 0.374,
+          "market_contrib_%": -2.131,
+          "idio_%": 6.539,
+          "idio_z": 3.09
+        }
+      ]
+    },
+    "KT&G": {
+      "beta_now": 0.20994755765271875,
+      "cum_stock_%": 2.199,
+      "cum_market_contrib_%": 3.145,
+      "cum_idio_%": -0.946,
+      "max_abs_idio_z": 2.6893204944546976,
+      "daily_tail": [
+        {
+          "date": "2026-05-07",
+          "r_stock_%": 0.738,
+          "r_market_%": 1.418,
+          "beta": 0.259,
+          "market_contrib_%": 0.367,
+          "idio_%": 0.372,
+          "idio_z": 0.2
+        },
+        {
+          "date": "2026-05-08",
+          "r_stock_%": 2.404,
+          "r_market_%": 0.106,
+          "beta": 0.256,
+          "market_contrib_%": 0.027,
+          "idio_%": 2.377,
+          "idio_z": 1.19
+        },
+        {
+          "date": "2026-05-11",
+          "r_stock_%": -0.387,
+          "r_market_%": 4.233,
+          "beta": 0.261,
+          "market_contrib_%": 1.103,
+          "idio_%": -1.49,
+          "idio_z": -0.74
+        },
+        {
+          "date": "2026-05-12",
+          "r_stock_%": 0.993,
+          "r_market_%": -2.316,
+          "beta": 0.257,
+          "market_contrib_%": -0.596,
+          "idio_%": 1.589,
+          "idio_z": 0.84
+        },
+        {
+          "date": "2026-05-13",
+          "r_stock_%": -2.277,
+          "r_market_%": 2.594,
+          "beta": 0.242,
+          "market_contrib_%": 0.629,
+          "idio_%": -2.906,
+          "idio_z": -1.42
+        },
+        {
+          "date": "2026-05-14",
+          "r_stock_%": 5.996,
+          "r_market_%": 1.736,
+          "beta": 0.237,
+          "market_contrib_%": 0.411,
+          "idio_%": 5.585,
+          "idio_z": 2.69
+        },
+        {
+          "date": "2026-05-15",
+          "r_stock_%": -4.99,
+          "r_market_%": -6.312,
+          "beta": 0.245,
+          "market_contrib_%": -1.545,
+          "idio_%": -3.446,
+          "idio_z": -1.57
+        },
+        {
+          "date": "2026-05-18",
+          "r_stock_%": -0.894,
+          "r_market_%": 0.305,
+          "beta": 0.273,
+          "market_contrib_%": 0.083,
+          "idio_%": -0.977,
+          "idio_z": -0.4
+        },
+        {
+          "date": "2026-05-19",
+          "r_stock_%": -0.563,
+          "r_market_%": -3.305,
+          "beta": 0.274,
+          "market_contrib_%": -0.907,
+          "idio_%": 0.345,
+          "idio_z": 0.23
+        },
+        {
+          "date": "2026-05-20",
+          "r_stock_%": 0.563,
+          "r_market_%": -0.866,
+          "beta": 0.273,
+          "market_contrib_%": -0.236,
+          "idio_%": 0.799,
+          "idio_z": 0.44
+        },
+        {
+          "date": "2026-05-21",
+          "r_stock_%": 1.559,
+          "r_market_%": 8.08,
+          "beta": 0.27,
+          "market_contrib_%": 2.18,
+          "idio_%": -0.621,
+          "idio_z": -0.22
+        },
+        {
+          "date": "2026-05-22",
+          "r_stock_%": 3.794,
+          "r_market_%": 0.41,
+          "beta": 0.265,
+          "market_contrib_%": 0.109,
+          "idio_%": 3.686,
+          "idio_z": 1.73
+        },
+        {
+          "date": "2026-05-26",
+          "r_stock_%": -3.189,
+          "r_market_%": 2.514,
+          "beta": 0.269,
+          "market_contrib_%": 0.677,
+          "idio_%": -3.866,
+          "idio_z": -1.7
+        },
+        {
+          "date": "2026-05-27",
+          "r_stock_%": -1.327,
+          "r_market_%": 2.227,
+          "beta": 0.256,
+          "market_contrib_%": 0.569,
+          "idio_%": -1.896,
+          "idio_z": -0.87
+        },
+        {
+          "date": "2026-05-28",
+          "r_stock_%": 2.202,
+          "r_market_%": -0.529,
+          "beta": 0.275,
+          "market_contrib_%": -0.146,
+          "idio_%": 2.347,
+          "idio_z": 1.17
+        },
+        {
+          "date": "2026-05-29",
+          "r_stock_%": 0.543,
+          "r_market_%": 3.492,
+          "beta": 0.267,
+          "market_contrib_%": 0.931,
+          "idio_%": -0.388,
+          "idio_z": -0.19
+        },
+        {
+          "date": "2026-06-01",
+          "r_stock_%": 0.216,
+          "r_market_%": 3.617,
+          "beta": 0.279,
+          "market_contrib_%": 1.009,
+          "idio_%": -0.793,
+          "idio_z": -0.49
+        },
+        {
+          "date": "2026-06-02",
+          "r_stock_%": -0.27,
+          "r_market_%": 0.149,
+          "beta": 0.208,
+          "market_contrib_%": 0.031,
+          "idio_%": -0.301,
+          "idio_z": -0.2
+        },
+        {
+          "date": "2026-06-04",
+          "r_stock_%": -4.884,
+          "r_market_%": -1.859,
+          "beta": 0.192,
+          "market_contrib_%": -0.356,
+          "idio_%": -4.528,
+          "idio_z": -2.39
+        },
+        {
+          "date": "2026-06-05",
+          "r_stock_%": 1.971,
+          "r_market_%": -5.702,
+          "beta": 0.21,
+          "market_contrib_%": -1.197,
+          "idio_%": 3.168,
+          "idio_z": 1.6
+        }
+      ]
+    },
+    "삼성SDI": {
+      "beta_now": 0.5394114077239742,
+      "cum_stock_%": -20.61,
+      "cum_market_contrib_%": 10.528,
+      "cum_idio_%": -31.137,
+      "max_abs_idio_z": 2.069172895500753,
+      "daily_tail": [
+        {
+          "date": "2026-05-07",
+          "r_stock_%": -0.575,
+          "r_market_%": 1.418,
+          "beta": 0.86,
+          "market_contrib_%": 1.22,
+          "idio_%": -1.795,
+          "idio_z": -0.58
+        },
+        {
+          "date": "2026-05-08",
+          "r_stock_%": -2.332,
+          "r_market_%": 0.106,
+          "beta": 0.855,
+          "market_contrib_%": 0.091,
+          "idio_%": -2.423,
+          "idio_z": -0.72
+        },
+        {
+          "date": "2026-05-11",
+          "r_stock_%": 0.881,
+          "r_market_%": 4.233,
+          "beta": 0.864,
+          "market_contrib_%": 3.659,
+          "idio_%": -2.778,
+          "idio_z": -0.81
+        },
+        {
+          "date": "2026-05-12",
+          "r_stock_%": -8.383,
+          "r_market_%": -2.316,
+          "beta": 0.842,
+          "market_contrib_%": -1.949,
+          "idio_%": -6.433,
+          "idio_z": -1.71
+        },
+        {
+          "date": "2026-05-13",
+          "r_stock_%": 0.792,
+          "r_market_%": 2.594,
+          "beta": 0.872,
+          "market_contrib_%": 2.261,
+          "idio_%": -1.469,
+          "idio_z": -0.44
+        },
+        {
+          "date": "2026-05-14",
+          "r_stock_%": 0.315,
+          "r_market_%": 1.736,
+          "beta": 0.867,
+          "market_contrib_%": 1.506,
+          "idio_%": -1.191,
+          "idio_z": -0.37
+        },
+        {
+          "date": "2026-05-15",
+          "r_stock_%": -3.52,
+          "r_market_%": -6.312,
+          "beta": 0.866,
+          "market_contrib_%": -5.467,
+          "idio_%": 1.947,
+          "idio_z": 0.42
+        },
+        {
+          "date": "2026-05-18",
+          "r_stock_%": -0.163,
+          "r_market_%": 0.305,
+          "beta": 0.855,
+          "market_contrib_%": 0.26,
+          "idio_%": -0.423,
+          "idio_z": -0.2
+        },
+        {
+          "date": "2026-05-19",
+          "r_stock_%": -4.334,
+          "r_market_%": -3.305,
+          "beta": 0.852,
+          "market_contrib_%": -2.818,
+          "idio_%": -1.516,
+          "idio_z": -0.45
+        },
+        {
+          "date": "2026-05-20",
+          "r_stock_%": -2.939,
+          "r_market_%": -0.866,
+          "beta": 0.843,
+          "market_contrib_%": -0.731,
+          "idio_%": -2.208,
+          "idio_z": -0.65
+        },
+        {
+          "date": "2026-05-21",
+          "r_stock_%": 7.761,
+          "r_market_%": 8.08,
+          "beta": 0.855,
+          "market_contrib_%": 6.911,
+          "idio_%": 0.85,
+          "idio_z": 0.13
+        },
+        {
+          "date": "2026-05-22",
+          "r_stock_%": 4.91,
+          "r_market_%": 0.41,
+          "beta": 0.861,
+          "market_contrib_%": 0.353,
+          "idio_%": 4.557,
+          "idio_z": 1.11
+        },
+        {
+          "date": "2026-05-26",
+          "r_stock_%": -0.776,
+          "r_market_%": 2.514,
+          "beta": 0.851,
+          "market_contrib_%": 2.14,
+          "idio_%": -2.915,
+          "idio_z": -0.84
+        },
+        {
+          "date": "2026-05-27",
+          "r_stock_%": -1.887,
+          "r_market_%": 2.227,
+          "beta": 0.843,
+          "market_contrib_%": 1.876,
+          "idio_%": -3.763,
+          "idio_z": -1.04
+        },
+        {
+          "date": "2026-05-28",
+          "r_stock_%": 7.047,
+          "r_market_%": -0.529,
+          "beta": 0.833,
+          "market_contrib_%": -0.441,
+          "idio_%": 7.488,
+          "idio_z": 1.84
+        },
+        {
+          "date": "2026-05-29",
+          "r_stock_%": 1.76,
+          "r_market_%": 3.492,
+          "beta": 0.833,
+          "market_contrib_%": 2.907,
+          "idio_%": -1.148,
+          "idio_z": -0.38
+        },
+        {
+          "date": "2026-06-01",
+          "r_stock_%": -5.374,
+          "r_market_%": 3.617,
+          "beta": 0.757,
+          "market_contrib_%": 2.74,
+          "idio_%": -8.115,
+          "idio_z": -2.07
+        },
+        {
+          "date": "2026-06-02",
+          "r_stock_%": -7.979,
+          "r_market_%": 0.149,
+          "beta": 0.605,
+          "market_contrib_%": 0.09,
+          "idio_%": -8.069,
+          "idio_z": -1.96
+        },
+        {
+          "date": "2026-06-04",
+          "r_stock_%": 0.827,
+          "r_market_%": -1.859,
+          "beta": 0.541,
+          "market_contrib_%": -1.006,
+          "idio_%": 1.833,
+          "idio_z": 0.44
+        },
+        {
+          "date": "2026-06-05",
+          "r_stock_%": -6.641,
+          "r_market_%": -5.702,
+          "beta": 0.539,
+          "market_contrib_%": -3.076,
+          "idio_%": -3.565,
+          "idio_z": -0.84
+        }
+      ]
+    },
+    "아모레퍼시픽": {
+      "beta_now": 0.3278695660948802,
+      "cum_stock_%": -19.004,
+      "cum_market_contrib_%": 6.352,
+      "cum_idio_%": -25.357,
+      "max_abs_idio_z": 2.7215951307244675,
+      "daily_tail": [
+        {
+          "date": "2026-05-07",
+          "r_stock_%": -0.077,
+          "r_market_%": 1.418,
+          "beta": 0.542,
+          "market_contrib_%": 0.769,
+          "idio_%": -0.846,
+          "idio_z": -0.12
+        },
+        {
+          "date": "2026-05-08",
+          "r_stock_%": -0.386,
+          "r_market_%": 0.106,
+          "beta": 0.542,
+          "market_contrib_%": 0.058,
+          "idio_%": -0.443,
+          "idio_z": 0.01
+        },
+        {
+          "date": "2026-05-11",
+          "r_stock_%": -1.166,
+          "r_market_%": 4.233,
+          "beta": 0.558,
+          "market_contrib_%": 2.361,
+          "idio_%": -3.527,
+          "idio_z": -0.86
+        },
+        {
+          "date": "2026-05-12",
+          "r_stock_%": -3.744,
+          "r_market_%": -2.316,
+          "beta": 0.543,
+          "market_contrib_%": -1.258,
+          "idio_%": -2.486,
+          "idio_z": -0.63
+        },
+        {
+          "date": "2026-05-13",
+          "r_stock_%": -2.216,
+          "r_market_%": 2.594,
+          "beta": 0.479,
+          "market_contrib_%": 1.241,
+          "idio_%": -3.457,
+          "idio_z": -0.98
+        },
+        {
+          "date": "2026-05-14",
+          "r_stock_%": 7.742,
+          "r_market_%": 1.736,
+          "beta": 0.472,
+          "market_contrib_%": 0.82,
+          "idio_%": 6.922,
+          "idio_z": 2.72
+        },
+        {
+          "date": "2026-05-15",
+          "r_stock_%": -6.505,
+          "r_market_%": -6.312,
+          "beta": 0.483,
+          "market_contrib_%": -3.047,
+          "idio_%": -3.458,
+          "idio_z": -0.97
+        },
+        {
+          "date": "2026-05-18",
+          "r_stock_%": -1.32,
+          "r_market_%": 0.305,
+          "beta": 0.514,
+          "market_contrib_%": 0.157,
+          "idio_%": -1.477,
+          "idio_z": -0.25
+        },
+        {
+          "date": "2026-05-19",
+          "r_stock_%": -0.416,
+          "r_market_%": -3.305,
+          "beta": 0.516,
+          "market_contrib_%": -1.706,
+          "idio_%": 1.29,
+          "idio_z": 0.72
+        },
+        {
+          "date": "2026-05-20",
+          "r_stock_%": -3.221,
+          "r_market_%": -0.866,
+          "beta": 0.509,
+          "market_contrib_%": -0.441,
+          "idio_%": -2.78,
+          "idio_z": -0.74
+        },
+        {
+          "date": "2026-05-21",
+          "r_stock_%": 1.028,
+          "r_market_%": 8.08,
+          "beta": 0.521,
+          "market_contrib_%": 4.208,
+          "idio_%": -3.18,
+          "idio_z": -0.86
+        },
+        {
+          "date": "2026-05-22",
+          "r_stock_%": 2.276,
+          "r_market_%": 0.41,
+          "beta": 0.5,
+          "market_contrib_%": 0.205,
+          "idio_%": 2.071,
+          "idio_z": 0.99
+        },
+        {
+          "date": "2026-05-26",
+          "r_stock_%": -1.089,
+          "r_market_%": 2.514,
+          "beta": 0.499,
+          "market_contrib_%": 1.254,
+          "idio_%": -2.344,
+          "idio_z": -0.56
+        },
+        {
+          "date": "2026-05-27",
+          "r_stock_%": -1.785,
+          "r_market_%": 2.227,
+          "beta": 0.496,
+          "market_contrib_%": 1.105,
+          "idio_%": -2.89,
+          "idio_z": -0.75
+        },
+        {
+          "date": "2026-05-28",
+          "r_stock_%": -1.034,
+          "r_market_%": -0.529,
+          "beta": 0.497,
+          "market_contrib_%": -0.263,
+          "idio_%": -0.772,
+          "idio_z": -0.01
+        },
+        {
+          "date": "2026-05-29",
+          "r_stock_%": -0.26,
+          "r_market_%": 3.492,
+          "beta": 0.493,
+          "market_contrib_%": 1.722,
+          "idio_%": -1.983,
+          "idio_z": -0.48
+        },
+        {
+          "date": "2026-06-01",
+          "r_stock_%": -3.357,
+          "r_market_%": 3.617,
+          "beta": 0.446,
+          "market_contrib_%": 1.613,
+          "idio_%": -4.97,
+          "idio_z": -1.53
+        },
+        {
+          "date": "2026-06-02",
+          "r_stock_%": -1.813,
+          "r_market_%": 0.149,
+          "beta": 0.352,
+          "market_contrib_%": 0.052,
+          "idio_%": -1.866,
+          "idio_z": -0.42
+        },
+        {
+          "date": "2026-06-04",
+          "r_stock_%": 1.723,
+          "r_market_%": -1.859,
+          "beta": 0.338,
+          "market_contrib_%": -0.629,
+          "idio_%": 2.352,
+          "idio_z": 1.08
+        },
+        {
+          "date": "2026-06-05",
+          "r_stock_%": -3.384,
+          "r_market_%": -5.702,
+          "beta": 0.328,
+          "market_contrib_%": -1.869,
+          "idio_%": -1.515,
+          "idio_z": -0.28
+        }
+      ]
+    },
+    "삼성물산": {
+      "beta_now": 1.2023766439376844,
+      "cum_stock_%": 20.405,
+      "cum_market_contrib_%": 11.899,
+      "cum_idio_%": 8.507,
+      "max_abs_idio_z": 3.689000350218677,
+      "daily_tail": [
+        {
+          "date": "2026-05-07",
+          "r_stock_%": 7.563,
+          "r_market_%": 1.418,
+          "beta": 1.164,
+          "market_contrib_%": 1.651,
+          "idio_%": 5.912,
+          "idio_z": 2.34
+        },
+        {
+          "date": "2026-05-08",
+          "r_stock_%": 4.23,
+          "r_market_%": 0.106,
+          "beta": 1.172,
+          "market_contrib_%": 0.124,
+          "idio_%": 4.106,
+          "idio_z": 1.58
+        },
+        {
+          "date": "2026-05-11",
+          "r_stock_%": 6.749,
+          "r_market_%": 4.233,
+          "beta": 1.177,
+          "market_contrib_%": 4.984,
+          "idio_%": 1.765,
+          "idio_z": 0.68
+        },
+        {
+          "date": "2026-05-12",
+          "r_stock_%": -3.834,
+          "r_market_%": -2.316,
+          "beta": 1.176,
+          "market_contrib_%": -2.724,
+          "idio_%": -1.11,
+          "idio_z": -0.4
+        },
+        {
+          "date": "2026-05-13",
+          "r_stock_%": -1.506,
+          "r_market_%": 2.594,
+          "beta": 1.167,
+          "market_contrib_%": 3.027,
+          "idio_%": -4.532,
+          "idio_z": -1.65
+        },
+        {
+          "date": "2026-05-14",
+          "r_stock_%": 3.102,
+          "r_market_%": 1.736,
+          "beta": 1.157,
+          "market_contrib_%": 2.01,
+          "idio_%": 1.092,
+          "idio_z": 0.47
+        },
+        {
+          "date": "2026-05-15",
+          "r_stock_%": -10.863,
+          "r_market_%": -6.312,
+          "beta": 1.16,
+          "market_contrib_%": -7.32,
+          "idio_%": -3.544,
+          "idio_z": -1.25
+        },
+        {
+          "date": "2026-05-18",
+          "r_stock_%": 0.754,
+          "r_market_%": 0.305,
+          "beta": 1.18,
+          "market_contrib_%": 0.36,
+          "idio_%": 0.394,
+          "idio_z": 0.22
+        },
+        {
+          "date": "2026-05-19",
+          "r_stock_%": -4.873,
+          "r_market_%": -3.305,
+          "beta": 1.176,
+          "market_contrib_%": -3.888,
+          "idio_%": -0.985,
+          "idio_z": -0.33
+        },
+        {
+          "date": "2026-05-20",
+          "r_stock_%": -2.663,
+          "r_market_%": -0.866,
+          "beta": 1.188,
+          "market_contrib_%": -1.029,
+          "idio_%": -1.634,
+          "idio_z": -0.57
+        },
+        {
+          "date": "2026-05-21",
+          "r_stock_%": 12.182,
+          "r_market_%": 8.08,
+          "beta": 1.188,
+          "market_contrib_%": 9.6,
+          "idio_%": 2.583,
+          "idio_z": 1.05
+        },
+        {
+          "date": "2026-05-22",
+          "r_stock_%": 0.477,
+          "r_market_%": 0.41,
+          "beta": 1.212,
+          "market_contrib_%": 0.497,
+          "idio_%": -0.02,
+          "idio_z": 0.04
+        },
+        {
+          "date": "2026-05-26",
+          "r_stock_%": -2.285,
+          "r_market_%": 2.514,
+          "beta": 1.213,
+          "market_contrib_%": 3.049,
+          "idio_%": -5.334,
+          "idio_z": -1.91
+        },
+        {
+          "date": "2026-05-27",
+          "r_stock_%": -0.122,
+          "r_market_%": 2.227,
+          "beta": 1.2,
+          "market_contrib_%": 2.673,
+          "idio_%": -2.794,
+          "idio_z": -0.94
+        },
+        {
+          "date": "2026-05-28",
+          "r_stock_%": -2.716,
+          "r_market_%": -0.529,
+          "beta": 1.197,
+          "market_contrib_%": -0.633,
+          "idio_%": -2.083,
+          "idio_z": -0.67
+        },
+        {
+          "date": "2026-05-29",
+          "r_stock_%": 7.937,
+          "r_market_%": 3.492,
+          "beta": 1.197,
+          "market_contrib_%": 4.179,
+          "idio_%": 3.758,
+          "idio_z": 1.44
+        },
+        {
+          "date": "2026-06-01",
+          "r_stock_%": 5.072,
+          "r_market_%": 3.617,
+          "beta": 1.204,
+          "market_contrib_%": 4.354,
+          "idio_%": 0.718,
+          "idio_z": 0.32
+        },
+        {
+          "date": "2026-06-02",
+          "r_stock_%": 6.488,
+          "r_market_%": 0.149,
+          "beta": 1.216,
+          "market_contrib_%": 0.181,
+          "idio_%": 6.307,
+          "idio_z": 2.23
+        },
+        {
+          "date": "2026-06-04",
+          "r_stock_%": 9.709,
+          "r_market_%": -1.859,
+          "beta": 1.258,
+          "market_contrib_%": -2.339,
+          "idio_%": 12.048,
+          "idio_z": 3.69
+        },
+        {
+          "date": "2026-06-05",
+          "r_stock_%": -14.995,
+          "r_market_%": -5.702,
+          "beta": 1.202,
+          "market_contrib_%": -6.856,
+          "idio_%": -8.14,
+          "idio_z": -2.44
+        }
+      ]
+    },
+    "삼양식품": {
+      "beta_now": 0.12985089517800485,
+      "cum_stock_%": -14.441,
+      "cum_market_contrib_%": 5.159,
+      "cum_idio_%": -19.6,
+      "max_abs_idio_z": 2.7242949543916515,
+      "daily_tail": [
+        {
+          "date": "2026-05-07",
+          "r_stock_%": -2.346,
+          "r_market_%": 1.418,
+          "beta": 0.449,
+          "market_contrib_%": 0.637,
+          "idio_%": -2.983,
+          "idio_z": -0.9
+        },
+        {
+          "date": "2026-05-08",
+          "r_stock_%": 7.32,
+          "r_market_%": 0.106,
+          "beta": 0.448,
+          "market_contrib_%": 0.048,
+          "idio_%": 7.273,
+          "idio_z": 2.17
+        },
+        {
+          "date": "2026-05-11",
+          "r_stock_%": -3.061,
+          "r_market_%": 4.233,
+          "beta": 0.44,
+          "market_contrib_%": 1.861,
+          "idio_%": -4.922,
+          "idio_z": -1.43
+        },
+        {
+          "date": "2026-05-12",
+          "r_stock_%": 0.906,
+          "r_market_%": -2.316,
+          "beta": 0.415,
+          "market_contrib_%": -0.961,
+          "idio_%": 1.867,
+          "idio_z": 0.56
+        },
+        {
+          "date": "2026-05-13",
+          "r_stock_%": -2.742,
+          "r_market_%": 2.594,
+          "beta": 0.402,
+          "market_contrib_%": 1.042,
+          "idio_%": -3.784,
+          "idio_z": -1.07
+        },
+        {
+          "date": "2026-05-14",
+          "r_stock_%": 10.544,
+          "r_market_%": 1.736,
+          "beta": 0.396,
+          "market_contrib_%": 0.687,
+          "idio_%": 9.856,
+          "idio_z": 2.72
+        },
+        {
+          "date": "2026-05-15",
+          "r_stock_%": 0.347,
+          "r_market_%": -6.312,
+          "beta": 0.409,
+          "market_contrib_%": -2.579,
+          "idio_%": 2.926,
+          "idio_z": 0.81
+        },
+        {
+          "date": "2026-05-18",
+          "r_stock_%": -5.553,
+          "r_market_%": 0.305,
+          "beta": 0.376,
+          "market_contrib_%": 0.115,
+          "idio_%": -5.668,
+          "idio_z": -1.51
+        },
+        {
+          "date": "2026-05-19",
+          "r_stock_%": 1.814,
+          "r_market_%": -3.305,
+          "beta": 0.375,
+          "market_contrib_%": -1.24,
+          "idio_%": 3.054,
+          "idio_z": 0.82
+        },
+        {
+          "date": "2026-05-20",
+          "r_stock_%": -2.475,
+          "r_market_%": -0.866,
+          "beta": 0.371,
+          "market_contrib_%": -0.321,
+          "idio_%": -2.154,
+          "idio_z": -0.59
+        },
+        {
+          "date": "2026-05-21",
+          "r_stock_%": -2.84,
+          "r_market_%": 8.08,
+          "beta": 0.378,
+          "market_contrib_%": 3.051,
+          "idio_%": -5.891,
+          "idio_z": -1.56
+        },
+        {
+          "date": "2026-05-22",
+          "r_stock_%": -0.304,
+          "r_market_%": 0.41,
+          "beta": 0.326,
+          "market_contrib_%": 0.134,
+          "idio_%": -0.437,
+          "idio_z": -0.08
+        },
+        {
+          "date": "2026-05-26",
+          "r_stock_%": -1.455,
+          "r_market_%": 2.514,
+          "beta": 0.33,
+          "market_contrib_%": 0.829,
+          "idio_%": -2.284,
+          "idio_z": -0.58
+        },
+        {
+          "date": "2026-05-27",
+          "r_stock_%": -4.659,
+          "r_market_%": 2.227,
+          "beta": 0.324,
+          "market_contrib_%": 0.721,
+          "idio_%": -5.381,
+          "idio_z": -1.41
+        },
+        {
+          "date": "2026-05-28",
+          "r_stock_%": -2.124,
+          "r_market_%": -0.529,
+          "beta": 0.324,
+          "market_contrib_%": -0.171,
+          "idio_%": -1.953,
+          "idio_z": -0.46
+        },
+        {
+          "date": "2026-05-29",
+          "r_stock_%": -0.497,
+          "r_market_%": 3.492,
+          "beta": 0.327,
+          "market_contrib_%": 1.141,
+          "idio_%": -1.638,
+          "idio_z": -0.37
+        },
+        {
+          "date": "2026-06-01",
+          "r_stock_%": -3.29,
+          "r_market_%": 3.617,
+          "beta": 0.307,
+          "market_contrib_%": 1.112,
+          "idio_%": -4.402,
+          "idio_z": -1.13
+        },
+        {
+          "date": "2026-06-02",
+          "r_stock_%": -2.255,
+          "r_market_%": 0.149,
+          "beta": 0.128,
+          "market_contrib_%": 0.019,
+          "idio_%": -2.274,
+          "idio_z": -0.56
+        },
+        {
+          "date": "2026-06-04",
+          "r_stock_%": -2.307,
+          "r_market_%": -1.859,
+          "beta": 0.121,
+          "market_contrib_%": -0.225,
+          "idio_%": -2.082,
+          "idio_z": -0.5
+        },
+        {
+          "date": "2026-06-05",
+          "r_stock_%": 0.537,
+          "r_market_%": -5.702,
+          "beta": 0.13,
+          "market_contrib_%": -0.74,
+          "idio_%": 1.278,
+          "idio_z": 0.41
+        }
+      ]
+    },
+    "ISC": {
+      "beta_now": 0.9328019705851193,
+      "cum_stock_%": -23.691,
+      "cum_market_contrib_%": 10.82,
+      "cum_idio_%": -34.511,
+      "max_abs_idio_z": 2.006596208008559,
+      "daily_tail": [
+        {
+          "date": "2026-05-07",
+          "r_stock_%": -3.579,
+          "r_market_%": 1.418,
+          "beta": 0.963,
+          "market_contrib_%": 1.366,
+          "idio_%": -4.944,
+          "idio_z": -1.0
+        },
+        {
+          "date": "2026-05-08",
+          "r_stock_%": 2.598,
+          "r_market_%": 0.106,
+          "beta": 0.965,
+          "market_contrib_%": 0.102,
+          "idio_%": 2.495,
+          "idio_z": 0.42
+        },
+        {
+          "date": "2026-05-11",
+          "r_stock_%": -4.025,
+          "r_market_%": 4.233,
+          "beta": 1.006,
+          "market_contrib_%": 4.258,
+          "idio_%": -8.283,
+          "idio_z": -1.59
+        },
+        {
+          "date": "2026-05-12",
+          "r_stock_%": 2.033,
+          "r_market_%": -2.316,
+          "beta": 0.997,
+          "market_contrib_%": -2.309,
+          "idio_%": 4.342,
+          "idio_z": 0.84
+        },
+        {
+          "date": "2026-05-13",
+          "r_stock_%": -1.827,
+          "r_market_%": 2.594,
+          "beta": 0.967,
+          "market_contrib_%": 2.508,
+          "idio_%": -4.335,
+          "idio_z": -0.83
+        },
+        {
+          "date": "2026-05-14",
+          "r_stock_%": 1.424,
+          "r_market_%": 1.736,
+          "beta": 0.953,
+          "market_contrib_%": 1.656,
+          "idio_%": -0.231,
+          "idio_z": -0.04
+        },
+        {
+          "date": "2026-05-15",
+          "r_stock_%": -9.753,
+          "r_market_%": -6.312,
+          "beta": 0.953,
+          "market_contrib_%": -6.018,
+          "idio_%": -3.736,
+          "idio_z": -0.69
+        },
+        {
+          "date": "2026-05-18",
+          "r_stock_%": -7.154,
+          "r_market_%": 0.305,
+          "beta": 0.982,
+          "market_contrib_%": 0.299,
+          "idio_%": -7.453,
+          "idio_z": -1.37
+        },
+        {
+          "date": "2026-05-19",
+          "r_stock_%": -5.761,
+          "r_market_%": -3.305,
+          "beta": 0.981,
+          "market_contrib_%": -3.244,
+          "idio_%": -2.517,
+          "idio_z": -0.41
+        },
+        {
+          "date": "2026-05-20",
+          "r_stock_%": -1.481,
+          "r_market_%": -0.866,
+          "beta": 0.969,
+          "market_contrib_%": -0.839,
+          "idio_%": -0.642,
+          "idio_z": -0.06
+        },
+        {
+          "date": "2026-05-21",
+          "r_stock_%": 12.143,
+          "r_market_%": 8.08,
+          "beta": 0.976,
+          "market_contrib_%": 7.886,
+          "idio_%": 4.258,
+          "idio_z": 0.85
+        },
+        {
+          "date": "2026-05-22",
+          "r_stock_%": -4.424,
+          "r_market_%": 0.41,
+          "beta": 1.015,
+          "market_contrib_%": 0.416,
+          "idio_%": -4.841,
+          "idio_z": -0.88
+        },
+        {
+          "date": "2026-05-26",
+          "r_stock_%": 13.353,
+          "r_market_%": 2.514,
+          "beta": 1.015,
+          "market_contrib_%": 2.552,
+          "idio_%": 10.801,
+          "idio_z": 2.01
+        },
+        {
+          "date": "2026-05-27",
+          "r_stock_%": -3.39,
+          "r_market_%": 2.227,
+          "beta": 1.043,
+          "market_contrib_%": 2.321,
+          "idio_%": -5.712,
+          "idio_z": -1.01
+        },
+        {
+          "date": "2026-05-28",
+          "r_stock_%": -8.545,
+          "r_market_%": -0.529,
+          "beta": 1.025,
+          "market_contrib_%": -0.542,
+          "idio_%": -8.002,
+          "idio_z": -1.38
+        },
+        {
+          "date": "2026-05-29",
+          "r_stock_%": -5.055,
+          "r_market_%": 3.492,
+          "beta": 1.036,
+          "market_contrib_%": 3.617,
+          "idio_%": -8.672,
+          "idio_z": -1.45
+        },
+        {
+          "date": "2026-06-01",
+          "r_stock_%": 3.398,
+          "r_market_%": 3.617,
+          "beta": 1.022,
+          "market_contrib_%": 3.696,
+          "idio_%": -0.298,
+          "idio_z": 0.04
+        },
+        {
+          "date": "2026-06-02",
+          "r_stock_%": 0.95,
+          "r_market_%": 0.149,
+          "beta": 1.104,
+          "market_contrib_%": 0.165,
+          "idio_%": 0.786,
+          "idio_z": 0.28
+        },
+        {
+          "date": "2026-06-04",
+          "r_stock_%": 1.175,
+          "r_market_%": -1.859,
+          "beta": 0.942,
+          "market_contrib_%": -1.751,
+          "idio_%": 2.926,
+          "idio_z": 0.69
+        },
+        {
+          "date": "2026-06-05",
+          "r_stock_%": -5.771,
+          "r_market_%": -5.702,
+          "beta": 0.933,
+          "market_contrib_%": -5.319,
+          "idio_%": -0.452,
+          "idio_z": 0.05
+        }
+      ]
+    },
+    "두산에너빌리티": {
+      "beta_now": 0.7270782992349316,
+      "cum_stock_%": -28.401,
+      "cum_market_contrib_%": 11.274,
+      "cum_idio_%": -39.675,
+      "max_abs_idio_z": 2.1457837599258784,
+      "daily_tail": [
+        {
+          "date": "2026-05-07",
+          "r_stock_%": 7.14,
+          "r_market_%": 1.418,
+          "beta": 0.997,
+          "market_contrib_%": 1.415,
+          "idio_%": 5.726,
+          "idio_z": 2.01
+        },
+        {
+          "date": "2026-05-08",
+          "r_stock_%": -5.114,
+          "r_market_%": 0.106,
+          "beta": 0.998,
+          "market_contrib_%": 0.106,
+          "idio_%": -5.22,
+          "idio_z": -1.74
+        },
+        {
+          "date": "2026-05-11",
+          "r_stock_%": -1.242,
+          "r_market_%": 4.233,
+          "beta": 0.988,
+          "market_contrib_%": 4.183,
+          "idio_%": -5.425,
+          "idio_z": -1.73
+        },
+        {
+          "date": "2026-05-12",
+          "r_stock_%": -1.893,
+          "r_market_%": -2.316,
+          "beta": 0.963,
+          "market_contrib_%": -2.231,
+          "idio_%": 0.338,
+          "idio_z": 0.19
+        },
+        {
+          "date": "2026-05-13",
+          "r_stock_%": -4.561,
+          "r_market_%": 2.594,
+          "beta": 0.948,
+          "market_contrib_%": 2.46,
+          "idio_%": -7.021,
+          "idio_z": -2.15
+        },
+        {
+          "date": "2026-05-14",
+          "r_stock_%": -2.446,
+          "r_market_%": 1.736,
+          "beta": 0.931,
+          "market_contrib_%": 1.616,
+          "idio_%": -4.062,
+          "idio_z": -1.16
+        },
+        {
+          "date": "2026-05-15",
+          "r_stock_%": -5.53,
+          "r_market_%": -6.312,
+          "beta": 0.925,
+          "market_contrib_%": -5.84,
+          "idio_%": 0.31,
+          "idio_z": 0.2
+        },
+        {
+          "date": "2026-05-18",
+          "r_stock_%": 1.166,
+          "r_market_%": 0.305,
+          "beta": 0.928,
+          "market_contrib_%": 0.283,
+          "idio_%": 0.884,
+          "idio_z": 0.39
+        },
+        {
+          "date": "2026-05-19",
+          "r_stock_%": -5.595,
+          "r_market_%": -3.305,
+          "beta": 0.93,
+          "market_contrib_%": -3.073,
+          "idio_%": -2.522,
+          "idio_z": -0.69
+        },
+        {
+          "date": "2026-05-20",
+          "r_stock_%": -4.535,
+          "r_market_%": -0.866,
+          "beta": 0.942,
+          "market_contrib_%": -0.816,
+          "idio_%": -3.719,
+          "idio_z": -1.04
+        },
+        {
+          "date": "2026-05-21",
+          "r_stock_%": 6.774,
+          "r_market_%": 8.08,
+          "beta": 0.94,
+          "market_contrib_%": 7.596,
+          "idio_%": -0.822,
+          "idio_z": -0.13
+        },
+        {
+          "date": "2026-05-22",
+          "r_stock_%": 2.909,
+          "r_market_%": 0.41,
+          "beta": 0.937,
+          "market_contrib_%": 0.384,
+          "idio_%": 2.525,
+          "idio_z": 0.91
+        },
+        {
+          "date": "2026-05-26",
+          "r_stock_%": 0.892,
+          "r_market_%": 2.514,
+          "beta": 0.941,
+          "market_contrib_%": 2.365,
+          "idio_%": -1.473,
+          "idio_z": -0.36
+        },
+        {
+          "date": "2026-05-27",
+          "r_stock_%": -3.709,
+          "r_market_%": 2.227,
+          "beta": 0.937,
+          "market_contrib_%": 2.087,
+          "idio_%": -5.796,
+          "idio_z": -1.69
+        },
+        {
+          "date": "2026-05-28",
+          "r_stock_%": -2.425,
+          "r_market_%": -0.529,
+          "beta": 0.935,
+          "market_contrib_%": -0.495,
+          "idio_%": -1.931,
+          "idio_z": -0.46
+        },
+        {
+          "date": "2026-05-29",
+          "r_stock_%": -0.284,
+          "r_market_%": 3.492,
+          "beta": 0.943,
+          "market_contrib_%": 3.293,
+          "idio_%": -3.576,
+          "idio_z": -0.96
+        },
+        {
+          "date": "2026-06-01",
+          "r_stock_%": 1.224,
+          "r_market_%": 3.617,
+          "beta": 0.916,
+          "market_contrib_%": 3.312,
+          "idio_%": -2.088,
+          "idio_z": -0.52
+        },
+        {
+          "date": "2026-06-02",
+          "r_stock_%": -6.672,
+          "r_market_%": 0.149,
+          "beta": 0.78,
+          "market_contrib_%": 0.116,
+          "idio_%": -6.789,
+          "idio_z": -1.92
+        },
+        {
+          "date": "2026-06-04",
+          "r_stock_%": -0.803,
+          "r_market_%": -1.859,
+          "beta": 0.721,
+          "market_contrib_%": -1.34,
+          "idio_%": 0.537,
+          "idio_z": 0.41
+        },
+        {
+          "date": "2026-06-05",
+          "r_stock_%": -3.697,
+          "r_market_%": -5.702,
+          "beta": 0.727,
+          "market_contrib_%": -4.146,
+          "idio_%": 0.449,
+          "idio_z": 0.43
+        }
+      ]
+    },
+    "NH투자증권": {
+      "beta_now": 0.9594256328020098,
+      "cum_stock_%": -19.147,
+      "cum_market_contrib_%": 10.646,
+      "cum_idio_%": -29.793,
+      "max_abs_idio_z": 2.4665202338581094,
+      "daily_tail": [
+        {
+          "date": "2026-05-07",
+          "r_stock_%": -1.97,
+          "r_market_%": 1.418,
+          "beta": 1.086,
+          "market_contrib_%": 1.54,
+          "idio_%": -3.51,
+          "idio_z": -1.05
+        },
+        {
+          "date": "2026-05-08",
+          "r_stock_%": -2.961,
+          "r_market_%": 0.106,
+          "beta": 1.084,
+          "market_contrib_%": 0.115,
+          "idio_%": -3.076,
+          "idio_z": -0.9
+        },
+        {
+          "date": "2026-05-11",
+          "r_stock_%": -1.514,
+          "r_market_%": 4.233,
+          "beta": 1.094,
+          "market_contrib_%": 4.63,
+          "idio_%": -6.144,
+          "idio_z": -1.75
+        },
+        {
+          "date": "2026-05-12",
+          "r_stock_%": -5.855,
+          "r_market_%": -2.316,
+          "beta": 1.068,
+          "market_contrib_%": -2.474,
+          "idio_%": -3.38,
+          "idio_z": -0.91
+        },
+        {
+          "date": "2026-05-13",
+          "r_stock_%": -1.332,
+          "r_market_%": 2.594,
+          "beta": 1.084,
+          "market_contrib_%": 2.813,
+          "idio_%": -4.145,
+          "idio_z": -1.11
+        },
+        {
+          "date": "2026-05-14",
+          "r_stock_%": 4.231,
+          "r_market_%": 1.736,
+          "beta": 1.08,
+          "market_contrib_%": 1.875,
+          "idio_%": 2.356,
+          "idio_z": 0.82
+        },
+        {
+          "date": "2026-05-15",
+          "r_stock_%": -7.257,
+          "r_market_%": -6.312,
+          "beta": 1.083,
+          "market_contrib_%": -6.835,
+          "idio_%": -0.422,
+          "idio_z": -0.01
+        },
+        {
+          "date": "2026-05-18",
+          "r_stock_%": -1.861,
+          "r_market_%": 0.305,
+          "beta": 1.09,
+          "market_contrib_%": 0.332,
+          "idio_%": -2.193,
+          "idio_z": -0.51
+        },
+        {
+          "date": "2026-05-19",
+          "r_stock_%": -2.857,
+          "r_market_%": -3.305,
+          "beta": 1.097,
+          "market_contrib_%": -3.626,
+          "idio_%": 0.768,
+          "idio_z": 0.61
+        },
+        {
+          "date": "2026-05-20",
+          "r_stock_%": -1.951,
+          "r_market_%": -0.866,
+          "beta": 1.046,
+          "market_contrib_%": -0.906,
+          "idio_%": -1.045,
+          "idio_z": -0.08
+        },
+        {
+          "date": "2026-05-21",
+          "r_stock_%": 4.652,
+          "r_market_%": 8.08,
+          "beta": 1.036,
+          "market_contrib_%": 8.371,
+          "idio_%": -3.719,
+          "idio_z": -1.16
+        },
+        {
+          "date": "2026-05-22",
+          "r_stock_%": 2.935,
+          "r_market_%": 0.41,
+          "beta": 1.012,
+          "market_contrib_%": 0.415,
+          "idio_%": 2.52,
+          "idio_z": 1.37
+        },
+        {
+          "date": "2026-05-26",
+          "r_stock_%": -2.622,
+          "r_market_%": 2.514,
+          "beta": 1.024,
+          "market_contrib_%": 2.573,
+          "idio_%": -5.195,
+          "idio_z": -1.83
+        },
+        {
+          "date": "2026-05-27",
+          "r_stock_%": -2.692,
+          "r_market_%": 2.227,
+          "beta": 1.015,
+          "market_contrib_%": 2.261,
+          "idio_%": -4.953,
+          "idio_z": -1.69
+        },
+        {
+          "date": "2026-05-28",
+          "r_stock_%": -2.273,
+          "r_market_%": -0.529,
+          "beta": 1.016,
+          "market_contrib_%": -0.538,
+          "idio_%": -1.735,
+          "idio_z": -0.38
+        },
+        {
+          "date": "2026-05-29",
+          "r_stock_%": -0.824,
+          "r_market_%": 3.492,
+          "beta": 1.016,
+          "market_contrib_%": 3.547,
+          "idio_%": -4.371,
+          "idio_z": -1.4
+        },
+        {
+          "date": "2026-06-01",
+          "r_stock_%": 3.258,
+          "r_market_%": 3.617,
+          "beta": 1.022,
+          "market_contrib_%": 3.698,
+          "idio_%": -0.44,
+          "idio_z": 0.16
+        },
+        {
+          "date": "2026-06-02",
+          "r_stock_%": -1.779,
+          "r_market_%": 0.149,
+          "beta": 1.012,
+          "market_contrib_%": 0.151,
+          "idio_%": -1.929,
+          "idio_z": -0.42
+        },
+        {
+          "date": "2026-06-04",
+          "r_stock_%": 3.052,
+          "r_market_%": -1.859,
+          "beta": 0.982,
+          "market_contrib_%": -1.826,
+          "idio_%": 4.878,
+          "idio_z": 2.21
+        },
+        {
+          "date": "2026-06-05",
+          "r_stock_%": 0.474,
+          "r_market_%": -5.702,
+          "beta": 0.959,
+          "market_contrib_%": -5.47,
+          "idio_%": 5.944,
+          "idio_z": 2.47
+        }
+      ]
+    }
+  },
+  "triggers": [
+    {
+      "name": "삼성전자",
+      "cum_stock_20d_%": 21.26,
+      "cum_idio_20d_%": 9.56,
+      "beta_now": 1.32,
+      "triggers": [
+        {
+          "code": "T1",
+          "severity": "high",
+          "msg": "이벤트 의심: 06-01 idio_z=+3.04 (idio +5.20%) → 뉴스/공시 확인"
+        }
+      ]
+    },
+    {
+      "name": "SK하이닉스",
+      "cum_stock_20d_%": 25.69,
+      "cum_idio_20d_%": 12.87,
+      "beta_now": 1.56,
+      "triggers": [
+        {
+          "code": "T4",
+          "severity": "info",
+          "msg": "20일 종목고유 누적 +12.9%. Mom12와 교차 확인"
+        }
+      ]
+    },
+    {
+      "name": "한미반도체",
+      "cum_stock_20d_%": -33.22,
+      "cum_idio_20d_%": -46.12,
+      "beta_now": 1.18,
+      "triggers": [
+        {
+          "code": "T2",
+          "severity": "high",
+          "msg": "20일 종목고유 누적 -46.1% (시장 제외 약세). F-Score 재점검 + 분기 결산 우선 체크"
+        }
+      ]
+    },
+    {
+      "name": "알테오젠",
+      "cum_stock_20d_%": -8.91,
+      "cum_idio_20d_%": -17.18,
+      "beta_now": 0.36,
+      "triggers": [
+        {
+          "code": "T2",
+          "severity": "high",
+          "msg": "20일 종목고유 누적 -17.2% (시장 제외 약세). F-Score 재점검 + 분기 결산 우선 체크"
+        },
+        {
+          "code": "T5",
+          "severity": "med",
+          "msg": "β 변화: 30일 전 0.80 → 현재 0.36 (Δ-0.44). Kelly sizing 재검토"
+        }
+      ]
+    },
+    {
+      "name": "NAVER",
+      "cum_stock_20d_%": 20.57,
+      "cum_idio_20d_%": 14.02,
+      "beta_now": 0.63,
+      "triggers": [
+        {
+          "code": "T1",
+          "severity": "high",
+          "msg": "이벤트 의심: 05-29 idio_z=+4.48 (idio +11.05%) → 뉴스/공시 확인"
+        },
+        {
+          "code": "T4",
+          "severity": "info",
+          "msg": "20일 종목고유 누적 +14.0%. Mom12와 교차 확인"
+        }
+      ]
+    },
+    {
+      "name": "카카오",
+      "cum_stock_20d_%": -14.0,
+      "cum_idio_20d_%": -23.78,
+      "beta_now": 0.58,
+      "triggers": [
+        {
+          "code": "T2",
+          "severity": "high",
+          "msg": "20일 종목고유 누적 -23.8% (시장 제외 약세). F-Score 재점검 + 분기 결산 우선 체크"
+        }
+      ]
+    },
+    {
+      "name": "한화에어로",
+      "cum_stock_20d_%": -31.19,
+      "cum_idio_20d_%": -32.73,
+      "beta_now": 0.23,
+      "triggers": [
+        {
+          "code": "T2",
+          "severity": "high",
+          "msg": "20일 종목고유 누적 -32.7% (시장 제외 약세). F-Score 재점검 + 분기 결산 우선 체크"
+        }
+      ]
+    },
+    {
+      "name": "LIG넥스원",
+      "cum_stock_20d_%": -29.9,
+      "cum_idio_20d_%": -35.11,
+      "beta_now": 0.58,
+      "triggers": [
+        {
+          "code": "T2",
+          "severity": "high",
+          "msg": "20일 종목고유 누적 -35.1% (시장 제외 약세). F-Score 재점검 + 분기 결산 우선 체크"
+        }
+      ]
+    },
+    {
+      "name": "KB금융",
+      "cum_stock_20d_%": 7.69,
+      "cum_idio_20d_%": 1.16,
+      "beta_now": 0.37,
+      "triggers": [
+        {
+          "code": "T1",
+          "severity": "high",
+          "msg": "이벤트 의심: 06-05 idio_z=+3.09 (idio +6.54%) → 뉴스/공시 확인"
+        }
+      ]
+    },
+    {
+      "name": "삼성SDI",
+      "cum_stock_20d_%": -20.61,
+      "cum_idio_20d_%": -31.14,
+      "beta_now": 0.54,
+      "triggers": [
+        {
+          "code": "T2",
+          "severity": "high",
+          "msg": "20일 종목고유 누적 -31.1% (시장 제외 약세). F-Score 재점검 + 분기 결산 우선 체크"
+        }
+      ]
+    },
+    {
+      "name": "아모레퍼시픽",
+      "cum_stock_20d_%": -19.0,
+      "cum_idio_20d_%": -25.36,
+      "beta_now": 0.33,
+      "triggers": [
+        {
+          "code": "T2",
+          "severity": "high",
+          "msg": "20일 종목고유 누적 -25.4% (시장 제외 약세). F-Score 재점검 + 분기 결산 우선 체크"
+        }
+      ]
+    },
+    {
+      "name": "삼성물산",
+      "cum_stock_20d_%": 20.41,
+      "cum_idio_20d_%": 8.51,
+      "beta_now": 1.2,
+      "triggers": [
+        {
+          "code": "T1",
+          "severity": "high",
+          "msg": "이벤트 의심: 06-04 idio_z=+3.69 (idio +12.05%) → 뉴스/공시 확인"
+        }
+      ]
+    },
+    {
+      "name": "삼양식품",
+      "cum_stock_20d_%": -14.44,
+      "cum_idio_20d_%": -19.6,
+      "beta_now": 0.13,
+      "triggers": [
+        {
+          "code": "T2",
+          "severity": "high",
+          "msg": "20일 종목고유 누적 -19.6% (시장 제외 약세). F-Score 재점검 + 분기 결산 우선 체크"
+        },
+        {
+          "code": "T5",
+          "severity": "med",
+          "msg": "β 변화: 30일 전 0.53 → 현재 0.13 (Δ-0.40). Kelly sizing 재검토"
+        }
+      ]
+    },
+    {
+      "name": "ISC",
+      "cum_stock_20d_%": -23.69,
+      "cum_idio_20d_%": -34.51,
+      "beta_now": 0.93,
+      "triggers": [
+        {
+          "code": "T2",
+          "severity": "high",
+          "msg": "20일 종목고유 누적 -34.5% (시장 제외 약세). F-Score 재점검 + 분기 결산 우선 체크"
+        }
+      ]
+    },
+    {
+      "name": "두산에너빌리티",
+      "cum_stock_20d_%": -28.4,
+      "cum_idio_20d_%": -39.68,
+      "beta_now": 0.73,
+      "triggers": [
+        {
+          "code": "T2",
+          "severity": "high",
+          "msg": "20일 종목고유 누적 -39.7% (시장 제외 약세). F-Score 재점검 + 분기 결산 우선 체크"
+        }
+      ]
+    },
+    {
+      "name": "NH투자증권",
+      "cum_stock_20d_%": -19.15,
+      "cum_idio_20d_%": -29.79,
+      "beta_now": 0.96,
+      "triggers": [
+        {
+          "code": "T2",
+          "severity": "high",
+          "msg": "20일 종목고유 누적 -29.8% (시장 제외 약세). F-Score 재점검 + 분기 결산 우선 체크"
+        }
+      ]
+    }
+  ]
+}
