@@ -1,8 +1,12 @@
-name: 진우퀀트 v3.6 + v3.7.2 자동 점수 갱신
+name: 진우퀀트 v3.6 + v3.7.2 자동 점수 갱신 (Validation Gate)
 
 # 2026-06-05: Node24 대응 액션 버전 업데이트 (GitHub 2026-06-16 Node24 강제 전환 대비)
 #   checkout v4→v5 · setup-python v5→v6 · configure-pages v4→v5
 #   deploy-pages@v4 · upload-pages-artifact@v3 는 이미 최신 major — 태그 내 Node24 패치 자동 수신
+# 2026-06-05: Validation Gate (#2) 머지 — score 생성 후 deploy 전 7가지 검사
+#   18종목 누락 / NaN·inf / 등급 / 포인트합 / 권장비중 / 급변동 / 신선도
+#   실패 시 deploy-pages 미실행 → 직전 dashboard 자동 유지 (롤백)
+#   실패 시 GitHub Issues 자동 생성
 
 on:
   schedule:
@@ -14,6 +18,7 @@ permissions:
   contents: write
   pages: write
   id-token: write
+  issues: write        # Validation 실패 시 이슈 자동 생성
 
 jobs:
   update-scores:
@@ -23,6 +28,12 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v5
+
+      # 직전(현재 live) 점수를 백업 → Validation 급변동 비교 + 롤백 기준
+      - name: Save previous scores (rollback 기준)
+        run: |
+          cp docs/v37_2_scores.csv prev_v37_2_scores.csv 2>/dev/null || true
+          echo "직전 점수 백업 완료(있으면)"
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -70,7 +81,18 @@ jobs:
           echo "✅ v3.7.2 production 완료"
 
       # ============================================
-      # Dashboard 파일을 docs/ 폴더로 정리
+      # #2 Validation Gate — 실패 시 이후 스텝(커밋/배포) 중단 → 직전 docs/ 유지(롤백)
+      # 검사 7가지: 18종목 누락·체력_최종·등급·포인트합 무결성·권장비중·전일 급변동·신선도
+      # ============================================
+      - name: Validation Gate (#2)
+        run: |
+          python validate.py \
+            --csv v37_2_scores_latest.csv \
+            --prev-csv prev_v37_2_scores.csv \
+            --move-pts 5 --max-age-hours 24
+
+      # ============================================
+      # Dashboard 파일을 docs/ 폴더로 정리 (Validation 통과 시에만 도달)
       # v3.7.2가 primary (index.html), v3.6/v3.7.1은 reference
       # ============================================
       - name: Update dashboards
@@ -103,8 +125,22 @@ jobs:
           git pull --rebase origin main
           git push
 
+      # ============================================
+      # Validation/스텝 실패 시 이슈 자동 생성 (배포는 자동 중단됨)
+      # ============================================
+      - name: Validation 실패 시 이슈 생성
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner, repo: context.repo.repo,
+              title: `⚠️ 자동 갱신 실패 ${new Date().toISOString().slice(0,10)} — 대시보드 미배포(직전 유지)`,
+              body: "Validation Gate 또는 점수 스텝 실패로 이번 배포를 건너뜀. 직전 대시보드가 그대로 유지됩니다(롤백). Actions 로그를 확인하세요."
+            })
+
   deploy-pages:
-    needs: update-scores
+    needs: update-scores         # update-scores 실패(=Validation 실패) 시 미실행 → 직전 Pages 유지
     runs-on: ubuntu-latest
     environment:
       name: github-pages
