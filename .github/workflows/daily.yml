@@ -1,5 +1,9 @@
 name: 진우퀀트 v3.6 + v3.7.2 자동 점수 갱신
 
+# 2026-06-05: Node24 대응 액션 버전 업데이트 (GitHub 2026-06-16 Node24 강제 전환 대비)
+#   checkout v4→v5 · setup-python v5→v6 · configure-pages v4→v5
+#   deploy-pages@v4 · upload-pages-artifact@v3 는 이미 최신 major — 태그 내 Node24 패치 자동 수신
+
 on:
   schedule:
     # 매일 07:30 UTC = 16:30 KST (한국 4:30 PM)
@@ -18,10 +22,10 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
 
@@ -107,12 +111,12 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: main
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
