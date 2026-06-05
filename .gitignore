@@ -43,3 +43,30 @@ __pycache__/
 
 # Optional: github_setup 폴더가 별도 v3.6 setup용이면 제외
 # github_setup/
+
+# === 2026-06-05 추가 ===
+
+# 임시 진단 / self-test 파일 (_ 접두사)
+_*.csv
+_*.json
+
+# DART/EPS 캐시 (재수집 가능, .dart_key로 fetch 재생성)
+eps_dart_raw_cache.json
+eps_sue_cache.json
+
+# Regime market 캐시 (PIT 재생성 가능)
+regime_market_cache_v40*.json
+
+# 백업 파일 (KOSPI-only 등)
+*.bak
+*_KOSPI.bak
+*_KOSPIonly.csv
+
+# OS
+Thumbs.db
+.DS_Store
+
+# 합성 / 진단 전용
+synthetic_korea_factors.csv
+trial_returns_matrix.csv
+
