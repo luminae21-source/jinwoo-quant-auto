@@ -1,0 +1,150 @@
+name: 진우퀀트 v3.6 + v3.7.2 자동 점수 갱신 (Validation Gate)
+
+on:
+  schedule:
+    # 매일 07:30 UTC = 16:30 KST (한국 4:30 PM)
+    - cron: '30 7 * * *'
+  workflow_dispatch:  # 수동 실행 버튼
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  issues: write        # [추가] Validation 실패 시 이슈 자동 생성
+
+jobs:
+  update-scores:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # [추가] 직전(현재 live) 점수를 백업 → Validation 급변동 비교 + 롤백 기준
+      - name: Save previous scores (rollback 기준)
+        run: |
+          cp docs/v37_2_scores.csv prev_v37_2_scores.csv 2>/dev/null || true
+          echo "직전 점수 백업 완료(있으면)"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # ============================================
+      # v3.6 baseline (기존 production, 비교용 유지)
+      # ============================================
+      - name: Run score_v36.py (baseline)
+        env:
+          DART_API_KEY: ${{ secrets.DART_API_KEY }}
+          TZ: Asia/Seoul
+        run: |
+          python score_v36.py
+          echo "✅ v3.6 baseline 완료"
+
+      # ============================================
+      # v3.7.1 backup (안전망)
+      # ============================================
+      - name: Run score_v37_1.py (backup)
+        continue-on-error: true
+        env:
+          DART_API_KEY: ${{ secrets.DART_API_KEY }}
+          TZ: Asia/Seoul
+        run: |
+          python score_v37_1.py
+          echo "✅ v3.7.1 backup 완료"
+
+      # ============================================
+      # v3.7.2 production (Echo Momentum, 신규 primary)
+      # CAGR 71.54%, Sharpe 2.78, IR 1.54
+      # ============================================
+      - name: Run score_v37_2.py (production)
+        env:
+          DART_API_KEY: ${{ secrets.DART_API_KEY }}
+          TZ: Asia/Seoul
+        run: |
+          python score_v37_2.py
+          echo "✅ v3.7.2 production 완료"
+
+      # ============================================
+      # [추가] #2 Validation Gate — 실패 시 이후 스텝(커밋/배포) 중단 → 직전 docs/ 유지(롤백)
+      # 검사: 18종목·체력_최종·등급·포인트합 무결성·권장비중·전일 급변동·신선도
+      # ============================================
+      - name: Validation Gate (#2)
+        run: |
+          python validate.py \
+            --csv v37_2_scores_latest.csv \
+            --prev-csv prev_v37_2_scores.csv \
+            --move-pts 5 --max-age-hours 24
+
+      # ============================================
+      # Dashboard 파일을 docs/ 폴더로 정리 (Validation 통과 시에만 도달)
+      # ============================================
+      - name: Update dashboards
+        run: |
+          mkdir -p docs
+          cp dashboard_v37_2.html docs/index.html 2>/dev/null || true
+          cp dashboard_v37_2.html docs/v37_2.html 2>/dev/null || true
+          cp dashboard_v36.html docs/v36.html 2>/dev/null || true
+          cp dashboard_v36.html docs/dashboard.html 2>/dev/null || true
+          cp dashboard_v37_1.html docs/v37_1.html 2>/dev/null || true
+          cp v37_2_scores_latest.csv docs/v37_2_scores.csv 2>/dev/null || true
+          cp v37_2_summary_latest.json docs/v37_2_summary.json 2>/dev/null || true
+          cp v36_scores_latest.csv docs/v36_scores.csv 2>/dev/null || true
+          cp v36_summary_latest.json docs/v36_summary.json 2>/dev/null || true
+          cp v37_1_scores_latest.csv docs/v37_1_scores.csv 2>/dev/null || true
+          cp v37_1_summary_latest.json docs/v37_1_summary.json 2>/dev/null || true
+          echo "✅ Dashboard 정리 완료"
+
+      - name: Commit dashboard updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/
+          git diff --staged --quiet || git commit -m "🤖 v3.6 + v3.7.2 자동 갱신 $(date +'%Y-%m-%d %H:%M KST')"
+          git pull --rebase origin main
+          git push
+
+      # ============================================
+      # [추가] Validation/스텝 실패 시 이슈 자동 생성 (배포는 자동 중단됨)
+      # ============================================
+      - name: Validation 실패 시 이슈 생성
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner, repo: context.repo.repo,
+              title: `⚠️ 자동 갱신 실패 ${new Date().toISOString().slice(0,10)} — 대시보드 미배포(직전 유지)`,
+              body: "Validation Gate 또는 점수 스텝 실패로 이번 배포를 건너뜀. 직전 대시보드가 그대로 유지됩니다(롤백). Actions 로그를 확인하세요."
+            })
+
+  deploy-pages:
+    needs: update-scores         # update-scores 실패(=Validation 실패) 시 미실행 → 직전 Pages 유지
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './docs'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

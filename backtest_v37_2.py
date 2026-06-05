@@ -138,6 +138,8 @@ def compute_scores_at(panel, dt):
         total_v36 = base
         total_v371 = base + mom_s + bab_s + noa_s
         total_v372 = total_v371 + echo_s
+        total_v372_noMom = total_v372 - mom_s   # [PATCH ②] Mom12 한계기여용
+        total_v372_noBAB = total_v372 - bab_s   # [PATCH ②] BAB 한계기여용
 
         rows.append({
             '종목': name, 'Echo': echo_s,
@@ -147,6 +149,8 @@ def compute_scores_at(panel, dt):
             '등급_v36': grade(total_v36),
             '등급_v37_1': grade(total_v371),
             '등급_v37_2': grade(total_v372),
+            '등급_v37_2_noMom': grade(total_v372_noMom),
+            '등급_v37_2_noBAB': grade(total_v372_noBAB),
         })
     return pd.DataFrame(rows)
 
@@ -211,18 +215,32 @@ def run_backtest(panel, args):
     if rebal[-1] < end_dt: rebal.append(end_dt)
 
     print(f"\n🔁 Rebalance: {len(rebal)-1}회")
-    rets = {k_: [] for k_ in ['36', '371', '372', 'b']}
+    VARIANTS = [('36', '등급_v36'), ('371', '등급_v37_1'), ('372', '등급_v37_2'),
+                ('372nm', '등급_v37_2_noMom'), ('372nb', '등급_v37_2_noBAB')]  # [PATCH ②]
+    rets = {k_: [] for k_ in [v[0] for v in VARIANTS] + ['b']}
+    history = []   # [PATCH] 월별 수익률 로깅 (③ trial 행렬 + ② 한계기여)
 
     for i in range(len(rebal) - 1):
         d0, d1 = rebal[i], rebal[i + 1]
         snap = compute_scores_at(panel, d0)
         if snap is None or len(snap) == 0: continue
 
-        for vid, col in [('36', '등급_v36'), ('371', '등급_v37_1'),
-                          ('372', '등급_v37_2')]:
+        period = {}
+        for vid, col in VARIANTS:
             picks = snap[snap[col].isin(target)]['종목'].tolist()
-            rets[vid].append(avg_return(picks, panel, d0, d1))
-        rets['b'].append(kospi_return(panel, d0, d1))
+            r = avg_return(picks, panel, d0, d1)
+            rets[vid].append(r); period[vid] = r
+        rb = kospi_return(panel, d0, d1)
+        rets['b'].append(rb)
+        history.append({                       # [PATCH] 다른 backtest와 동일 포맷
+            'date': pd.Timestamp(d1).strftime('%Y-%m-%d'),
+            'r_v36_%': round(period['36'] * 100, 2),
+            'r_v37_1_%': round(period['371'] * 100, 2),
+            'r_v37_2_%': round(period['372'] * 100, 2),
+            'r_v372_noMom_%': round(period['372nm'] * 100, 2),   # [PATCH ②]
+            'r_v372_noBAB_%': round(period['372nb'] * 100, 2),   # [PATCH ②]
+            'r_kospi_%': round(rb * 100, 2),
+        })
 
     m = {k_: metrics(rets[k_]) for k_ in rets}
     ir = {k_: information_ratio(rets[k_], rets['b']) for k_ in rets if k_ != 'b'}
@@ -247,10 +265,18 @@ def run_backtest(panel, args):
     print(f"  v3.7.2 vs v3.6: {m['372'].get('연환산',0) - m['36'].get('연환산',0):+.2f}%p ⭐")
     print(f"  v3.7.2 vs v3.7.1 (Echo 단독 효과): {m['372'].get('연환산',0) - m['371'].get('연환산',0):+.2f}%p ⭐")
 
+    print(f"\n② 팩터 한계기여 (leave-one-out, v3.7.2 기준):")
+    s372 = m['372'].get('Sharpe') or 0
+    print(f"  Mom12 기여: 연환산 {m['372'].get('연환산',0) - m['372nm'].get('연환산',0):+.2f}%p · "
+          f"Sharpe {s372 - (m['372nm'].get('Sharpe') or 0):+.2f}  (≈0이면 Echo와 중복 → 제거 후보)")
+    print(f"  BAB 기여:   연환산 {m['372'].get('연환산',0) - m['372nb'].get('연환산',0):+.2f}%p · "
+          f"Sharpe {s372 - (m['372nb'].get('Sharpe') or 0):+.2f}  (≤0이면 대형주 무알파 → 제거/regime 후보)")
+
     report = {
         'timestamp': datetime.now().isoformat(),
         'metrics': m, 'ir': ir,
         'echo_weight': ECHO_WEIGHT,
+        'history': history,   # [PATCH] r_v37_2_% 포함 월별 시계열
     }
     out = BASE / f'backtest_v37_2_{datetime.now().strftime("%Y%m%d_%H%M")}.json'
     out.write_text(json.dumps(report, ensure_ascii=False, indent=2, default=str),
