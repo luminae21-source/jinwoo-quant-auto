@@ -14,7 +14,8 @@
 [먼저 읽을 것 — Desktop\진우퀀트]
 1. 진우퀀트_v40_regime_결정메모.md §10 (승인된 로드맵·실행 트리거) + §8 (18종목 기각 사유)
 2. fetch_regime_kosdaq_v40.py + regime_history_v40_kosdaq.csv (KOSDAQ detector — 어긋남 29% 실측 완료, 재사용)
-3. 확정 universe 리스트: [여기에 파일명 또는 리스트 붙여넣기]
+3. 확정 universe 리스트: universe_rule30_latest.csv (30종목, 2026-06-05 진우 승인 확정)
+   + 진우퀀트_영역3_universe확정_결정메모.md (§7 리스트·§6 판정 근거·§8 다음 단계)
 
 [작업 범위 — 결정메모 §10 승인 사항]
 ② DART 전 종목 자동화: 확정 universe의 F_korean·ModF·Sloan 등 재무 입력 자동화
@@ -43,6 +44,6 @@ regime 재시험: 코스피 종목은 KOSPI detector, 코스닥 종목은 KOSDAQ
 | 매월 초 | 평소 루틴 그대로: score_v37_2 + score_v39_pead 실행, v3.9 관찰기록 1줄 기입 |
 | 분기 초 (7월) | fetch_dart_eps.py 1회 (C 관찰용) |
 | 2026-09 초 | v3.9 관찰 판정 + v3.7.2 옵션 B(ECHO 1.2) 검토 — 기존 일정 |
-| 수시 | **universe 규칙화 대화 마무리** ← 영역 3 모듈의 유일한 선행 조건 |
+| ~~수시~~ | ~~universe 규칙화 대화 마무리~~ ✅ **완료 (2026-06-05)** — universe_rule30_latest.csv 확정. 영역 3 모듈 즉시 착수 가능 |
 
 작성: 2026-06-05 (모듈 D 종결 세션)
