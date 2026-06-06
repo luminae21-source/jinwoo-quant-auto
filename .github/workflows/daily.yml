@@ -92,6 +92,21 @@ jobs:
             --move-pts 5 --max-age-hours 24
 
       # ============================================
+      # (신규) 밸류·피크 오버레이 — production 무수정 레이어 (모듈 E).
+      # continue-on-error: 오버레이 실패해도 기존 배포는 그대로 진행(안전).
+      # 데이터 의존: book_equity.csv·liquidity_*.csv·*_monthly_prices.csv (repo 커밋 필요)
+      # ============================================
+      - name: Value/Peak overlay (트림권고)
+        continue-on-error: true
+        env:
+          TZ: Asia/Seoul
+        run: |
+          python run_overlay.py v37_2_scores_latest.csv
+          mkdir -p docs
+          cp overlay_scores_latest.csv docs/overlay_scores.csv 2>/dev/null || true
+          echo "✅ 밸류·피크 오버레이 완료 (실패해도 배포 진행)"
+
+      # ============================================
       # Dashboard 파일을 docs/ 폴더로 정리 (Validation 통과 시에만 도달)
       # v3.7.2가 primary (index.html), v3.6/v3.7.1은 reference
       # ============================================
