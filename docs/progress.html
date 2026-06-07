@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>진우퀀트 진행상황 대시보드 · 2026-06-07</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<style>
+  :root{
+    --bg:#0d1117; --card:#161b22; --card2:#1c2330; --bd:#30363d;
+    --tx:#e6edf3; --mut:#8b949e;
+    --green:#3fb950; --yellow:#d29922; --red:#f85149; --blue:#58a6ff; --accent:#2f81f7;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--tx);
+    font-family:'Segoe UI','Malgun Gothic',system-ui,-apple-system,sans-serif;
+    line-height:1.6;font-size:16px;}
+  .wrap{max-width:1080px;margin:0 auto;padding:18px 14px 60px;}
+  header.top{padding:22px 18px;border-radius:16px;margin-bottom:18px;
+    background:linear-gradient(135deg,#16263f,#101720);border:1px solid var(--bd);}
+  header.top h1{margin:0 0 6px;font-size:1.5rem;}
+  header.top .date{color:var(--mut);font-size:.9rem;}
+  header.top .lead{margin-top:12px;font-size:.97rem;color:#cdd6e0;}
+  h2{font-size:1.18rem;margin:30px 0 12px;padding-left:10px;border-left:4px solid var(--accent);}
+  h2 .em{color:var(--mut);font-size:.85rem;font-weight:400;margin-left:6px;}
+  p.note{color:var(--mut);font-size:.9rem;margin:.2rem 0 1rem;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;}
+  .kpi{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;}
+  .kpi .lbl{color:var(--mut);font-size:.8rem;}
+  .kpi .val{font-size:1.25rem;font-weight:700;margin-top:4px;}
+  .kpi .sub{font-size:.82rem;color:var(--mut);margin-top:3px;}
+  .card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;}
+  .card h3{margin:0 0 6px;font-size:1.02rem;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .card p{margin:.3rem 0 0;font-size:.9rem;color:#c9d3de;}
+  .badge{font-size:.72rem;padding:2px 9px;border-radius:999px;font-weight:700;white-space:nowrap;}
+  .b-done{background:rgba(63,185,80,.16);color:var(--green);border:1px solid rgba(63,185,80,.4);}
+  .b-pend{background:rgba(210,153,34,.16);color:var(--yellow);border:1px solid rgba(210,153,34,.4);}
+  .b-rej{background:rgba(248,81,73,.16);color:var(--red);border:1px solid rgba(248,81,73,.4);}
+  .b-next{background:rgba(88,166,255,.16);color:var(--blue);border:1px solid rgba(88,166,255,.4);}
+  .flowbox{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px;overflow-x:auto;}
+  .mermaid{min-width:560px;}
+  .cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .cmp .col{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;}
+  .cmp .col.kospi{border-top:3px solid var(--green);}
+  .cmp .col.kosdaq{border-top:3px solid var(--yellow);}
+  .cmp h3{margin:0 0 8px;font-size:1.05rem;}
+  .cmp ul{margin:6px 0 0;padding-left:18px;font-size:.88rem;color:#c9d3de;}
+  .cmp li{margin-bottom:6px;}
+  table{width:100%;border-collapse:collapse;font-size:.86rem;margin-top:6px;}
+  .tblwrap{overflow-x:auto;background:var(--card);border:1px solid var(--bd);border-radius:12px;}
+  th,td{padding:9px 11px;text-align:left;border-bottom:1px solid var(--bd);white-space:nowrap;}
+  th{color:var(--mut);font-weight:600;background:var(--card2);}
+  .poss{display:inline-block;font-size:.72rem;padding:1px 8px;border-radius:6px;font-weight:700;}
+  .p-hi{background:rgba(63,185,80,.16);color:var(--green);}
+  .p-mid{background:rgba(210,153,34,.16);color:var(--yellow);}
+  .p-lo{background:rgba(139,148,158,.16);color:var(--mut);}
+  .timeline{list-style:none;margin:0;padding:0;}
+  .timeline li{position:relative;padding:0 0 16px 26px;border-left:2px solid var(--bd);}
+  .timeline li:last-child{border-left:2px solid transparent;}
+  .timeline li::before{content:"";position:absolute;left:-7px;top:3px;width:12px;height:12px;
+    border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--bg);}
+  .timeline .when{font-weight:700;color:var(--blue);font-size:.9rem;}
+  .timeline .what{font-size:.88rem;color:#c9d3de;}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.8rem;color:var(--mut);margin:8px 0 0;}
+  footer{margin-top:40px;color:var(--mut);font-size:.82rem;text-align:center;border-top:1px solid var(--bd);padding-top:16px;}
+  @media(max-width:640px){
+    body{font-size:15px;}
+    .cmp{grid-template-columns:1fr;}
+    header.top h1{font-size:1.25rem;}
+    h2{font-size:1.08rem;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <h1>📊 진우퀀트 진행상황 대시보드</h1>
+    <div class="date">기준일 2026-06-07 · production v3.7.2 · KOSPI 18종목 시스템</div>
+    <div class="lead">
+      한 줄 요약 — <b>v3.7.2가 production으로 확정·재검증(계산오류 0)된 상태</b>이고,
+      팩터 추가는 <b>9연속 기각으로 천장</b>에 도달. 새 모듈 중 <b>C(PEAD ×0.5)만 생존(병행관찰)</b>,
+      D·영역3은 기각. KOSPI는 시스템 lane, KOSDAQ는 테마 lane으로 역할이 갈렸어.
+    </div>
+  </header>
+
+  <!-- KPI -->
+  <h2>핵심 지표 <span class="em">한눈에</span></h2>
+  <div class="grid">
+    <div class="kpi"><div class="lbl">Production</div><div class="val">v3.7.2</div><div class="sub">v3.7.1 + Echo ×1.0</div></div>
+    <div class="kpi"><div class="lbl">백테스트 (4년 OOS)</div><div class="val">CAGR 71.5% · Sharpe 2.78</div><div class="sub">⚠️ forward 기대 ≠ 백테스트</div></div>
+    <div class="kpi"><div class="lbl">현실 기대치 (정직)</div><div class="val">CAGR 20%대</div><div class="sub">시장 +5~10%p · White RC p=0.019(진짜 알파)</div></div>
+    <div class="kpi"><div class="lbl">PC 재현검증 (오늘)</div><div class="val">계산오류 0 ✅</div><div class="sub">JSON 대조 + 원자료 재계산 일치</div></div>
+    <div class="kpi"><div class="lbl">팩터 탐색</div><div class="val">9연속 기각</div><div class="sub">Echo만 유일 성공 = 천장 확정</div></div>
+    <div class="kpi"><div class="lbl">예약 리마인더</div><div class="val">5개 활성</div><div class="sub">월간·B전환·한미2Q·9월재심사</div></div>
+  </div>
+
+  <!-- 모듈 상태 -->
+  <h2>모듈별 진행 상태 <span class="em">무엇이 잘 됐고 무엇이 막혔나</span></h2>
+  <p class="note">✅ 잘 됨 · 🟡 진행/관찰 · ❌ 기각(시험 후 종결, 게이트 정상 작동)</p>
+  <div class="grid">
+    <div class="card"><h3>영역1 · 추가 퀀트기법 <span class="badge b-done">✅ 완료</span></h3>
+      <p>v3.7.2로 공식 완료. Echo Momentum이 유일하게 검증을 통과한 신호.</p></div>
+    <div class="card"><h3>영역4 · Phase1 attribution <span class="badge b-done">✅ 검증완료</span></h3>
+      <p>오늘 실데이터로 작동 확인. 한미반도체 급락을 점수표(S+)보다 먼저 잡아낸 <b>조기경보</b>로 가치 입증.</p></div>
+    <div class="card"><h3>C · v3.9 PEAD <span class="badge b-pend">🟡 병행관찰</span></h3>
+      <p>×0.5가 공식 관문을 통과한 첫 팩터(마진 +0.06%p, 박빙). production은 그대로 두고 9월에 통합/기각 판정.</p></div>
+    <div class="card"><h3>영역4 · Phase2~4 <span class="badge b-pend">🟡 재정의 필요</span></h3>
+      <p>"universe 확장" 전제가 사라져서 fixed18 기준으로 다시 설계해야 함. Phase1은 그대로 유효.</p></div>
+    <div class="card"><h3>KOSDAQ lane <span class="badge b-pend">🟡 테마 lane</span></h3>
+      <p>체계적 팩터가 안 통해서 팩터노선은 종결. 대신 forward-looking <b>테마 발굴 시스템</b>으로 전환.</p></div>
+    <div class="card"><h3>영역2 · 매매기법(F) <span class="badge b-rej">❌ 대부분 기각</span></h3>
+      <p>오버레이(추세추종 청산·헤지)는 한국 reversal 엣지와 충돌해 전부 패배. VWAP 진입만 유지.</p></div>
+    <div class="card"><h3>D · v4.0 regime <span class="badge b-rej">❌ 기각</span></h3>
+      <p>국면별 가중치 조정이 MDD는 줄였으나 합격선 미달 + 수익 대가가 커서 기각. KOSDAQ detector만 자산으로 남김.</p></div>
+    <div class="card"><h3>영역3 · universe 확장(18→30) <span class="badge b-rej">❌ 기각</span></h3>
+      <p>룰 기반 30종(26%)이 fixed-18 집중 트랙(71%)의 수익원을 복제 못 함. 룰30은 분기 정보 트랙으로만.</p></div>
+  </div>
+
+  <!-- 플로우차트 1 -->
+  <h2>① 전체 진화·판정 흐름 <span class="em">무엇이 통과/기각됐나</span></h2>
+  <div class="flowbox">
+    <div class="mermaid">
+flowchart TD
+  V36["v3.6 (구 production)"] --> V372["v3.7.2 ⭐ Production<br/>v3.7.1 + Echo ×1.0"]
+  V372 --> VER["2026-06-07 PC 재현검증<br/>계산오류 0 ✅"]:::done
+  V372 --> FAC{"팩터 추가 시험 9회"}
+  FAC -->|"Echo Momentum"| OK["✅ 채택 (유일 성공)"]:::done
+  FAC -->|"GP·AG·EarnMom·Value·regime×2<br/>MR·룰univ30·regime재시험"| NG["❌ 9연속 기각<br/>= v3.7.2 천장 확정"]:::rej
+  V372 --> C["v3.9 PEAD ×0.5<br/>🟡 병행관찰 → 9월 판정"]:::pend
+  V372 --> D["v4.0 regime (D)<br/>❌ 기각 (MDD 개선해도 대가 큼)"]:::rej
+  V372 --> A3["영역3 universe 30종<br/>❌ 기각 (26% vs fixed18 71%)"]:::rej
+  V372 --> A4["영역4 attribution / 교체룰"]
+  A4 --> P1["Phase1 ✅ 오늘 검증<br/>한미 조기경보 입증"]:::done
+  A4 --> P2["Phase2~4 🟡 fixed18 기준 재정의"]:::pend
+  classDef done fill:#10331b,stroke:#3fb950,color:#e6edf3;
+  classDef pend fill:#3a2f12,stroke:#d29922,color:#e6edf3;
+  classDef rej fill:#3a1514,stroke:#f85149,color:#e6edf3;
+    </div>
+  </div>
+  <div class="legend"><span>🟩 통과/완료</span><span>🟨 진행/관찰</span><span>🟥 기각</span></div>
+
+  <!-- KOSPI vs KOSDAQ -->
+  <h2>KOSPI vs KOSDAQ <span class="em">왜 다루는 방식이 다른가 · 각자의 특장점</span></h2>
+  <p class="note">핵심: 두 시장은 "수익이 어디서 나오는지"가 구조적으로 달라서, <b>같은 시스템을 쓰면 안 돼</b>. 그래서 lane을 나눴어.</p>
+  <div class="cmp">
+    <div class="col kospi">
+      <h3>🟢 KOSPI — 시스템 lane</h3>
+      <ul>
+        <li><b>backward-looking 팩터가 통한다.</b> 대형주는 재무·모멘텀이 가격에 안정적으로 반영돼서 룰 기반 점수가 작동.</li>
+        <li>룰 시장초과 <b>+5~10%p</b> (White's Reality Check p=0.019 = 우연 아님).</li>
+        <li>특장점: <b>자동화·재현 가능</b>. 매월 점수 산출 → 등급 컷 → 18종목. 직장인 운영에 최적(저회전 7.4%).</li>
+        <li>MA200 추세방어 채택(낙폭 40%↓). 방어는 KOSPI에서만 효과.</li>
+        <li>역할 = <b>v3.7.2 production 본체.</b></li>
+      </ul>
+    </div>
+    <div class="col kosdaq">
+      <h3>🟡 KOSDAQ — 테마 lane</h3>
+      <ul>
+        <li><b>backward-looking 팩터가 안 통한다.</b> 룰 시장초과 <b>−1.5~−2.2%p</b> = 체계적 알파 없음 → 팩터노선 종결.</li>
+        <li>알파의 정체 = <b>테마·forward-looking 모멘텀</b>(예: 에코프로비엠은 팩터 점수 46th pctile인데 시장 견인). 백워드 팩터가 못 잡음.</li>
+        <li>특장점: <b>진우님 직관·테마 발굴이 시스템보다 유리한 영역.</b> → 발굴엔진 + 가드레일 + 워치리스트로 운영.</li>
+        <li>국면(regime)도 KOSPI와 <b>29% 어긋남</b> → 별도 KOSDAQ detector 보유.</li>
+        <li>역할 = <b>재량 위성(Track W), 자본 cap ≤10%.</b> 6~12개월 반사실로 "재량이 밥값 하는지" 측정.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 플로우차트 2 -->
+  <h2>② 앞으로 할 일 + 실현 가능성 <span class="em">무엇을, 얼마나 될 만한가</span></h2>
+  <div class="flowbox">
+    <div class="mermaid">
+flowchart TD
+  NOW(["지금 · 2026-06"]) --> LT["월말 라이브추적 첫 기입<br/>🟢 할 일 명확"]:::hi
+  NOW --> DEC{"진우 결정 대기"}
+  DEC --> GC["grade-cut S+/S 채택?<br/>+9.7%p이나 MDD↑ · 검증완료 🟢"]:::hi
+  DEC --> BT["B전환 T1 집행<br/>워크시트 완료 🟢"]:::hi
+  NOW --> SEP["⚠️ 9월 병목 (한 달에 몰림)"]:::pend
+  SEP --> S1["v3.9 통합/기각 판정"]
+  SEP --> S2["옵션B (Echo 1.2) 검토"]
+  SEP --> S3["통합 재심사 (9/30)"]
+  NOW --> NEW["발전 가능성 탐색"]:::next
+  NEW --> N1["영역4 Phase2 · 섹터 2팩터<br/>🟢 가능성 높음 (한미 사례가 동기)"]:::hi
+  NEW --> N2["영역4 Phase3 · 시계열 F-score<br/>🟡 가능성 중간 (lookahead 제거)"]:::pend
+  NEW --> N3["KOSDAQ 테마 발굴 운영<br/>🟡 가능성 중간 (Track W 측정)"]:::pend
+  classDef hi fill:#10331b,stroke:#3fb950,color:#e6edf3;
+  classDef pend fill:#3a2f12,stroke:#d29922,color:#e6edf3;
+  classDef next fill:#10263f,stroke:#58a6ff,color:#e6edf3;
+    </div>
+  </div>
+
+  <!-- 미완성 & 발전 가능성 -->
+  <h2>미완성 부분 & 추가 발전 가능성 <span class="em">항목별 설명 + 가능성 평가</span></h2>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>항목</th><th>현재 상태</th><th>핵심 설명</th><th>가능성</th></tr></thead>
+      <tbody>
+        <tr><td><b>영역4 Phase2</b><br>섹터 2팩터</td><td>미착수</td>
+          <td>오늘 T2가 11종목 폭주 = KOSPI 단일팩터가 반도체 쏠림을 종목약세로 오인. 시장+산업 2팩터로 분리하면 정밀해짐. <b>점수가 아닌 의사결정 정밀화라 CAGR 게이트 무관.</b></td>
+          <td><span class="poss p-hi">높음</span></td></tr>
+        <tr><td><b>영역4 Phase3</b><br>시계열 F-score</td><td>미착수</td>
+          <td>백테스트의 부분 lookahead(재무 정적 사용)를 제거하는 진짜 OOS 검증. v3.7.2 알파의 "진위"를 가리는 작업.</td>
+          <td><span class="poss p-mid">중간</span></td></tr>
+        <tr><td><b>KOSDAQ 테마 발굴</b></td><td>1차 구현</td>
+          <td>발굴엔진·가드레일·플레이북 작성됨. 월간 테마스캔 루틴 + Track W 반사실(재량 기여도) 6~12개월 측정이 남음.</td>
+          <td><span class="poss p-mid">중간</span></td></tr>
+        <tr><td><b>grade-cut S+/S</b></td><td>검증완료·결정대기</td>
+          <td>공격형: CAGR +9.7%p이나 MDD −2.1%p·Sharpe↓. 진짜 수익 레버. B전환 T3 이후 적용 권장(소액 단계 과집중 방지).</td>
+          <td><span class="poss p-hi">높음</span></td></tr>
+        <tr><td><b>B전환 실집행</b></td><td>워크시트 완료</td>
+          <td>검증 트랙(v3.7.2)을 실제 매매로 전환. T1=7종목 매수(머티 매도 재원). 주문은 진우님 직접.</td>
+          <td><span class="poss p-hi">높음</span></td></tr>
+        <tr><td><b>직관+시스템 하이브리드</b></td><td>아이디어</td>
+          <td>시스템=backward 팩터 / 진우님=forward 테마. B전환에 "재량 슬롯" 1~2종목 포함 검토. KOSDAQ lane이 그 실험장.</td>
+          <td><span class="poss p-mid">중간</span></td></tr>
+        <tr><td><b>영역2 매매기법(F)</b></td><td>대부분 기각</td>
+          <td>오버레이 전부 패배(VWAP만 유지). 남은 후보(Kelly sizing 등)도 reversal 엣지와 충돌 prior → 종결 후보.</td>
+          <td><span class="poss p-lo">낮음</span></td></tr>
+        <tr><td><b>확장 universe + regime</b></td><td>무산</td>
+          <td>영역3 기각으로 "확장 universe"가 없어짐. KOSDAQ detector는 고아 자산 → 테마 lane으로 인계 검토.</td>
+          <td><span class="poss p-lo">낮음</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 일정 -->
+  <h2>일정 타임라인 <span class="em">예약 리마인더 자동 작동</span></h2>
+  <ul class="timeline">
+    <li><div class="when">6월 말</div><div class="what">라이브 추적 첫 기입 (실전기록 2026-06 슬롯) — <b>최우선</b></div></li>
+    <li><div class="when">7/1</div><div class="what">월간 라이브추적 자동 실행 + B전환 T2 트랜치 알림</div></li>
+    <li><div class="when">8/3</div><div class="what">B전환 T3 트랜치 알림</div></li>
+    <li><div class="when">8/17</div><div class="what">🔴 한미반도체 2Q 실적 자동 점검 (TC본더 수주 재개 → 보유/축소 판정)</div></li>
+    <li><div class="when">9월 (병목)</div><div class="what">v3.9 PEAD 통합/기각 판정 · 옵션B(Echo 1.2) 검토 · 9/30 통합 재심사</div></li>
+  </ul>
+
+  <footer>
+    진우퀀트 진행상황 대시보드 · 생성 2026-06-07 (Cowork)<br>
+    데이터 출처: 결정메모(C/D/영역3)·v3.7.2 핸드오프·실전기록·메모리 · production v3.7.2 무변경<br>
+    ⚠️ 백테스트 수치는 forward 수익 보장이 아니며, 매매 판단은 본인 책임입니다.
+  </footer>
+
+</div>
+<script>
+  mermaid.initialize({startOnLoad:true, theme:'dark',
+    themeVariables:{fontFamily:"'Segoe UI','Malgun Gothic',sans-serif", fontSize:'14px'},
+    flowchart:{useMaxWidth:true, htmlLabels:true, curve:'basis'}});
+</script>
+</body>
+</html>
