@@ -1,0 +1,91 @@
+{
+ "window": [
+  "2021-05-31",
+  "2026-05-31"
+ ],
+ "months": 61,
+ "cost": 0.006,
+ "skipped_kq_months": 0,
+ "base_MKT": {
+  "CAGR": 0.12059316211133941,
+  "Sharpe": 0.5244827469136016,
+  "MDD": -0.37275419377046826
+ },
+ "base_EW": {
+  "CAGR": 0.3140576159503541,
+  "Sharpe": 1.0787572237411884,
+  "MDD": -0.2729749145368745
+ },
+ "base_KQ150": {
+  "CAGR": 0.059264046440917095,
+  "Sharpe": 0.33932417488805205,
+  "MDD": -0.3724749214347104
+ },
+ "gw1.0": {
+  "CAGR": 0.17163556285656112,
+  "Sharpe": 0.643460527496157,
+  "MDD": -0.3882182555920397,
+  "IR_vs_MKT": 0.3332953713853288,
+  "IR_vs_EW": -0.8000925697594061,
+  "IR_vs_KQ150": 0.5958004411729961,
+  "avg_turnover": 0.176
+ },
+ "gw0.5": {
+  "CAGR": 0.20888884252930784,
+  "Sharpe": 0.744538944093807,
+  "MDD": -0.3543011875449513,
+  "IR_vs_MKT": 0.5469405540800885,
+  "IR_vs_EW": -0.5956457324819621,
+  "IR_vs_KQ150": 0.7831877970172662,
+  "avg_turnover": 0.196
+ },
+ "verdict": {
+  "gw1.0": {
+   "vs_KQ150": {
+    "pass": false,
+    "alpha_pp": 11.24,
+    "IR": 0.596,
+    "g_alpha": true,
+    "g_IR": true,
+    "g_Sharpe": true,
+    "g_MDD": false
+   },
+   "vs_EW": {
+    "pass": false,
+    "alpha_pp": -14.24,
+    "IR": -0.8,
+    "g_alpha": false,
+    "g_IR": false,
+    "g_Sharpe": false,
+    "g_MDD": false
+   },
+   "beats_EW_cagr": false
+  },
+  "gw0.5": {
+   "vs_KQ150": {
+    "pass": true,
+    "alpha_pp": 14.96,
+    "IR": 0.783,
+    "g_alpha": true,
+    "g_IR": true,
+    "g_Sharpe": true,
+    "g_MDD": true
+   },
+   "vs_EW": {
+    "pass": false,
+    "alpha_pp": -10.52,
+    "IR": -0.596,
+    "g_alpha": false,
+    "g_IR": false,
+    "g_Sharpe": false,
+    "g_MDD": false
+   },
+   "beats_EW_cagr": false
+  }
+ },
+ "summary": {
+  "any_pass_vs_KQ150": true,
+  "any_beats_EW": false,
+  "conclusion": "팩터 실력 미입증(EW 미달) — KQ150-pass는 EW/소형 프리미엄 아티팩트"
+ }
+}

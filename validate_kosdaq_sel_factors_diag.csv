@@ -1,0 +1,14 @@
+﻿factor,axis,orient,coverage,status,redundant_with,rho
+g_rev_yoy,growth,+,0.984,adopted,,
+g_cfo_yoy,growth,+,0.694,adopted,,
+g_rev_cagr,growth,+,0.995,adopted,,
+q_roa,quality,+,1.0,adopted,,
+q_low_accrual,quality,-,1.0,adopted,,
+q_op_margin,quality,+,0.984,pruned_redundant,q_roa,0.892
+q_low_debt,quality,-,1.0,adopted,,
+q_current,quality,+,0.99,pruned_redundant,q_low_debt,0.857
+m_mom_12_1,momentum,+,0.99,adopted,,
+g_op_yoy,growth,+,0.658,pruned_redundant,g_rev_yoy,0.716
+g_ni_yoy,growth,+,0.627,adopted,,
+q_gross_margin,quality,+,0.917,adopted,,
+g_rev_stability,growth,-,0.995,adopted,,

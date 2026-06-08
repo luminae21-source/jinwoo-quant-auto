@@ -1,0 +1,40 @@
+﻿theme,tier,name,ticker,market,role
+반도체HBM,0_US,엔비디아,NVDA,US,GPU/HBM 수요 원천(연료)
+반도체HBM,0_US,미반도체ETF,SOXX,US,美 반도체 지수(연료)
+반도체HBM,0_US,마이크론,MU,US,HBM 경쟁/업황
+반도체HBM,1_KR대장,삼성전자,005930,KOSPI,HBM/메모리 대장
+반도체HBM,1_KR대장,SK하이닉스,000660,KOSPI,HBM 대장
+반도체HBM,1_KR대장,한미반도체,042700,KOSPI,HBM 본더 대장
+반도체HBM,2_KR peer,주성엔지니어링,036930,KOSDAQ,증착장비
+반도체HBM,2_KR peer,원익IPS,240810,KOSDAQ,증착장비
+반도체HBM,2_KR peer,이오테크닉스,039030,KOSDAQ,레이저장비
+반도체HBM,2_KR peer,테스,095610,KOSDAQ,증착장비
+반도체HBM,2_KR peer,HPSP,403870,KOSDAQ,고압어닐링(과점)
+반도체HBM,2_KR peer,피에스케이,319660,KOSDAQ,세정/스트립
+반도체HBM,2_KR peer,하나마이크론,067310,KOSDAQ,후공정/패키징
+반도체HBM,2_KR peer,유진테크,084370,KOSDAQ,증착장비
+반도체HBM,2_KR peer,테크윙,089030,KOSDAQ,테스트핸들러
+반도체HBM,2_KR peer,리노공업,058470,KOSDAQ,테스트소켓(과점)
+반도체HBM,2_KR peer,심텍,222800,KOSDAQ,FCBGA 기판
+2차전지,0_US,테슬라,TSLA,US,EV 수요/ESS(연료)
+2차전지,0_US,앨버말,ALB,US,리튬 가격
+2차전지,1_KR대장,LG에너지솔루션,373220,KOSPI,셀 대장
+2차전지,1_KR대장,삼성SDI,006400,KOSPI,셀 대장
+2차전지,1_KR대장,에코프로비엠,247540,KOSDAQ,양극재 대장
+2차전지,2_KR peer,에코프로,086520,KOSDAQ,양극재 지주
+2차전지,2_KR peer,비츠로셀,082920,KOSDAQ,리튬1차전지
+2차전지,2_KR peer,비나텍,126340,KOSDAQ,슈퍼커패시터
+2차전지,2_KR peer,신흥에스이씨,243840,KOSDAQ,원형전지 부품
+2차전지,2_KR peer,상신이디피,091580,KOSDAQ,각형 캔
+2차전지,2_KR peer,에코앤드림,101360,KOSDAQ,전구체
+2차전지,2_KR peer,더블유씨피,393890,KOSDAQ,분리막
+로봇,0_US,엔비디아,NVDA,US,피지컬AI 플랫폼(연료)
+로봇,0_US,인튜이티브서지컬,ISRG,US,수술로봇
+로봇,0_US,테슬라,TSLA,US,옵티머스 휴머노이드
+로봇,1_KR대장,두산로보틱스,454910,KOSPI,협동로봇 대장
+로봇,1_KR대장,레인보우로보틱스,277810,KOSDAQ,휴머노이드 대장
+로봇,2_KR peer,로보티즈,108490,KOSDAQ,구동모듈
+로봇,2_KR peer,로보스타,090360,KOSDAQ,산업로봇
+로봇,2_KR peer,휴림로봇,090710,KOSDAQ,서비스로봇
+로봇,2_KR peer,에스피지,058610,KOSDAQ,감속기/모터
+로봇,2_KR peer,고영,098460,KOSDAQ,검사/의료로봇

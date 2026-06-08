@@ -1,0 +1,185 @@
+{
+  "snapshot_date": "2026-06-30",
+  "holdings": [
+    {
+      "name": "삼양식품",
+      "code": "003230",
+      "qual_pct": 76,
+      "mom_pct": 9,
+      "val_pct": 47,
+      "ret12m": -18.3,
+      "qmom": "WATCH:모멘텀약",
+      "peak": ""
+    },
+    {
+      "name": "두산에너빌리티",
+      "code": "034020",
+      "qual_pct": 39,
+      "mom_pct": 44,
+      "val_pct": 19,
+      "ret12m": 46.2,
+      "qmom": "TRIM:퀄탈락",
+      "peak": "비쌈"
+    },
+    {
+      "name": "NH투자증권",
+      "code": "005940",
+      "qual_pct": null,
+      "mom_pct": 48,
+      "val_pct": 76,
+      "ret12m": 53.3,
+      "qmom": "WATCH:모멘텀약",
+      "peak": ""
+    },
+    {
+      "name": "ISC",
+      "code": "095340",
+      "qual_pct": 36,
+      "mom_pct": 85,
+      "val_pct": 25,
+      "ret12m": 253.7,
+      "qmom": "TRIM:퀄탈락",
+      "peak": "PEAK트림"
+    },
+    {
+      "name": "알테오젠",
+      "code": "196170",
+      "qual_pct": 10,
+      "mom_pct": 16,
+      "val_pct": 14,
+      "ret12m": -4.0,
+      "qmom": "TRIM:퀄탈락",
+      "peak": "비쌈"
+    },
+    {
+      "name": "한화에어로",
+      "code": "012450",
+      "qual_pct": 30,
+      "mom_pct": 33,
+      "val_pct": 46,
+      "ret12m": 26.2,
+      "qmom": "TRIM:퀄탈락",
+      "peak": ""
+    },
+    {
+      "name": "한미반도체",
+      "code": "042700",
+      "qual_pct": 93,
+      "mom_pct": 75,
+      "val_pct": 15,
+      "ret12m": 170.1,
+      "qmom": "KEEP",
+      "peak": "PEAK트림"
+    },
+    {
+      "name": "SK하이닉스",
+      "code": "000660",
+      "qual_pct": 79,
+      "mom_pct": 98,
+      "val_pct": 29,
+      "ret12m": 708.2,
+      "qmom": "KEEP",
+      "peak": "PEAK트림"
+    },
+    {
+      "name": "삼성물산",
+      "code": "028260",
+      "qual_pct": 9,
+      "mom_pct": 79,
+      "val_pct": 65,
+      "ret12m": 200.8,
+      "qmom": "TRIM:퀄탈락",
+      "peak": ""
+    },
+    {
+      "name": "삼성전자",
+      "code": "005930",
+      "qual_pct": 83,
+      "mom_pct": 95,
+      "val_pct": 39,
+      "ret12m": 502.8,
+      "qmom": "KEEP",
+      "peak": ""
+    },
+    {
+      "name": "NAVER",
+      "code": "035420",
+      "qual_pct": null,
+      "mom_pct": 24,
+      "val_pct": 62,
+      "ret12m": 6.9,
+      "qmom": "WATCH:모멘텀약",
+      "peak": ""
+    },
+    {
+      "name": "아모레퍼시픽",
+      "code": "090430",
+      "qual_pct": 96,
+      "mom_pct": 8,
+      "val_pct": 68,
+      "ret12m": -20.0,
+      "qmom": "WATCH:모멘텀약",
+      "peak": ""
+    },
+    {
+      "name": "KT&G",
+      "code": "033780",
+      "qual_pct": 51,
+      "mom_pct": 42,
+      "val_pct": 62,
+      "ret12m": 44.6,
+      "qmom": "KEEP",
+      "peak": ""
+    },
+    {
+      "name": "KB금융",
+      "code": "105560",
+      "qual_pct": null,
+      "mom_pct": 41,
+      "val_pct": 80,
+      "ret12m": 41.2,
+      "qmom": "WATCH:모멘텀약",
+      "peak": ""
+    },
+    {
+      "name": "삼성SDI",
+      "code": "006400",
+      "qual_pct": 29,
+      "mom_pct": 84,
+      "val_pct": 37,
+      "ret12m": 248.4,
+      "qmom": "TRIM:퀄탈락",
+      "peak": ""
+    },
+    {
+      "name": "기아",
+      "code": "000270",
+      "qual_pct": 72,
+      "mom_pct": 57,
+      "val_pct": 81,
+      "ret12m": 74.2,
+      "qmom": "KEEP",
+      "peak": ""
+    },
+    {
+      "name": "카카오",
+      "code": "035720",
+      "qual_pct": null,
+      "mom_pct": 5,
+      "val_pct": 57,
+      "ret12m": -29.1,
+      "qmom": "WATCH:모멘텀약",
+      "peak": ""
+    },
+    {
+      "name": "LIG넥스원",
+      "code": "079550",
+      "qual_pct": 5,
+      "mom_pct": 38,
+      "val_pct": 23,
+      "ret12m": 34.4,
+      "qmom": "TRIM:퀄탈락",
+      "peak": "비쌈"
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+{
+ "module": "v4.1 kosdaq_sel · Stage 3 (점수엔진)",
+ "growth_weight": 1.0,
+ "axis_weights": {
+  "growth": 0.5,
+  "quality": 0.35,
+  "momentum": 0.15
+ },
+ "factor_weights": {
+  "g_rev_yoy": 1.0,
+  "g_cfo_yoy": 1.0,
+  "g_rev_cagr": 1.0,
+  "g_ni_yoy": 0.5,
+  "g_rev_stability": 0.5,
+  "q_roa": 1.0,
+  "q_low_accrual": 1.0,
+  "q_low_debt": 1.0,
+  "q_gross_margin": 1.0,
+  "m_mom_12_1": 1.0
+ },
+ "adopted_factors": [
+  "g_rev_yoy",
+  "g_cfo_yoy",
+  "g_rev_cagr",
+  "q_roa",
+  "q_low_accrual",
+  "q_low_debt",
+  "m_mom_12_1",
+  "g_ni_yoy",
+  "q_gross_margin",
+  "g_rev_stability"
+ ],
+ "universe_n": 193,
+ "grade_counts": {
+  "S+": 10,
+  "S": 19,
+  "A": 29,
+  "B": 48,
+  "C": 48,
+  "D": 29,
+  "F": 10
+ },
+ "top15": [
+  {
+   "code": "458870",
+   "name": "씨어스",
+   "score": 75.34,
+   "grade": "S+",
+   "g": 80.4,
+   "q": 64.5,
+   "m": 83.7
+  },
+  {
+   "code": "476060",
+   "name": "온코닉테라퓨틱스",
+   "score": 74.74,
+   "grade": "S+",
+   "g": 80.0,
+   "q": 64.7,
+   "m": 80.5
+  },
+  {
+   "code": "420770",
+   "name": "기가비스",
+   "score": 71.94,
+   "grade": "S+",
+   "g": 61.0,
+   "q": 77.6,
+   "m": 95.3
+  },
+  {
+   "code": "095610",
+   "name": "테스",
+   "score": 71.16,
+   "grade": "S+",
+   "g": 66.2,
+   "q": 70.7,
+   "m": 88.9
+  },
+  {
+   "code": "058470",
+   "name": "리노공업",
+   "score": 71.09,
+   "grade": "S+",
+   "g": 68.4,
+   "q": 84.6,
+   "m": 48.4
+  },
+  {
+   "code": "240810",
+   "name": "원익IPS",
+   "score": 70.63,
+   "grade": "S+",
+   "g": 61.6,
+   "q": 77.1,
+   "m": 85.8
+  },
+  {
+   "code": "214150",
+   "name": "클래시스",
+   "score": 70.05,
+   "grade": "S+",
+   "g": 78.0,
+   "q": 84.5,
+   "m": 10.0
+  },
+  {
+   "code": "327260",
+   "name": "RF머트리얼즈",
+   "score": 69.92,
+   "grade": "S+",
+   "g": 73.0,
+   "q": 53.1,
+   "m": 98.9
+  },
+  {
+   "code": "440110",
+   "name": "파두",
+   "score": 69.5,
+   "grade": "S+",
+   "g": 77.5,
+   "q": 45.4,
+   "m": 98.9
+  },
+  {
+   "code": "336570",
+   "name": "원텍",
+   "score": 69.03,
+   "grade": "S+",
+   "g": 77.2,
+   "q": 82.8,
+   "m": 9.5
+  },
+  {
+   "code": "214450",
+   "name": "파마리서치",
+   "score": 68.04,
+   "grade": "S",
+   "g": 82.8,
+   "q": 74.0,
+   "m": 4.7
+  },
+  {
+   "code": "039030",
+   "name": "이오테크닉스",
+   "score": 67.36,
+   "grade": "S",
+   "g": 61.4,
+   "q": 76.9,
+   "m": 64.7
+  },
+  {
+   "code": "082920",
+   "name": "비츠로셀",
+   "score": 67.28,
+   "grade": "S",
+   "g": 56.7,
+   "q": 75.8,
+   "m": 82.6
+  },
+  {
+   "code": "108490",
+   "name": "로보티즈",
+   "score": 67.07,
+   "grade": "S",
+   "g": 59.9,
+   "q": 68.4,
+   "m": 87.9
+  },
+  {
+   "code": "425420",
+   "name": "티에프이",
+   "score": 67.06,
+   "grade": "S",
+   "g": 79.4,
+   "q": 61.0,
+   "m": 40.0
+  }
+ ],
+ "note": "사전등록 a-priori 가중(fitting X). 선정·수익 판정은 Stage4 PIT 백테스트(등록 합격선)."
+}
