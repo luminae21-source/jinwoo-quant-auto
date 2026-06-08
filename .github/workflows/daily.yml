@@ -3,6 +3,9 @@ name: 진우퀀트 v3.6 + v3.7.2 자동 점수 갱신 (Validation Gate)
 # 2026-06-05: Node24 대응 액션 버전 업데이트 (GitHub 2026-06-16 Node24 강제 전환 대비)
 #   checkout v4→v5 · setup-python v5→v6 · configure-pages v4→v5
 #   deploy-pages@v4 · upload-pages-artifact@v3 는 이미 최신 major — 태그 내 Node24 패치 자동 수신
+# 2026-06-07: Node24 추가 대응 (Node20 런너 2026-09-16 제거 대비)
+#   checkout v5→v6 · github-script v7→v8 (Node24 버전)
+#   Pages 액션(configure-pages@v5·deploy-pages@v4·upload-pages-artifact@v3)은 아직 Node24 릴리스 미출시 → 출시 시 재업데이트
 # 2026-06-05: Validation Gate (#2) 머지 — score 생성 후 deploy 전 7가지 검사
 #   18종목 누락 / NaN·inf / 등급 / 포인트합 / 권장비중 / 급변동 / 신선도
 #   실패 시 deploy-pages 미실행 → 직전 dashboard 자동 유지 (롤백)
@@ -27,7 +30,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       # 직전(현재 live) 점수를 백업 → Validation 급변동 비교 + 롤백 기준
       - name: Save previous scores (rollback 기준)
@@ -145,7 +148,7 @@ jobs:
       # ============================================
       - name: Validation 실패 시 이슈 생성
         if: failure()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             github.rest.issues.create({
@@ -162,7 +165,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: main
 
