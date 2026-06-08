@@ -35,7 +35,8 @@ SRC_PIT = BASE / 'fundamentals_pit.csv'                    # KOSPI 광범위 (57
 SRC_KOSDAQ = BASE / 'fundamentals_kosdaq.csv'              # KOSDAQ (297종목)
 MARKET_MAP = BASE / 'market_map.csv'
 SECTOR_KOSPI = BASE / 'liquidity_sector.csv'
-SECTOR_KOSDAQ = BASE / 'liquidity_kosdaq.csv'
+SECTOR_KOSDAQ = BASE / 'liquidity_kosdaq.csv'          # sector=시장부 (fallback)
+SECTOR_KOSDAQ_IND = BASE / 'kosdaq_industry.csv'       # 산업 라벨 (있으면 우선 — fetch_kosdaq_sector.py)
 UNIVERSE_CSV = BASE / 'universe_rule30_latest.csv'
 OUT_CSV = BASE / 'score_inputs_univ.csv'
 
@@ -76,13 +77,22 @@ def attach_labels(pf, verbose=True):
     else:
         mkt = {}
     sec, nm = {}, {}
-    for p, label in ((SECTOR_KOSPI, 'KOSPI'), (SECTOR_KOSDAQ, 'KOSDAQ')):
+    # 우선순위: KOSPI 산업 > KOSDAQ 산업(kosdaq_industry.csv) > KOSDAQ 시장부(fallback)
+    n_ind = 0
+    for p in (SECTOR_KOSPI, SECTOR_KOSDAQ_IND, SECTOR_KOSDAQ):
         if Path(p).exists():
             ls = pd.read_csv(p, dtype={'code': str})
             ls['code'] = ls['code'].str.zfill(6)
             for _, r in ls.iterrows():
-                sec.setdefault(r['code'], r.get('sector'))
-                nm.setdefault(r['code'], r.get('name'))
+                s_val, n_val = r.get('sector'), r.get('name')
+                if isinstance(s_val, str) and s_val.strip():
+                    if r['code'] not in sec and p == SECTOR_KOSDAQ_IND:
+                        n_ind += 1
+                    sec.setdefault(r['code'], s_val.strip())
+                if isinstance(n_val, str) and n_val.strip():
+                    nm.setdefault(r['code'], n_val.strip())
+    if verbose and Path(SECTOR_KOSDAQ_IND).exists():
+        print(f"  KOSDAQ 산업 라벨 적용: {n_ind}종목 (kosdaq_industry.csv — 시장부 대체)")
     out = pf.copy()
     # 시장: market_map 우선, 없으면 KOSDAQ liquidity에 있으면 KOSDAQ, 그 외 KOSPI
     kosdaq_codes = set()
@@ -94,7 +104,9 @@ def attach_labels(pf, verbose=True):
     if verbose:
         vc = out.drop_duplicates('code')['market'].value_counts().to_dict()
         n_sec = (out.drop_duplicates('code')['sector'] != '').sum()
-        print(f"  라벨: 시장 {vc} · 섹터 보유 {n_sec}종목 (KOSDAQ 섹터=시장부, 한계 등록됨)")
+        note = ('KOSDAQ=산업 라벨 (보강 적용)' if Path(SECTOR_KOSDAQ_IND).exists()
+                else 'KOSDAQ 섹터=시장부 — python fetch_kosdaq_sector.py 로 보강 가능')
+        print(f"  라벨: 시장 {vc} · 섹터 보유 {n_sec}종목 ({note})")
     return out
 
 
