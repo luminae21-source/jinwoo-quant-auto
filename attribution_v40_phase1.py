@@ -304,14 +304,14 @@ def evaluate_triggers(decomp_dict: dict[str, pd.DataFrame],
 # ============================================
 def print_summary(decomp_dict: dict[str, pd.DataFrame],
                   triggers: list[dict],
-                  days: int):
+                  days: int, beta_win: int = 60):
     print("\n" + "=" * 78)
     print("진우퀀트 v4.0 영역4 — Phase 1 CAPM 분해 결과")
     print(f"분석 시점: {datetime.now():%Y-%m-%d %H:%M}")
     print("=" * 78)
 
     # β 분포
-    print(f"\n📊 종목별 현재 β (60d rolling, 최근 영업일 기준)")
+    print(f"\n📊 종목별 현재 β ({beta_win}d rolling, 최근 영업일 기준)")
     print(f"  {'종목':<14} {'β_now':>7} {'β_30d전':>9} {'Δβ':>6} {'cum_20d':>9} {'cum_idio_20d':>13} {'market_share*':>14}")
     rows = []
     for name, df in decomp_dict.items():
@@ -360,13 +360,14 @@ def print_summary(decomp_dict: dict[str, pd.DataFrame],
 
 def save_json_output(decomp_dict: dict[str, pd.DataFrame],
                      triggers: list[dict],
-                     days: int) -> Path:
+                     days: int, beta_win: int = 60) -> Path:
     """일별 attribution + trigger 결과 JSON 저장."""
     payload = {
         'generated_at': datetime.now().isoformat(timespec='minutes'),
         'phase': 1,
         'method': 'CAPM single-factor (market = KOSPI)',
         'lookback_days': days,
+        'beta_win': beta_win,
         'stocks': {},
         'triggers': triggers,
     }
@@ -402,7 +403,7 @@ def save_json_output(decomp_dict: dict[str, pd.DataFrame],
 
 def save_html_panel(decomp_dict: dict[str, pd.DataFrame],
                     triggers: list[dict],
-                    days: int) -> Path:
+                    days: int, beta_win: int = 60) -> Path:
     """모바일 친화 HTML 패널 — 기존 대시보드에 iframe 또는 통합 가능."""
     # 종목별 마지막 영업일 분해 (오늘의 "왜 X% 움직였나")
     today_rows = []
@@ -527,7 +528,7 @@ def save_html_panel(decomp_dict: dict[str, pd.DataFrame],
 </style></head><body>
 
 <h1>진우퀀트 v4.0 Attribution — Phase 1 (CAPM)</h1>
-<div class="sub">생성: {datetime.now():%Y-%m-%d %H:%M} · β window 60d · 분해: r = β·r_KOSPI + idio</div>
+<div class="sub">생성: {datetime.now():%Y-%m-%d %H:%M} · β window {beta_win}d · 분해: r = β·r_KOSPI + idio</div>
 
 <h2>🚨 교체룰 trigger 발동</h2>
 {trigger_html}
@@ -577,12 +578,12 @@ def main():
                                  lookback_days=args.days,
                                  z_threshold=args.z_threshold)
 
-    print_summary(decomp, triggers, days=args.days)
+    print_summary(decomp, triggers, days=args.days, beta_win=args.beta_win)
 
     if args.save_json:
-        save_json_output(decomp, triggers, days=args.days)
+        save_json_output(decomp, triggers, days=args.days, beta_win=args.beta_win)
     if args.save_html:
-        save_html_panel(decomp, triggers, days=args.days)
+        save_html_panel(decomp, triggers, days=args.days, beta_win=args.beta_win)
 
 
 if __name__ == '__main__':

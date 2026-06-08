@@ -1,0 +1,127 @@
+{
+  "generated_at": "2026-06-07T13:31",
+  "phase": 2,
+  "method": "2-factor (market=KOSPI + sector ETF, orthogonalized)",
+  "beta_win": 120,
+  "lookback_days": 20,
+  "gates": {
+    "valid": true,
+    "insufficient_data": [],
+    "min_rows_required": 25,
+    "t2_phase1": [
+      "ISC",
+      "LIG넥스원",
+      "NH투자증권",
+      "두산에너빌리티",
+      "삼성SDI",
+      "삼양식품",
+      "아모레퍼시픽",
+      "알테오젠",
+      "카카오",
+      "한미반도체",
+      "한화에어로"
+    ],
+    "t2_phase2": [
+      "ISC",
+      "기아",
+      "삼양식품",
+      "아모레퍼시픽",
+      "카카오",
+      "한미반도체"
+    ],
+    "false_candidates": [
+      "ISC",
+      "LIG넥스원",
+      "NH투자증권",
+      "두산에너빌리티",
+      "삼성SDI",
+      "삼양식품",
+      "아모레퍼시픽",
+      "알테오젠",
+      "카카오",
+      "한화에어로"
+    ],
+    "reclassified": [
+      "LIG넥스원",
+      "NH투자증권",
+      "두산에너빌리티",
+      "삼성SDI",
+      "알테오젠",
+      "한화에어로"
+    ],
+    "reclassify_rate": 0.6,
+    "gate_A_reclass>=30%": true,
+    "gate_B_hanmi_preserved": true,
+    "gate_C_identity+betaS": true,
+    "identity_max_err": 0.0,
+    "beta_s_semi": {
+      "삼성전자": -0.26,
+      "SK하이닉스": 0.12,
+      "한미반도체": 1.47,
+      "ISC": 1.19
+    },
+    "PASS": true,
+    "detail": {
+      "ISC": {
+        "cum_idio_p1_%": -33.75,
+        "cum_sector_contrib_%": -1.06,
+        "cum_idio_p2_%": -32.69,
+        "t2_cleared": false
+      },
+      "LIG넥스원": {
+        "cum_idio_p1_%": -35.91,
+        "cum_sector_contrib_%": -42.77,
+        "cum_idio_p2_%": 6.85,
+        "t2_cleared": true
+      },
+      "NH투자증권": {
+        "cum_idio_p1_%": -29.58,
+        "cum_sector_contrib_%": -29.26,
+        "cum_idio_p2_%": -0.32,
+        "t2_cleared": true
+      },
+      "두산에너빌리티": {
+        "cum_idio_p1_%": -38.54,
+        "cum_sector_contrib_%": -33.12,
+        "cum_idio_p2_%": -5.42,
+        "t2_cleared": true
+      },
+      "삼성SDI": {
+        "cum_idio_p1_%": -30.05,
+        "cum_sector_contrib_%": -34.57,
+        "cum_idio_p2_%": 4.52,
+        "t2_cleared": true
+      },
+      "삼양식품": {
+        "cum_idio_p1_%": -18.67,
+        "cum_sector_contrib_%": 0.0,
+        "cum_idio_p2_%": -18.67,
+        "t2_cleared": false
+      },
+      "아모레퍼시픽": {
+        "cum_idio_p1_%": -23.95,
+        "cum_sector_contrib_%": 0.0,
+        "cum_idio_p2_%": -23.95,
+        "t2_cleared": false
+      },
+      "알테오젠": {
+        "cum_idio_p1_%": -14.92,
+        "cum_sector_contrib_%": -23.68,
+        "cum_idio_p2_%": 8.75,
+        "t2_cleared": true
+      },
+      "카카오": {
+        "cum_idio_p1_%": -21.69,
+        "cum_sector_contrib_%": 6.25,
+        "cum_idio_p2_%": -27.95,
+        "t2_cleared": false
+      },
+      "한화에어로": {
+        "cum_idio_p1_%": -34.8,
+        "cum_sector_contrib_%": -30.41,
+        "cum_idio_p2_%": -4.4,
+        "t2_cleared": true
+      }
+    }
+  }
+}
