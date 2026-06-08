@@ -70,3 +70,6 @@ Thumbs.db
 synthetic_korea_factors.csv
 trial_returns_matrix.csv
 
+
+# === 2026-06-08 추가: 시크릿 보호 ===
+naver_api.json
