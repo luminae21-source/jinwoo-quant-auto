@@ -73,3 +73,10 @@ trial_returns_matrix.csv
 
 # === 2026-06-08 추가: 시크릿 보호 ===
 naver_api.json
+
+# === 2026-06-08 추가: 가치·피크 오버레이 자동 산출물 (매번 재생성) ===
+# 주의: docs/overlay_scores.csv(배포본)는 파일명이 달라 제외되지 않음
+overlay_scores_latest.csv
+value_quality_pit_*.json
+holdings_qmom_snapshot.json
+_bashwrite_test.txt
