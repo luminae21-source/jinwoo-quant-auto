@@ -109,6 +109,22 @@ jobs:
           cp overlay_scores_latest.csv docs/overlay_scores.csv 2>/dev/null || true
           echo "✅ 밸류·피크 오버레이 완료 (실패해도 배포 진행)"
 
+
+      # ============================================
+      # (신규 2026-06-08) 영역4 Phase2 attribution — 보유/매도 판단 패널.
+      # 점수 무관 별도 레이어. continue-on-error: 실패해도 production 배포 진행.
+      # 출력 docs/attribution_phase2.html → Pages 배포(/attribution_phase2.html).
+      # ============================================
+      - name: Attribution Phase2 (영역4 보유/매도 판단)
+        continue-on-error: true
+        env:
+          TZ: Asia/Seoul
+        run: |
+          python attribution_v40_phase2.py --beta-win 120 --save-html
+          mkdir -p docs
+          cp attribution_panel_phase2.html docs/attribution_phase2.html 2>/dev/null || true
+          echo "✅ Phase2 attribution 완료 (실패해도 배포 진행)"
+
       # ============================================
       # Dashboard 파일을 docs/ 폴더로 정리 (Validation 통과 시에만 도달)
       # v3.7.2가 primary (index.html), v3.6/v3.7.1은 reference
