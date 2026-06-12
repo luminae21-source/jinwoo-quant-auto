@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>진우퀀트 플로우차트</title>
+<style>
+  :root{
+    --bg:#0f1620; --card:#18222f; --card2:#1d2937; --ink:#e8eef5; --sub:#9fb0c3;
+    --line:#2b3a4d; --go:#34c98a; --stop:#ff6b6b; --accent:#4fa8ff; --warn:#ffc24d;
+    --pill:#243345;
+  }
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#f4f7fb; --card:#ffffff; --card2:#eef3f9; --ink:#16212e; --sub:#5b6b7d;
+      --line:#d7e0ea; --go:#11a06a; --stop:#d63b3b; --accent:#1f73d6; --warn:#b5790a; --pill:#e7eef6; }
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+    font-size:16px;line-height:1.5}
+  .wrap{max-width:560px;margin:0 auto;padding:14px 12px 60px}
+  h1{font-size:18px;margin:6px 2px 2px;letter-spacing:-.2px}
+  .note{font-size:12px;color:var(--sub);margin:0 2px 12px}
+  .tabs{display:flex;gap:8px;position:sticky;top:0;z-index:5;padding:8px 0;background:var(--bg)}
+  .tab{flex:1;padding:15px 8px;border:1px solid var(--line);border-radius:14px;background:var(--card);
+    color:var(--sub);font-weight:700;font-size:15px;text-align:center;cursor:pointer;user-select:none}
+  .tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .panel{display:none;margin-top:6px}
+  .panel.active{display:block}
+  .step{border:1px solid var(--line);border-radius:14px;background:var(--card);margin:10px 0;overflow:hidden}
+  .head{display:flex;align-items:center;gap:10px;padding:15px 14px;cursor:pointer}
+  .num{flex:none;width:26px;height:26px;border-radius:50%;background:var(--pill);color:var(--ink);
+    font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .htxt{flex:1;min-width:0}
+  .htxt b{display:block;font-size:15px;letter-spacing:-.2px}
+  .htxt span{display:block;font-size:12px;color:var(--sub);margin-top:2px}
+  .chev{flex:none;color:var(--sub);transition:transform .2s;font-size:13px}
+  .step.open .chev{transform:rotate(180deg)}
+  .body{display:none;padding:0 14px 14px;border-top:1px dashed var(--line)}
+  .step.open .body{display:block}
+  .row{margin-top:11px}
+  .lab{font-size:11px;font-weight:800;letter-spacing:.4px;color:var(--sub);text-transform:uppercase}
+  .val{margin-top:3px;font-size:14px}
+  .val code{background:var(--card2);padding:1px 6px;border-radius:6px;font-size:13px}
+  .todo{margin-top:3px;font-size:14px;padding:9px 11px;border-radius:10px;background:var(--card2);border-left:3px solid var(--go)}
+  .todo.stop{border-left-color:var(--stop)}
+  .badge{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle}
+  .b-go{background:rgba(52,201,138,.16);color:var(--go)}
+  .b-stop{background:rgba(255,107,107,.16);color:var(--stop)}
+  .arrow{text-align:center;color:var(--line);font-size:16px;margin:-2px 0}
+  .foot{font-size:11px;color:var(--sub);text-align:center;margin-top:18px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>진우퀀트 — 매매 플로우차트</h1>
+  <p class="note">매매할 때 위에서 아래로 따라가며 쓰는 도구. 각 단계를 탭하면 [기준값 / 뜻 / 할 일]이 펼쳐져요.</p>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="sys">① 본체 (시스템·월간)</div>
+    <div class="tab" data-tab="theme">② 테마 Go / Stop</div>
+  </div>
+
+  <!-- ===== 본체 ===== -->
+  <div class="panel active" data-panel="sys">
+
+    <div class="step"><div class="head"><div class="num">1</div><div class="htxt"><b>데이터 수집</b><span>18종 + KOSPI 일별 종가</span></div><div class="chev">▼</div></div>
+      <div class="body">
+        <div class="row"><div class="lab">기준값</div><div class="val">KOSPI <code>18종</code> + 지수, 일별 종가(FDR). 월 1회.</div></div>
+        <div class="row"><div class="lab">뜻</div><div class="val">Mom12·Echo·베타 같은 가격 점수를 계산하려면 과거 시계열이 필요.</div></div>
+        <div class="row"><div class="lab">할 일</div><div class="todo">월 1회 점수 스크립트 실행 → 표/대시보드 갱신.</div></div>
+      </div></div>
+    <div class="arrow">↓</div>
+
+    <div class="step"><div class="head"><div class="num">2</div><div class="htxt"><b>팩터 점수</b><span>합산 = 체력_최종</span></div><div class="chev">▼</div></div>
+      <div class="body">
+        <div class="row"><div class="lab">기준값</div><div class="val">체력_최종 = 체력12(F×12/9) + ModF + FAR + Sloan + <b>Mom12</b> + <b>BAB</b> + NOA + <b>Echo</b></div></div>
+        <div class="row"><div class="lab">Mom12 (추세)</div><div class="val"><code>≥+60%→+2</code> · <code>≥+30%→+1</code> · <code>≥−10%→0</code> · <code>≥−30%→−1</code> · 그 아래 <code>−2</code></div></div>
+        <div class="row"><div class="lab">BAB (베타·방어)</div><div class="val">β<code>&lt;0.4→+2</code> · <code>&lt;0.7→+1</code> · <code>&lt;1.2→0</code> · <code>&lt;1.5→−1</code> · <code>≥1.5→−2</code> (덜 출렁이면 가점)</div></div>
+        <div class="row"><div class="lab">Echo (중기 모멘텀)</div><div class="val">1년~7개월 전 수익 상위20% <code>+1</code> / 하위20% <code>−1</code> (최근 6개월은 제외)</div></div>
+        <div class="row"><div class="lab">Sloan·NOA (이익 질)</div><div class="val">발생액·과투자 점검, 외부입력 <code>−2~+2</code> (음수면 이익 질·과투자 경계)</div></div>
+        <div class="row"><div class="lab">FAR (역발상)</div><div class="val">한 달 <code>−5%↓</code> 인데 재무 튼튼(체력≥9) → <code>+2</code> 매수가점</div></div>
+        <div class="row"><div class="lab">할 일</div><div class="todo">자동 계산 — 종목별 총점만 확인.</div></div>
+      </div></div>
+    <div class="arrow">↓</div>
+
+    <div class="step"><div class="head"><div class="num">3</div><div class="htxt"><b>등급</b><span>매수는 S+·S·A만</span></div><div class="chev">▼</div></div>
+      <div class="body">
+        <div class="row"><div class="lab">기준값</div><div class="val"><code>S+≥14</code> · <code>S≥12</code> · <code>A≥9</code> · <code>B≥6</code> · <code>C≥3</code> · <code>D≥0</code> · <code>F&lt;0</code></div></div>
+        <div class="row"><div class="lab">뜻</div><div class="val">점수가 높을수록 "재무 튼튼 + 추세 좋음 + 덜 위험".</div></div>
+        <div class="row"><div class="lab">할 일</div><div class="todo"><b>S+·S·A → 매수 대상<span class="badge b-go">GO</span></b></div>
+          <div class="todo stop">B 이하 → 미편입 <span class="badge b-stop">제외</span></div></div>
+      </div></div>
+    <div class="arrow">↓</div>
+
+    <div class="step"><div class="head"><div class="num">4</div><div class="htxt"><b>비중</b><span>고른 비중 + 상한</span></div><div class="chev">▼</div></div>
+      <div class="body">
+        <div class="row"><div class="lab">기준값</div><div class="val"><code>1/n</code> 동일가중 → 종목 <code>≤15%</code> → 섹터 <code>≤35%</code> → 합 100% 정규화</div></div>
+        <div class="row"><div class="lab">뜻</div><div class="val">한 종목·한 업종 쏠림 방지. 반도체가 35% 넘으면 그 섹터만 비례 축소.</div></div>
+        <div class="row"><div class="lab">할 일</div><div class="todo">권장비중대로 — 임의 조정 금지.</div></div>
+      </div></div>
+    <div class="arrow">↓</div>
+
+    <div class="step"><div class="head"><div class="num">5</div><div class="htxt"><b>MA200 체크</b><span>10개월선 위/아래</span></div><div class="chev">▼</div></div>
+      <div class="body">
+        <div class="row"><div class="lab">기준값</div><div class="val">월간 <code>10개월 이동평균</code>(≈200일선) 대비 종가 위/아래</div></div>
+        <div class="row"><div class="lab">뜻</div><div class="val">행동규칙(신호 아님). 정교화하면 손해 → 단순 점검만.</div></div>
+        <div class="row"><div class="lab">할 일</div><div class="todo">선 <b>위 → 보유</b> <span class="badge b-go">ON</span></div>
+          <div class="todo stop">선 <b>아래 → RISK-OFF</b> 관망 <span class="badge b-stop">OFF</span></div></div>
+      </div></div>
+    <div class="arrow">↓</div>
+
+    <div class="step"><div class="head"><div class="num">6</div><div class="htxt"><b>집행</b><span>VWAP 이하 지정가</span></div><div class="chev">▼</div></div>
+      <div class="body">
+        <div class="row"><div class="lab">기준값</div><div class="val">VWAP(거래량가중평균가) <code>이하 지정가</code>, 비용 왕복 <code>0.235%</code></div></div>
+        <div class="row"><div class="lab">뜻</div><div class="val">싸게 체결되도록 지정가로. 비용 차감 후에도 이기는 게 검증의 핵심.</div></div>
+        <div class="row"><div class="lab">할 일</div><div class="todo">월 1회 리밸런스 직접 집행. 끝.</div></div>
+      </div></div>
+
+  </div>
+
+  <!-- ===== 테마 Go/Stop ===== -->
+  <div class="panel" data-panel="theme">
+
+    <div class="step"><div class="head"><div class="num">1</div><div class="htxt"><b>스캔</b><span>후보 떠올리기</span></div><div class="chev">▼</div></div>
+      <div class="body">
+        <div class="row"><div class="lab">기준값</div><div class="val">월간 스캔 + 3계층 엔진(촉매·확산·수급)</div></div>
+        <div class="row"><div class="lab">뜻</div><div class="val">후보 surfacing일 뿐 <b>매수신호 아님</b>.</div></div>
+        <div class="row"><div class="lab">할 일</div><div class="todo">월초 스캔 → 후보 목록 확인.</div></div>
+      </div></div>
+    <div class="arrow">↓</div>
+
+    <div class="step"><div class="head"><div class="num">2</div><div class="htxt"><b>신호 2+ 점등?</b><span>2 미만이면 STOP</span></div><div class="chev">▼</div></div>
+      <div class="body">
+        <div class="row"><div class="lab">촉매 (A)</div><div class="val">뉴스(종목명+수주·공급계약·증설…) 또는 DART 공시</div></div>
+        <div class="row"><div class="lab">확산 (B)</div><div class="val">美연료 ON + 한국대장 <code>+10%↑</code> + peer가 대장보다 <code>15%p↑</code> 뒤처짐 (peer <code>+100%↑</code> 급등이면 제외)</div></div>
+        <div class="row"><div class="lab">수급 (C)</div><div class="val">외국인·기관 <code>순매수</code></div></div>
+        <div class="row"><div class="lab">할 일</div><div class="todo"><b>2개 이상 점등 → 진행</b> <span class="badge b-go">GO</span></div>
+          <div class="todo stop">1개 이하 / 검색량 단독 → <b>STOP</b> <span class="badge b-stop">STOP</span></div></div>
+      </div></div>
+    <div class="arrow">↓</div>
+
+    <div class="step"><div class="head"><div class="num">3</div><div class="htxt"><b>선반영(과열)?</b><span>과열이면 STOP</span></div><div class="chev">▼</div></div>
+      <div class="body">
+        <div class="row"><div class="lab">기준값 (전부 만족해야 통과)</div><div class="val">최근 20일 <code>&lt;+30%</code> &nbsp;AND&nbsp; 52주 고점 <code>−5% 밖</code> &nbsp;AND&nbsp; 12-1 모멘텀 <code>&lt;+100%</code></div></div>
+        <div class="row"><div class="lab">뜻</div><div class="val">이미 다 오른 종목은 카탈리스트가 남지 않음.</div></div>
+        <div class="row"><div class="lab">할 일</div><div class="todo"><b>셋 다 통과 → 진행</b> <span class="badge b-go">GO</span></div>
+          <div class="todo stop">하나라도 과열 → <b>STOP</b> <span class="badge b-stop">STOP</span></div></div>
+      </div></div>
+    <div class="arrow">↓</div>
+
+    <div class="step"><div class="head"><div class="num">4</div><div class="htxt"><b>thesis + 무효화 등록?</b><span>없으면 STOP</span></div><div class="chev">▼</div></div>
+      <div class="body">
+        <div class="row"><div class="lab">기준값</div><div class="val">사기 <b>전에</b> thesis 1줄 + 무효화 트리거 + 선반영 점검을 기록</div></div>
+        <div class="row"><div class="lab">뜻</div><div class="val">사후 합리화·뇌동매매 차단. 직관의 자리는 여기 한 줄뿐.</div></div>
+        <div class="row"><div class="lab">할 일</div><div class="todo"><b>등록 완료 → 진행</b> <span class="badge b-go">GO</span></div>
+          <div class="todo stop">못 적으면 → <b>사지 않음</b> <span class="badge b-stop">STOP</span></div></div>
+      </div></div>
+    <div class="arrow">↓</div>
+
+    <div class="step"><div class="head"><div class="num">5</div><div class="htxt"><b>사이징</b><span>2%룰 + ATR</span></div><div class="chev">▼</div></div>
+      <div class="body">
+        <div class="row"><div class="lab">기준값</div><div class="val">위험 = 자본 <code>×2%</code> &nbsp;÷&nbsp; 손절폭(<code>2.5×ATR14</code>) = 수량</div></div>
+        <div class="row"><div class="lab">한도</div><div class="val">1종목 <code>≤10%</code> · 동일 테마 <code>≤6%</code> · 동시보유 ≤5 · 주문 ≤ADTV 1%</div></div>
+        <div class="row"><div class="lab">뜻</div><div class="val">틀려도 한 종목에서 자본 2%만 잃게. 워치는 일ATR~7.3%라 수량 자동↓.</div></div>
+        <div class="row"><div class="lab">할 일</div><div class="todo">계산된 수량·한도 안에서만 분할 진입(정찰 1/3).</div></div>
+      </div></div>
+    <div class="arrow">↓</div>
+
+    <div class="step"><div class="head"><div class="num">6</div><div class="htxt"><b>손절선</b><span>하한가 전에 작동</span></div><div class="chev">▼</div></div>
+      <div class="body">
+        <div class="row"><div class="lab">기준값</div><div class="val">손절 = 진입가 <code>− 2.5×ATR</code>. 손절폭이 <code>−20%</code> 넘으면 진입 스킵/−20% 고정</div></div>
+        <div class="row"><div class="lab">뜻</div><div class="val">하한가(<code>−30%</code>) 닿으면 체결 불가 → 손절선은 그 전 −20% 안에서 먼저 작동.</div></div>
+        <div class="row"><div class="lab">킬스위치</div><div class="val">lane 기준 일 <code>−7%</code> / 주 <code>−12%</code> / 월 <code>−20%</code> → 신규 정지 + thesis 재검토</div></div>
+        <div class="row"><div class="lab">할 일</div><div class="todo stop">손절선·무효화 닿으면 <b>기계적으로 청산</b> — 버티기 금지.</div></div>
+      </div></div>
+    <div class="arrow">↓</div>
+
+    <div class="step"><div class="head"><div class="num">7</div><div class="htxt"><b>Track W 측정</b><span>직관이 밥값 하나</span></div><div class="chev">▼</div></div>
+      <div class="body">
+        <div class="row"><div class="lab">기준값</div><div class="val">매월 (테마픽 − 같은돈 시스템픽) 기록 → <code>6개월 누적 ≥0</code></div></div>
+        <div class="row"><div class="lab">뜻</div><div class="val">직관이 시스템보다 나은지 데이터로만 판정.</div></div>
+        <div class="row"><div class="lab">할 일</div><div class="todo"><b>누적 ≥0 → 유지/확대</b> <span class="badge b-go">유지</span></div>
+          <div class="todo stop">음수 지속 → <b>축소·중단</b> <span class="badge b-stop">축소</span></div></div>
+      </div></div>
+
+  </div>
+
+  <p class="foot">표시 값은 실제 코드·문서 기준이며 시점에 따라 갱신될 수 있어요.<br>※ 정보·도구일 뿐 투자 추천이 아닙니다. 종목명은 예시이며 매수는 본인 판단·책임.</p>
+</div>
+
+<script>
+(function(){
+  var root=document.querySelector('.wrap');
+  root.addEventListener('click',function(e){
+    var tab=e.target.closest('.tab');
+    if(tab){
+      var t=tab.getAttribute('data-tab');
+      root.querySelectorAll('.tab').forEach(function(x){x.classList.toggle('active',x===tab);});
+      root.querySelectorAll('.panel').forEach(function(p){p.classList.toggle('active',p.getAttribute('data-panel')===t);});
+      window.scrollTo({top:0,behavior:'smooth'});
+      return;
+    }
+    var head=e.target.closest('.head');
+    if(head){ head.parentNode.classList.toggle('open'); }
+  });
+})();
+</script>
+</body>
+</html>

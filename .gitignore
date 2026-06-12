@@ -80,3 +80,15 @@ overlay_scores_latest.csv
 value_quality_pit_*.json
 holdings_qmom_snapshot.json
 _bashwrite_test.txt
+
+# === 2026-06-08 추가: 개인 매매·집행 문서 (로컬 전용, 공개 저장소 제외) ===
+진우퀀트_B전환_T1_워크시트_2026-06-06.md
+*_워크시트_*.md
+# 마스터정리: B전환 집행일정·금액(적립 50만·트림 210만 등) 포함 → 로컬 전용
+# (공개용이 필요하면 금액 redact 후 별도 파일로)
+진우퀀트_마스터정리_2026-06-10.md
+
+# === 2026-06-08 추가: 자동생성 attribution/분석 출력 (매번 재생성) ===
+attribution_v40_*.json
+attribution_v40_*.html
+analyze_*.json
