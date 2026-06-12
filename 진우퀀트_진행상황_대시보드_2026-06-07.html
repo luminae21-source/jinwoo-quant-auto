@@ -233,9 +233,46 @@ flowchart TD
     <li><div class="when">9월 (병목)</div><div class="what">v3.9 PEAD 통합/기각 판정 · 옵션B(Echo 1.2) 검토 · 9/30 통합 재심사</div></li>
   </ul>
 
+  <!-- ===== 2026-06-13 추가: 가치·피크 오버레이 + 정합성 (Cowork) ===== -->
+  <h2>가치·피크 오버레이 <span class="em">밸류 렌즈 검증 + 매일 경보 자동화 · 2026-06-13 추가</span></h2>
+  <p class="note">버핏·멍거·린치 렌즈로 들어갔으나 <b>PIT 백테스트가 결론을 주도</b>. 핵심 — 밸류는 엔진이 아니라 "비싼 과열주" 경보. production·등급 무변경.</p>
+  <div class="grid">
+    <div class="card"><h3>PIT 팩터 재검증 <span class="badge b-done">✅ 엔진 확정</span></h3>
+      <p>광범위 유니버스 사전선택 검증: <b>모멘텀 IR +0.76 · Q→Mom +0.83</b>(최고), 밸류 +0.08(중립), 단독 퀄리티 −0.21. → <b>퀄리티+모멘텀 설계가 데이터로 옳음.</b> 2026 급등 제외·전후반 분할에서도 유지.</p></div>
+    <div class="card"><h3>밸류·피크 오버레이 <span class="badge b-next">🔵 경보 레이어</span></h3>
+      <p>비쌈(B/M 하위)+과열(MA200 대비, 반도체 25%·경기민감 30%) → <b>TRIM 경보</b>. 현재: SK하이닉스·한미반도체 TRIM, LIG넥스원 WATCH. production 점수 무변경.</p></div>
+    <div class="card"><h3>기계적 트림 <span class="badge b-rej">❌ 합격선 미달</span></h3>
+      <p>피크명 제외·부분트림·밸류틸트 전부 v40 게이트 미달(CAGR −9~12%p). 2021–26엔 비싼+과열=승자(반도체)였기 때문. → <b>자동 트림 X, 경보 전용 확정.</b></p></div>
+    <div class="card"><h3>KOSDAQ 편입 재검증 <span class="badge b-rej">❌ 확장 안 함</span></h3>
+      <p>KOSPI200(IR 0.62) vs 코스닥 편입(0.13~0.16, MDD −42.5%). <b>영역3 기각과 동일 결론 재확인.</b> 단 Track W 재량 테마 lane과는 무관(별도 버킷).</p></div>
+    <div class="card"><h3>자동화 <span class="badge b-done">✅ 매일 경보</span></h3>
+      <p>daily.yml에 오버레이 스텝(Validation Gate 뒤·continue-on-error) → 매일 docs/overlay_scores.csv에 트림권고. production 등급 무변경. Node24 액션 업데이트 동반.</p></div>
+    <div class="card"><h3>반도체 트림 스트레스 <span class="badge b-pend">🟡 인지 사항</span></h3>
+      <p>반도체 −40% 시 Baseline −10.0% vs 트림½ −5.8% vs Exit −1.7%. 트림분은 <b>현금/방어로</b>(다른 주식 재투자는 분산효과 약함). 실행은 진우 판단.</p></div>
+  </div>
+
+  <h2>투자 방향 정합성 <span class="em">진우퀀트 노선과 맞는가</span></h2>
+  <p class="note">진우퀀트 방향: <b>퀄리티+모멘텀 시스템(Track S) + 수익추구(옵션B·B전환) + 재량 테마(Track W) + "검증 후 채택" 규율.</b></p>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>관점</th><th>판정</th><th>설명</th></tr></thead>
+      <tbody>
+        <tr><td><b>엔진(퀄+모멘텀)</b></td><td><span class="poss p-hi">정합</span></td><td>밸류 렌즈로 들어갔지만 결국 진우퀀트 엔진을 검증·확정. 방향 전환 아님.</td></tr>
+        <tr><td><b>검증 후 채택 규율</b></td><td><span class="poss p-hi">정합</span></td><td>합격선 미달 룰은 자동 채택 X(경보로만). 내 가설도 데이터가 반박하자 폐기 = 진우퀀트 DNA(9연속 기각과 같은 결).</td></tr>
+        <tr><td><b>production 무수정</b></td><td><span class="poss p-hi">정합</span></td><td>오버레이가 등급·비중 안 건드림. 레이어만 추가(C·D 패턴과 동일).</td></tr>
+        <tr><td><b>수익 추구(옵션B·테마)</b></td><td><span class="poss p-mid">보완</span></td><td>경보는 수익을 안 깎음(alert-only). 공격형으로 가되 반도체 고점만 주시.</td></tr>
+        <tr><td><b>KOSDAQ Track W</b></td><td><span class="poss p-mid">무관·공존</span></td><td>"KOSDAQ 편입 안 함"은 *시스템 유니버스* 한정. 재량 테마 lane과 충돌 없음.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card" style="margin-top:12px;border-left:4px solid var(--green);">
+    <h3>한 줄 결론 <span class="badge b-done">방향 정합</span></h3>
+    <p>다른 전략으로 끌고 가지 않음 — <b>기존 엔진을 검증(✓)하고, 수익을 안 깎는 리스크 경보를 정직성 규율대로 얹음.</b> 유일하게 의식할 건 "공격(옵션B·테마) ↔ 반도체 피크" 긴장인데, 이미 Track 분리로 관리되는 구조와 같은 결.</p>
+  </div>
+
   <footer>
-    진우퀀트 진행상황 대시보드 · 생성 2026-06-07 (Cowork)<br>
-    데이터 출처: 결정메모(C/D/영역3)·v3.7.2 핸드오프·실전기록·메모리 · production v3.7.2 무변경<br>
+    진우퀀트 진행상황 대시보드 · 생성 2026-06-07 · 가치·피크 오버레이 섹션 추가 2026-06-13 (Cowork)<br>
+    데이터 출처: 결정메모(C/D/영역3)·v3.7.2 핸드오프·실전기록·메모리 · production v3.7.2 무변경 · PIT 백테스트(value_quality_backtest.py)<br>
     ⚠️ 백테스트 수치는 forward 수익 보장이 아니며, 매매 판단은 본인 책임입니다.
   </footer>
 
