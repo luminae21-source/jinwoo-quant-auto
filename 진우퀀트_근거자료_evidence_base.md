@@ -40,6 +40,8 @@
 
 **→ 진우퀀트 재해석 (중요):** 제 검증의 "한국 퀄리티 단독 IR −0.29"는 *퀄리티 무용*이 아니라 **2021-26 AI/반도체 버블기의 예상된 언더퍼폼**(QMJ: 버블기 퀄리티 싸짐). QMJ는 *그 후 반등*을 예측 → **VQ를 '버블 되돌림 대비 크래시 보험'으로 보는 §2·§3 결론을 원문이 직접 뒷받침**(퀄리티 = distress기 flight-to-quality 자산). 즉 음의 IR은 반박이 아니라 *타이밍*의 문제.
 
+**→ 진우 데이터 한국 실증 (2026-06-13, 가설→증거 전환):** 직전 12M 모멘텀 누적으로 국면 분리. **버블기(모멘텀强): VQ가 모멘텀에 월 −4.5%p 언더퍼폼**(QMJ "버블기 퀄리티 싸짐" ✅). **모멘텀 최악 10개월(크래시): VQ +9.6%p 압도**(QMJ "이후 반등" ✅). 완만한 되돌림기엔 −0.58%p(거의 동등). 상관(VQ−Mom vs 12M모멘텀)=−0.30. **결론: QMJ 명제는 한국서도 성립하되 반등이 *꼬리(크래시)에 집중* = 일상우위 아닌 보험금 지급형.** (대가 선진국 가설을 진우 한국 데이터로 검증 완료.)
+
 **보강 실증 — QARP (Maury 2017):** Maury, B. **"Quality at a Reasonable Price: The Role of Investors' Portfolio Weights."** *Nordic J. of Business* 66(1), 2017. 📄 `QARP_Maury2017.pdf`(원문 직접 검증). **핀란드** 100만+ 투자자 포트폴리오 데이터로, "value+quality at a reasonable price(QARP)" 성과에 **소유 집중도(ownership/portfolio concentration) 변화**를 신호로 더하면 (조건부) 개선됨을 확인. → ① QARP(=진우 VQ)가 학계서 다뤄지는 정식 전략임을 보강(Novy-Marx·Piotroski·Asness 계보 인용) ② **소유·수급 집중도 = 밸류/퀄리티 픽의 확인신호** 아이디어 → 진우 Track W `catalyst_scan`의 *수급(C)* 활용과 직접 연결. ⚠️ 증거등급: 단독저자·NJB·**핀란드 표본(한국 아님)** → AQR 논문보다 *보조적*.
 
 ### 1-B. 저베타 — Betting Against Beta (Frazzini·Pedersen)
@@ -107,11 +109,16 @@
 
 **1차 출처:**
 - O'Neil, William J. **"How to Make Money in Stocks."** (CANSLIM) — `ONeil_HowToMakeMoney.pdf` 📄 **원문 직접 검증**.
-- Minervini, Mark (2013). **"Trade Like a Stock Market Wizard."** (SEPA®) — `Minervini_TradeLikeWizard.pdf`(업로드) ⚠️ **스캔본(텍스트 0) — verbatim 인용 불가**, 공지된 SEPA 프레임워크로 인용.
+- Minervini, Mark (2013). **"Trade Like a Stock Market Wizard."** (SEPA®) — 📄 **원문 텍스트 직접 검증**(진우 제공 DOCX, 스캔 PDF는 텍스트 0이라 DOCX로 대체).
 
-**원문이 말하는 것:**
-- **O'Neil (원문 직접 인용):** "…**cut losses at 8%**. The plan had several enormous advantages. You could be wrong twice and right once and still not get [hurt]." → **−8% 무조건 손절**의 정확한 출처. 주도주·신고가 진입(CANSLIM).
-- **Minervini (SEPA, 공지 프레임워크):** 강세 확인 시 피라미딩(승자에 추가), 엄격한 손절. *(스캔본이라 본문 verbatim 미확보 — O'Neil −8%를 1차 청산근거로 사용.)*
+**원문이 말하는 것 (모두 원문 직접 인용):**
+- **O'Neil:** "…**cut losses at 8%**… You could be wrong twice and right once and still not get [hurt]." → −8% 무조건 손절. 주도주·신고가 진입(CANSLIM).
+- **Minervini (verbatim):**
+  - SEPA 랭킹: "Stocks must first meet my **Trend Template**… then screened through filters based on **earnings, sales and margins**." → 진입 = 추세(기술) + 실적·매출·마진(펀더멘털) 이중 필터.
+  - **VCP**(Volatility Contraction Pattern): "establishing a precise entry point at the **line of least resistance**."
+  - 손절: "If you normally **cut losses at 7 to 8 percent**, cut them at 5 to 6 percent [어려운 장]." → **O'Neil 8%와 일치(이중 출처 확정).**
+  - 사이징: "I may try to **pyramid my gains** by placing a larger bet size… The key… is to **preserve capital** and wait patiently." → 승자에 피라미딩하되 자본보존 우선.
+  - 관점: "**value investing does not protect you**… No magic number." → Minervini는 성장·모멘텀파(밸류 회의). 진우 엔진의 모멘텀 핵심과 정합, 밸류는 보조(꼬리보험)로만.
 
 **진우퀀트 적용 (Track W 청산룰 명문화 — 문서화된 근거 기반):**
 - 진입: catalyst scan 점등 + guardrail 통과 + thesis (이미 구현).
@@ -136,13 +143,19 @@
 ## 6. Track W 청산룰 (명문화, O'Neil/Minervini 근거)
 
 ```
-진입: catalyst 2+ 점등 AND guardrail PASS AND 진우 thesis(2분 스토리)
+진입(SEPA, Minervini 검증): 다음 4개 동시
+  - 추세: Trend Template — 주가가 상승추세(예: 200일선 위·신고가 부근)   [기술]
+  - 펀더멘털: 실적·매출·마진 개선                                      [Minervini 필터]
+  - catalyst 2+ 점등 (진우 기존 catalyst_scan) + guardrail PASS
+  - 진우 thesis(2분 스토리) + 무효화 조건 사전기록
 사이징: 종목 ≤ 전계좌 2%, Track W 합계 ≤ 10% (기존 가드레일)
 청산:
-  - 하드 손절: 진입가 대비 −8% (O'Neil, 무조건·재량 없음)
-  - thesis 무효화: 사전기록한 무효화 조건 발생 시 즉시 청산
-  - 트레일링: +20% 이상 수익 시 고점 대비 일정%(예 −15%) 트레일
-가산(선택): 강세 지속 확인 시 분할 피라미딩 (Minervini SEPA, 평단 상승 감수)
+  - 하드 손절 −7~8% (O'Neil "8%" + Minervini "7 to 8 percent" 이중 출처, 무조건·재량 없음)
+    · 시황 악화 시 −5~6%로 타이트닝 (Minervini)
+  - thesis 무효화 발생 시 즉시 청산
+  - 트레일링: 큰 수익 구간에서 고점 대비 일정%(예 −15%) 트레일
+가산(선택): 강세 지속·자본보존 우선 하에 분할 피라미딩 (Minervini, 평단 상승 감수)
 ```
+> 근거 격상: 기존 catalyst+guardrail(진우)에 **Minervini SEPA의 Trend Template(추세) + 실적·매출·마진 필터**를 진입에 추가하면, 발굴이 "촉매만"이 아니라 "추세+실적 동반"으로 정밀해짐(O'Neil 주도주 논리와 동일 계보).
 
 > 출처 링크: Asness [AQR](https://www.aqr.com/Insights/Research/Journal-Article/Value-and-Momentum-Everywhere)·[Wiley](https://onlinelibrary.wiley.com/doi/10.1111/jofi.12021) / Marks [Oaktree](https://www.oaktreecapital.com/insights/memo/is-it-a-bubble) / O'Neil·Minervini(단행본). 팩터 논문은 README 학술백본 참조.
