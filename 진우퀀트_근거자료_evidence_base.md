@@ -43,6 +43,17 @@
 **→ 진우 데이터 한국 실증 (2026-06-13, 가설→증거 전환):** 직전 12M 모멘텀 누적으로 국면 분리. **버블기(모멘텀强): VQ가 모멘텀에 월 −4.5%p 언더퍼폼**(QMJ "버블기 퀄리티 싸짐" ✅). **모멘텀 최악 10개월(크래시): VQ +9.6%p 압도**(QMJ "이후 반등" ✅). 완만한 되돌림기엔 −0.58%p(거의 동등). 상관(VQ−Mom vs 12M모멘텀)=−0.30. **결론: QMJ 명제는 한국서도 성립하되 반등이 *꼬리(크래시)에 집중* = 일상우위 아닌 보험금 지급형.** (대가 선진국 가설을 진우 한국 데이터로 검증 완료.)
 
 **보강 실증 — QARP (Maury 2017):** Maury, B. **"Quality at a Reasonable Price: The Role of Investors' Portfolio Weights."** *Nordic J. of Business* 66(1), 2017. 📄 `QARP_Maury2017.pdf`(원문 직접 검증). **핀란드** 100만+ 투자자 포트폴리오 데이터로, "value+quality at a reasonable price(QARP)" 성과에 **소유 집중도(ownership/portfolio concentration) 변화**를 신호로 더하면 (조건부) 개선됨을 확인. → ① QARP(=진우 VQ)가 학계서 다뤄지는 정식 전략임을 보강(Novy-Marx·Piotroski·Asness 계보 인용) ② **소유·수급 집중도 = 밸류/퀄리티 픽의 확인신호** 아이디어 → 진우 Track W `catalyst_scan`의 *수급(C)* 활용과 직접 연결. ⚠️ 증거등급: 단독저자·NJB·**핀란드 표본(한국 아님)** → AQR 논문보다 *보조적*.
+**→ 진우 데이터 한국 검증(2026-06-13~14): 시장별로 정반대 — KOSDAQ ❌ / KOSPI ✅.**
+
+| 시장 | flow IC | VQ_hiFlow vs loFlow | Flow단독 IR | 판정 |
+|---|---|---|---|---|
+| KOSDAQ | ≈0 (v42) | degenerate(겹침 얇음) | 음수 | ❌ 미성립 |
+| **KOSPI top-200** | **+0.025** | **30.5% > 23.3%(+7.2%p)**, 둘 다 >VQ단독 12.4% | **+0.91** | ✅ **성립** |
+
+- **시장구조 해석:** KOSDAQ=개인·테마 주도→수급 예측력 0 / **KOSPI=기관·외국인 주도 대형주→수급이 수익 견인+밸류·퀄 픽 확인.** Maury(핀란드 기관시장)가 KOSPI엔 전이, KOSDAQ엔 비전이 — 구조적으로 정합.
+- **진우퀀트 함의:** v42는 수급을 *KOSDAQ만* 보고 기각했으나 **KOSPI에선 작동 → 수급은 KOSPI 후보 팩터.** 도구: `fetch_kospi_flow_pykrx.py`(PC), `maury_kospi_test.py`(selftest 양성대조 IC0.54로 엔진 검증).
+- **정직한 단서(채택 전):** ① IC 0.025 작음(포트 효과는 큼) ② **수급 단독(40.6%) > VQ_hiFlow(30.5%) = 수급이 주동력, VQ는 희석** ③ 단일 백테스트·생존편향 → **v42식 사전등록 게이트로 재검증 후 채택.**
+- **결론: QMJ 확인→채택 / Maury는 *시장 조건부 확인*(KOSPI ✅·KOSDAQ ❌).** 단일시장 테스트였으면 놓쳤을 차이를 양시장 검증으로 잡음 = 검증규율의 가치.
 
 ### 1-B. 저베타 — Betting Against Beta (Frazzini·Pedersen)
 
