@@ -95,3 +95,6 @@ analyze_*.json
 
 # === 2026-06-08 추가: 대용량 일봉 PIT 패널 (PC pykrx 재생성 → 저장소 비대화 방지) ===
 *_pykrx.csv
+gradecut_log.csv
+trackw_record.csv
+live_record.csv
