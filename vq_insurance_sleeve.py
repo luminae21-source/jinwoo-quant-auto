@@ -31,9 +31,11 @@ def run():
     mc=dict(zip(liq['code'],pd.to_numeric(liq['mcap'],errors='coerce'))); nm=dict(zip(liq['code'],liq['name']))
     # 산업: v37_2 점수에서(현 보유 산업 라벨), 없으면 liquidity sector
     sec={}
-    sf=BASE/'v39_pead_scores_latest.csv'
-    if sf.exists():
-        d=rd('v39_pead_scores_latest.csv'); sec=dict(zip(d['코드'].astype(str).str.zfill(6),d['산업']))
+    for sfn in ['v37_2_scores_latest.csv','v39_pead_scores_latest.csv']:  # CI는 v37_2 생성
+        if (BASE/sfn).exists():
+            try:
+                d=rd(sfn); sec=dict(zip(d['코드'].astype(str).str.zfill(6),d['산업'])); break
+            except Exception: pass
     d0=px.index[-1]; fa=fund[fund['avail']<=d0].sort_values('fiscal_year').groupby('code').tail(1).set_index('code')
     hist=px.loc[:d0]; pxnow=px.iloc[-1].to_dict()
     valid=[c for c in px.columns if hist[c].notna().sum()>=SMA_N and pd.notna(px.loc[d0,c]) and c in mc and pxnow.get(c)]

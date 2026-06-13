@@ -109,6 +109,25 @@ jobs:
           cp overlay_scores_latest.csv docs/overlay_scores.csv 2>/dev/null || true
           echo "✅ 밸류·피크 오버레이 완료 (실패해도 배포 진행)"
 
+      # ============================================
+      # (신규 2026-06-14) 운영 레이어: gradecut 타이밍 / 신규종목 / VQ보험.
+      # 모두 경보·발굴 보조(production 무수정). continue-on-error: 실패해도 배포 진행.
+      # 출력 docs/gradecut_signal.csv·emerging.csv·vq_insurance.csv (gitignore와 다른 이름).
+      # ============================================
+      - name: 운영 레이어 (gradecut·emerging·VQ보험)
+        continue-on-error: true
+        env:
+          TZ: Asia/Seoul
+        run: |
+          mkdir -p docs
+          python gradecut_tracker.py || true
+          python emerging_screen.py || true
+          python vq_insurance_sleeve.py || true
+          cp gradecut_log.csv docs/gradecut_signal.csv 2>/dev/null || true
+          cp vq_insurance_latest.csv docs/vq_insurance.csv 2>/dev/null || true
+          ls -t emerging_candidates_*.csv 2>/dev/null | head -1 | xargs -I{} cp {} docs/emerging.csv 2>/dev/null || true
+          echo "✅ 운영 레이어 완료 (실패해도 배포 진행)"
+
 
       # ============================================
       # (신규 2026-06-08) 영역4 Phase2 attribution — 보유/매도 판단 패널.
