@@ -1,0 +1,158 @@
+{
+ "asof": "2026-06-12",
+ "market": {
+  "kospi": {
+   "code": "KS11",
+   "asof": "2026-06-12",
+   "close": 8123.62,
+   "ma200": 5003.72,
+   "ma200_state": "위",
+   "mtd": -0.0416
+  },
+  "kosdaq": {
+   "code": "KQ11",
+   "asof": "2026-06-12",
+   "close": 1029.05,
+   "ma200": 993.72,
+   "ma200_state": "위",
+   "mtd": -0.0426
+  }
+ },
+ "system": {
+  "picks": [
+   {
+    "name": "한화에어로",
+    "code": "012450",
+    "grade": "S+",
+    "w": 7.69
+   },
+   {
+    "name": "두산에너빌리티",
+    "code": "034020",
+    "grade": "S+",
+    "w": 7.69
+   },
+   {
+    "name": "삼양식품",
+    "code": "003230",
+    "grade": "S+",
+    "w": 7.69
+   },
+   {
+    "name": "NH투자증권",
+    "code": "005940",
+    "grade": "S+",
+    "w": 7.69
+   },
+   {
+    "name": "ISC",
+    "code": "095340",
+    "grade": "S+",
+    "w": 7.69
+   },
+   {
+    "name": "한미반도체",
+    "code": "042700",
+    "grade": "S+",
+    "w": 7.69
+   },
+   {
+    "name": "알테오젠",
+    "code": "196170",
+    "grade": "S+",
+    "w": 7.69
+   },
+   {
+    "name": "SK하이닉스",
+    "code": "000660",
+    "grade": "S+",
+    "w": 7.69
+   },
+   {
+    "name": "삼성물산",
+    "code": "028260",
+    "grade": "S",
+    "w": 7.69
+   },
+   {
+    "name": "삼성전자",
+    "code": "005930",
+    "grade": "S",
+    "w": 7.69
+   },
+   {
+    "name": "NAVER",
+    "code": "035420",
+    "grade": "A",
+    "w": 7.69
+   },
+   {
+    "name": "아모레퍼시픽",
+    "code": "090430",
+    "grade": "A",
+    "w": 7.69
+   },
+   {
+    "name": "KT&G",
+    "code": "033780",
+    "grade": "A",
+    "w": 7.69
+   }
+  ],
+  "n": 13,
+  "note": "score_csv=v37_2_scores_latest.csv (운영시 docs/v37_2_scores.csv 최신본)"
+ },
+ "theme": {
+  "watch": [
+   {
+    "name": "펩트론",
+    "code": "087010",
+    "asof": "2026-06-12",
+    "close": 230000,
+    "ret12": 0.174,
+    "prox": 0.586,
+    "gate": "PASS"
+   },
+   {
+    "name": "테크윙",
+    "code": "089030",
+    "asof": "2026-06-12",
+    "close": 65300,
+    "ret12": 1.155,
+    "prox": 0.882,
+    "gate": "LATE"
+   },
+   {
+    "name": "테스",
+    "code": "095610",
+    "asof": "2026-06-12",
+    "close": 182200,
+    "ret12": 5.799,
+    "prox": 0.9,
+    "gate": "LATE"
+   }
+  ],
+  "w_satellite": [
+   {
+    "name": "대덕전자",
+    "code": "353200",
+    "track": "W위성",
+    "gate": "데이터없음"
+   }
+  ],
+  "note": "gate=선반영(과열) 필터·매수신호 아님. 매수일 호가 재확인."
+ },
+ "trackw": {
+  "months": [
+   {
+    "month": "2026-06",
+    "W": null,
+    "sys": null,
+    "themeEW": null
+   }
+  ],
+  "recorded": 0,
+  "note": "6월말 첫 기입 — trackw_compute.py로 sys/themeEW 자동, W는 진우"
+ },
+ "_notes": []
+}
