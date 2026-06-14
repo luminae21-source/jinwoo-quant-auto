@@ -61,6 +61,25 @@ def _gate(code, srcs):
                 prox=round(float(prox), 3), gate=("PASS" if pg else "LATE"))
 
 
+def _gate_monthly(code, prices_csv="kospi_monthly_prices.csv"):
+    """일봉 없을 때 월간 근사 게이트(52주고점=월간 max). KOSPI·미수록 종목 폴백."""
+    import os
+    if not os.path.exists(prices_csv):
+        return None
+    mp = pd.read_csv(prices_csv, index_col=0, parse_dates=True)
+    mp.columns = [str(c).zfill(6) for c in mp.columns]
+    if code not in mp.columns:
+        return None
+    sps = mp[code].dropna()
+    if len(sps) < 12:
+        return None
+    last = float(sps.iloc[-1]); p12 = float(sps.iloc[-13]) if len(sps) >= 13 else float(sps.iloc[0])
+    ret12 = last / p12 - 1; hi = float(sps.tail(13).max()); prox = last / hi
+    pg = (ret12 < 1.0 and prox < 0.95)
+    return dict(asof=str(sps.index[-1].date()), close=round(last), ret12=round(ret12, 3),
+                prox=round(prox, 3), gate=("PASS" if pg else "LATE"), src="월간근사")
+
+
 def build(daily_csv=DAILY, score_csv=SCORE, ledger=LEDGER):
     out = {"asof": None, "market": {}, "system": {}, "theme": {}, "trackw": {}, "_notes": []}
     # market — 양 지수 MA200
@@ -90,11 +109,11 @@ def build(daily_csv=DAILY, score_csv=SCORE, ledger=LEDGER):
     srcs = [_load_daily(f) for f in THEME_DAILYS if os.path.exists(f)]
     watch = []
     for code, nm in THEME_WATCH.items():
-        g = _gate(code, srcs) if srcs else None
+        g = (_gate(code, srcs) if srcs else None) or _gate_monthly(code)
         watch.append(dict(name=nm, code=code, **(g or {"gate": "데이터없음"})))
     wsat = []
     for code, nm in W_HELD.items():
-        g = _gate(code, srcs) if srcs else None
+        g = (_gate(code, srcs) if srcs else None) or _gate_monthly(code)
         wsat.append(dict(name=nm, code=code, track="W위성", **(g or {"gate": "데이터없음"})))
     out["theme"] = dict(watch=watch, w_satellite=wsat,
                         note="gate=선반영(과열) 필터·매수신호 아님. 매수일 호가 재확인.")
