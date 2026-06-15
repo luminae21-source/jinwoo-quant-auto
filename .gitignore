@@ -104,3 +104,13 @@ trackw_record.csv
 live_record.csv
 emerging_candidates_*.csv
 vq_insurance_latest.csv
+
+# 진우퀀트 통합 빌더 재컴파일 캐시 (build_dashboard_all.py)
+__jqpyc__/
+# 대용량 일봉(재생성 가능: fetch_kospi_daily_full.py)
+kospi_pit_daily.csv
+# 일봉 갱신 로그
+jq_daily_update_console.txt
+진우퀀트_의사결정뷰_LATEST.html
+my_holdings.csv
+진우퀀트_월간_단일화docs/monthly.html
