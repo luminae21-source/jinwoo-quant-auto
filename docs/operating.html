@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>진우퀀트 — 실전 운영 가이드</title>
+<style>
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f1419;color:#e0e6ed;line-height:1.65;padding:14px;margin:0 auto;max-width:840px;}
+  h1{color:#4fc3f7;font-size:21px;margin:0 0 2px;}
+  h2{color:#ffd54f;font-size:16px;margin:24px 0 8px;border-bottom:1px solid #2a3441;padding-bottom:5px;}
+  .meta{font-size:11px;color:#6c757d;margin-bottom:12px;}
+  .nav{font-size:13px;margin-bottom:14px;}
+  .card{background:#1a232e;border-radius:10px;padding:14px 16px;margin:10px 0;font-size:14px;}
+  .hero{background:linear-gradient(135deg,#15311f,#1e4a30);border-left:4px solid #81c784;font-size:14px;}
+  .warn{background:linear-gradient(135deg,#3a2a15,#4a3520);border-left:4px solid #ffb74d;}
+  table{width:100%;border-collapse:collapse;font-size:12px;background:#1a232e;border-radius:8px;overflow:hidden;margin:8px 0;}
+  th{background:#2a3441;color:#ffd54f;padding:7px 6px;text-align:left;font-size:11px;}
+  td{padding:7px 6px;border-bottom:1px solid #2a3441;}
+  .g{color:#81c784;}.w{color:#ffb74d;}.b{color:#e57373;}.mut{color:#6c757d;} b.k{color:#4fc3f7;} a{color:#4fc3f7;}
+  code{background:#0f1419;color:#9ccc65;padding:1px 6px;border-radius:4px;font-size:12px;}
+  .pill{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:bold;}
+  .pt{background:#4a1f1f;color:#e57373;}.pw{background:#4a3a15;color:#ffb74d;}.pk{background:#15311f;color:#81c784;}
+  .step{display:grid;grid-template-columns:22px 1fr;gap:4px 10px;font-size:13px;margin:3px 0;}
+  .step .n{color:#4fc3f7;font-weight:bold;}
+</style></head><body>
+
+<h1>진우퀀트 — 실전 운영 가이드</h1>
+<div class="meta">v1.0 · 2026-06-07 · 운영용 압축본 · 투자자문 아님, 매매는 본인 책임</div>
+<div class="nav"><a href="index.html">← 매일 점수 대시보드</a> · <a href="guide.html">전략 쉬운 설명</a></div>
+
+<div class="card hero">
+<b>한 줄로.</b> <b class="k">엔진</b> = 퀄리티+모멘텀(검증됨). <b class="k">방어</b> = MA200+퀄리티필터. <b class="k">밸류·피크</b> = 매일 뜨는 <b>경보</b>(자동 트림 X — 사람이 판단). <b class="w">지금 최우선 = 반도체 비중·트림 판단.</b><br>
+현실 기대 <b class="g">시장 +5~10%p(연 17~25%)</b> · "76%"는 사후편향이라 안 씀.
+</div>
+
+<h2>1. 왜 이렇게 운영하나</h2>
+<div class="card">
+PIT(그때 정보만으로) 백테스트 — 순수 팩터효과(IR):
+<table>
+<tr><th>슬리브</th><th>IR</th><th>판정</th></tr>
+<tr><td>Q→Mom (퀄필터+모멘텀)</td><td class="g">+0.83</td><td>엔진(최고)</td></tr>
+<tr><td>Momentum</td><td class="g">+0.76</td><td>엔진</td></tr>
+<tr><td>Value 단독</td><td class="mut">+0.08</td><td>중립→선택도구</td></tr>
+<tr><td>Quality 단독</td><td class="b">−0.21</td><td>필터로만</td></tr>
+</table>
+① 알파는 <b>종목 선별 + 집중 + 저회전</b>에 있다. ② 밸류는 수익이 아니라 <b>"비싼 과열주 거르기"</b>에 쓴다. ③ 기계적 피크-트림은 백테스트 미달(비싼+과열=승자였음) → <b>경보로만.</b>
+</div>
+
+<h2>2. 도구 — 무엇을·언제</h2>
+<div class="card">
+<table>
+<tr><th>스크립트</th><th>용도</th><th>시점</th></tr>
+<tr><td><code>run_overlay.py</code></td><td>매일 트림권고</td><td class="g">매일(자동)</td></tr>
+<tr><td><code>ma200_regime_check.py</code></td><td>방어상태</td><td>매월</td></tr>
+<tr><td><code>holdings_trim_analysis.py</code></td><td>보유 스냅샷</td><td>매월</td></tr>
+<tr><td><code>trim_simulation.py</code></td><td>트림 영향·스트레스</td><td>결정 전</td></tr>
+<tr><td><code>value_quality_backtest.py</code></td><td>팩터 유효성</td><td>분기</td></tr>
+</table>
+모두 폴더에서 <code>python &lt;파일명&gt;</code>. FDR 불필요.
+</div>
+
+<h2>3. 운영 루틴</h2>
+<div class="card">
+<b class="k">매일 (자동)</b> — 16:30 KST 자동 실행 → <code>docs/overlay_scores.csv</code>에 트림권고. 폰에서 <b>TRIM 뜬 종목만</b> 확인.
+</div>
+<div class="card">
+<b class="k">매월 (~10분)</b>
+<div class="step"><span class="n">1</span><span><code>ma200_regime_check.py</code> → 방어상태(RISK-OFF=추세 꺾임)</span></div>
+<div class="step"><span class="n">2</span><span><code>holdings_trim_analysis.py</code> → 보유 스냅샷</span></div>
+<div class="step"><span class="n">3</span><span>TRIM 종목을 §4 규칙으로 판단 → 트림 결정</span></div>
+<div class="step"><span class="n">4</span><span>(트림 시) <code>trim_simulation.py</code>로 영향 확인</span></div>
+</div>
+<div class="card">
+<b class="k">분기</b> — <code>value_quality_backtest.py</code>로 모멘텀·Q→Mom 우위가 아직 유효한지 + DART 재무 갱신.
+</div>
+
+<h2>4. 의사결정 규칙 (사람이 판단)</h2>
+<div class="card">
+<b>경보 읽는 법</b><br>
+<span class="pill pt">TRIM</span> 비쌈+과열 → 차익실현 1순위 후보 ·
+<span class="pill pw">WATCH</span> 비쌈, 과열 임박 → 관찰 ·
+순위Δ −2↓ = 강등됨<br>
+<span class="w">⚠️ 경보 = 자동매도 아님.</span> "정상이익인가 피크이익인가?" 본인이 답한 뒤 결정.
+</div>
+<div class="card">
+<b>트림하면 어디로?</b> (검증 결과)<br>
+· 다른 주식 재투자 <b class="b">✗</b> (조정장엔 다 같이 빠짐, 분산 안 됨)<br>
+· 현금/방어 <b class="g">○</b> (Exit→현금: 변동성 27.7→19.0%, MDD −20.1→−16.6%)<br>
+· <b>트림폭 = 방어폭</b> — 반도체 −40% 시 Baseline −10.0% vs Trim½ −5.8% vs Exit −1.7%
+</div>
+<div class="card">
+<b>밸류 기회 (역방향: 고퀄·저모멘텀)</b><br>
+점수 낮아도 사업 좋으면 기회. <b>"2분 스토리" 못 쓰면 안 산다.</b><br>
+· <b>아모레퍼시픽</b> = 턴어라운드(북미 +35%, 바닥 탈출) → 밸류기회 쪽<br>
+· <b>삼양식품</b> = 초우량 고성장(ROE 30%)인데 비싸서 조정 → 트랩 아님, <b>합리적 가격 대기</b>
+</div>
+
+<h2>5. 현재 상태 (2026-06)</h2>
+<div class="card warn">
+· <b>트림권고:</b> <span class="pill pt">TRIM</span> SK하이닉스 · 한미반도체 &nbsp; <span class="pill pw">WATCH</span> LIG넥스원<br>
+· <b>MA200:</b> 13/18 RISK-ON. RISK-OFF = 카카오·알테오젠·아모레·삼양식품·한화에어로<br>
+· <b>과열:</b> SK하이닉스 SMA 대비 <b class="b">+117.6%</b>, 삼성전자 +94.4%<br>
+· <b class="w">최우선:</b> 반도체 집중도 점검. 과열구간에선 MA200 방어가 늦으니 <b>지금 실질 방어는 트림.</b>
+</div>
+
+<h2>6. 정직성 규율 · 한계</h2>
+<div class="card">
+☑ 백테스트 통과 못 한 룰은 <b>자동 채택 X</b>(피크-트림=경보로만)<br>
+☑ forward 기대 = <b>시장 +5~10%p</b>(76%·월간36% 안 씀)<br>
+☑ 결론은 <b>PIT 보수 숫자</b>로 — fixed18·생존편향 수치 안 믿음<br>
+☑ 새 룰은 <code>backtest_v40_regime.py</code> 합격선 통과 후 채택<br>
+<span class="mut">한계: 생존편향이 모멘텀 부풀림 · 2026 극단 데이터 보류 · 단일 시장/시대 · 모멘텀 크래시 미표본.</span>
+</div>
+
+<div class="meta" style="margin-top:18px;">전체 근거: 진우퀀트_가치투자_피드백.md (§1~13) · 과거 ≠ 미래 · 매매는 본인 책임.</div>
+</body></html>

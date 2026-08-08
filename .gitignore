@@ -1,0 +1,206 @@
+# === 비밀키·토큰 (절대 커밋 금지) — 2026-07-28 추가 ===
+.kis_key
+.kis_token
+.kis_key.json
+.dart_key
+ecos_key.txt
+krx_authkey.txt
+naver_api.json
+재무_APIKEY.txt
+jq_kakao_token.json
+jq_kakao_config.txt
+진우_KIS키.json
+*_token.json
+*_authkey.txt
+*.key
+.env
+.env.*
+# 인증·발송 로그 (토큰 흔적)
+*_auth_log.txt
+jq_kakao_log.txt
+krx_openapi_결과.txt
+# 예시/템플릿은 유지
+!*.example
+!*.template
+# === 비밀키 블록 끝 ===
+
+﻿# DART API key 절대 보호
+.dart_key
+dart_config.json
+dart_corp_codes.json
+
+# 학술 PDF (큰 파일, 67편)
+*.pdf
+
+# 캐시 데이터
+quality_data_cache.json
+quality_timeseries_cache.json
+quality_summary.csv
+quality_timeseries_summary.csv
+
+# 백테스트 결과 (큰 파일, 매번 갱신)
+backtest_*.json
+validate_*.json
+factor_correlation_*.json
+factor_correlation_*.csv
+attribution_v37_*.json
+attribution_v37_*.html
+attribution_panel_SAMPLE.html
+
+# 점수 결과 (GitHub Actions에서 자동 생성)
+v3*_scores_latest.csv
+v3*_summary_latest.json
+
+# Dashboard HTML (자동 생성, docs/에 배포됨)
+dashboard_v37.html
+dashboard_v37_*.html
+dashboard_v38_*.html
+
+# Python
+__pycache__/
+*.pyc
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Optional: github_setup 폴더가 별도 v3.6 setup용이면 제외
+# github_setup/
+
+# === 2026-06-05 추가 ===
+
+# 임시 진단 / self-test 파일 (_ 접두사)
+_*.csv
+_*.json
+
+# DART/EPS 캐시 (재수집 가능, .dart_key로 fetch 재생성)
+eps_dart_raw_cache.json
+eps_sue_cache.json
+
+# Regime market 캐시 (PIT 재생성 가능)
+regime_market_cache_v40*.json
+
+# 백업 파일 (KOSPI-only 등)
+*.bak
+*_KOSPI.bak
+*_KOSPIonly.csv
+
+# OS
+Thumbs.db
+.DS_Store
+
+# 합성 / 진단 전용
+synthetic_korea_factors.csv
+trial_returns_matrix.csv
+
+
+# === 2026-06-08 추가: 시크릿 보호 ===
+naver_api.json
+
+# === 2026-06-08 추가: 가치·피크 오버레이 자동 산출물 (매번 재생성) ===
+# 주의: docs/overlay_scores.csv(배포본)는 파일명이 달라 제외되지 않음
+overlay_scores_latest.csv
+value_quality_pit_*.json
+holdings_qmom_snapshot.json
+_bashwrite_test.txt
+
+# === 2026-06-08 추가: 개인 매매·집행 문서 (로컬 전용, 공개 저장소 제외) ===
+진우퀀트_B전환_T1_워크시트_2026-06-06.md
+*_워크시트_*.md
+# 마스터정리: B전환 집행일정·금액(적립 50만·트림 210만 등) 포함 → 로컬 전용
+# (공개용이 필요하면 금액 redact 후 별도 파일로)
+진우퀀트_마스터정리_2026-06-10.md
+
+# === 2026-06-08 추가: 자동생성 attribution/분석 출력 (매번 재생성) ===
+attribution_v40_*.json
+attribution_v40_*.html
+analyze_*.json
+
+# === 2026-06-08 추가: 대용량 일봉 PIT 패널 (PC pykrx 재생성 → 저장소 비대화 방지) ===
+*_pykrx.csv
+
+# === 2026-06-13 추가: 대가 원문 참고자료 (저작권·대용량 → 로컬 보관, *.pdf는 기존 규칙) ===
+BAB_EquityFactors_Monthly.xlsx
+emerging_candidates_*.csv
+gradecut_log.csv
+trackw_record.csv
+live_record.csv
+emerging_candidates_*.csv
+vq_insurance_latest.csv
+
+# 진우퀀트 통합 빌더 재컴파일 캐시 (build_dashboard_all.py)
+__jqpyc__/
+# 대용량 일봉(재생성 가능: fetch_kospi_daily_full.py)
+kospi_pit_daily.csv
+# 일봉 갱신 로그
+jq_daily_update_console.txt
+진우퀀트_의사결정뷰_LATEST.html
+my_holdings.csv
+진우퀀트_월간_단일화docs/monthly.html
+
+# ===== 2026-08-04 정리 (허브·백서 보존 원칙) =====
+# 원칙: 진우허브(강화키트/진우퀀트_허브*.html, 허브_자립형.py)와
+#       백서(백서_빌더/, 데이터수리/_백서_추가_*.md, 감사/*백서*.md) 계열 문서는
+#       반드시 추적한다. 재생성 가능한 원자료·샘플·리포트의 '무게'만 제외한다.
+
+# 순수 임시·백업 폴더 (문서 없음)
+_stage_tmp/
+_stagetmp2/
+_stagetmp3/
+_백업/
+_archive/
+_to_delete/
+_보관/20260719/원위치반영/
+
+# 폴더 안 무게만 제외 — md·html·py 문서는 그대로 추적
+강화키트/미니샘플/
+강화키트/__pycache__/
+강화키트/*.pdf
+강화키트/*.db
+감사/미니샘플/
+감사/미니샘플2/
+데이터수리/*.csv
+데이터수리/__pycache__/
+가상매매/검증/*.html
+가상매매/**/*.csv
+
+# 카드뉴스는 생성 이미지 전용 (md/html/py 0개)
+카드뉴스/
+
+# 30년 PIT 원자료 (pykrx 재생성 가능, 725MB — GitHub 100MB 파일 한도 초과)
+종목일봉_30년_*.csv
+종목시총_30년.csv
+종목재무_KRX_*.csv
+
+# 대용량 수급 원자료 (재생성 가능, 139MB)
+flow_detail_monthly_*.csv
+flow_ext_weekly_*.csv
+flow_ext_monthly_*.csv
+
+# 백업 확장자 일괄 (*.bak_비용SSOT, *.bak_0727 등)
+*.bak_*
+
+# 캐시·1회성 검증 결과
+sector_heat_cache.pkl
+jq_close_data.json
+jq_close_stocks.json
+
+# ===== 2026-08-07 비공개 금고 =====
+# .git-vault 는 같은 폴더를 보는 '두 번째 저장소'다.
+# 공개 저장소(origin)와 개체·refs 를 전혀 공유하지 않으므로
+# 실수로 push --all 해도 연구 자료가 공개로 새지 않는다.
+.git-vault/
+
+# ===== 2026-08-07 연구 문서 비공개화 =====
+# 이 저장소는 대시보드·Pages 배포 전용이다.
+# 매매룰·팩터명세·실전기록·결정메모 같은 연구 문서는 금고(.git-vault)에만 둔다.
+# 이미 추적 중이던 96개는 git rm --cached 로 내렸고, 아래 규칙이 재유입을 막는다.
+/*.md
+!/README.md
+/진우퀀트_진행상황_대시보드_*.html
+/진우퀀트_테마lane_대시보드.html
+/진우퀀트_플로우차트_모바일.html
+/dashboard_v39_pead.html

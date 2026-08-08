@@ -1,0 +1,236 @@
+name: 진우퀀트 v3.6 + v3.7.2 자동 점수 갱신 (Validation Gate)
+
+# 2026-06-05: Node24 대응 액션 버전 업데이트 (GitHub 2026-06-16 Node24 강제 전환 대비)
+#   checkout v4→v5 · setup-python v5→v6 · configure-pages v4→v5
+#   deploy-pages@v4 · upload-pages-artifact@v3 는 이미 최신 major — 태그 내 Node24 패치 자동 수신
+# 2026-06-07: Node24 추가 대응 (Node20 런너 2026-09-16 제거 대비)
+#   checkout v5→v6 · github-script v7→v8 (Node24 버전)
+#   Pages 액션(configure-pages@v5·deploy-pages@v4·upload-pages-artifact@v3)은 아직 Node24 릴리스 미출시 → 출시 시 재업데이트
+# 2026-06-05: Validation Gate (#2) 머지 — score 생성 후 deploy 전 7가지 검사
+#   18종목 누락 / NaN·inf / 등급 / 포인트합 / 권장비중 / 급변동 / 신선도
+#   실패 시 deploy-pages 미실행 → 직전 dashboard 자동 유지 (롤백)
+#   실패 시 GitHub Issues 자동 생성
+
+on:
+  schedule:
+    # 매일 07:30 UTC = 16:30 KST (한국 4:30 PM)
+    - cron: '30 7 * * *'
+  workflow_dispatch:  # 수동 실행 버튼
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  issues: write        # Validation 실패 시 이슈 자동 생성
+
+jobs:
+  update-scores:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+
+      # 직전(현재 live) 점수를 백업 → Validation 급변동 비교 + 롤백 기준
+      - name: Save previous scores (rollback 기준)
+        run: |
+          cp docs/v37_2_scores.csv prev_v37_2_scores.csv 2>/dev/null || true
+          echo "직전 점수 백업 완료(있으면)"
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # ============================================
+      # v3.6 baseline (기존 production, 비교용 유지)
+      # ============================================
+      - name: Run score_v36.py (baseline)
+        env:
+          DART_API_KEY: ${{ secrets.DART_API_KEY }}
+          TZ: Asia/Seoul
+        run: |
+          python score_v36.py
+          echo "✅ v3.6 baseline 완료"
+
+      # ============================================
+      # v3.7.1 backup (안전망)
+      # ============================================
+      - name: Run score_v37_1.py (backup)
+        continue-on-error: true
+        env:
+          DART_API_KEY: ${{ secrets.DART_API_KEY }}
+          TZ: Asia/Seoul
+        run: |
+          python score_v37_1.py
+          echo "✅ v3.7.1 backup 완료"
+
+      # ============================================
+      # v3.7.2 production (Echo Momentum, 신규 primary)
+      # CAGR 71.54%, Sharpe 2.78, IR 1.54
+      # ============================================
+      - name: Run score_v37_2.py (production)
+        env:
+          DART_API_KEY: ${{ secrets.DART_API_KEY }}
+          TZ: Asia/Seoul
+        run: |
+          python score_v37_2.py
+          echo "✅ v3.7.2 production 완료"
+
+      # ============================================
+      # #2 Validation Gate — 실패 시 이후 스텝(커밋/배포) 중단 → 직전 docs/ 유지(롤백)
+      # 검사 7가지: 18종목 누락·체력_최종·등급·포인트합 무결성·권장비중·전일 급변동·신선도
+      # ============================================
+      - name: Validation Gate (#2)
+        run: |
+          python validate.py \
+            --csv v37_2_scores_latest.csv \
+            --prev-csv prev_v37_2_scores.csv \
+            --move-pts 5 --max-age-hours 24
+
+      # ============================================
+      # (신규) 밸류·피크 오버레이 — production 무수정 레이어 (모듈 E).
+      # continue-on-error: 오버레이 실패해도 기존 배포는 그대로 진행(안전).
+      # 데이터 의존: book_equity.csv·liquidity_*.csv·*_monthly_prices.csv (repo 커밋 필요)
+      # ============================================
+      - name: Value/Peak overlay (트림권고)
+        continue-on-error: true
+        env:
+          TZ: Asia/Seoul
+        run: |
+          python run_overlay.py v37_2_scores_latest.csv
+          mkdir -p docs
+          cp overlay_scores_latest.csv docs/overlay_scores.csv 2>/dev/null || true
+          echo "✅ 밸류·피크 오버레이 완료 (실패해도 배포 진행)"
+
+      # ============================================
+      # (신규 2026-06-14) 운영 레이어: gradecut 타이밍 / 신규종목 / VQ보험.
+      # 모두 경보·발굴 보조(production 무수정). continue-on-error: 실패해도 배포 진행.
+      # 출력 docs/gradecut_signal.csv·emerging.csv·vq_insurance.csv (gitignore와 다른 이름).
+      # ============================================
+      - name: 운영 레이어 (gradecut·emerging·VQ보험)
+        continue-on-error: true
+        env:
+          TZ: Asia/Seoul
+        run: |
+          mkdir -p docs
+          python gradecut_tracker.py || true
+          python emerging_screen.py || true
+          python vq_insurance_sleeve.py || true
+          cp gradecut_log.csv docs/gradecut_signal.csv 2>/dev/null || true
+          cp vq_insurance_latest.csv docs/vq_insurance.csv 2>/dev/null || true
+          ls -t emerging_candidates_*.csv 2>/dev/null | head -1 | xargs -I{} cp {} docs/emerging.csv 2>/dev/null || true
+          echo "✅ 운영 레이어 완료 (실패해도 배포 진행)"
+
+
+      # ============================================
+      # (신규 2026-06-08) 영역4 Phase2 attribution — 보유/매도 판단 패널.
+      # 점수 무관 별도 레이어. continue-on-error: 실패해도 production 배포 진행.
+      # 출력 docs/attribution_phase2.html → Pages 배포(/attribution_phase2.html).
+      # ============================================
+      - name: Attribution Phase2 (영역4 보유/매도 판단)
+        continue-on-error: true
+        env:
+          TZ: Asia/Seoul
+        run: |
+          python attribution_v40_phase2.py --beta-win 120 --save-html
+          mkdir -p docs
+          cp attribution_panel_phase2.html docs/attribution_phase2.html 2>/dev/null || true
+          echo "✅ Phase2 attribution 완료 (실패해도 배포 진행)"
+
+      # ============================================
+      # Dashboard 파일을 docs/ 폴더로 정리 (Validation 통과 시에만 도달)
+      # v3.7.2가 primary (index.html), v3.6/v3.7.1은 reference
+      # ============================================
+      - name: Update dashboards
+        run: |
+          mkdir -p docs
+          # v3.7.2 primary
+          cp dashboard_v37_2.html docs/index.html 2>/dev/null || true
+          cp dashboard_v37_2.html docs/v37_2.html 2>/dev/null || true
+          # v3.6 baseline reference (기존 dashboard.html 유지)
+          cp dashboard_v36.html docs/v36.html 2>/dev/null || true
+          cp dashboard_v36.html docs/dashboard.html 2>/dev/null || true
+          # v3.7.1 backup
+          cp dashboard_v37_1.html docs/v37_1.html 2>/dev/null || true
+          # 점수 CSV·JSON 함께 배포 (v3.6 + v3.7.2)
+          cp v37_2_scores_latest.csv docs/v37_2_scores.csv 2>/dev/null || true
+          cp v37_2_summary_latest.json docs/v37_2_summary.json 2>/dev/null || true
+          cp v36_scores_latest.csv docs/v36_scores.csv 2>/dev/null || true
+          cp v36_summary_latest.json docs/v36_summary.json 2>/dev/null || true
+          # v3.7.1 backup 데이터
+          cp v37_1_scores_latest.csv docs/v37_1_scores.csv 2>/dev/null || true
+          cp v37_1_summary_latest.json docs/v37_1_summary.json 2>/dev/null || true
+          echo "✅ Dashboard 정리 완료"
+
+      - name: Commit dashboard updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/
+          git diff --staged --quiet || git commit -m "🤖 v3.6 + v3.7.2 자동 갱신 $(date +'%Y-%m-%d %H:%M KST')"
+          # CI가 생성한 unstaged 파일이 rebase를 막지 않도록 autostash (로컬 운영과 동일)
+          git pull --rebase --autostash origin main
+          git push
+
+      # ============================================
+      # Validation/스텝 실패 시 이슈 자동 생성 (배포는 자동 중단됨)
+      # ============================================
+      - name: Validation 실패 시 이슈 생성
+        if: failure()
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const MARKER = "<!-- ci-auto-fail -->";  // 중복방지 식별자
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const today = new Date().toISOString().slice(0, 10);
+            // 열린 자동실패 이슈 탐색 (식별자 마커로 판별)
+            const open = await github.paginate(github.rest.issues.listForRepo, {
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: "open", per_page: 100
+            });
+            const existing = open.find(i => !i.pull_request && i.body && i.body.includes(MARKER));
+            if (existing) {
+              // 이미 열린 이슈가 있으면 새로 만들지 않고 코멘트만 추가
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: existing.number,
+                body: `🔁 ${today} 자동 갱신 또 실패 — 직전 대시보드 유지(롤백). 로그: ${runUrl}`
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner, repo: context.repo.repo,
+                title: `⚠️ 자동 갱신 실패 ${today} — 대시보드 미배포(직전 유지)`,
+                body: `${MARKER}\nValidation Gate 또는 점수 스텝 실패로 이번 배포를 건너뜀. 직전 대시보드가 그대로 유지됩니다(롤백).\n\n해결 후 이 이슈를 닫으세요(닫혀 있으면 다음 실패 때 새로 생성, 열려 있으면 코멘트로 누적).\n로그: ${runUrl}`
+              });
+            }
+
+  deploy-pages:
+    needs: update-scores         # update-scores 실패(=Validation 실패) 시 미실행 → 직전 Pages 유지
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: './docs'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
