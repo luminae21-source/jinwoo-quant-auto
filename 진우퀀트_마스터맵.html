@@ -67,7 +67,6 @@ h1{font-size:22px;margin:0;letter-spacing:.5px}.k{color:var(--gold)}
  <div class="col c1">
   <h2>📨 회수 대기</h2><div class="sub">대화에 갇힌 자산 — "폴더에 파일로 커밋해줘" 한 줄로 회수</div>
   <div class="card"><b>가상매매 엔진 Phase 1</b><small>현행 동결사양과 관계 확인</small></div>
-  <div class="card"><b>PEAD v3.9 (C)</b><small>실적발표 후 드리프트 — 4번째 엔진 후보</small></div>
   <div class="card"><b>regime v4.0 (D)</b><small>국면 엔진 확장 — 휩쏘 게이트와 통합 검토</small></div>
   <div class="card"><b>KOSDAQ 선정 v41 · 수급 오버레이 · 배당 인과검정</b><small>검정 후보·근거 문서</small></div>
   <div class="card"><b>사냥터 발굴툴 + 테마lane</b><small>조사 트랙 정의와 통합</small></div>
@@ -88,7 +87,8 @@ h1{font-size:22px;margin:0;letter-spacing:.5px}.k{color:var(--gold)}
   <div class="card hot"><b>가상매매 100만</b><small>실전 동일 규칙 · 1차 관문 2026-11 초</small><span class="tag t-a">판정 임박</span></div>
   <div class="card"><b>A′ MA240 완화</b><small>40건 누적까지 (기한 2028-12)</small></div>
   <div class="card"><b>1월 앵커 청산</b><small>9~10월 진입분부터 병기 기록</small></div>
-  <div class="card"><b>멀티팩터 forward</b><small>규칙 동결 · 월간 리밸런싱 (엔진 02)</small></div>
+  <div class="card"><b>멀티팩터 forward</b><small>규칙 동결 · 월간 리밸런싱 (엔진 02) · ⚠️ 6월 이후 월초 실행 공백 — 재개 필요</small></div>
+  <div class="card"><b>PEAD v3.9 병행 관찰</b><small>06-05 공식 관문 PASS(×0.5 Δ+1.06%p) · 7·8월 기록 공백 → 재개, 판정 연장 검토</small><span class="tag t-a">회수됨</span></div>
   <div class="card"><b>모멘텀 유니버스</b><small>페이퍼 병행 (엔진 03)</small></div>
   <div class="card"><b>사냥터 딥밸류 (엔진 04)</b><small>저PBR 바닥 반등 · 10~15종 장기보유 · 30년 IN/OOS 검증 · 모의매매장 기록 중</small></div>
  </div>
@@ -143,7 +143,7 @@ const INFO={
 "주문 실행 계층":{s:"1단계 가동 — 엔진 제안 + 사람 승인 (무인 금지 로드맵 5단계)",d:"신호를 실제 주문으로 바꾸는 층. <b>진우_주문생성.py</b>(매수·익절 제안, 등가중 분산, HTML 승인표)와 <b>jq_broker_kis.py</b>(한국투자증권 REST, 모의투자 기본·실계좌는 allow_real 안전핀)가 폴더에 완성돼 있고 셀프테스트 42개 전부 통과(08-22). 원칙: <b>AI는 주문을 생성만, 체결은 사람만.</b> API 실집행은 라이브 기록 검증 후.",l:[F("사냥터_기획/핸드오프_주문엔진_반자동트레이딩.md","핸드오프 원문"),F("진우_주문생성_현황.html","최근 주문 제안")]},
 "사냥터 딥밸류 (엔진 04)":{s:"전진기록 중 · 장기보유 축",d:"저PBR 하위 20% ∩ 이격도<0.85 ∩ 20일수익>0 — 딥밸류 바닥 반등을 10~15종 분산·2~3년 보유. 30년·상폐 반영·IN/OOS 검증 완료(사냥터 트랙). 발굴툴이 매주 후보를 뱉고 주문생성기가 제안, 모의매매장에 기록. 휩쏘(단기 역발상)와 시간축이 정반대라 하우스의 보완 축.",l:[F("사냥터_기획/진우_사냥터_검증종합_한장.md","검증 종합 한 장"),F("진우_타점발굴.csv","최신 후보")]},
 "가상매매 엔진 Phase 1":{s:"회수 대기",d:"과거 대화에서 설계된 가상매매 엔진 초기 버전. 현재 가동 중인 가상매매.py(동결사양)와 무엇이 다른지 대조 후 흡수 또는 폐기 판정 필요.",l:[F("가상매매.py","현행 가상매매 엔진"),U(NOTION_BACKLOG,"📋 백로그")]},
-"PEAD v3.9 (C)":{s:"회수 대기 · 4번째 엔진 후보",d:"실적발표 후 주가 표류(Post-Earnings Announcement Drift) 전략. 회수 후 사전등록 방식으로 30년 검정을 통과해야 하우스 엔진으로 승격된다.",l:[U(NOTION_BACKLOG,"📋 백로그")]},
+"PEAD v3.9 병행 관찰":{s:"Stage 3-A 병행 관찰 · 2026-08-22 회수",d:"실적발표 후 주가 표류(Bernard-Thomas 1989). SUE(8분기 σ 표준화)+공시 후 60거래일 게이트. <b>2026-06-05 공식 엔진 관문 PASS</b>(×0.5, Δ+1.06%p net, 사전 합격선 충족 — GP·AG·EarnMom 3연패 후 첫 합격, 단 마진 +0.06%p 종이 한 장). 이후 병행 관찰 개시했으나 7·8월 기록 공백(월초 루틴 중단) — 사전 등록 기준상 9월 초 B(통합) 판정 불가, 관찰 재개·연장 검토 중. 운용은 v3.7.2 불변.",l:[F("진우퀀트_v39_PEAD_결정메모.md","결정 메모·판정 기록"),F("진우퀀트_v39_관찰기록.md","관찰 기록·회수 노트")]},
 "regime v4.0 (D)":{s:"회수 대기",d:"국면 판정 엔진의 확장판. 현행 시장국면.py(휩쏘 게이트)와 통합할지, 별도 축으로 둘지 검토 필요.",l:[F("시장국면.py","현행 국면 엔진"),U(NOTION_BACKLOG,"📋 백로그")]},
 "KOSDAQ 선정 v41 · 수급 오버레이 · 배당 인과검정":{s:"회수 대기 · 검정 후보들",d:"코스닥 종목 선정 로직, 수급(외인·기관) 오버레이 검증, 멀티팩터 배당 축의 인과 검정 문서. 각각 회수 후 일관성감사 체계에 등록.",l:[U(NOTION_BACKLOG,"📋 백로그")]},
 "사냥터 발굴툴 + 테마lane":{s:"회수 대기",d:"신규 종목 발굴 도구 기획과 테마 트랙. 조사 트랙 검색 정의(형 결정 대기)와 한 몸으로 통합하는 것이 효율적.",l:[U(NOTION_BACKLOG,"📋 백로그")]},
