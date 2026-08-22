@@ -1,0 +1,30 @@
+{
+ "디코드실패": [],
+ "BOM": [
+  "./kospi_index_daily.csv",
+  "./pit.py",
+  "./_월봉종가캐시_KOSDAQ.csv",
+  "./_월봉종가캐시_KOSPI.csv",
+  "./가상매매/검증/_recent_ohlc_20260727.csv",
+  "./가상매매/검증/_거래대금2주_20260727.csv",
+  "./감사/미니샘플2/mini_style_panel.csv",
+  "./감사/미니샘플2/mini_universe_panel.csv",
+  "./강화키트/반등신호_현재.csv",
+  "./강화키트/재무상세_EBITDA.csv",
+  "./강화키트/종합스캔_현재.csv",
+  "./실전준비/forward_ledger.csv",
+  "./실전준비/forward_returns.csv",
+  "./익일예측_log.csv",
+  "./익일예측_log_kosdaq.csv",
+  "./종목시총_30년.csv",
+  "./종목일봉_30년_KOSDAQ.csv",
+  "./종목일봉_30년_KOSPI.csv",
+  "./진우_매매방식_가이드.csv",
+  "./진우_진입신호.csv",
+  "./진우_타점발굴.csv",
+  "./진우사냥터_후보.csv"
+ ],
+ "모지바케": [],
+ "널바이트": [],
+ "0바이트": []
+}
