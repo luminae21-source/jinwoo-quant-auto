@@ -104,8 +104,11 @@ def main():
     if os.path.exists(LEDGER):
         old = pd.read_csv(LEDGER, dtype=str)
         if ym in set(old["ym"]) and not a.force:
-            sys.exit(f"[중단] {ym} 이미 기록됨 — 덮어쓰려면 --force\n"
-                     f"  (패널이 갱신되지 않았는데 재실행하면 트랙이 멈춘 채 진행 중으로 오인된다)")
+            # 정상 동작(중복 방지)이므로 exit 0 — 배치 로그에 가짜 FAIL을 남기지 않는다.
+            # 진짜 실패(패널 없음·데이터 오류)만 비정상 종료로 남긴다. (2026-08-22 로그 검증)
+            print(f"[SKIP] {ym} 이미 기록됨 — 이번 달 신호는 생성 완료 상태 (재생성은 --force)")
+            print("  참고: 패널이 갱신되지 않았는데 덮어쓰면 트랙이 멈춘 채 진행 중으로 오인된다")
+            return
     else:
         old = None
 

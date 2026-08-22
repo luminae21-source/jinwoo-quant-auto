@@ -18,7 +18,7 @@ WATCH = [
     ("eps_sue_cache.json",      100, "DART 실적 캐시(분기)",      "py fetch_dart_eps.py"),
     ("종목스냅숏_일별.csv",        5, "KRX 일별 스냅숏(PIT 재료)",  "py 진우퀀트_KRX수집.py"),
     ("스타일패널_DART.csv",       40, "스타일 패널(엔진02 입력)",   "py 스타일패널_DART.py"),
-    ("실전준비/forward_ledger.csv", 40, "엔진02 forward 원장",      "py 실전준비/forward_signal.py"),
+    ("실전준비/forward_ledger_v2.csv", 40, "엔진02 forward 원장(v2)",  "py 엔진02_신호.py"),
     ("kospi_index_daily.csv",     5, "KOSPI 지수 일봉",           "py 진우퀀트_KRX수집.py --index"),
 ]
 
