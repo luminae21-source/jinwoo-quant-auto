@@ -1,5 +1,7 @@
 # === 비밀키·토큰 (절대 커밋 금지) — 2026-07-28 추가 ===
 .kis_key
+.krx_key
+.krx_key.json
 .kis_token
 .kis_key.json
 .dart_key
