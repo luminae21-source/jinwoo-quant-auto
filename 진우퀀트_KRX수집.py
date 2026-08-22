@@ -32,7 +32,12 @@ F_STOCK = {
     "volume": ["ACC_TRDVOL", "TRDVOL"],
 }
 F_INDEX = {"name": ["IDX_NM", "IDX_IND_NM"], "close": ["CLSPRC_IDX", "CLSPRC", "TDD_CLSPRC"]}
-INDEX_PICK = "코스피"          # 여러 지수가 오면 이 이름으로 고름 (부분일치)
+INDEX_PICK = "코스피"          # 정확히 이 이름인 행을 고른다 ("코스피 (외국주포함)"·"코스피 200" 배제)
+# 실측(2026-08-21): 지수 51행 중 변형·빈값 다수 → 정확일치 우선, 없으면 값 있는 첫 행
+
+# 시총 스냅숏 (매일 찍으면 생존편향 없는 PIT 유니버스가 쌓인다 — 엔진05 교훈)
+F_SNAP = {"code": ["ISU_SRT_CD", "ISU_CD"], "name": ["ISU_NM"], "mcap": ["MKTCAP"],
+          "shares": ["LIST_SHRS"], "sect": ["SECT_TP_NM"]}
 
 
 def key():
@@ -101,15 +106,57 @@ def parse_index(payload, bas_dd):
     d = f"{bas_dd[:4]}-{bas_dd[4:6]}-{bas_dd[6:]}"
     cand = None
     for r in rows:
-        nm = str(pick(r, F_INDEX["name"]) or "")
+        nm = str(pick(r, F_INDEX["name"]) or "").strip()
         c = fnum(pick(r, F_INDEX["close"]))
-        if c is None:
+        if c is None or c == 0:          # 빈값·0 행 배제
             continue
-        if INDEX_PICK in nm and ("200" not in nm and "150" not in nm):
+        if nm == INDEX_PICK:             # 정확일치가 정답
             return d, c
         if cand is None:
             cand = (d, c)
     return cand if cand else (None, None)
+
+
+def parse_snapshot(payload, bas_dd, market):
+    """일별 시총·종목명·소속부 스냅숏 → 생존편향 없는 PIT 유니버스 재료"""
+    rows = payload.get("OutBlock_1") or []
+    d = f"{bas_dd[:4]}-{bas_dd[4:6]}-{bas_dd[6:]}"
+    out = []
+    for r in rows:
+        code = pick(r, F_SNAP["code"])
+        mc = num(pick(r, F_SNAP["mcap"]))
+        if not code:
+            continue
+        out.append({"date": d, "code": str(code).zfill(6), "market": market,
+                    "name": str(pick(r, F_SNAP["name"]) or "").strip(),
+                    "mcap": mc if mc is not None else 0,
+                    "shares": num(pick(r, F_SNAP["shares"])) or 0,
+                    "sect": str(pick(r, F_SNAP["sect"]) or "").strip()})
+    return out
+
+
+def append_snapshot(recs):
+    """종목스냅숏_일별.csv 에 누적 (없으면 헤더와 함께 생성)"""
+    path = os.path.join(HERE, "종목스냅숏_일별.csv")
+    cols = ["date", "code", "market", "name", "mcap", "shares", "sect"]
+    new = not os.path.exists(path)
+    have = set()
+    if not new:
+        with open(path, encoding="utf-8-sig") as f:
+            for line in f:
+                p = line.split(",")
+                if len(p) > 2 and len(p[0]) == 10:
+                    have.add((p[0], p[2].strip()))
+    todo = [r for r in recs if (r["date"], r["market"]) not in have]
+    if not todo:
+        return 0
+    with open(path, "a", encoding="utf-8", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=cols)
+        if new:
+            w.writeheader()
+        for r in todo:
+            w.writerow(r)
+    return len(todo)
 
 
 def existing_dates(path, col=0):
@@ -181,15 +228,23 @@ def self_test():
     assert recs[1]["code"] == "035420" and recs[1]["close"] == 200000
 
     idx = {"OutBlock_1": [
+        {"IDX_NM": "코스피 (외국주포함)", "CLSPRC_IDX": ""},      # 실측: 빈값 변형
         {"IDX_NM": "코스피 200", "CLSPRC_IDX": "400.11"},
-        {"IDX_NM": "코스피", "CLSPRC_IDX": "3,120.45"},
+        {"IDX_NM": "코스피", "CLSPRC_IDX": "3,120.45"},           # ← 정확일치가 정답
     ]}
     d, c = parse_index(idx, "20260820")
     assert (d, c) == ("2026-08-20", 3120.45), (d, c)
 
+    snap = parse_snapshot({"OutBlock_1": [
+        {"ISU_CD": "095570", "ISU_NM": "AJ네트웍스", "MKTCAP": "203,000,000,000",
+         "LIST_SHRS": "46,822,295", "SECT_TP_NM": ""},
+    ]}, "20260821", "KOSPI")
+    assert snap[0]["code"] == "095570" and snap[0]["mcap"] == 203000000000, snap
+    assert snap[0]["name"] == "AJ네트웍스" and snap[0]["market"] == "KOSPI"
+
     days = list(daterange("20260821", "20260824"))            # 금~월, 주말 제외
     assert days == ["20260821", "20260824"], days
-    print("self-test 6/6 통과")
+    print("self-test 8/8 통과")
 
 
 def main():
@@ -239,13 +294,17 @@ def main():
             continue
         for market, path in EP_STOCK.items():
             try:
-                recs, sk = parse_stock(call(path, dd, auth), dd)
+                payload = call(path, dd, auth)
+                recs, sk = parse_stock(payload, dd)
             except Exception as e:
                 print(f"  {market} {dd}: 실패 — {e}")
                 continue
             if recs:
                 print(f"[{market}] {dd}: 파싱 {len(recs)}건 (skip {sk})")
                 total += append_stock(market, recs)
+                ns = append_snapshot(parse_snapshot(payload, dd, market))
+                if ns:
+                    print(f"  {market}: 스냅숏 +{ns}건 (시총·종목명·소속부)")
             time.sleep(SLEEP)
     print(f"\n완료 — 총 {total}건 추가")
 
