@@ -98,6 +98,16 @@ def open_positions(a):
     mark = {"실행(유리)": "🟢", "주의(중립)": "🟡", "관찰만(불리)": "🔴"}.get(rg.get("판정", ""), "")
     print(f"{mark} {asof} 국면: {rg.get('판정','?')} — {rg.get('이유','')[:60]}")
 
+    # 서킷브레이커 (사전등록 2026-08-22 §4 — 기계 강제): '정지'면 코드가 신규 진입을 거부한다
+    circuit = {}
+    cp = os.path.join(HERE, "서킷상태.json")
+    if os.path.exists(cp):
+        try: circuit = json.load(open(cp, encoding="utf-8"))
+        except Exception: circuit = {}
+    halted = (circuit.get("상태") == "정지")
+    if halted:
+        print("🔴 서킷브레이커 정지 — 신규 진입 전면 차단: " + " / ".join(circuit.get("사유", ["사유 미기재"])))
+
     # 자본·열린 위험
     realized = pd.to_numeric(L["실현손익"], errors="coerce").fillna(0).sum() if len(L) else 0.0
     capital = C["시작자본"] + realized
@@ -120,6 +130,10 @@ def open_positions(a):
         below = lp if (np.isfinite(lp) and lp < px) else px * 0.98
         stop = below * 0.95
         target = px + (px / (1 + cum2) - px) * 0.5 if (np.isfinite(cum2) and cum2 < 0) else px * 1.10
+        if halted:
+            rows.append({**base, "상태": "미진입(서킷정지)", "진입가": px, "수량": 0, "잔여수량": 0,
+                         "손절가": round(stop), "목표가": round(target),
+                         "메모": "서킷브레이커 정지 — 재가동은 재검정 통과 후"}); continue
         if not rg.get("실행"):
             rows.append({**base, "상태": "미진입(국면)", "진입가": px, "수량": 0, "잔여수량": 0,
                          "손절가": round(stop), "목표가": round(target), "메모": rg.get("판정", "")}); continue
