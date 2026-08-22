@@ -1,0 +1,312 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>진우퀀트 완성형 데모</title>
+<style>
+:root{--bg:#0d1117;--card:#161b22;--c2:#1c2330;--bd:#30363d;--tx:#e6edf3;--mut:#8b949e;--grn:#3fb950;--yel:#d29922;--red:#f85149;--blu:#58a6ff;--gray:#8b949e;--vio:#a371f7}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:'Segoe UI','Malgun Gothic',sans-serif;font-size:16px;line-height:1.5}
+.wrap{max-width:880px;margin:0 auto;padding:12px 12px 100px}
+h1{font-size:1.2rem;margin:0 0 2px}
+.sub{color:var(--mut);font-size:.78rem;margin-bottom:9px}
+.warn{background:rgba(248,81,73,.12);border:1px solid rgba(248,81,73,.4);border-radius:9px;padding:8px 11px;font-size:.74rem;color:#ffb4ad;margin-bottom:11px}
+.stepper{display:flex;gap:5px;overflow-x:auto;padding-bottom:6px;margin-bottom:10px}
+.st{flex:none;padding:8px 11px;border:1px solid var(--bd);border-radius:999px;background:var(--card);color:var(--mut);font-size:.73rem;font-weight:700;cursor:pointer;white-space:nowrap}
+.st.on{background:#16263f;color:var(--blu);border-color:var(--blu)}.st.done{color:var(--grn);border-color:rgba(63,185,80,.4)}
+.scene{display:none}.scene.on{display:block;animation:f .25s ease}
+@keyframes f{from{opacity:.15;transform:translateY(5px)}to{opacity:1;transform:none}}
+.lead{background:var(--c2);border-left:3px solid var(--blu);border-radius:8px;padding:10px 12px;font-size:.83rem;margin-bottom:11px}
+.lead b{color:var(--blu)}.lead .tick{color:var(--grn)}
+h2{font-size:1rem;margin:13px 0 7px;padding-left:9px;border-left:3px solid var(--blu)}
+.card{border:1px solid var(--bd);border-radius:12px;background:var(--card);padding:12px 13px;margin-bottom:10px}
+.grid2{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:680px){.grid2{grid-template-columns:1.4fr 1fr}}
+table{width:100%;border-collapse:collapse;font-size:.8rem}
+th,td{padding:6px 7px;text-align:left;border-bottom:1px solid var(--bd);white-space:nowrap}
+th{color:var(--mut);font-weight:600}
+.b{font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:999px}
+.g-grn{background:rgba(63,185,80,.16);color:var(--grn)}.g-yel{background:rgba(210,153,34,.16);color:var(--yel)}
+.g-red{background:rgba(248,81,73,.16);color:var(--red)}.g-blu{background:rgba(88,166,255,.16);color:var(--blu)}.g-gray{background:rgba(139,148,158,.18);color:var(--gray)}.g-vio{background:rgba(163,113,247,.16);color:var(--vio)}
+.note{color:var(--mut);font-size:.77rem;margin-top:8px}
+.kpi{display:flex;gap:8px;flex-wrap:wrap}
+.kpi div{flex:1;min-width:104px;background:var(--c2);border:1px solid var(--bd);border-radius:9px;padding:9px 11px}
+.kpi .l{color:var(--mut);font-size:.7rem}.kpi .v{font-size:1.1rem;font-weight:700;margin-top:2px}
+/* heat bars */
+.hb{margin:7px 0}
+.hb .row{display:flex;align-items:center;gap:8px;font-size:.8rem;margin-bottom:3px}
+.hb .nm{width:120px;flex:none;font-weight:700}
+.hb .tr{flex:1;height:14px;background:var(--c2);border-radius:7px;overflow:hidden}
+.hb .fl{height:100%;border-radius:7px}
+.hb .vv{width:78px;flex:none;text-align:right;color:var(--mut);font-size:.72rem}
+/* funnel */
+.fn{display:flex;flex-direction:column;align-items:center;gap:5px;margin:6px 0}
+.fn .lvl{text-align:center;padding:7px 0;border-radius:7px;font-size:.78rem;font-weight:700;color:#0d1117}
+/* stages */
+.stage{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--bd)}.stage:last-child{border-bottom:0}
+.sdot{width:25px;height:25px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;border:2px solid var(--bd);color:var(--mut)}
+.stage.pass .sdot{color:var(--mut)}.stage.cur .sdot{border-color:var(--grn);background:rgba(63,185,80,.16);color:var(--grn)}.stage.cur .stt{color:var(--grn)}
+.stage.lock .sdot{border-color:rgba(248,81,73,.4);color:var(--red)}
+.stt{font-size:.84rem;font-weight:700}.scr{color:var(--mut);font-size:.74rem;margin-top:2px}
+svg{display:block;width:100%;height:auto}
+.chk{font-size:.82rem;margin:4px 0;color:#c9d3de}.chk .tick{color:var(--grn);font-weight:700}
+code{background:var(--c2);padding:1px 6px;border-radius:5px;color:var(--blu);font-size:.85em}
+.rr{display:flex;height:30px;border-radius:7px;overflow:hidden;font-size:.68rem;font-weight:700;color:#0d1117;margin:6px 0}
+.nav{position:fixed;left:0;right:0;bottom:0;background:rgba(13,17,23,.97);border-top:1px solid var(--bd);padding:9px 12px;display:flex;gap:8px;max-width:880px;margin:0 auto}
+.nav button{flex:1;padding:12px;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font-size:.9rem;font-weight:700;cursor:pointer}
+.nav button.pri{background:#16263f;color:var(--blu);border-color:var(--blu)}.nav button:disabled{opacity:.4}
+.tick{color:var(--grn)}.dn{color:var(--red)}
+</style></head><body><div class="wrap">
+<h1>진우퀀트 — 완성형 데모</h1>
+<div class="sub">"모든 기능 완성 시" 운영 흐름 · 2026년 9월 가정 · 6단계</div>
+<div class="warn">⚠️ <b>데모·예시</b> — 종목명·차트·수치 전부 <b>가상</b>. 실제 매수 추천 아님 · production v3.7.2 무수정 · 백테 ≠ forward · 매매 책임 본인.</div>
+
+<div class="stepper" id="sp">
+  <div class="st on" onclick="go(0)">① 환경인식</div><div class="st" onclick="go(1)">② 발굴</div>
+  <div class="st" onclick="go(2)">③ 진입 5단계</div><div class="st" onclick="go(3)">④ 매수 전 기입</div>
+  <div class="st" onclick="go(4)">⑤ 사후 측정</div><div class="st" onclick="go(5)">⑥ 월간 화면</div>
+</div>
+
+<!-- 1 환경인식 -->
+<div class="scene on">
+  <div class="lead">종목부터 안 찾는다. 매월 먼저 <b>"지금 어떤 테마가 주도하나"</b>를 자동 인식. <b>환경 → 발굴 → 진입</b> 순서.</div>
+  <h2>L2 환경인식 — 테마 Heat &amp; 수퍼사이클</h2>
+  <div class="card">
+    <div class="hb" id="heatbars"></div>
+    <div class="note">ON = <code>detect_supercycle</code> 단일정의(12M초과≥30% · breadth≥60% · 3개월지속). 이번 달 ON = <b style="color:var(--grn)">전력/AI인프라 1개</b>.</div>
+  </div>
+  <div class="card">
+    <div style="font-size:.8rem;color:var(--mut);margin-bottom:4px">전력/AI인프라 — 12M 시장초과 추이</div>
+    <svg id="spark1" viewBox="0 0 320 70"></svg>
+  </div>
+  <div class="lead"><b>판단</b> — 전력/AI인프라 수퍼사이클 ON. 이번 달 발굴은 이 테마로 좁힌다.</div>
+</div>
+
+<!-- 2 발굴 -->
+<div class="scene">
+  <div class="lead">L3 발굴이 <b>전 시장 → ON 테마 → 가드레일</b>로 자동 압축. <b>관찰후보 = 매수신호 아님.</b></div>
+  <h2>L3 발굴 — 압축 퍼널 &amp; 관찰후보</h2>
+  <div class="grid2">
+    <div class="card">
+      <div style="font-size:.8rem;color:var(--mut);margin-bottom:6px">전시장 → 관찰후보 압축</div>
+      <div class="fn" id="funnel"></div>
+    </div>
+    <div class="card">
+      <div style="font-size:.8rem;color:var(--mut);margin-bottom:6px">관찰후보 (가드레일 PASS)</div>
+      <div id="cands"></div>
+    </div>
+  </div>
+  <div class="lead"><b>핵심</b> — 600여 종목이 4개 관찰후보로. 그래도 아직 <b>한 종도 안 샀다</b>. 여기는 "장바구니"가 아니라 관찰 목록.</div>
+</div>
+
+<!-- 3 진입 5단계 + 차트 -->
+<div class="scene">
+  <div class="lead"><b>한빛파워(예시)</b>가 5단계를 통과하는 실제 차트. <code>chart_timing</code> 자동연동이 4단계까지 판정, 마지막만 사람.</div>
+  <h2>L4 진입 — 돌파 차트 &amp; 5단계</h2>
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:4px"><b>한빛파워(예시)</b> <span style="color:var(--grn)">▲ 돌파확인</span></div>
+    <svg id="price" viewBox="0 0 320 200"></svg>
+    <div class="note">파랑=주가 · 보라=10주선 · 점선=52주 고점(저항) · 초록▲=돌파(거래량 1.6배) · 빨강 점선=손절(−8%). 하단=거래량.</div>
+  </div>
+  <div class="card">
+    <div class="stage pass"><div class="sdot">✓</div><div><div class="stt">관찰만</div><div class="scr">가드레일 통과 · chart 미충족</div></div></div>
+    <div class="stage pass"><div class="sdot">✓</div><div><div class="stt">셋업 대기</div><div class="scr">10주선 위·우상향 · 베이스 형성</div></div></div>
+    <div class="stage pass"><div class="sdot">✓</div><div><div class="stt">진입 임박</div><div class="scr">52주고점 −5% 이내 · RS 개선 · 거래대금↑</div></div></div>
+    <div class="stage cur"><div class="sdot">●</div><div><div class="stt">돌파 확인 ← 지금</div><div class="scr">베이스 상단 돌파 · 거래량 <b>1.6배</b> · 손절 −8% 산정</div></div></div>
+    <div class="stage lock"><div class="sdot">🔒</div><div><div class="stt">매수 검토 (사람 승격)</div><div class="scr">+ thesis · stop · 비중 · Track W 사전등록 충족 시만</div></div></div>
+  </div>
+  <div class="lead"><b>의미</b> — 시스템은 "돌파확인"까지만 자동. <b>매수는 사람이</b>, 사전등록 6요건 채워야.</div>
+</div>
+
+<!-- 4 매수 전 기입 -->
+<div class="scene">
+  <div class="lead"><b>사기 전에</b> Track W에 먼저 기입 — 사후합리화 차단. thesis 없으면 매수 기입 불가.</div>
+  <h2>매수 전 사전등록 (Track W)</h2>
+  <div class="grid2">
+    <div class="card">
+      <table><tbody>
+      <tr><th>종목/상태</th><td>한빛파워(예시) · 돌파확인</td></tr>
+      <tr><th>thesis</th><td>전력 수퍼사이클 ON + AI데이터센터 수주</td></tr>
+      <tr><th>진입 / 손절</th><td>12,000 / <b class="dn">11,040 (−8%)</b></td></tr>
+      <tr><th>1차 목표</th><td><b class="tick">14,400 (+20%)</b></td></tr>
+      <tr><th>목표 비중</th><td>3% (재량 cap ≤10% 내)</td></tr>
+      <tr><th>benchmark</th><td>동액 v3.7.2 픽</td></tr>
+      </tbody></table>
+    </div>
+    <div class="card">
+      <div style="font-size:.8rem;color:var(--mut);margin-bottom:5px">손익비 (R:R = 1 : 2.5)</div>
+      <div class="rr"><div style="width:28.6%;background:var(--red);display:flex;align-items:center;justify-content:center">손절 −8%</div><div style="width:71.4%;background:var(--grn);display:flex;align-items:center;justify-content:center">목표 +20%</div></div>
+      <div style="margin-top:10px">
+        <div class="chk"><span class="tick">✓</span> 돌파 확인 (자동)</div>
+        <div class="chk"><span class="tick">✓</span> thesis 작성</div>
+        <div class="chk"><span class="tick">✓</span> 손절선 기입</div>
+        <div class="chk"><span class="tick">✓</span> 목표 비중</div>
+        <div class="chk"><span class="tick">✓</span> Track W 사전등록</div>
+        <div class="chk" style="color:var(--grn);font-weight:700">→ '매수 검토 가능' 승격 ✅</div>
+      </div>
+    </div>
+  </div>
+  <div class="lead"><b>규칙</b> — 6요건 다 채워야 매수 칸으로. "왜 샀는지"가 먼저, 사용자 기입은 자동화가 무수정 보존.</div>
+</div>
+
+<!-- 5 사후 측정 -->
+<div class="scene">
+  <div class="lead">6개월 누적 후 <b>"내 재량이 시스템보다 나았나"</b>를 반사실로 측정. <code>update_track_w.py</code> 자동.</div>
+  <h2>Track W — 6개월 누적 (예시)</h2>
+  <div class="kpi" style="margin-bottom:10px">
+    <div><div class="l">메인 (재량 − 시스템벤치)</div><div class="v tick">+5.1%p</div></div>
+    <div><div class="l">보조 (패스 − 매수)</div><div class="v tick">−8.2%p</div></div>
+    <div><div class="l">임계 단계</div><div class="v">🟢 정상</div></div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <div style="font-size:.8rem;color:var(--mut);margin-bottom:6px">평균 fwd_3m 비교</div>
+      <svg id="twbar" viewBox="0 0 320 150"></svg>
+    </div>
+    <div class="card">
+      <div style="font-size:.8rem;color:var(--mut);margin-bottom:6px">메인 점수 누적 추이 (6개월)</div>
+      <svg id="twline" viewBox="0 0 320 150"></svg>
+    </div>
+  </div>
+  <div class="note">메인 +5.1%p = 재량이 시스템보다 나음. 보조 −8.2%p = 내 매수가 패스보다 나음(<b>음수=정상</b>). 양수면 "패스가 더 잘됨=선별 경고". 단일 스냅샷은 참고, 6~12개월 누적이 판정.</div>
+</div>
+
+<!-- 6 월간 화면 -->
+<div class="scene">
+  <div class="lead">위 전부가 <b>월간 단일화면 1장</b>으로. 매월 이것만 보면 됨. 액션 우선.</div>
+  <h2>월간 단일화면 (통합·예시)</h2>
+  <div class="card" style="border-left:3px solid var(--blu)">
+    <div style="font-size:.86rem;font-weight:700">[0] 이번 달 액션</div>
+    <div style="font-size:.82rem;color:#c9d3de;margin-top:3px">한빛파워(예시) 돌파확인 1건 · 실보유 점검 · Track W 갱신 · 모델픽 갱신</div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <div style="font-size:.84rem;font-weight:700;margin-bottom:5px">[1] 실보유 <span class="b g-grn">정상</span></div>
+      <table><tbody>
+      <tr><td>한빛파워(예시)</td><td>3%</td><td><span class="b g-grn">정상</span></td></tr>
+      <tr><td>○○전력(예시)</td><td>18%</td><td><span class="b g-blu">관찰</span></td></tr>
+      <tr><td>△△소재(예시)</td><td>22%</td><td><span class="b g-yel">주의</span></td></tr>
+      </tbody></table>
+      <div class="note">과집중 0 · 손절 근접 0</div>
+    </div>
+    <div class="card">
+      <div style="font-size:.84rem;font-weight:700;margin-bottom:5px">[2] 모델픽 (production)</div>
+      <div style="margin:4px 0"><span class="b g-grn">S+ 8</span> <span class="b g-blu">S 2</span> <span class="b g-gray">A 3</span></div>
+      <div class="note">검증 바스켓 — 실보유와 분리. v3.7.2 무수정.</div>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <div style="font-size:.84rem;font-weight:700;margin-bottom:5px">[3] 환경 / [4] 관찰후보</div>
+      <div style="font-size:.8rem;color:#c9d3de">ON = <b style="color:var(--grn)">전력/AI인프라</b></div>
+      <div style="font-size:.8rem;color:#c9d3de;margin-top:3px">후보 4종: 돌파확인 1 · 임박 1 · 관찰만 2</div>
+    </div>
+    <div class="card">
+      <div style="font-size:.84rem;font-weight:700;margin-bottom:5px">[5] Track W</div>
+      <div style="font-size:1.05rem;font-weight:700" class="tick">메인 +5.1%p</div>
+      <div class="note">🟢 정상 · 재량 lane 유지</div>
+    </div>
+  </div>
+  <div class="lead"><b>완성형의 그림</b> — 환경→발굴→5단계→사전등록→측정이 자동으로 흐르고, 진우님은 <b>월 1회 1화면</b>에서 '검토 가능'만 판단. <span class="tick">종목 서칭의 정확한 진행방향 = 이 순서.</span></div>
+</div>
+
+</div>
+<div class="nav">
+  <button id="prev" onclick="go(cur-1)">‹ 이전</button>
+  <button id="next" class="pri" onclick="go(cur+1)">다음 ›</button>
+</div>
+<script>
+var cur=0, sc=document.querySelectorAll('.scene'), st=document.querySelectorAll('.st'), N=sc.length;
+function go(n){ if(n<0||n>=N)return; cur=n;
+  for(var i=0;i<N;i++){ sc[i].classList.toggle('on',i===n); st[i].classList.toggle('on',i===n); st[i].classList.toggle('done',i<n);}
+  document.getElementById('prev').disabled=n===0;
+  var nx=document.getElementById('next'); nx.textContent=n===N-1?'처음으로 ↺':'다음 ›';
+  nx.onclick=n===N-1?function(){go(0)}:function(){go(cur+1)};
+  window.scrollTo(0,0);
+}
+// ---------- charts ----------
+function svg(id){return document.getElementById(id);}
+function poly(pts,stroke,w,dash){return '<polyline points="'+pts+'" fill="none" stroke="'+stroke+'" stroke-width="'+w+'"'+(dash?' stroke-dasharray="'+dash+'"':'')+' stroke-linejoin="round" stroke-linecap="round"/>';}
+// heat bars
+(function(){
+  var d=[['전력/AI인프라',94,'68%','⚡',1],['반도체/HBM',91,'61%','·',0],['로봇/자동화',85,'49%','⚡',0]];
+  var h='';
+  d.forEach(function(r){var col=r[4]?'var(--grn)':'var(--blu)';
+    h+='<div class="row"><div class="nm">'+r[0]+(r[4]?' <span class="b g-grn">ON</span>':'')+'</div><div class="tr"><div class="fl" style="width:'+r[1]+'%;background:'+col+'"></div></div><div class="vv">h'+r[1]+' · b'+r[2]+' '+r[3]+'</div></div>';});
+  svg('heatbars').outerHTML='<div class="hb" id="heatbars">'+h+'</div>';
+})();
+// spark1 (12M excess)
+(function(){var v=[2,5,4,8,12,10,16,21,19,24,28,31,29,34];var min=0,max=36,W=320,H=70,P=6;
+  var pts=v.map(function(y,i){var x=P+i*(W-2*P)/(v.length-1);var yy=H-P-(y-min)/(max-min)*(H-2*P);return x.toFixed(1)+','+yy.toFixed(1);}).join(' ');
+  svg('spark1').innerHTML='<line x1="6" y1="'+(H-6-(30/36)*(H-12)).toFixed(1)+'" x2="314" y2="'+(H-6-(30/36)*(H-12)).toFixed(1)+'" stroke="var(--grn)" stroke-width="1" stroke-dasharray="3 3" opacity=".5"/>'+poly(pts,'var(--grn)',2)+'<text x="8" y="12" fill="var(--mut)" font-size="9">+30% 임계</text>';
+})();
+// funnel
+(function(){var d=[['전시장',620,'#58a6ff'],['ON 테마 관련',42,'#a371f7'],['가드레일 통과',8,'#d29922'],['관찰후보',4,'#3fb950']];
+  var max=620,h='';d.forEach(function(r){var w=20+r[1]/max*80;h+='<div class="lvl" style="width:'+w+'%;background:'+r[2]+'">'+r[0]+' · '+r[1]+'</div>';});
+  svg('funnel').outerHTML='<div class="fn" id="funnel">'+h+'</div>';
+})();
+// candidates with sparkline
+(function(){
+  var d=[['한빛파워(예시)','8,400억','PASS','돌파확인','grn',[3,3,2,3,4,6,9]],['그린이엔지(예시)','5,200억','PASS','임박','yel',[2,2,3,2,3,4,5]],['세니칩(예시)','6,700억','PASS','관찰만','blu',[3,2,3,2,2,3,2]],['로보메카(예시)','3,100억','LATE','관찰만','red',[4,6,8,7,9,8,9]]];
+  var h='';d.forEach(function(r){
+    var min=Math.min.apply(0,r[5]),max=Math.max.apply(0,r[5])||1,W=70,H=22;
+    var pts=r[5].map(function(y,i){var x=i*(W)/(r[5].length-1);var yy=H-2-((y-min)/((max-min)||1))*(H-4);return x.toFixed(1)+','+yy.toFixed(1);}).join(' ');
+    h+='<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--bd)">'
+     +'<div style="flex:1"><div style="font-size:.8rem;font-weight:700">'+r[0]+'</div><div style="font-size:.7rem;color:var(--mut)">'+r[1]+' · <span class="b g-'+(r[2]==='LATE'?'red':'grn')+'">'+r[2]+'</span></div></div>'
+     +'<svg viewBox="0 0 70 22" style="width:70px"><polyline points="'+pts+'" fill="none" stroke="var(--'+r[4]+')" stroke-width="1.6"/></svg>'
+     +'<span class="b g-'+r[4]+'" style="width:58px;text-align:center">'+r[3]+'</span></div>';
+  });
+  svg('cands').outerHTML='<div id="cands">'+h+'</div>';
+})();
+// price chart
+(function(){
+  var px=[104,103,105,102,104,103,102,104,103,105,103,104,102,103,105,104,103,105,104,106,105,104,106,105,104,106,105,107,106,108,111,110,114,116,115,118,120,119,122,121];
+  var vol=[40,38,42,36,44,39,41,37,43,40,38,42,39,41,44,40,38,43,41,45,42,40,44,42,40,46,44,52,50,60,96,82,90,94,80,92,88,76,84,80];
+  var n=px.length,W=320,Hc=140,P=8,vmin=100,vmax=124;
+  function X(i){return P+i*(W-2*P)/(n-1);}
+  function Y(v){return P+ (vmax-v)/(vmax-vmin)*(Hc-2*P);}
+  // MA10
+  var ma=px.map(function(_,i){var a=px.slice(Math.max(0,i-9),i+1);return a.reduce(function(s,x){return s+x;},0)/a.length;});
+  var ppx=px.map(function(v,i){return X(i).toFixed(1)+','+Y(v).toFixed(1);}).join(' ');
+  var pma=ma.map(function(v,i){return X(i).toFixed(1)+','+Y(v).toFixed(1);}).join(' ');
+  var hi=Y(110); // 52주 고점/저항
+  var bi=30, ex=X(bi), ey=Y(px[bi]); // 돌파 지점
+  var stopY=Y(110*0.92);
+  // volume
+  var vb='';var vmaxv=Math.max.apply(0,vol);
+  vol.forEach(function(v,i){var bh=(v/vmaxv)*40;vb+='<rect x="'+(X(i)-2).toFixed(1)+'" y="'+(200-6-bh).toFixed(1)+'" width="4" height="'+bh.toFixed(1)+'" fill="'+(i>=bi?'rgba(63,185,80,.7)':'rgba(139,148,158,.4)')+'"/>';});
+  var s='<line x1="8" y1="'+hi.toFixed(1)+'" x2="312" y2="'+hi.toFixed(1)+'" stroke="var(--mut)" stroke-width="1" stroke-dasharray="4 3"/>'
+   +'<text x="10" y="'+(hi-3).toFixed(1)+'" fill="var(--mut)" font-size="8">52주 고점(저항)</text>'
+   +'<line x1="8" y1="'+stopY.toFixed(1)+'" x2="312" y2="'+stopY.toFixed(1)+'" stroke="var(--red)" stroke-width="1" stroke-dasharray="3 3" opacity=".8"/>'
+   +'<text x="10" y="'+(stopY+9).toFixed(1)+'" fill="var(--red)" font-size="8">손절 −8%</text>'
+   +poly(pma,'var(--vio)',1.6)
+   +poly(ppx,'var(--blu)',2.2)
+   +'<circle cx="'+ex.toFixed(1)+'" cy="'+ey.toFixed(1)+'" r="4" fill="var(--grn)"/>'
+   +'<path d="M'+ex.toFixed(1)+','+(ey-8)+' l-4,8 l8,0 z" fill="var(--grn)"/>'
+   +'<text x="'+(ex-6).toFixed(1)+'" y="'+(ey-12).toFixed(1)+'" fill="var(--grn)" font-size="8.5" font-weight="700">돌파</text>'
+   +vb+'<text x="8" y="198" fill="var(--mut)" font-size="8">거래량</text>';
+  svg('price').innerHTML=s;
+})();
+// track W bar
+(function(){
+  var d=[['재량 매수',14.2,'var(--grn)'],['시스템 벤치',9.1,'var(--blu)'],['패스 후보',6.0,'var(--gray)']];
+  var W=320,H=150,P=22,max=16,bw=54,gap=(W-2*P-bw*3)/2;
+  var s='<line x1="'+P+'" y1="'+(H-20)+'" x2="'+(W-P)+'" y2="'+(H-20)+'" stroke="var(--bd)"/>';
+  d.forEach(function(r,i){var x=P+i*(bw+gap);var bh=(r[1]/max)*(H-40);var y=H-20-bh;
+    s+='<rect x="'+x+'" y="'+y.toFixed(1)+'" width="'+bw+'" height="'+bh.toFixed(1)+'" rx="4" fill="'+r[2]+'"/>'
+     +'<text x="'+(x+bw/2)+'" y="'+(y-5).toFixed(1)+'" fill="var(--tx)" font-size="11" font-weight="700" text-anchor="middle">+'+r[1]+'%</text>'
+     +'<text x="'+(x+bw/2)+'" y="'+(H-6)+'" fill="var(--mut)" font-size="9" text-anchor="middle">'+r[0]+'</text>';});
+  svg('twbar').innerHTML=s;
+})();
+// track W cumulative line
+(function(){
+  var v=[1.2,2.0,3.1,4.0,4.6,5.1],W=320,H=150,P=20,min=0,max=6;
+  function X(i){return P+i*(W-2*P)/(v.length-1);}function Y(y){return P+(max-y)/(max-min)*(H-2*P-14);}
+  var pts=v.map(function(y,i){return X(i).toFixed(1)+','+Y(y).toFixed(1);}).join(' ');
+  var area=pts+' '+X(v.length-1).toFixed(1)+','+(H-P-14)+' '+X(0).toFixed(1)+','+(H-P-14);
+  var dots='';v.forEach(function(y,i){dots+='<circle cx="'+X(i).toFixed(1)+'" cy="'+Y(y).toFixed(1)+'" r="2.6" fill="var(--grn)"/>';});
+  var lbl='';['1M','2M','3M','4M','5M','6M'].forEach(function(m,i){lbl+='<text x="'+X(i).toFixed(1)+'" y="'+(H-4)+'" fill="var(--mut)" font-size="8.5" text-anchor="middle">'+m+'</text>';});
+  svg('twline').innerHTML='<polygon points="'+area+'" fill="rgba(63,185,80,.12)"/>'+poly(pts,'var(--grn)',2.2)+dots+lbl
+   +'<text x="'+X(5).toFixed(1)+'" y="'+(Y(5.1)-6).toFixed(1)+'" fill="var(--grn)" font-size="10" font-weight="700" text-anchor="end">+5.1%p</text>';
+})();
+go(0);
+</script>
+</body></html>

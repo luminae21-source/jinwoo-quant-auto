@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>휩쏘 S2 근접 미달형 — 30년 판정문</title>
+<style>
+:root{--bg:#0f1115;--panel:#171a21;--panel2:#1d212a;--line:#2a2f3a;--tx:#e6e8ee;--dim:#98a0b0;--dim2:#6d7484;
+--good:#3fb98a;--bad:#e0596b;--warn:#e0a33f;--acc:#6aa6ff}
+@media(prefers-color-scheme:light){:root{--bg:#f7f8fa;--panel:#fff;--panel2:#f0f2f6;--line:#e2e5ec;--tx:#1a1d24;--dim:#5b6373;--dim2:#8a92a3}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:980px;margin:0 auto;padding:32px 20px 80px}
+h1{font-size:27px;margin:0 0 6px;letter-spacing:-.4px}
+.sub{color:var(--dim);font-size:14px;margin-bottom:24px}
+h2{font-size:19px;margin:38px 0 12px;padding-top:20px;border-top:1px solid var(--line)}
+p{margin:10px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0}
+.verdict{display:flex;gap:14px;align-items:flex-start;background:linear-gradient(135deg,rgba(63,185,138,.14),rgba(63,185,138,.03));
+border:1px solid rgba(63,185,138,.45);border-radius:12px;padding:18px 20px;margin:18px 0}
+.verdict .ic{font-size:26px}
+.big{background:linear-gradient(135deg,rgba(106,166,255,.13),rgba(106,166,255,.03));border:1px solid rgba(106,166,255,.4);
+border-radius:12px;padding:18px 20px;margin:18px 0}
+.rule{background:var(--panel2);border-left:3px solid var(--acc);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:16px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px}
+th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+thead th{color:var(--dim);font-weight:600;font-size:12.5px}
+tbody tr:hover{background:var(--panel2)}
+.g{color:var(--good)}.b{color:var(--bad)}.w{color:var(--warn)}.d{color:var(--dim2)}
+.hi{background:rgba(63,185,138,.10)}.hi td{font-weight:600}
+.dead{opacity:.55}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.kpi .l{font-size:11.5px;color:var(--dim2)}.kpi .v{font-size:22px;font-weight:650;margin-top:3px;letter-spacing:-.5px}
+.kpi .n{font-size:11.5px;color:var(--dim);margin-top:2px}
+.bar{height:7px;border-radius:4px;background:var(--panel2);overflow:hidden;margin-top:5px}
+.bar i{display:block;height:100%;border-radius:4px}
+ul{margin:8px 0;padding-left:20px}li{margin:6px 0}
+code{background:var(--panel2);padding:1.5px 6px;border-radius:5px;font-size:12.5px;font-family:ui-monospace,Menlo,monospace}
+pre{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:15px 17px;overflow-x:auto;
+font-size:12.5px;line-height:1.75;font-family:ui-monospace,Menlo,monospace}
+.note{font-size:12.5px;color:var(--dim);border-left:2px solid var(--line);padding-left:13px;margin:14px 0}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;border:1px solid var(--line);color:var(--dim);font-weight:600}
+.ok{color:var(--good);border-color:rgba(63,185,138,.45)}.no{color:var(--bad);border-color:rgba(224,89,107,.45)}
+.mid{color:var(--warn);border-color:rgba(224,163,63,.45)}
+.ci{font-family:ui-monospace,monospace;font-size:12.5px}
+footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);color:var(--dim2);font-size:12px}
+</style></head><body><div class="wrap">
+
+<h1>S2 근접 미달형 — 30년 판정문</h1>
+<div class="sub">2026-08-02 · 전 종목·전 기간 재스캔 · 정식 A 2,405건 · S2 4,666건 신규 탐지 (두 집단 비중첩)</div>
+
+<div class="verdict"><div class="ic">🟢</div><div>
+<b style="font-size:17px">채택 — 단, 미달 '항목'에 따라 3등급으로 쪼갠다.</b><br>
+<span style="color:var(--dim)">핵심은 "S2가 먹히나"가 아니었다. <b>어느 조건을 완화했느냐가 전부를 가른다.</b>
+🟢실행 국면에서 S2 전체 +1.27%(CI [+0.40,+2.31])이지만, 항목별로는 +4.05%부터 +0.11%까지 갈린다.</span>
+</div></div>
+
+<div class="rule"><b>규칙 한 줄 — 2일누적을 낀 조합은 죽는다. 2일누적을 빼면 산다.</b></div>
+
+<div class="kpis">
+<div class="kpi"><div class="l">S2 전체 · 🟢실행</div><div class="v g">+1.27%</div><div class="n">승률 56.5% · n=2,681</div></div>
+<div class="kpi"><div class="l">정식 A · 🟢실행</div><div class="v">+2.40%</div><div class="n">승률 55.3% · n=1,444</div></div>
+<div class="kpi"><div class="l">기회 증가</div><div class="v g">1.86배</div><div class="n">1,444 → 2,681건</div></div>
+<div class="kpi"><div class="l">MA240 단독완화</div><div class="v g">+4.05%</div><div class="n">정식 A보다 +1.65%p</div></div>
+<div class="kpi"><div class="l">2단 적용 시 Δ</div><div class="v g">+0.66%p</div><div class="n">A(+0.50%p)보다 크다</div></div>
+</div>
+
+<h2>0. 재현 검증 — 같은 엔진에서 나왔다</h2>
+<div class="card">
+<ul>
+<li>정식 A 재탐지 <b>2,405건 — 원장과 (종목, 날짜) 키 100% 일치</b>. 카드수익 오차 &lt;0.05%p가 100%.</li>
+<li>국면 도장 재계산 → 원장과 <b>100% 일치</b>.</li>
+<li>인수인계 문서 수치 전량 재현: A형 40봉 창완결 <b>2,095건 · 40일 평균 +2.1% · 중앙 −1.2% · 승률 48%</b>.</li>
+</ul>
+<div class="note">2,405는 전체, 2,095는 40봉 창완결분 — 문서에 오류는 없다.
+이번 S2 수치는 <b>기존 검정과 완전히 같은 엔진</b>에서 나왔고, 조건만 바꿨다.</div>
+</div>
+
+<h2>1. 등급표 — 어느 조건을 완화했느냐가 전부다 (🟢실행 국면)</h2>
+<table>
+<thead><tr><th>등급</th><th>미달 항목</th><th>n</th><th>카드 평균</th><th>중앙</th><th>승률</th><th>2단</th><th>부트 95% CI</th><th>처리</th></tr></thead>
+<tbody>
+<tr class="hi"><td><b>S2-α</b></td><td>MA240 + 시총</td><td>60</td><td class="g">+4.45%</td><td>+7.53%</td><td class="g">68.3%</td><td class="g">+6.54%</td><td class="ci g">[+2.86, +6.41]</td><td><span class="tag ok">실전 후보</span></td></tr>
+<tr class="hi"><td><b>S2-α</b></td><td>MA240 단독</td><td>128</td><td class="g">+4.05%</td><td>+7.44%</td><td class="g">64.1%</td><td class="g">+4.75%</td><td class="ci g">[+1.16, +5.93]</td><td><span class="tag ok">실전 후보</span></td></tr>
+<tr class="hi"><td><b>S2-α</b></td><td>5년고점 단독</td><td>100</td><td class="g">+2.85%</td><td>+7.15%</td><td class="g">63.0%</td><td class="g">+3.28%</td><td class="ci g">[+0.76, +4.51]</td><td><span class="tag ok">실전 후보</span></td></tr>
+<tr class="hi"><td><b>S2-α</b></td><td>시총 단독</td><td>640</td><td class="g">+1.86%</td><td>+6.92%</td><td>51.9%</td><td class="g">+2.76%</td><td class="ci g">[+0.33, +3.54]</td><td><span class="tag ok">실전 후보</span></td></tr>
+<tr><td><b>S2-β</b></td><td>2일누적 단독</td><td>990</td><td class="w">+0.81%</td><td>+5.70%</td><td>58.0%</td><td>+1.42%</td><td class="ci">[+0.19, +1.55]</td><td><span class="tag mid">관찰만</span></td></tr>
+<tr class="dead"><td><b>S2-γ</b></td><td>2일누적 + 시총</td><td>434</td><td class="b">+0.14%</td><td>+5.64%</td><td>53.5%</td><td>+0.46%</td><td class="ci d">[−0.59, +1.05]</td><td><span class="tag no">등록 제외</span></td></tr>
+<tr class="dead"><td><b>S2-γ</b></td><td>2일누적 + 5년고점</td><td>108</td><td class="b">+0.11%</td><td>+5.65%</td><td>51.9%</td><td>+0.52%</td><td class="ci d">[−1.25, +1.30]</td><td><span class="tag no">등록 제외</span></td></tr>
+</tbody></table>
+
+<h2>2. S2 전체 — A보다 열등하지만 0보다 확실히 우월</h2>
+<table>
+<thead><tr><th>집단 (🟢실행)</th><th>n</th><th>카드 평균</th><th>중앙</th><th>승률</th><th>2단</th><th>부트 95% CI (vs 0)</th></tr></thead>
+<tbody>
+<tr><td>정식 A</td><td>1,444</td><td>+2.40%</td><td>+7.03%</td><td>55.3%</td><td>+2.91%</td><td class="ci g">[+1.23, +3.68]</td></tr>
+<tr class="hi"><td>S2 전체</td><td>2,681</td><td class="g">+1.27%</td><td>+5.73%</td><td class="g">56.5%</td><td class="g">+1.92%</td><td class="ci g">[+0.40, +2.31]</td></tr>
+</tbody></table>
+<ul>
+<li>평균은 A보다 <b>−1.13%p 낮다.</b> 열등한 건 맞다.</li>
+<li>그런데 <b>승률은 A보다 높다</b>(56.5% vs 55.3%). 작게 자주 이기고 크게 못 번다 — 꼬리가 A만큼 두껍지 않다.</li>
+<li><b>기회는 1.86배.</b> 신호가 거의 두 배로 늘어난다.</li>
+</ul>
+
+<h2>3. 국면 게이트는 S2에도 그대로 작동한다</h2>
+<table>
+<thead><tr><th>국면</th><th>n</th><th>카드 평균</th><th>중앙</th><th>승률</th><th></th></tr></thead><tbody>
+<tr class="hi"><td>🟢 실행</td><td>2,681</td><td class="g">+1.27%</td><td>+5.73%</td><td>56.5%</td><td><div class="bar"><i style="width:66%;background:var(--good)"></i></div></td></tr>
+<tr><td>🟡 주의</td><td>1,066</td><td>−0.16%</td><td class="b">−5.00%</td><td>48.1%</td><td><div class="bar"><i style="width:8%;background:var(--bad)"></i></div></td></tr>
+<tr><td>🔴 관찰만</td><td>620</td><td class="b">−0.64%</td><td class="b">−5.00%</td><td class="b">44.7%</td><td><div class="bar"><i style="width:33%;background:var(--bad)"></i></div></td></tr>
+</tbody></table>
+<p>게이트가 A에서만 통하는 게 아니라 <b>완화 구간에서도 같은 부호로 작동한다.</b> 30년 검정의 가장 견고한 발견이 다시 확인됐다 — <b>국면이 신호를 뒤집는다.</b></p>
+
+<h2>4. 가장 큰 발견 — MA240 이격 상한 +8%는 너무 빡빡할 수 있다</h2>
+<div class="big">
+MA240 이격을 <b>+8% → +12%로만</b> 푼 자리가 <b style="font-size:19px" class="g">+4.05%</b>로,
+정식 A(+2.40%)보다 <b>+1.65%p 좋다.</b> 승률도 64.1%(A 55.3%). 시총까지 같이 푼 조합은 +4.45% · 승률 68.3%.
+</div>
+<p><b>해석.</b> A형은 "장기선 아래/근처에서 밟고 오르는 자리"를 노려 이격 상한을 +8%로 뒀다.
+그런데 선 위 8~12% 구간 — 선을 밟진 않았지만 여전히 선 근처인 자리 — 가 오히려 더 좋았다.
+<b>등급 역설(C급 근접 &gt; A급 지지)이 이격 축에서도 똑같이 나타난 것</b>이다.</p>
+<div class="note">⚠️ <b>다만 이건 사후 발견이다.</b> 완화 4종 중 사후에 가장 좋은 걸 고른 것이고 n=128(단독)·362(포함)이다.
+Bonferroni 보정(4개 비교)을 해도 CI는 0을 넘지만, <b>A형 정의를 바꾸는 건 별개 문제</b>다.
+→ 사전등록 후 전진검증. 지금은 S2-α 등급으로 조사 원장에서 돌린다.</div>
+
+<h2>5. 2일누적 완화는 왜 약한가</h2>
+<p>2일누적 −10~−12% 구간 단독은 +0.81%(CI [+0.19, +1.55]) — 유의하지만 가장 약하다.
+그리고 <b>여기에 다른 완화가 하나라도 겹치면 즉시 무의</b>가 된다(+0.14% / +0.11%, CI 0 포함).</p>
+<div class="card">
+논리적으로 일관된다. <b>덜 빠진 자리는 덜 번다.</b> 휩쏘는 급락의 깊이가 반등의 연료인데,
+−10%짜리 얕은 플러시는 연료가 부족하고, 거기에 다른 조건까지 흐려지면 그냥 평범한 하락이 된다.<br><br>
+<b>즉 2일누적 −12%는 진짜 문턱이다. 이 하나는 건드리지 않는다.</b>
+</div>
+
+<h2>6. 2단 청산은 S2에서 더 잘 듣는다</h2>
+<table>
+<thead><tr><th>집단 (🟢실행)</th><th>카드</th><th>2단 적용</th><th>Δ</th><th>부트 95% CI</th></tr></thead><tbody>
+<tr><td>정식 A</td><td>+2.40%</td><td>+2.91%</td><td class="g">+0.50%p</td><td class="ci g">[+0.06, +0.94]</td></tr>
+<tr class="hi"><td>S2</td><td>+1.27%</td><td class="g">+1.92%</td><td class="g">+0.66%p</td><td class="ci g">[+0.25, +1.14]</td></tr>
+</tbody></table>
+<div class="note">A에서의 Δ+0.50%p는 과제1의 +0.48%p와 사실상 동일 — <b>독립 표본에서 재현됐다</b>
+(과제1은 126봉 창완결, 여기는 40봉 창완결).</div>
+
+<h2>7. 안정성 — 5년 구간별 (🟢실행 · S2)</h2>
+<table>
+<thead><tr><th>구간</th><th>n</th><th>카드</th><th>2단</th><th></th></tr></thead><tbody>
+<tr><td>1995–99</td><td>227</td><td class="b">−0.54%</td><td class="b">−0.86%</td><td><div class="bar"><i style="width:14%;background:var(--bad)"></i></div></td></tr>
+<tr><td>2000–04</td><td>350</td><td class="g">+0.59%</td><td class="g">+0.85%</td><td><div class="bar"><i style="width:13%;background:var(--good)"></i></div></td></tr>
+<tr><td>2005–09</td><td>431</td><td class="g">+1.81%</td><td class="g">+2.72%</td><td><div class="bar"><i style="width:43%;background:var(--good)"></i></div></td></tr>
+<tr><td>2010–14</td><td>247</td><td class="g">+1.21%</td><td class="g">+1.17%</td><td><div class="bar"><i style="width:19%;background:var(--good)"></i></div></td></tr>
+<tr><td>2015–19</td><td>351</td><td class="g">+0.78%</td><td class="g">+1.27%</td><td><div class="bar"><i style="width:20%;background:var(--good)"></i></div></td></tr>
+<tr><td>2020–24</td><td>769</td><td class="g">+0.77%</td><td class="g">+1.58%</td><td><div class="bar"><i style="width:25%;background:var(--good)"></i></div></td></tr>
+<tr><td>2025–26</td><td>306</td><td class="g">+4.50%</td><td class="g">+6.32%</td><td><div class="bar"><i style="width:100%;background:var(--good)"></i></div></td></tr>
+</tbody></table>
+<p><b>7구간 중 6구간 플러스.</b> 마이너스는 1995–99 한 구간뿐.</p>
+
+<h2>8. 운영 반영 (<code>조사_스캐너.py</code> 수정 완료)</h2>
+<pre>[조사 트랙 · S2 등급 운영]
+  S2-α  MA240 / 5년고점 / 시총 중 <b>하나만</b> 단독 미달 (2일누적은 충족)
+        → 조사 원장 등록 + 휩쏘 카드와 동일 운용. <b>실전 후보.</b>
+  S2-β  2일누적만 단독 미달
+        → 조사 원장 등록하되 <b>관찰만.</b> 실전 진입하지 않는다.
+  S2-γ  2일누적을 낀 조합
+        → <b>등록하지 않는다.</b> 30년에서 무의미했다.
+▸ 세 등급 전부 🟢실행 국면에서만 유효. 🟡주의·🔴관찰만은 A와 동일하게 사지 않는다.</pre>
+
+<p>2026-07-30(대휩쏘 당일) 실제 적용 예 — 자동 분류 결과:</p>
+<table>
+<thead><tr><th>등급</th><th>종목</th><th>2일누적</th><th>미달 항목</th></tr></thead><tbody>
+<tr class="hi"><td>S2-α</td><td>저스템</td><td>−15.2%</td><td class="d">시총 2,351억</td></tr>
+<tr class="hi"><td>S2-α</td><td>세보엠이씨</td><td>−12.9%</td><td class="d">시총 2,219억</td></tr>
+<tr class="hi"><td>S2-α</td><td>RF머트리얼즈</td><td>−18.5%</td><td class="d">시총 2,132억</td></tr>
+<tr class="hi"><td>S2-α</td><td>서울바이오시스</td><td>−12.9%</td><td class="d">시총 2,440억</td></tr>
+<tr><td>S2-β</td><td>효성</td><td>−11.8%</td><td class="d">2일누적</td></tr>
+<tr class="dead"><td>S2-γ</td><td>월덱스</td><td>−11.3%</td><td class="d">2일누적 + 5년고점</td></tr>
+</tbody></table>
+
+<h2>9. 한계</h2>
+<ul>
+<li><b>생존편향</b> — S2는 시총 하한을 2,000억으로 낮춰 <b>A보다 생존편향에 더 취약하다.</b> 실제 성과는 위 수치보다 나쁠 것이다.</li>
+<li><b>사후 선택</b> — 미달 항목별 분해는 사전등록되지 않았다. MA240 완화의 우월성은 <b>가설이지 결론이 아니다.</b></li>
+<li><b>표본 크기</b> — MA240 단독 n=128 · MA240+시총 n=60. 5년 구간별로 쪼개면 구간당 10~20건이다.</li>
+<li><b>위기해 클러스터</b> — 연도블록 부트스트랩으로 완화했으나 독립표본 아님.</li>
+<li><b>거래비용·유동성</b> — 시총 2,000~3,000억 구간은 슬리피지가 A 유니버스보다 크다. 위 수치는 총액 기준.</li>
+</ul>
+
+<footer>
+재현: <code>휩쏘_S2_역사검정.py --market {KOSPI,KOSDAQ}</code> → <code>휩쏘_S2_분석.py</code> · 산출 <code>S2_이벤트_통합.csv</code>(7,071건)<br>
+원자료 = 종목일봉_30년 백조정. 엔진·카드 규칙은 <code>휩쏘_역사검정.py</code>와 동일.<br>
+⚠️ 검정용 문서. 매매 추천이 아니다.
+</footer>
+</div></body></html>

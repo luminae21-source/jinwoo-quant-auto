@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>진우퀀트 · 휩쏘 재진입 시스템</title>
+<style>
+  :root{
+    color-scheme:light;
+    --bg:#f6f6f4; --surface:#fcfcfb; --border:#e3e2dd;
+    --ink:#0f0f0e; --ink2:#54534e; --muted:#8a877e;
+    --a:#2a78d6; --b:#eb6834; --good:#1a7f4b; --bad:#c0342f;
+    --code-bg:#f2f1ec;
+  }
+  @media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){
+    color-scheme:dark;
+    --bg:#111110; --surface:#1a1a19; --border:#33322f;
+    --ink:#fafaf7; --ink2:#c3c2b7; --muted:#8f8e85;
+    --a:#3987e5; --b:#d95926; --good:#4bb87c; --bad:#e66767;
+    --code-bg:#232320;
+  }}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",Roboto,sans-serif;
+    line-height:1.7;font-size:15px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:44px 22px 90px}
+  header{border-bottom:2px solid var(--ink);padding-bottom:20px;margin-bottom:14px}
+  .kicker{color:var(--a);font-weight:700;font-size:13px;letter-spacing:.06em}
+  h1{font-size:30px;margin:6px 0 8px;letter-spacing:-.02em}
+  .sub{color:var(--ink2);margin:0;font-size:15px}
+  h2{font-size:20px;margin:44px 0 12px;display:flex;gap:10px;align-items:baseline;letter-spacing:-.01em}
+  h2 .n{color:var(--muted);font-size:14px;font-variant-numeric:tabular-nums}
+  h3{font-size:15.5px;margin:22px 0 8px}
+  p{margin:0 0 12px}
+  .lead{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--ink);
+    border-radius:8px;padding:16px 18px}
+  .lead p{margin:0;font-size:16px}
+  table{width:100%;border-collapse:collapse;margin:12px 0 16px;font-size:14px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--border);vertical-align:top}
+  th{color:var(--ink2);font-size:12.5px;font-weight:650}
+  tbody tr:last-child td{border-bottom:none}
+  .col-a{color:var(--a);font-weight:650}
+  .col-b{color:var(--b);font-weight:650}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0}
+  @media(max-width:680px){.cards{grid-template-columns:1fr}}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px}
+  .card.a{border-top:3px solid var(--a)} .card.b{border-top:3px solid var(--b)}
+  .card h4{margin:0 0 4px;font-size:16px}
+  .card .tag{font-size:12px;font-weight:700}
+  .card.a .tag{color:var(--a)} .card.b .tag{color:var(--b)}
+  .card ul{margin:10px 0 0;padding-left:18px} .card li{margin-bottom:5px;font-size:13.5px}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:14px 0}
+  .step{flex:1;min-width:150px;background:var(--surface);border:1px solid var(--border);
+    border-radius:10px;padding:13px 14px}
+  .step .s{color:var(--a);font-weight:700;font-size:12px}
+  .step b{display:block;margin:3px 0 2px;font-size:14.5px}
+  .step span{color:var(--ink2);font-size:12.5px}
+  .step .f{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--muted);margin-top:4px}
+  .arrow{align-self:center;color:var(--muted);font-size:18px}
+  @media(max-width:680px){.arrow{display:none}}
+  pre{background:var(--code-bg);border:1px solid var(--border);border-radius:8px;
+    padding:13px 15px;overflow-x:auto;font-size:12.5px;line-height:1.6;margin:8px 0 14px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  code{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;background:var(--code-bg);
+    padding:1px 5px;border-radius:4px}
+  pre code{background:none;padding:0}
+  .note{color:var(--ink2);font-size:13.5px}
+  .warn{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--b);
+    border-radius:8px;padding:15px 17px;margin:14px 0}
+  .warn b{color:var(--b)}
+  ul.plain{padding-left:20px} ul.plain li{margin-bottom:6px}
+  .grade{display:inline-block;width:20px;height:20px;border-radius:5px;text-align:center;
+    line-height:20px;font-size:12px;font-weight:700;color:#fff;margin-right:2px}
+  .gA{background:var(--good)} .gB{background:var(--a)} .gC{background:var(--muted)}
+  footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--border);
+    color:var(--muted);font-size:12.5px}
+  .disc{font-size:11.5px;color:var(--muted);margin-top:8px}
+  @media print{body{background:#fff}.wrap{max-width:100%}pre,.card,.step,.lead,.warn{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">진우퀀트</p>
+  <h1>휩쏘 재진입 시스템</h1>
+  <p class="sub">급락장·조정장에서 손절이 유도되는 자리 — 그 바닥에서 재진입하는 방법. 2026-08-01</p>
+</header>
+
+<div class="lead">
+  <p><b>휩쏘(whipsaw)</b>는 지수가 급락을 만들어 손절을 유도하고 재진입을 막는 구간이다.
+  이 시스템은 그 <b>급락 이틀째 바닥</b>에서, 주도주가 장기 지지선을 밟고 반등하는 자리를 찾는다.
+  드물게 나오지만 강력한 역발상 자리 — 남들이 털리는 곳에서 산다.</p>
+</div>
+
+<h2><span class="n">01</span> 두 가지 유형</h2>
+<p>겉보기엔 하나 같지만 <b>기계적으로 완전히 다른 두 신호</b>다. 하나로 뭉치면 둘 다 놓친다.</p>
+
+<div class="cards">
+  <div class="card a">
+    <span class="tag">A</span>
+    <h4>선지지형</h4>
+    <p class="note" style="margin:6px 0 0">얻어맞은 옛 주도주가 1년 구조 바닥을 되찾는 자리</p>
+    <ul>
+      <li>깊은 2일 플러시 <b>누적 −12~−22%</b></li>
+      <li>장기선(일240·주60주) <b>근처/아래</b></li>
+      <li>5년 고점 대비 −40~−70% (깊은 조정)</li>
+      <li>예: 대덕전자·심텍·피에스케이홀딩스·삼화콘덴서</li>
+    </ul>
+  </div>
+  <div class="card b">
+    <span class="tag">B</span>
+    <h4>리더형</h4>
+    <p class="note" style="margin:6px 0 0">안 빠진 대장주가 얕게 눌렸다 지수를 끄는 자리</p>
+    <ul>
+      <li>얕은 플러시 <b>누적 −3~−10%</b></li>
+      <li>240일선 <b>위 크게</b>(추세 상단) → 월10선으로 눌림</li>
+      <li>시총 5조 이상 대장주</li>
+      <li>예: 삼성전자·SK하이닉스·삼성전기·LG전자</li>
+    </ul>
+  </div>
+</div>
+
+<p class="note"><b>지문 하나:</b> 얻어맞은 종목(A)은 1년 바닥(일240·주60)에서, 안 빠진 대장(B)은 10개월선에서 받친다.
+A는 "얼마나 깊이 빠졌나", B는 "대장이 얕게 눌렸나"로 잡는다.</p>
+
+<h2><span class="n">02</span> 도구 흐름 — 탐지 → 분류 → 카드</h2>
+<div class="flow">
+  <div class="step"><span class="s">STEP 1</span><b>급등 실물 추출</b><span>급등일 등급별 종목·재무·위치</span><div class="f">휩쏘_추출.py</div></div>
+  <div class="arrow">→</div>
+  <div class="step"><span class="s">STEP 2</span><b>패턴 역산</b><span>내가 고른 종목 → 공통 조건</span><div class="f">휩쏘_기준분석.py</div></div>
+  <div class="arrow">→</div>
+  <div class="step"><span class="s">STEP 3</span><b>매일 탐지</b><span>A/B 분류 · 등급 A·B·C</span><div class="f">휩쏘_탐색기.py</div></div>
+  <div class="arrow">→</div>
+  <div class="step"><span class="s">STEP 4</span><b>매매카드</b><span>유형별 진입·손절 자리</span><div class="f">휩쏘_매매카드.py</div></div>
+</div>
+<p class="note">등급 — <span class="grade gA">A</span> 선을 실제로 밟고 종가 위(지지) &nbsp;
+<span class="grade gB">B</span> 선에 밀착 ±3% &nbsp;
+<span class="grade gC">C</span> 근접(기관이 밀어냈을 수 있는 좋은 종목 · 관찰). <b>C도 버리지 않는다.</b></p>
+
+<h2><span class="n">03</span> 매일 루틴 (장 마감 후)</h2>
+<pre><code>py 휩쏘_탐색기.py                          # 대부분 "없음" — 뜨면 그날이 그 자리
+py 휩쏘_매매카드.py --grade ABC --capital 10000000   # 뜬 날만</code></pre>
+<p class="note">시장 전체 휩쏘 날(예 7/30)엔 30~40종, 보통 날엔 0~2종. <b>대부분의 날 침묵하는 게 정상</b> —
+빈도 낮고 강력한 도구. 카드는 <b>손절을 '가격 −N%'가 아니라 '기준선을 종가로 지켰나'로</b> 판단한다.</p>
+
+<h2><span class="n">04</span> HTS 조건검색식 — 장중 1차 거름망</h2>
+<p>파이썬 탐색기가 정밀 판정이고, HTS 검색식은 <b>장중에 후보를 30~50종으로 좁히는 그물</b>이다.
+핵심 숫자 기준:</p>
+
+<table>
+  <thead><tr><th>조건</th><th class="col-a">A 선지지형</th><th class="col-b">B 리더형</th></tr></thead>
+  <tbody>
+    <tr><td>2일 누적 낙폭</td><td>≤ −12%</td><td>≤ −3%</td></tr>
+    <tr><td>연속 하락</td><td>2봉 연속</td><td>2봉 연속</td></tr>
+    <tr><td><b>240일선 이격도</b></td><td>85 ~ 108 (근처/아래)</td><td>≥ 110 (위·추세 상단)</td></tr>
+    <tr><td>5년 고점 대비</td><td>≤ −30%</td><td>—</td></tr>
+    <tr><td>시가총액</td><td>≥ 3,000억</td><td>≥ 5조</td></tr>
+    <tr><td>거래대금(당일)</td><td>≥ 30억</td><td>≥ 100억</td></tr>
+  </tbody>
+</table>
+
+<h3>키움 영웅문4 · [0150] 조건검색 — A형</h3>
+<pre><code>① [재무분석 &gt; 시가총액]                    3,000억 이상
+② [시세분석 &gt; 거래대금]                    [일] 30억 이상
+③ [시세분석 &gt; 주가등락률]                  [일] 2봉전 종가대비 -12% 이하
+④ [시세분석 &gt; 연속하락]                    [일] 종가 2봉 연속 하락
+⑤ [기술적분석 &gt; 모멘텀지표 &gt; 이격도]       [일] 이격도(240) 85 ~ 108
+⑥ [시세분석 &gt; 주가등락률(기간내 최고 대비)] [일] 1200봉내 최고종가 대비 -30% 이하</code></pre>
+<p class="note"><b>⑤ 대체</b> — 이격도 기간 240이 드롭다운에 없으면:<br>
+<code>⑤-a [가격-이동평균비교] [일] 종가 ≤ 240이평 × 1.08</code><br>
+<code>⑤-b [가격-이동평균비교] [일] 종가 ≥ 240이평 × 0.85</code><br>
+(±% 옵션이 없으면 <code>종가 ≤ 240이평</code> + <code>종가 ≥ 120이평</code>으로 근사)</p>
+<p class="note"><b>선택 보강</b> — 주60주선도 같이 밟는 자리만 좁히려면:
+<code>[가격-이동평균비교] [주] 종가 ≥ 60이평×0.93 AND ≤ ×1.05</code></p>
+
+<h3>키움 영웅문4 — B형</h3>
+<pre><code>① [재무분석 &gt; 시가총액]              5조 이상
+② [시세분석 &gt; 거래대금]              [일] 100억 이상
+③ [시세분석 &gt; 주가등락률]            [일] 2봉전 대비 -3% 이하
+④ [시세분석 &gt; 연속하락]              [일] 종가 2봉 연속 하락
+⑤ [기술적분석 &gt; 모멘텀지표 &gt; 이격도] [일] 이격도(240) 110 이상   (240일선 위 = 추세 상단)</code></pre>
+<p class="note"><b>⑤ 대체</b> — 이격도 240 없으면 <code>[가격-이동평균비교] [일] 종가 ≥ 240이평 × 1.10</code></p>
+
+<h3>한국투자증권 (eFriend Plus / Force) — A형</h3>
+<pre><code>① 시가총액                3,000억 이상
+② 당일 거래대금            30억 이상
+③ 기간등락률              최근 2일 등락률 -12% 이하
+④ 주가 연속하락           종가 2일 연속 하락
+⑤ 이격도(일, 240)         85 ~ 108        (없으면 종가÷240일이평×100 을 이 범위로)
+⑥ 기간내 최고가대비        최근 1200일 최고 대비 -30% 이하</code></pre>
+
+<h3>한국투자증권 — B형</h3>
+<pre><code>① 시가총액 5조 이상   ② 당일 거래대금 100억 이상
+③ 기간등락률 최근 2일 -3% 이하   ④ 주가 종가 2일 연속 하락
+⑤ 이격도(일, 240) 110 이상       (240일선 위 = 추세 상단)</code></pre>
+
+<p class="note">⚠️ 한국투자 조건검색 <b>메뉴 경로는 공식 문서로 확인하지 못했다</b> — 같은 숫자 논리를
+유사 항목에 매핑할 것. 월봉 이평이 없으면 <b>일봉 240이평</b> 기준 그대로 사용.
+더 확실한 길: <b>KIS Developers 조건검색 API</b>(<code>inquire-psearch</code>)로 HTS 저장조건을
+호출하면 결과를 자동으로 받을 수 있다 — 진우퀀트는 이미 KIS OpenAPI를 쓰므로 자동화에 자연스럽다.</p>
+
+<h3>HTS가 못 하는 것 = 탐색기가 채우는 것</h3>
+<table>
+  <thead><tr><th>항목</th><th>HTS 조건검색</th><th>휩쏘_탐색기.py</th></tr></thead>
+  <tbody>
+    <tr><td>2일 누적 낙폭</td><td>△ 주가등락률로 근사</td><td>○ 급락1·급락2 분해</td></tr>
+    <tr><td><b>저가가 선 밟고 종가 위(진짜 지지)</b></td><td class="col-b">✕</td><td class="col-a">○ 정확 판정</td></tr>
+    <tr><td>선 겹침(일240·주60 동시)</td><td class="col-b">✕</td><td class="col-a">○</td></tr>
+    <tr><td>A/B 자동 분류·등급</td><td>△ 조건식 2개로 분리</td><td class="col-a">○ 자동</td></tr>
+    <tr><td>월10선 정밀</td><td>✕ (월봉 없음) → 일240 근사</td><td class="col-a">○</td></tr>
+    <tr><td>5년 고점 대비</td><td class="col-a">○ 기간최고가 항목</td><td class="col-a">○</td></tr>
+  </tbody>
+</table>
+<div class="warn">
+  <p class="note" style="margin:0"><b>결론</b> — HTS 검색식 = 장중 후보를 30~50종으로 좁히는 그물.
+  진짜 2일째 지지 자리 확정은 <b>파이썬 탐색기(A/B 등급) + 형 눈</b>. 둘을 같이 쓴다.</p>
+</div>
+
+<h2><span class="n">05</span> 정직하게 — 이건 출발점이다</h2>
+<ul class="plain">
+  <li><b>검정된 엣지가 아니다.</b> 기준종목 9종에서 역산한 <b>직관의 좌표화</b>다. 표본이 적다.</li>
+  <li><b>마지막 방아쇠는 사람의 눈.</b> 도구는 후보를 좁힐 뿐, 일봉을 직접 보고 진짜 휩쏘인지 확인한다.</li>
+  <li><b>배우는 구조다.</b> 다음 휩쏘 때 고른 종목을 <code>기준종목.txt</code>에 추가 → 재분석하면 조건이 정교해진다.</li>
+  <li><b>검색식 수치는 갱신 대상.</b> 표본이 커지면 <code>휩쏘_기준분석.py</code>로 다시 뽑아 이 문서도 함께 고친다.</li>
+</ul>
+<p class="disc">본 문서는 과거 관찰·기계적 산출을 정리한 참고 자료다. 매수·매도 추천이나 투자자문이 아니며,
+모든 판단과 책임은 본인에게 있다.</p>
+
+<footer>
+  진우퀀트 · 휩쏘 재진입 시스템 · 2026-08-01 · 검증 출처: 키움 영웅문4 공식 도움말([0150] 조건검색)
+</footer>
+
+</div>
+</body>
+</html>

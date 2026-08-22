@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>진우퀀트 청사진 v1</title>
+<style>
+  :root{
+    color-scheme: light;
+    --surface:#fcfcfb; --card:#ffffff; --line:#e5e4e0;
+    --ink:#0b0b0b; --ink2:#52514e; --ink3:#8a8983;
+    --core:#2a78d6; --core-bg:#eaf2fc;
+    --sat:#eb6834;  --sat-bg:#fdeee7;
+    --cash:#1baf7a; --cash-bg:#e6f6ef;
+    --warn:#eda100; --bad:#e34948;
+    --mono:'Consolas','SF Mono',monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:where(:not([data-theme="light"])){
+      color-scheme: dark;
+      --surface:#1a1a19; --card:#232322; --line:#3a3936;
+      --ink:#ffffff; --ink2:#c3c2b7; --ink3:#8a8983;
+      --core:#3987e5; --core-bg:#1d2d42;
+      --sat:#d95926;  --sat-bg:#3b2519;
+      --cash:#199e70; --cash-bg:#16332a;
+      --warn:#c98500; --bad:#e66767;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard','Malgun Gothic',system-ui,sans-serif;background:var(--surface);color:var(--ink);line-height:1.55;padding:28px 20px 60px;max-width:980px;margin:0 auto}
+  h1{font-size:26px;letter-spacing:-.5px}
+  .sub{color:var(--ink2);font-size:13.5px;margin:6px 0 26px}
+  h2{font-size:16px;margin:34px 0 12px;display:flex;align-items:center;gap:8px}
+  h2 .n{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--ink);color:var(--surface);font-size:12.5px;flex:none}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .muted{color:var(--ink2);font-size:13px}
+  .tag{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:20px;margin-right:6px}
+  .t-core{background:var(--core-bg);color:var(--core)}
+  .t-sat{background:var(--sat-bg);color:var(--sat)}
+  .t-cash{background:var(--cash-bg);color:var(--cash)}
+
+  /* 돈의 흐름 */
+  .flow{display:flex;flex-direction:column;gap:0;align-items:center}
+  .frow{display:flex;gap:14px;width:100%;justify-content:center;flex-wrap:wrap}
+  .fbox{border:1.5px solid var(--line);background:var(--card);border-radius:10px;padding:10px 16px;text-align:center;min-width:150px}
+  .fbox b{display:block;font-size:14px}
+  .fbox span{font-size:12px;color:var(--ink2)}
+  .fbox.core{border-color:var(--core);background:var(--core-bg)}
+  .fbox.sat{border-color:var(--sat);background:var(--sat-bg)}
+  .fbox.cash{border-color:var(--cash);background:var(--cash-bg)}
+  .arr{color:var(--ink3);font-size:17px;padding:4px 0;text-align:center}
+
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;color:var(--ink2);font-weight:600;font-size:12px;border-bottom:1.5px solid var(--line);padding:7px 10px}
+  td{border-bottom:1px solid var(--line);padding:8px 10px;vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td.k{font-weight:700;white-space:nowrap}
+  code{font-family:var(--mono);font-size:12px;background:var(--surface);border:1px solid var(--line);padding:1px 6px;border-radius:5px}
+
+  /* 두 트랙 */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:760px){.two{grid-template-columns:1fr}}
+  .track{border-radius:12px;padding:16px 18px;border:1.5px solid}
+  .track.core{border-color:var(--core);background:var(--core-bg)}
+  .track.sat{border-color:var(--sat);background:var(--sat-bg)}
+  .track h3{font-size:15px;margin-bottom:2px}
+  .track .role{font-size:12.5px;color:var(--ink2);margin-bottom:10px}
+  .track ul{list-style:none}
+  .track li{font-size:13px;padding:4px 0;border-bottom:1px dashed var(--line)}
+  .track li:last-child{border:none}
+  .track li b{display:inline-block;min-width:74px;color:var(--ink2);font-weight:600;font-size:12px}
+
+  /* 사다리 */
+  .ladder{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  @media(max-width:760px){.ladder{grid-template-columns:repeat(2,1fr)}}
+  .step{border:1.5px solid var(--line);border-radius:10px;padding:12px 13px;position:relative}
+  .step.now{border-color:var(--core);box-shadow:0 0 0 3px var(--core-bg)}
+  .step .lv{font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.5px}
+  .step .pct{font-size:22px;font-weight:800;margin:2px 0}
+  .step .cond{font-size:12px;color:var(--ink2)}
+  .step .now-badge{position:absolute;top:-9px;right:10px;background:var(--core);color:#fff;font-size:10.5px;font-weight:800;padding:1px 8px;border-radius:10px}
+
+  .warnbox{border-left:4px solid var(--warn);background:var(--card);border-radius:0 10px 10px 0;padding:12px 16px;font-size:13px;margin-top:12px}
+  .foot{margin-top:36px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--ink3)}
+  .big3 li{padding:6px 0;font-size:13.5px}
+  .big3 b{color:var(--ink)}
+  .ok{color:var(--cash);font-weight:700}.ng{color:var(--bad);font-weight:700}
+</style>
+</head>
+<body>
+
+<h1>진우퀀트 청사진 <span style="font-size:14px;color:var(--ink3)">v1</span></h1>
+<p class="sub">2026-07-28 · 시스템 전체를 한 장으로 — 깜깜이 해소용. 목표: <b>12월 판정일에 "증액한다/안 한다"를 숫자로 결정</b></p>
+
+<h2><span class="n">1</span>돈의 흐름 — 전체 그림</h2>
+<div class="card">
+  <div class="flow">
+    <div class="frow"><div class="fbox"><b>투자가용자산</b><span>지금은 이 중 <b>10~20%만</b> 투입 (사다리 0단계)</span></div></div>
+    <div class="arr">▼ 투입분을 둘로 나눈다</div>
+    <div class="frow">
+      <div class="fbox core"><b>본체 70%</b><span>코어 top30 · 느린 복리 엔진</span></div>
+      <div class="fbox sat"><b>위성 30%</b><span>재량 시트 · 공격 트랙 (손실 격리)</span></div>
+    </div>
+    <div class="arr">▼ 수익은 4곳에서 나온다 (백서 B-1h 기준 · 정직 표기)</div>
+    <div class="frow">
+      <div class="fbox"><b>① 배당 실수령</b><span>연 +2.4~3.7%p <b>실측 확정</b></span></div>
+      <div class="fbox cash"><b>② 방어 규칙</b><span>+3.3%p·MDD −57%로 축소 (30년 실측)</span></div>
+      <div class="fbox sat"><b>③ 위성 엣지</b><span>소·중형 검증 규칙 4종 — <b>검증된 유일한 알파</b></span></div>
+      <div class="fbox"><b>④ 대형 팩터 알파</b><span>⚠️ 증거 없음 (초과확률 46~57%) — forward가 판정</span></div>
+    </div>
+    <div class="arr">▼ 게이트 통과 시마다</div>
+    <div class="frow"><div class="fbox"><b>증액 사다리 승급</b><span>수익 증가 = 알파 × <b>커지는 자본</b> × 생존</span></div></div>
+  </div>
+</div>
+
+<h2><span class="n">2</span>두 트랙 — 헷갈림 정리</h2>
+<div class="two">
+  <div class="track core">
+    <h3>🔵 본체 — 코어 top30</h3>
+    <div class="role">시스템이 뽑고, 나는 거부권만. 계좌의 몸통.</div>
+    <ul>
+      <li><b>뭘 사나</b> 배당·B/P·E/P·ROE 합성점수 상위 30종 동일가중</li>
+      <li><b>언제</b> 월 1회, 매월 첫 주 (<code>forward_signal.py</code>)</li>
+      <li><b>방어</b> KOSPI가 10개월 평균선 아래면 현금 50%</li>
+      <li><b>매도</b> 다음 달 명단에서 빠지면 교체 — 개별 판단 없음</li>
+      <li><b>성격</b> 성장/가치 구분 없음 — 점수가 전부</li>
+      <li><b>역할 (정직)</b> 알파 엔진 아님 — <b>배당+방어+규율로 시장 수익을 지키는 몸통.</b> 지수 초과는 forward가 판정</li>
+    </ul>
+  </div>
+  <div class="track sat">
+    <h3>🟠 위성 — 재량 집행 시트</h3>
+    <div class="role">공격 트랙. 손실은 여기 갇히고(heat≤6%) 수익은 전체에 기여.</div>
+    <ul>
+      <li><b>뭘 사나</b> <code>risk_manager.py</code>가 뽑은 채택 북만 (시트 밖 진입 금지)</li>
+      <li><b>성장주란</b> ROE·EPS성장·배당 점수 상위 → <b>매도: 25% 트레일</b> (오래 태운다)</li>
+      <li><b>가치주란</b> 배당·E/P·B/P 점수 상위 → <b>매도: −40% 재난스톱 + PBR≥1.0/+100% 익절</b> (인내한다)</li>
+      <li><b>핵심</b> 성장 vs 가치 = <b>파는 규칙의 차이</b>일 뿐. 고르는 건 똑같이 점수</li>
+      <li><b>한도</b> 리스크 1%/종목 · 동시 5종 · 1종목 ≤ lane 25%</li>
+      <li><b>역할 (정직)</b> <b>검증된 엣지는 전부 여기(소·중형)에 있다</b> — 저변동성 +5.7%·저PBR +5.9%·하순필터·청산규칙 (4종 모두 OOS 통과 · 대형은 전부 기각)</li>
+    </ul>
+  </div>
+</div>
+<div class="warnbox">💡 <b>답답함의 정체:</b> "이 종목은 성장주인가 가치주인가"를 고민할 필요가 없다. 시트가 트랙까지 정해서 준다. 사람의 일은 딱 세 가지 — <b>① 시트대로 주문 ② 매도규칙 준수 ③ 거부할 거면 기록</b>.</div>
+
+<h2><span class="n">3</span>운영 달력 — 언제 무엇을</h2>
+<div class="card">
+<table>
+  <tr><th style="width:110px">주기</th><th>할 일</th><th style="width:250px">도구</th></tr>
+  <tr><td class="k">매일 (5분)</td><td>잔고 한도 점검 — 🔴 뜨면 그날 계획 수립</td><td><code>py 진우_잔고감시.py</code></td></tr>
+  <tr><td class="k">매월 첫 주</td><td>① 패널 갱신 → ② 본체 top30 산출 → ③ 주문(차단기 통과분) → ④ 원장 NAV 기입</td><td><code>forward_signal.py</code> → <code>진우_리스크차단기.py</code></td></tr>
+  <tr><td class="k">수시 (위성)</td><td>시트 재실행 → 채택 북 확인 → 집행 전 현재가·ADTV 재확인</td><td><code>강화키트\risk_manager.py --capital 금액</code></td></tr>
+  <tr><td class="k">분기</td><td>사다리 승급/강등 점검 · 규칙 준수율 확인</td><td>forward 원장 + 잔고감시 리포트</td></tr>
+  <tr><td class="k">2026-12</td><td><b>판정일</b> — F게이트로 증액 여부 결정</td><td>forward 원장 6개월 실기록</td></tr>
+</table>
+</div>
+
+<h2><span class="n">4</span>증액 사다리 — 수익이 "점점 커지는" 장치</h2>
+<div class="ladder">
+  <div class="step now"><span class="now-badge">현재</span><div class="lv">0단계</div><div class="pct">10~20%</div><div class="cond">잔고 정상화 + 규칙 가동. 수익보다 <b>기록</b>이 목적</div></div>
+  <div class="step"><div class="lv">1단계</div><div class="pct">30~40%</div><div class="cond">forward 3개월 & 규칙 준수율 100% (수익률 무관)</div></div>
+  <div class="step"><div class="lv">2단계</div><div class="pct">50~70%</div><div class="cond">6~12개월 & 벤치마크 대비 열위 아님 (F게이트)</div></div>
+  <div class="step"><div class="lv">3단계</div><div class="pct">100%</div><div class="cond"><b>첫 하락장을 방어 규칙으로 통과</b>한 후</div></div>
+</div>
+<div class="warnbox">강등 규칙: 규칙 이탈 1회 → 0단계 · 낙폭 −18% → 한 단계 아래 · 월 −15% → 신규 정지. <b>증액도 감액도 감정이 아니라 게이트가 결정.</b></div>
+
+<h2><span class="n">5</span>파일 지도 — 뭐가 뭔지</h2>
+<div class="card">
+<table>
+  <tr><th style="width:280px">파일</th><th>역할 (한 줄)</th></tr>
+  <tr><td><code>진우_통합한도.json</code></td><td><span class="tag t-cash">규칙</span>모든 리스크 한도의 단일 원천 — 숫자 바꾸려면 여기만</td></tr>
+  <tr><td><code>실전준비\forward_signal.py</code> + <code>forward_ledger.csv</code></td><td><span class="tag t-core">본체</span>top30 산출 + 실기록 원장 (12월 판정의 증거)</td></tr>
+  <tr><td><code>강화키트\risk_manager.py</code></td><td><span class="tag t-sat">위성</span>성장/가치 채택 북 + 손절가·수량까지 계산</td></tr>
+  <tr><td><code>진우_잔고감시.py</code></td><td><span class="tag t-cash">규칙</span>보유잔고가 한도 안인지 매일 검사</td></tr>
+  <tr><td><code>진우_리스크차단기.py</code></td><td><span class="tag t-cash">규칙</span>주문 직전 최종 안전핀 (가격밴드·현금·비중·킬스위치)</td></tr>
+  <tr><td><code>코어_TR_기준선.py</code> / <code>배당_TR_패널.py</code></td><td><span class="tag t-core">검증</span>"진짜 총수익" 측정기 — 12월 판정 기준선</td></tr>
+  <tr><td><code>소멸_재분류_v1.csv</code> / <code>상폐수익률_가정.md</code></td><td><span class="tag t-core">검증</span>상폐 정직 처리 — 못 박은 가정</td></tr>
+  <tr><td><code>데이터수리\collect_kis_monthly*.py</code></td><td><span class="tag t-cash">데이터</span>수정주가 수집기 (1996~2015 완료 · 2016+ 진행 중)</td></tr>
+  <tr><td><code>종목_선별계획_2026-08.md</code> / <code>수익엔진_설계.md</code></td><td><span class="tag t-core">문서</span>이번 달 선별 계획 · 전체 전략 설계</td></tr>
+</table>
+</div>
+
+<h2><span class="n">6</span>현재 위치와 다음 3가지</h2>
+<div class="card">
+  <ul class="big3" style="list-style:none">
+    <li><span class="ok">✅ 끝난 것</span> — 한도 통일·배선 / cap 버그 수정 / 잔고 감시 / 배당 TR(+2.4%p 확정) / 상폐 재분류(2,264개) / 검증창 기준선(TR 16.8%, 단 2008~15는 지수 열위)</li>
+    <li><span class="ng">① 수집 완주</span> — <b>2016~2026 수정주가</b> (지금 돌아가는 중) → 병합 → 전 기간 진짜 수익률 확정</li>
+    <li><span class="ng">② 대덕전자 선언</span> — 81% 보유를 위성(분할 축소)이냐 예외 동결이냐. <b>이게 결정돼야 신규 선별이 시작됨</b></li>
+    <li><span class="ng">③ 위성 엣지 조립</span> — 검증 통과 4규칙(저변동성·저PBR·하순필터·청산)은 <b>소·중형 전용 — 대형 코어엔 못 얹는다.</b> 이 4종을 하나의 위성 운용 규칙으로 조립해 사전등록 → 2016+ 수정주가(봉인 OOS)로 개봉 검정</li>
+  </ul>
+</div>
+
+<div class="foot">
+  원칙 세 줄: <b>시스템이 고르고 사람은 거부권만</b> · <b>리스크 총량(heat 6%)이 먼저, 수익은 그다음</b> · <b>증액은 게이트가 결정</b><br>
+  ⚠️ 내부 운용 문서 · 과거통계 기반 · 투자자문 아님 · 결정과 책임은 본인. — 진우퀀트 청사진 v1 (2026-07-28)
+</div>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>진우퀀트 현황 — 2026-06-22</title>
+<style>
+:root{--bg:#0f1115;--card:#181b22;--ink:#e8eaed;--mut:#9aa0aa;--line:#262a33;--acc:#ff7a45;--g:#3fb37a;--y:#e0b020;--r:#e2606a;--b:#5b9bd5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,'Segoe UI','Malgun Gothic',sans-serif;padding:16px 14px 40px;line-height:1.55;max-width:560px;margin:0 auto}
+h1{font-size:20px;margin:0 0 2px}
+.sub{color:var(--mut);font-size:12px;margin-bottom:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px;margin:11px 0}
+.card h2{font-size:13px;margin:0 0 8px;color:#fff;border-left:3px solid var(--acc);padding-left:8px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px}
+.row:last-child{border-bottom:0}
+.row .nm{flex:1}
+.b{font-size:11px;border-radius:5px;padding:2px 7px;white-space:nowrap;font-weight:600}
+.b.g{background:#143b2a;color:#7ee0ad}.b.y{background:#3b3214;color:#ffd479}.b.r{background:#3a1618;color:#ff9aa0}.b.b{background:#15293d;color:#9cc7f0}.b.m{background:#22262f;color:#9aa0aa}
+.mut{color:var(--mut);font-size:11.5px}
+.big{font-size:15px;font-weight:700}
+.pill{display:inline-block;font-size:11px;background:#22262f;color:#bcc2cc;border-radius:20px;padding:3px 10px;margin:3px 4px 0 0}
+.todo{display:flex;gap:9px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13px;align-items:flex-start}
+.todo:last-child{border-bottom:0}
+.dot{flex:none;width:9px;height:9px;border-radius:50%;margin-top:5px}
+.dot.now{background:var(--acc)}.dot.soon{background:var(--y)}.dot.later{background:var(--b)}.dot.done{background:var(--g)}
+.foot{color:#5a6068;font-size:11px;margin-top:18px;text-align:center;line-height:1.6}
+.banner{background:#2a1d12;border:1px solid #5a3a1f;color:#ffc6a3;border-radius:10px;padding:11px 13px;font-size:12.5px;margin:11px 0}
+.k{color:var(--mut)}
+</style></head><body>
+
+<h1>🧭 진우퀀트 현황</h1>
+<div class="sub">2026-06-22 기준 · 시세 미포함 현황판 · "뭐가 돼있고 뭐가 남았나"</div>
+
+<div class="banner">⚠️ 이건 <b>상태 요약판</b>이야 — 시세·지표는 안 들어가. 실제 숫자는 PC에서 <b>시장브리핑_실행.bat</b> / <b>decision_view.py</b> 돌리면 최신 HTML로 떠.</div>
+
+<div class="card">
+<h2>1 · 두 갈래 구조</h2>
+<div class="row"><span class="nm"><b>본체 v3.7.2</b><br><span class="mut">KOSPI 18종, 검증된 룰 (backward)</span></span><span class="b g">운용 중</span></div>
+<div class="row"><span class="nm"><b>테마 lane</b><br><span class="mut">KOSDAQ forward 재량 + Track W 측정</span></span><span class="b y">측정 시작</span></div>
+<div class="row"><span class="nm"><b>정보 인프라</b><br><span class="mut">브리핑·스캔·의사결정뷰</span></span><span class="b g">자동화 완료</span></div>
+</div>
+
+<div class="card">
+<h2>2 · 자동화 도구 (작동 중)</h2>
+<div class="row"><span class="nm">매일 시장 브리핑 <span class="mut">+ 폰HTML·OneDrive</span></span><span class="b g">✓</span></div>
+<div class="row"><span class="nm">의사결정 뷰 <span class="mut">4렌즈 + regime신선도·저유동 경고</span></span><span class="b g">✓ 오늘 보강</span></div>
+<div class="row"><span class="nm">월간 테마 스캔 <span class="mut">선반영×촉매×수급</span></span><span class="b g">✓</span></div>
+<div class="row"><span class="nm">시장 스냅샷·breadth 누적</span><span class="b g">✓</span></div>
+<div class="row"><span class="nm">Track W 반사실 계산기</span><span class="b g">✓</span></div>
+</div>
+
+<div class="card">
+<h2>3 · 데이터 소스</h2>
+<div class="row"><span class="nm">yfinance <span class="mut">미국지수·환율·美금리</span></span><span class="b g">자동</span></div>
+<div class="row"><span class="nm">pykrx <span class="mut">국내지수·수급</span></span><span class="b g">자동</span></div>
+<div class="row"><span class="nm">KRX OpenAPI <span class="mut">VKOSPI·선물·OI·베이시스</span></span><span class="b g">자동</span></div>
+<div class="row"><span class="nm">└ 풋/콜 비율 <span class="mut">옵션 권한 활성 대기</span></span><span class="b y">내일 재확인</span></div>
+</div>
+
+<div class="card">
+<h2>4 · Track W (테마 실측)</h2>
+<div class="row"><span class="nm"><b>① 테크윙</b> <span class="k">089030</span><br><span class="mut">진입 60,450 · 2주 · 현금 · 6/21</span></span><span class="b g">보유·측정</span></div>
+<div class="row"><span class="nm">손절가 <span class="mut">ATR14 기반</span></span><span class="big">48,360</span></div>
+<div class="row"><span class="nm">테스 095610</span><span class="b m">워치</span></div>
+<div class="row"><span class="nm">펩트론 087010</span><span class="b m">등록·미진입</span></div>
+<div class="mut" style="margin-top:7px">다음 입력 = <b>월말 수익 3개</b>(테크윙·시스템픽·테마EW) → 첫 기록. 합격선: 6개월 누적 ≥0.</div>
+</div>
+
+<div class="card">
+<h2>5 · 채택 vs 기각 (불변)</h2>
+<div style="margin-bottom:6px"><span class="mut">✅ 채택</span><br>
+<span class="pill">v3.7.2 본체</span><span class="pill">MA200 행동규칙</span><span class="pill">MDD 메타룰</span><span class="pill">테마 손절 k2.5</span><span class="pill">v3.9 PEAD ×0.5 관찰</span></div>
+<div><span class="mut">❌ 기각</span><br>
+<span class="pill">팩터추가 4종</span><span class="pill">KOSDAQ 기계선정 4종</span><span class="pill">방어·타이밍 8회</span></div>
+<div class="mut" style="margin-top:7px">→ KOSDAQ 알파 = <b>forward 테마만</b>.</div>
+</div>
+
+<div class="card">
+<h2>6 · 남은 일 (우선순위)</h2>
+<div class="todo"><span class="dot done"></span><span><b>regime 신선도 경고 추가</b> <span class="mut">decision_view (오늘 완료)</span></span></div>
+<div class="todo"><span class="dot done"></span><span><b>재매수·R-사이징 룰 명문화</b> <span class="mut">체크리스트 문서 (오늘 완료)</span></span></div>
+<div class="todo"><span class="dot now"></span><span><b>풋/콜 확인</b> <span class="mut">내일 브리핑 재실행 — 오늘의 1순위</span></span></div>
+<div class="todo"><span class="dot soon"></span><span><b>2차전지 79% 집중 축소 검토</b> <span class="mut">진우 판단 (최대 리스크)</span></span></div>
+<div class="todo"><span class="dot soon"></span><span><b>테크윙 월말 수익 → Track W 첫 기록</b> <span class="mut">6/30 또는 7월말</span></span></div>
+<div class="todo"><span class="dot soon"></span><span><b>스케줄 등록 여부 확인</b> <span class="mut">작업 스케줄러</span></span></div>
+<div class="todo"><span class="dot later"></span><span><b>예약 일정</b> <span class="mut">7/1 B전환 · 9월 통합 재심사 · 12월 Track W 본판정</span></span></div>
+</div>
+
+<div class="card">
+<h2>한 줄</h2>
+<div style="font-size:13.5px">시스템·정보 인프라는 <b>다 갖춰졌어</b>. 남은 건 ① 진짜 포트(2차전지 집중) ② 실측 시간(Track W).<br><span class="mut" style="font-size:12px">도구가 아니라 규율과 시간의 문제. 한 번에 다 안 해도 돼.</span></div>
+</div>
+
+<div class="foot">진우퀀트 현황 대시보드 · 시세 미포함 · 매수·판단·책임은 진우<br>최신 시세는 PC .bat 실행 후 시장브리핑/의사결정뷰 HTML 참고</div>
+</body></html>

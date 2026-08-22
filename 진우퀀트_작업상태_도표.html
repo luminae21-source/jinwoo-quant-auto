@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>진우퀀트 작업 상태 — 도표</title>
+<style>
+  :root{
+    --bg:#f7f8fa;--card:#fff;--ink:#1c2128;--sub:#5b626d;--line:#e4e7ec;
+    --green:#1e8e5a;--greenbg:#e6f4ec;--red:#c0392b;--redbg:#fbecea;
+    --amber:#b7791f;--amberbg:#fdf3e2;--blue:#2f6fdb;--bluebg:#eaf1fd;--accent:#c85426;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:'Malgun Gothic','Apple SD Gothic Neo',system-ui,sans-serif;line-height:1.55}
+  .wrap{max-width:1080px;margin:0 auto;padding:30px 22px 70px}
+  header.top{border-left:6px solid var(--accent);padding:6px 0 6px 18px;margin-bottom:16px}
+  h1{font-size:25px;margin:0 0 4px}
+  .muted{color:var(--sub);font-size:13px}
+  h2{font-size:19px;margin:34px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:12px 0}
+  .grid{display:grid;grid-template-columns:260px 1fr;gap:18px;align-items:center}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:4px 0}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#f0f2f5;font-weight:700;font-size:12.5px}
+  tr:last-child td{border-bottom:none}
+  .b{display:inline-block;padding:1px 9px;border-radius:20px;font-size:11.5px;font-weight:700;white-space:nowrap}
+  .ok{background:var(--greenbg);color:var(--green)}
+  .no{background:var(--redbg);color:var(--red)}
+  .cond{background:var(--amberbg);color:var(--amber)}
+  .info{background:var(--bluebg);color:var(--blue)}
+  code{background:#eef1f5;padding:1px 6px;border-radius:5px;font-size:12px;font-family:'Consolas',monospace}
+  /* progress bars */
+  .bar{background:#edf0f4;border-radius:8px;height:22px;position:relative;overflow:hidden;margin:3px 0}
+  .fill{height:100%;border-radius:8px 0 0 8px;display:flex;align-items:center;color:#fff;font-size:11.5px;font-weight:700;padding-left:9px}
+  .row{display:grid;grid-template-columns:150px 1fr 46px;gap:10px;align-items:center;margin:7px 0;font-size:13px}
+  .pct{font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+  .legend{font-size:12px;color:var(--sub);margin-top:8px}
+  .legend span{display:inline-block;margin-right:14px}
+  .dot{display:inline-block;width:10px;height:10px;border-radius:3px;vertical-align:middle;margin-right:4px}
+  .callout{background:var(--redbg);border-left:4px solid var(--red);padding:12px 16px;border-radius:6px;margin:12px 0}
+  .foot{color:var(--sub);font-size:12px;margin-top:36px;border-top:1px solid var(--line);padding-top:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>진우퀀트 작업 상태 — 도표</h1>
+  <div class="muted">2026-07-19 기준 · 30년 패널(5,057종목·상폐포함·~2026-07-16) · 모든 판정은 실행 결과 기준<br>
+  ⚠️ 투자자문 아님 · 매매 판단·책임은 본인</div>
+</header>
+
+<!-- ── 전체 진행률 ── -->
+<h2>1. 전체 진행률</h2>
+<div class="card grid">
+  <div style="text-align:center">
+    <svg viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="완료율 도넛">
+      <circle cx="100" cy="100" r="78" fill="none" stroke="#edf0f4" stroke-width="26"/>
+      <!-- 완료 82% : 둘레 2πr=490, 완료 0.82*490=402 -->
+      <circle cx="100" cy="100" r="78" fill="none" stroke="#1e8e5a" stroke-width="26"
+        stroke-dasharray="402 490" stroke-dashoffset="0" transform="rotate(-90 100 100)" stroke-linecap="round"/>
+      <text x="100" y="94" text-anchor="middle" font-size="40" font-weight="800" fill="#1c2128">82%</text>
+      <text x="100" y="120" text-anchor="middle" font-size="13" fill="#5b626d">연구·도구 완료</text>
+    </svg>
+  </div>
+  <div>
+    <p class="muted" style="margin-top:0">연구(검정)·데이터·도구·학습자료는 <b>사실상 완료</b>. 남은 18%는 대부분
+    <b>사용자 입력(보유 진입가)에 막힌 실무 연결</b>과 선택적 자동화다. 연구 파이프라인 자체엔 미결이 없다.</p>
+    <div class="row"><div>검정 6종 (①②③④·B·C)</div><div class="bar"><div class="fill" style="width:100%;background:#1e8e5a">6/6</div></div><div class="pct">100%</div></div>
+    <div class="row"><div>데이터·무결성</div><div class="bar"><div class="fill" style="width:100%;background:#1e8e5a">완료</div></div><div class="pct">100%</div></div>
+    <div class="row"><div>도구·자동화</div><div class="bar"><div class="fill" style="width:100%;background:#1e8e5a">가동</div></div><div class="pct">100%</div></div>
+    <div class="row"><div>학습·문서</div><div class="bar"><div class="fill" style="width:100%;background:#1e8e5a">완료</div></div><div class="pct">100%</div></div>
+    <div class="row"><div>실무 연결(보유·원장)</div><div class="bar"><div class="fill" style="width:15%;background:#c0392b">막힘</div></div><div class="pct">15%</div></div>
+    <div class="row"><div>선택 자동화</div><div class="bar"><div class="fill" style="width:40%;background:#b7791f">선택</div></div><div class="pct">40%</div></div>
+    <div class="legend"><span><span class="dot" style="background:#1e8e5a"></span>완료</span>
+      <span><span class="dot" style="background:#b7791f"></span>선택/부분</span>
+      <span><span class="dot" style="background:#c0392b"></span>막힘(사용자 입력 대기)</span></div>
+  </div>
+</div>
+
+<!-- ── 완료 작업 ── -->
+<h2>2. 완료된 작업</h2>
+<div class="card">
+<table>
+<thead><tr><th>분류</th><th>작업</th><th>핵심 결과</th><th>상태</th></tr></thead>
+<tbody>
+<tr><td rowspan="4"><b>데이터·<br>무결성</b></td><td>30년 패널 구축</td><td>5,057종목·1,470만행·상폐 포함(날짜별 수집=생존편향 차단)</td><td><span class="b ok">완료</span></td></tr>
+<tr><td>패널 무결성 검증</td><td>6대 위기 5개 방향 일치 · EW↔KOSPI 월상관 0.703</td><td><span class="b ok">완료</span></td></tr>
+<tr><td>상폐 3분류 + 봉인 가정</td><td>정상 0%·폭락 −30%·완만 −50% → 연 드래그 <b>−1.5%p</b>(base)</td><td><span class="b ok">봉인</span></td></tr>
+<tr><td>재무 백필 + 발굴데이터 갱신</td><td>PBR 2002~ · KOSDAQ 2024→2026-07-16·volume 복구</td><td><span class="b ok">완료</span></td></tr>
+
+<tr><td rowspan="6"><b>검정<br>(6종)</b></td><td>C 진입 엣지</td><td>저변동성 채택(OOS t 4.7/5.0) · 모멘텀·신고가 기각</td><td><span class="b ok">봉인</span></td></tr>
+<tr><td>B 청산 규칙</td><td>트레일−15·고정−8 채택 — 파국 방어(손상통제)</td><td><span class="b ok">봉인</span></td></tr>
+<tr><td>① 고변동 × 스톱</td><td>스톱은 방어일 뿐 · 저변동에 못 미침(기하 −4.2 vs −1.4)</td><td><span class="b ok">판정</span></td></tr>
+<tr><td>② 섹터 내 기울기</td><td>저PBR OOS t=3.17·저변동 2.68(조건부, IN 관문 미달)</td><td><span class="b cond">조건부</span></td></tr>
+<tr><td>③ 발굴툴 배선</td><td>jq_discover 순위에 저PBR·저변동 가산(상태필터 불변)</td><td><span class="b ok">완료</span></td></tr>
+<tr><td>④ 팩터 결합</td><td>중형 채택·소형 조건부·대형 기각 · 상폐 민감도 강건</td><td><span class="b cond">부분채택</span></td></tr>
+
+<tr><td rowspan="4"><b>도구</b></td><td>검정 스크립트 3종</td><td>①②④ · 셀프테스트 게이트 내장</td><td><span class="b ok">가동</span></td></tr>
+<tr><td>발굴데이터 갱신기 · 관심종목 상태표</td><td>"지금 타점 형성됐나" 10초 확인(추세·신고가·유입·PBR)</td><td><span class="b ok">가동</span></td></tr>
+<tr><td>발굴 올인원 배치</td><td>상태표+안정+돌파 한 번에 (<code>발굴_전체_실행.bat</code>)</td><td><span class="b ok">가동</span></td></tr>
+<tr><td>오늘상승 분류·이중바닥 도구</td><td>장 마감 후 분류표(기존 자산, 확인)</td><td><span class="b ok">가동</span></td></tr>
+
+<tr><td rowspan="3"><b>학습·<br>문서</b></td><td>학습 대시보드</td><td><code>진우퀀트_학습대시보드.html</code> — 이론·도구·용어</td><td><span class="b ok">완료</span></td></tr>
+<tr><td>여섯 검정 수렴 도식</td><td><code>여섯검정_수렴도식.svg</code></td><td><span class="b ok">완료</span></td></tr>
+<tr><td>작업 현황판 · 상태 도표</td><td>본 문서 + <code>진우퀀트_작업현황판.md</code></td><td><span class="b ok">완료</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ── 미완 작업 ── -->
+<h2>3. 진행 안 된 / 남은 작업</h2>
+<div class="callout">
+  <b>🔴 최대 병목 — <code>my_holdings.csv</code></b> : 실제 보유 <b>평균단가·수량·진입일</b>은 사용자만 안다.
+  이 한 칸이 채워져야 보유점검·집중도·매도신호등·원장 4개가 실전 가동된다. (도구는 모두 준비 완료, 데이터만 대기)
+</div>
+<div class="card">
+<table>
+<thead><tr><th>작업</th><th>상태</th><th>막힌 이유 / 종속</th><th>다음 액션</th></tr></thead>
+<tbody>
+<tr><td><b>my_holdings.csv 완성</b></td><td><span class="b no">🔴 막힘</span></td><td>사용자 데이터 필요(추정 금지)</td><td>종목별 평균단가·수량·진입일·신용 입력</td></tr>
+<tr><td>Track W 원장 갱신</td><td><span class="b no">🔴 대기</span></td><td>#1 종속</td><td>#1 후 <code>trackw_update.py</code></td></tr>
+<tr><td>보유점검·집중도·매도신호등 가동</td><td><span class="b cond">🟡 대기</span></td><td>#1 종속(손절선 거리 계산에 진입가 필요)</td><td>#1 후 <code>보유점검_실행.bat</code></td></tr>
+<tr><td>임시파일 정리</td><td><span class="b cond">🟡 사소</span></td><td><code>_combo_run.log</code> 등 잔여</td><td>정리(선택) · 엔진 버그잔재는 이미 삭제됨</td></tr>
+<tr><td>예약작업 재등록(스케줄러)</td><td><span class="b cond">🟡 선택</span></td><td>자동 실행 원할 때만</td><td><code>예약작업_재등록_전체.bat</code></td></tr>
+<tr><td>마감 시황카드 스케줄</td><td><span class="b cond">🟡 선택</span></td><td>자동화 옵션</td><td><code>jq_close_register.bat</code> 1회</td></tr>
+<tr><td>시총 tier 엔진 배선</td><td><span class="b cond">🟡 선택</span></td><td>필터는 tier 지원, 엔진이 미전달(현재 전종목=보수적)</td><td>발굴/엔진에 tier 전달 배선</td></tr>
+<tr><td>에코프로비엠 유상증자 추적</td><td><span class="b info">🔵 진행중</span></td><td>일정만 추적</td><td>배정기준일 9/4 · 구주주청약 10/15~16 · 신주상장 11/5</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ── 결정경로 ── -->
+<h2>4. 크리티컬 패스</h2>
+<div class="card">
+  <div class="row" style="grid-template-columns:1fr;font-size:14px">
+    <div>
+      <span class="b ok">연구·도구 100%</span> &nbsp;→&nbsp;
+      <span class="b no">my_holdings.csv (사용자 입력)</span> &nbsp;→&nbsp;
+      <span class="b cond">보유점검·원장 자동 가동</span> &nbsp;→&nbsp;
+      <span class="b info">실전 운용 루프 완성</span>
+    </div>
+  </div>
+  <p class="muted" style="margin-bottom:0">모든 화살표가 <b>단 하나의 사용자 입력</b>에 걸려 있다. 그 외 남은 건 전부 <b>선택적 자동화</b>라
+  급하지 않다. 즉 <b>다음 할 일은 명확히 하나</b> — 보유 진입가를 넣는 것.</p>
+</div>
+
+<div class="foot">
+진우퀀트 작업 상태 도표 · 2026-07-19 · 상세 근거: <code>가상매매\검증\*_결과.md</code> · <code>증명된_규칙\</code> · <code>진우퀀트_학습대시보드.html</code><br>
+본 자료는 정리용이며 투자자문이 아닙니다. 모든 매매 판단·책임은 본인에게 있습니다.
+</div>
+
+</div>
+</body>
+</html>

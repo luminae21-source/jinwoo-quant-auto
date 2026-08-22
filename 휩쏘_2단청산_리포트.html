@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>휩쏘 2단 청산 — 30년 검정 판정문</title>
+<style>
+:root{
+ --bg:#0f1115; --panel:#171a21; --panel2:#1d212a; --line:#2a2f3a;
+ --tx:#e6e8ee; --dim:#98a0b0; --dim2:#6d7484;
+ --good:#3fb98a; --bad:#e0596b; --warn:#e0a33f; --acc:#6aa6ff;
+}
+@media(prefers-color-scheme:light){:root{
+ --bg:#f7f8fa;--panel:#fff;--panel2:#f0f2f6;--line:#e2e5ec;--tx:#1a1d24;--dim:#5b6373;--dim2:#8a92a3;}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);
+ font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+ -webkit-font-smoothing:antialiased}
+.wrap{max-width:940px;margin:0 auto;padding:32px 20px 80px}
+h1{font-size:27px;margin:0 0 6px;letter-spacing:-.4px}
+.sub{color:var(--dim);font-size:14px;margin-bottom:26px}
+h2{font-size:19px;margin:38px 0 12px;padding-top:20px;border-top:1px solid var(--line);letter-spacing:-.2px}
+h3{font-size:15px;margin:22px 0 8px;color:var(--dim)}
+p{margin:10px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0}
+.verdict{display:flex;gap:14px;align-items:flex-start;background:linear-gradient(135deg,rgba(224,163,63,.13),rgba(224,163,63,.04));
+ border:1px solid rgba(224,163,63,.4);border-radius:12px;padding:18px 20px;margin:18px 0}
+.verdict .ic{font-size:26px;line-height:1.2}
+.verdict b{font-size:17px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px}
+th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+thead th{color:var(--dim);font-weight:600;font-size:12.5px;text-transform:none;border-bottom:1px solid var(--line)}
+tbody tr:hover{background:var(--panel2)}
+.g{color:var(--good)}.b{color:var(--bad)}.w{color:var(--warn)}.d{color:var(--dim2)}
+.hi{background:rgba(106,166,255,.10)}
+.hi td{font-weight:600}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.kpi .l{font-size:11.5px;color:var(--dim2);letter-spacing:.3px}
+.kpi .v{font-size:23px;font-weight:650;margin-top:3px;letter-spacing:-.5px}
+.kpi .n{font-size:11.5px;color:var(--dim);margin-top:2px}
+.bar{height:7px;border-radius:4px;background:var(--panel2);overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;border-radius:4px}
+ul{margin:8px 0;padding-left:20px}li{margin:5px 0}
+code{background:var(--panel2);padding:1.5px 6px;border-radius:5px;font-size:12.5px;
+ font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+pre{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:15px 17px;
+ overflow-x:auto;font-size:12.5px;line-height:1.7;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.note{font-size:12.5px;color:var(--dim);border-left:2px solid var(--line);padding-left:13px;margin:14px 0}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;border:1px solid var(--line);color:var(--dim);margin-left:6px;vertical-align:middle}
+.ok{color:var(--good);border-color:rgba(63,185,138,.45)}
+.no{color:var(--bad);border-color:rgba(224,89,107,.45)}
+.mid{color:var(--dim2)}
+.ci{font-family:ui-monospace,monospace;font-size:12.5px}
+footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);color:var(--dim2);font-size:12px}
+</style></head><body><div class="wrap">
+
+<h1>휩쏘 2단 청산 — 30년 판정문</h1>
+<div class="sub">열린 과제 #1 · 2026-08-02 · 표본 2,801건 전량 / 126봉 창완결 2,163건 · 사전 고정 정책 그리드 50종</div>
+
+<div class="verdict">
+  <div class="ic">🟡</div>
+  <div>
+    <b>조건부 채택 — 방향은 맞다, 크기는 작다.</b><br>
+    <span style="color:var(--dim)">🟢실행 국면에서 평균 <b class="g">+0.48%p</b> (95% CI +0.05 ~ +0.97, P(Δ&gt;0)=98.8%).
+    중앙값과 승률은 <b>카드와 완전 동일</b> — 순수 가산이다.
+    다만 "고점 +26.6%와의 간극 40%p"는 <b>회수 대상이 아니었다</b>. 실제 회수는 그 간극의 1.1%.</span>
+  </div>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><div class="l">카드(현행) · 🟢실행</div><div class="v">+1.65%</div><div class="n">중앙 +0.10 · 승률 50.2%</div></div>
+  <div class="kpi"><div class="l">권고 2단 · 🟢실행</div><div class="v g">+2.13%</div><div class="n">중앙 +0.10 · 승률 50.2%</div></div>
+  <div class="kpi"><div class="l">Δ평균</div><div class="v g">+0.48%p</div><div class="n ci">95% CI [+0.05, +0.97]</div></div>
+  <div class="kpi"><div class="l">간극 회수율</div><div class="v w">1.1%</div><div class="n">42.9%p 중 0.48%p</div></div>
+</div>
+
+<h2>0. 재현 검증 — 이 검정을 믿어도 되는가</h2>
+<div class="card">
+원장 <code>카드수익</code> 2,801건을 백조정 원자료에서 <b>독립 재계산</b> → <b class="g">2,801건 전부 오차 0.05%p 이내</b>
+(중앙 0.022%p = 원장 소수1자리 반올림 오차). 원장 평균 +1.44% = 재현 평균 +1.44%.
+기존 판정문의 "카드청산 평균 +1.1%"(126봉 창완결분)도 정확히 재현.
+<div class="note">→ 기존 30년 검정 수치는 그대로 유효하다. 이번 결과는 <b>동일 신호·동일 진입가·동일 목표가</b>에서 청산 정책만 바꾼 것이므로 사후선택 편향이 없다.</div>
+</div>
+
+<h2>1. 핵심 발견 — 간극 40%p는 회수 대상이 아니었다</h2>
+<table>
+<thead><tr><th>지표 (🟢실행 국면)</th><th>값</th><th>해석</th></tr></thead>
+<tbody>
+<tr><td>6M 고점 평균</td><td class="g">+44.5%</td><td class="d">신이 최고점에 판 값</td></tr>
+<tr><td>카드 청산 평균</td><td>+1.65%</td><td class="d">실제 실행 가능한 값</td></tr>
+<tr><td>간극</td><td class="w">+42.9%p</td><td class="d">"회수 가능한 손실"로 읽었던 수치</td></tr>
+<tr class="hi"><td>2단이 실제 회수</td><td class="g">+0.48%p</td><td>간극의 <b>1.1%</b></td></tr>
+</tbody></table>
+<div class="note"><b>정직 고지.</b> 이 간극을 회수 대상으로 프레이밍했던 것이 오독이었다. 고점은 도달 불가능한 상한이지 목표가 아니다. 기록으로 남긴다.</div>
+
+<h3>왜 이렇게 작은가 — 3중 감쇠</h3>
+<table>
+<thead><tr><th>단계</th><th>감쇠</th><th>내용</th></tr></thead><tbody>
+<tr><td>① 표본이 절반</td><td class="w">×0.48</td><td class="d">40봉 내 목표 도달은 48.4%뿐. 나머지는 손절·트레일·만기 → 2단이 개입할 자리가 없다</td></tr>
+<tr><td>② 잔여 중앙값은 미미</td><td class="w">중앙 +2.7%</td><td class="d">목표 후 반을 들고 가도 절반 이상은 별 것 없이 끝난다(잔여 단독 승률 57%, 추가 보유 중앙 24봉)</td></tr>
+<tr><td>③ 로또 구조</td><td class="w">상위 5% = 평균의 42%</td><td class="d">잔여 단독 평균 +11.7% 중 +4.96%p가 상위 5%에서 나온다. p50 +2.7 · p90 +46 · 최대 +268%</td></tr>
+</tbody></table>
+<p>→ 절반을 로또에 태운 대가가 평균 +0.48%p. <b>"꼬리로 버는 자리"라는 시스템 정체성과 정확히 일치</b>한다.</p>
+
+<h2>2. 정책 비교 — 🟢실행 국면 (n=1,437)</h2>
+<table>
+<thead><tr><th>정책</th><th>평균</th><th>중앙</th><th>승률</th><th>표준편차</th><th>Δ평균</th><th>부트 95% CI</th><th>판정</th></tr></thead>
+<tbody>
+<tr><td>카드 · 40봉 (현행)</td><td>+1.72</td><td>+2.33</td><td>50.7%</td><td>8.7</td><td class="d">기준</td><td class="d">—</td><td class="d">—</td></tr>
+<tr><td>카드 · 126봉 (지평만 연장)</td><td>+1.65</td><td>+0.10</td><td>50.2%</td><td>8.6</td><td class="b">−0.08</td><td class="d">—</td><td><span class="tag no">기각</span></td></tr>
+<tr class="hi"><td>권고 2단 · 50%매도 T12 본전스톱</td><td class="g">+2.13</td><td>+0.10</td><td>50.2%</td><td>10.6</td><td class="g">+0.48</td><td class="ci g">[+0.05, +0.97]</td><td><span class="tag ok">채택</span></td></tr>
+<tr><td>공격 2단 · 25%매도 T12</td><td class="g">+2.37</td><td>+0.10</td><td>50.2%</td><td>12.3</td><td class="g">+0.73</td><td class="ci g">[+0.07, +1.46]</td><td><span class="tag mid">선택지</span></td></tr>
+<tr><td>보수 2단 · 75%매도 T12</td><td>+1.89</td><td>+0.10</td><td>50.2%</td><td>9.3</td><td class="g">+0.24</td><td class="ci g">[+0.02, +0.49]</td><td><span class="tag mid">선택지</span></td></tr>
+<tr><td>트레일만 (목표 제거)</td><td class="g">+2.81</td><td class="b">−3.20</td><td class="b">41.2%</td><td class="b">14.5</td><td class="g">+1.16</td><td class="ci g">[+0.32, +2.11]</td><td><span class="tag w">보류</span></td></tr>
+<tr><td>구조청산 (잔여를 핵심선 이탈로)</td><td>+1.93</td><td class="b">−0.94</td><td>48.6%</td><td class="b">15.1</td><td>+0.29</td><td class="ci d">[−0.59, +1.52]</td><td><span class="tag no">기각</span></td></tr>
+</tbody></table>
+<div class="note">부트스트랩은 <b>연도 블록</b> 재표집(6,000회). 휩쏘 이벤트는 위기해에 몰려 독립표본이 아니므로 일반 부트스트랩은 CI를 과소평가한다.</div>
+
+<h2>3. 왜 이 사양인가 — 그리드 50종에서 살아남은 것</h2>
+<table>
+<thead><tr><th>파라미터</th><th>선택</th><th>근거</th></tr></thead><tbody>
+<tr><td>잔여 트레일 폭</td><td><b>−12%</b></td><td class="d">10~12%만 전 구간·전 표본에서 95% CI가 0을 넘음. 15~25%는 점추정은 크나 CI가 0 포함 → 과최적화 위험. 12%는 A형 초기 트레일과 동일 → <b>규칙 수가 늘지 않는다</b></td></tr>
+<tr><td>잔여 손절</td><td><b>본전(진입가) 하한</b></td><td class="d">결정적 조항. 본전 스톱이면 중앙값·승률이 카드와 <b>완전 동일</b>하고 평균만 오른다. 트레일만 허용하면 승률 50.2%→42% 붕괴 → 기각</td></tr>
+<tr><td>보유 지평</td><td><b>126봉</b></td><td class="d">40/63/126봉 결과가 사실상 동일(+0.48 / +0.49 / +0.48). <b>시간이 아니라 꼬리를 놓치지 않는 것</b>이 수익원. 운영 편의로 126봉</td></tr>
+<tr><td>분할 비율</td><td><b>50%</b></td><td class="d">25% 매도가 Δ +0.73%p로 크지만 표준편차 8.6→12.3. 50%가 수익/변동성 균형점</td></tr>
+</tbody></table>
+
+<h2>4. 국면별 — 어디에 걸 것인가</h2>
+<table>
+<thead><tr><th>국면</th><th>n</th><th>카드</th><th>2단</th><th>Δ</th><th>부트 95% CI</th><th>판정</th></tr></thead><tbody>
+<tr class="hi"><td>🟢 실행</td><td>1,437</td><td>+1.65%</td><td class="g">+2.13%</td><td class="g">+0.48%p</td><td class="ci g">[+0.05, +0.97]</td><td><span class="tag ok">채택</span></td></tr>
+<tr><td>🟡 주의</td><td>426</td><td>−0.00%</td><td>+0.15%</td><td>+0.15%p</td><td class="ci d">[−0.33, +0.50]</td><td><span class="tag mid">무의</span></td></tr>
+<tr><td>🔴 관찰만</td><td>300</td><td class="b">−0.46%</td><td class="b">−0.16%</td><td>+0.30%p</td><td class="ci d">[−0.27, +0.90]</td><td><span class="tag mid">무의 · 애초에 안 산다</span></td></tr>
+</tbody></table>
+<p>세 국면 모두 중앙값·승률은 카드와 동일하므로 전 국면에 걸어도 손해는 아니다. 다만 <b>증거가 있는 곳은 🟢실행뿐</b>이므로 카드에는 실행 국면 조항으로 명문화한다.</p>
+
+<h2>5. 안정성 — 5년 구간별 (🟢실행)</h2>
+<table>
+<thead><tr><th>구간</th><th>n</th><th>카드</th><th>권고 2단</th><th>Δ</th><th></th></tr></thead><tbody>
+<tr><td>1995–99</td><td>146</td><td>+2.07</td><td>+1.76</td><td class="b">−0.31</td><td><div class="bar"><i style="width:22%;background:var(--bad)"></i></div></td></tr>
+<tr><td>2000–04</td><td>260</td><td>+0.80</td><td>+0.88</td><td class="g">+0.08</td><td><div class="bar"><i style="width:6%;background:var(--good)"></i></div></td></tr>
+<tr><td>2005–09</td><td>270</td><td>+1.46</td><td>+2.22</td><td class="g">+0.77</td><td><div class="bar"><i style="width:55%;background:var(--good)"></i></div></td></tr>
+<tr><td>2010–14</td><td>147</td><td>+1.81</td><td>+1.26</td><td class="b">−0.55</td><td><div class="bar"><i style="width:39%;background:var(--bad)"></i></div></td></tr>
+<tr><td>2015–19</td><td>127</td><td>+1.27</td><td>+2.42</td><td class="g">+1.16</td><td><div class="bar"><i style="width:83%;background:var(--good)"></i></div></td></tr>
+<tr><td>2020–24</td><td>432</td><td>+1.78</td><td>+2.73</td><td class="g">+0.95</td><td><div class="bar"><i style="width:68%;background:var(--good)"></i></div></td></tr>
+<tr><td>2025–26</td><td>55</td><td>+4.86</td><td>+5.48</td><td class="g">+0.62</td><td><div class="bar"><i style="width:44%;background:var(--good)"></i></div></td></tr>
+</tbody></table>
+<p><b>7구간 중 5구간 개선.</b> 최근 3구간(2015~)은 모두 개선. 손실 구간은 1995–99·2010–14.</p>
+
+<h2>6. 거래비용 민감도</h2>
+<p>2단은 매도가 1회 늘어난다(잔여 50%에 1회분).</p>
+<table>
+<thead><tr><th>편도 비용 가정</th><th>추가비용</th><th>Δ평균 (비용후)</th><th>부호</th></tr></thead><tbody>
+<tr><td>0.15%</td><td>0.075%p</td><td class="g">+0.41%p</td><td class="g">유지</td></tr>
+<tr><td>0.30%</td><td>0.150%p</td><td class="g">+0.33%p</td><td class="g">유지</td></tr>
+<tr><td>0.50% (보수적)</td><td>0.250%p</td><td class="g">+0.23%p</td><td class="g">유지</td></tr>
+</tbody></table>
+
+<h2>7. 카드 반영 문안</h2>
+<pre>[휩쏘 카드 · 청산]
+  손절   : 초기 손절가 (A: 지지선×0.95 / B: 지지선×0.97)
+  트레일 : 고점比 −12%(A) / −15%(B)
+  목표   : A = 급락폭 절반 되돌림 / B = 직전 60봉 고가
+
+▸ 목표 도달 시 → <b>50% 실현</b>. 잔여 50%는:
+     · 트레일 고점比 −12%
+     · <b>손절선은 본전(진입가) 아래로 내리지 않는다</b>   ← 이 조항이 승률을 지킨다
+     · 최대 126봉(6개월) 후 잔량 청산
+▸ 🟢실행 국면에서만 적용.</pre>
+
+<h2>8. 한계 — 모든 결론에 붙는 고지</h2>
+<ul>
+<li><b>생존편향</b> — 상폐 종목 과소반영. 실제 성과는 위 수치보다 다소 나쁘다.</li>
+<li><b>기업행위 잔존</b> — 가격제한폭 이내의 소규모 증자는 백조정이 잡지 못한다.</li>
+<li><b>클러스터</b> — 이벤트가 위기해에 몰려 독립표본이 아니다. 연도블록 부트스트랩으로 완화했으나 Δ는 시사이지 확정이 아니다.</li>
+<li><b>꼬리 의존</b> — 잔여분 성과가 소수 사례에 의존하므로, 실전 소표본에서는 평균에 한참 못 미치는 기간이 길게 이어질 수 있다. <b>이 규칙은 "체감되지 않는 개선"이다.</b></li>
+<li><b>슬리피지</b> — 시뮬은 총액 기준. 위 비용표는 사후 차감치다.</li>
+</ul>
+
+<footer>
+재현 스크립트: <code>휩쏘_2단청산검정.py</code> → <code>휩쏘_2단청산_보강.py</code> → <code>휩쏘_2단청산_최종.py</code><br>
+원자료: <code>종목일봉_30년_{KOSPI,KOSDAQ}.csv</code> 가격제한폭 백조정 · 이벤트 원장: <code>휩쏘_역사원장.csv</code> (2,801건)<br>
+산출물: <code>휩쏘_2단청산_이벤트.csv</code> · <code>휩쏘_2단청산_보강.csv</code> · <code>휩쏘_2단청산_요약.csv</code> · <code>휩쏘_2단청산_결과.json</code><br>
+⚠️ 검정용 문서. 매매 추천이 아니다.
+</footer>
+</div></body></html>

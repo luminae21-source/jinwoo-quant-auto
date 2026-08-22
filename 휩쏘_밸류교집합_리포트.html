@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>좋은 회사를 저렴하게 — 명제 검정 + 일관성 감사</title>
+<style>
+:root{--bg:#0f1115;--panel:#171a21;--panel2:#1d212a;--line:#2a2f3a;--tx:#e6e8ee;--dim:#98a0b0;--dim2:#6d7484;
+--good:#3fb98a;--bad:#e0596b;--warn:#e0a33f;--acc:#6aa6ff}
+@media(prefers-color-scheme:light){:root{--bg:#f7f8fa;--panel:#fff;--panel2:#f0f2f6;--line:#e2e5ec;--tx:#1a1d24;--dim:#5b6373;--dim2:#8a92a3}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:980px;margin:0 auto;padding:32px 20px 80px}
+h1{font-size:27px;margin:0 0 6px;letter-spacing:-.4px}
+.sub{color:var(--dim);font-size:14px;margin-bottom:24px}
+h2{font-size:19px;margin:38px 0 12px;padding-top:20px;border-top:1px solid var(--line)}
+h3{font-size:15px;margin:20px 0 8px;color:var(--dim)}
+p{margin:10px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0}
+.verdict{display:flex;gap:14px;align-items:flex-start;background:linear-gradient(135deg,rgba(63,185,138,.14),rgba(63,185,138,.03));
+border:1px solid rgba(63,185,138,.45);border-radius:12px;padding:18px 20px;margin:18px 0}
+.verdict .ic{font-size:26px}
+.warnbox{background:linear-gradient(135deg,rgba(224,163,63,.13),rgba(224,163,63,.03));border:1px solid rgba(224,163,63,.4);
+border-radius:12px;padding:18px 20px;margin:18px 0}
+.rule{background:var(--panel2);border-left:3px solid var(--acc);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:16px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px}
+th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+thead th{color:var(--dim);font-weight:600;font-size:12.5px}
+tbody tr:hover{background:var(--panel2)}
+.g{color:var(--good)}.b{color:var(--bad)}.w{color:var(--warn)}.d{color:var(--dim2)}
+.hi{background:rgba(63,185,138,.10)}.hi td{font-weight:600}
+.lo{background:rgba(224,89,107,.08)}
+.sec{background:var(--panel2)}
+.sec td{font-weight:600;color:var(--dim);font-size:12.5px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.kpi .l{font-size:11.5px;color:var(--dim2)}.kpi .v{font-size:22px;font-weight:650;margin-top:3px;letter-spacing:-.5px}
+.kpi .n{font-size:11.5px;color:var(--dim);margin-top:2px}
+ul{margin:8px 0;padding-left:20px}li{margin:6px 0}
+ol{margin:8px 0;padding-left:22px}
+code{background:var(--panel2);padding:1.5px 6px;border-radius:5px;font-size:12.5px;font-family:ui-monospace,Menlo,monospace}
+pre{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:15px 17px;overflow-x:auto;
+font-size:12px;line-height:1.7;font-family:ui-monospace,Menlo,monospace}
+.note{font-size:12.5px;color:var(--dim);border-left:2px solid var(--line);padding-left:13px;margin:14px 0}
+.ci{font-family:ui-monospace,monospace;font-size:12.5px}
+.pass{color:var(--good);font-weight:600}
+footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);color:var(--dim2);font-size:12px}
+</style></head><body><div class="wrap">
+
+<h1>"좋은 회사를 저렴하게" — 명제 검정</h1>
+<div class="sub">+ 오늘 4개 검정의 일관성 감사 · 2026-08-02 · 표본 7,071건(정식A 2,405 + S2 4,666) 중 재무판정 가능 5,528건</div>
+
+<div class="verdict"><div class="ic">✅</div><div>
+<b style="font-size:17px">명제는 데이터가 지지한다 — 단, 순서가 있다.</b><br>
+<span style="color:var(--dim)">밸류 태그 효과는 <b>모든 신호 등급 · 모든 국면에서 예외 없이 (+)</b>다.
+최상급 셀(🟢실행 × 밸류 × A/S2-α)은 <b class="g">+3.59% · 승률 64.0%</b>,
+최하급 셀은 <b class="b">−0.49% · 승률 43.5%</b> — 격차 <b>+4.07%p · 승률 +20.5%p</b>.<br>
+다만 밸류만으로는 부족하다. <b>🔴관찰만 국면에서는 밸류가 있어도 −0.02%</b> — 국면 게이트가 여전히 1순위다.</span>
+</div></div>
+
+<div class="kpis">
+<div class="kpi"><div class="l">최상급 셀</div><div class="v g">+3.59%</div><div class="n">승률 64.0% · n=422</div></div>
+<div class="kpi"><div class="l">최하급 셀</div><div class="v b">−0.49%</div><div class="n">승률 43.5% · n=1,825</div></div>
+<div class="kpi"><div class="l">격차</div><div class="v g">+4.07%p</div><div class="n">승률 +20.5%p</div></div>
+<div class="kpi"><div class="l">최상급 셀 빈도</div><div class="v w">7.6%</div><div class="n">5,528건 중 422건</div></div>
+<div class="kpi"><div class="l">일관성 감사</div><div class="v g">전항목 통과</div><div class="n">엔진·수치·논리</div></div>
+</div>
+
+<h2>1. 밸류 태그는 어디서나 더해진다</h2>
+<p>재무검정(2,074건)에서 <b>국면 통제 후에도 생존한 팩터만</b> 썼다 — 저PBR(&lt;0.8) · 저PER(&lt;8, EPS&gt;0) · 배당2%+.
+"적자 전환기가 세다" "고PER 눌림이 세다"는 이미 기각된 것들이라 넣지 않았다.</p>
+
+<h3>🟢실행 국면 (n=3,322)</h3>
+<table>
+<thead><tr><th>구분</th><th>n</th><th>카드 평균</th><th>중앙</th><th>승률</th><th>2단</th><th>부트 95% CI</th></tr></thead>
+<tbody>
+<tr><td>전체</td><td>3,322</td><td>+1.91%</td><td>+5.86%</td><td>57.8%</td><td>+2.69%</td><td class="ci g">[+0.78, +3.24]</td></tr>
+<tr class="hi"><td>밸류 태그 <b>있음</b></td><td>787</td><td class="g">+2.68%</td><td>+6.05%</td><td class="g">64.3%</td><td class="g">+3.32%</td><td class="ci g">[+1.25, +4.03]</td></tr>
+<tr><td>밸류 태그 없음</td><td>2,535</td><td>+1.68%</td><td>+5.78%</td><td>55.7%</td><td>+2.49%</td><td class="ci g">[+0.56, +3.01]</td></tr>
+<tr class="sec"><td colspan="7">태그별</td></tr>
+<tr><td>　저PBR (&lt;0.8)</td><td>416</td><td class="g">+2.96%</td><td>+6.15%</td><td>65.9%</td><td>+3.50%</td><td class="ci g">[+1.07, +4.45]</td></tr>
+<tr><td>　저PER (&lt;8)</td><td>357</td><td class="g">+2.56%</td><td>+6.00%</td><td>64.4%</td><td>+2.84%</td><td class="ci g">[+1.32, +3.87]</td></tr>
+<tr class="hi"><td>　배당 2%+</td><td>429</td><td class="g">+3.21%</td><td>+6.21%</td><td class="g">68.5%</td><td class="g">+3.97%</td><td class="ci g">[+1.69, +4.57]</td></tr>
+<tr class="hi"><td>　태그 <b>2개 이상</b></td><td>310</td><td class="g">+3.43%</td><td>+6.23%</td><td class="g">70.0%</td><td class="g">+3.68%</td><td class="ci g">[+1.73, +4.84]</td></tr>
+</tbody></table>
+<p><b>태그가 겹칠수록 좋아진다</b>(70.0% 승률). 단일 태그 중에선 <b>배당 2%+</b>가 가장 강하다 — 저평가 지표 중에서도
+"실제로 현금을 주는 회사"가 가장 잘 버틴다는 뜻으로 읽힌다.</p>
+
+<h2>2. 신호 등급 × 밸류 — 밸류는 죽은 등급도 살린다</h2>
+<table>
+<thead><tr><th>등급 (🟢실행)</th><th>n</th><th>카드 평균</th><th>승률</th><th>2단</th><th>부트 95% CI</th></tr></thead>
+<tbody>
+<tr class="sec"><td colspan="6">정식 A</td></tr>
+<tr class="hi"><td>　밸류 O</td><td>244</td><td class="g">+3.82%</td><td class="g">65.2%</td><td class="g">+4.34%</td><td class="ci g">[+1.71, +5.74]</td></tr>
+<tr><td>　밸류 X</td><td>884</td><td>+2.46%</td><td>55.2%</td><td>+3.27%</td><td class="ci g">[+1.12, +3.84]</td></tr>
+<tr class="sec"><td colspan="6">S2-α (실전 후보)</td></tr>
+<tr class="hi"><td>　밸류 O</td><td>178</td><td class="g">+3.27%</td><td class="g">62.4%</td><td>+3.62%</td><td class="ci g">[+1.16, +4.65]</td></tr>
+<tr><td>　밸류 X</td><td>627</td><td>+2.65%</td><td>56.9%</td><td>+3.98%</td><td class="ci g">[+0.88, +4.70]</td></tr>
+<tr class="sec"><td colspan="6">S2-β (관찰만)</td></tr>
+<tr><td>　밸류 O</td><td>215</td><td>+1.47%</td><td>62.8%</td><td>+1.99%</td><td class="ci d">[−0.08, +2.93]</td></tr>
+<tr><td>　밸류 X</td><td>586</td><td>+0.82%</td><td>58.2%</td><td>+1.59%</td><td class="ci g">[+0.25, +1.65]</td></tr>
+<tr class="sec"><td colspan="6">S2-γ (등록 제외)</td></tr>
+<tr class="hi"><td>　밸류 O</td><td>150</td><td class="g">+1.85%</td><td class="g">67.3%</td><td class="g">+3.22%</td><td class="ci g">[+0.70, +3.09]</td></tr>
+<tr class="lo"><td>　밸류 X</td><td>438</td><td class="b">−0.15%</td><td>51.8%</td><td>−0.04%</td><td class="ci d">[−1.16, +1.02]</td></tr>
+</tbody></table>
+<div class="rule"><b>S2-γ를 보라.</b> 신호로는 죽은 등급(−0.15%)인데 밸류 태그가 붙으면 <b class="g">+1.85% · 승률 67.3%</b>로 살아난다.
+<b>밸류는 신호 품질과 독립적으로 더해지는 축</b>이다 — 같은 걸 두 번 재는 게 아니다.</div>
+
+<h2>3. 국면 × 밸류 — 무엇이 먼저인가</h2>
+<table>
+<thead><tr><th>국면</th><th>n</th><th>카드 평균</th><th>중앙</th><th>승률</th><th>부트 95% CI</th></tr></thead>
+<tbody>
+<tr class="sec"><td colspan="6">🟢 실행</td></tr>
+<tr class="hi"><td>　밸류 O</td><td>787</td><td class="g">+2.68%</td><td>+6.05%</td><td class="g">64.3%</td><td class="ci g">[+1.25, +4.03]</td></tr>
+<tr><td>　밸류 X</td><td>2,535</td><td class="g">+1.68%</td><td>+5.78%</td><td>55.7%</td><td class="ci g">[+0.56, +3.01]</td></tr>
+<tr class="sec"><td colspan="6">🟡 주의</td></tr>
+<tr><td>　밸류 O</td><td>239</td><td>+0.31%</td><td>+5.56%</td><td>51.0%</td><td class="ci d">[−0.84, +1.57]</td></tr>
+<tr><td>　밸류 X</td><td>1,119</td><td class="b">−0.31%</td><td class="b">−5.00%</td><td>44.7%</td><td class="ci d">[−1.01, +0.44]</td></tr>
+<tr class="sec"><td colspan="6">🔴 관찰만</td></tr>
+<tr><td>　밸류 O</td><td>142</td><td class="b">−0.02%</td><td class="b">−4.01%</td><td>47.2%</td><td class="ci d">[−1.42, +1.03]</td></tr>
+<tr class="lo"><td>　밸류 X</td><td>706</td><td class="b">−0.77%</td><td class="b">−5.18%</td><td class="b">41.5%</td><td class="ci b">[−1.64, −0.09]</td></tr>
+</tbody></table>
+<div class="warnbox">
+<b>여기가 핵심이다.</b> 🔴관찰만 국면에서 밸류 태그가 있어도 <b>−0.02%</b>다.
+밸류는 <b>손실을 0 근처까지 막아주지만, 플러스를 만들어내지는 못한다.</b><br><br>
+반대로 🟢실행 국면에서는 밸류가 없어도 +1.68%다.
+<b>→ 순서는 국면 게이트(1순위) → 휩쏘 자리(2순위) → 밸류 태그(3순위·가점).</b>
+"좋은 회사를 저렴하게"에서 <b>'저렴하게'보다 '언제'가 먼저</b>다.
+</div>
+
+<h2>4. 최상급 셀 — 세 축이 겹치는 자리</h2>
+<table>
+<thead><tr><th>셀</th><th>n</th><th>카드 평균</th><th>중앙</th><th>승률</th><th>2단</th><th>부트 95% CI</th></tr></thead>
+<tbody>
+<tr class="hi"><td>🟢실행 × 밸류 × (정식A 또는 S2-α)</td><td>422</td><td class="g">+3.59%</td><td>+7.39%</td><td class="g">64.0%</td><td class="g">+4.04%</td><td class="ci g">[+1.62, +5.17]</td></tr>
+<tr class="lo"><td>비실행 × 무밸류</td><td>1,825</td><td class="b">−0.49%</td><td class="b">−5.07%</td><td class="b">43.5%</td><td class="b">−0.50%</td><td class="ci b">[−0.93, −0.08]</td></tr>
+</tbody></table>
+<p><b>격차 +4.07%p · 승률 격차 +20.5%p.</b> 그리고 이 최상급 셀은 재무판정 가능분 5,528건 중 <b>422건 = 7.6%</b>다.
+30년에 422번 — <b>연평균 14번</b>. 흔하지 않지만 없지도 않다.</p>
+
+<h2>5. 그런데 — 이게 확증편향인가?</h2>
+<div class="card">
+<p>형 말이 맞다. 결론이 먼저 있고 근거를 찾는 게 아니라, <b>결론은 이미 알려진 것이고 문제는 "언제가 그 순간인가"</b>다.
+그리고 그 증거는 오늘 검정에서 나온다 — <b>확증편향이었다면 전부 통과했을 것이다.</b> 실제로는 기각이 더 많았다:</p>
+<table>
+<thead><tr><th>오늘 시험대에 오른 것</th><th>결과</th></tr></thead><tbody>
+<tr><td>2단 청산</td><td class="w">🟡 조건부 채택 (간극 회수는 1.1%뿐 — 기대보다 훨씬 작음)</td></tr>
+<tr><td>1월 앵커 청산</td><td class="w">🟠 보류 (데드라인은 366건 중 0건 발동)</td></tr>
+<tr><td>밸류만 4월 연장</td><td class="b">❌ 기각 (분기가 단일보다 못함)</td></tr>
+<tr><td>구조청산(핵심선 이탈)</td><td class="b">❌ 기각</td></tr>
+<tr><td>지평 연장(40→126봉)</td><td class="b">❌ 기각 (오히려 감소)</td></tr>
+<tr><td>2일누적 완화</td><td class="b">❌ 조합은 전부 기각</td></tr>
+<tr><td>9~10월 진입이 좋다는 가정</td><td class="b">❌ 반증 (평균 이하였다)</td></tr>
+<tr class="hi"><td>밸류 × 국면 × 자리 교집합</td><td class="g">✅ 채택 (모든 셀에서 일관)</td></tr>
+</tbody></table>
+<p><b>편향이 되는 지점은 따로 있다.</b> "결과값은 나와 있다"가 <b>"그러니 어떤 완화든 정당하다"</b>로 넘어가는 순간이다.
+오늘 2일누적 완화가 정확히 그 시험대였고 — <b>죽었다.</b> 규율이 작동한 것이다.</p>
+<p><b>그리고 지금 당장의 위험 하나.</b> 위 표를 보고 밸류를 <b>필터</b>로 쓰면(밸류 없으면 안 산다) 🟢실행 기회의
+<b>76%를 버린다</b>(2,535/3,322). 밸류 X도 +1.68%로 플러스다. 재무검정의 원칙 —
+<b class="w">"가점·우선순위용, 필터 아님"</b> — 이 여기서도 그대로 유효하다.</p>
+</div>
+
+<h2>6. 일관성 감사 — 오늘 4개 검정이 서로 어긋나지 않는가</h2>
+<p>하루에 4개를 돌렸으니 엔진이 갈라졌을 수 있다. <b>텍스트가 아니라 "같은 입력 → 같은 출력"으로</b> 검증했다.</p>
+<table>
+<thead><tr><th>감사 항목</th><th>결과</th></tr></thead><tbody>
+<tr><td><b>A. 엔진 동등성</b> — 인위적 분할/병합을 넣은 동일 시계열</td><td></td></tr>
+<tr><td>　<code>back_adjust()</code> · 4개 스크립트 vs <b>형의 원본 엔진</b></td><td class="pass">✅ 최대차 0.0e+00</td></tr>
+<tr><td>　<code>line_series()</code> (주60주·월10)</td><td class="pass">✅ 최대차 0.0e+00</td></tr>
+<tr><td>　<code>era_limit()</code> 가격제한폭 경계(2015-06-15)</td><td class="pass">✅ 전부 일치</td></tr>
+<tr><td><b>B. 수치 동등성</b></td><td></td></tr>
+<tr><td>　원장 카드수익 ↔ 3개 검정의 재계산</td><td class="pass">✅ n=2,801/2,405/366 · 최대오차 0.05%p(반올림)</td></tr>
+<tr><td>　검정①↔② · ①↔③ 교집합 이벤트 카드·2단</td><td class="pass">✅ 최대차 0.0e+00 (완전일치)</td></tr>
+<tr><td>　A집합 = 원장 A집합 (2,405건 대칭차 0)</td><td class="pass">✅</td></tr>
+<tr><td>　A ∩ S2 = ∅ · B ∩ S2 = ∅</td><td class="pass">✅ 중복 집계 없음</td></tr>
+<tr><td><b>C. 판정문 수치 ↔ 재계산</b></td><td class="pass">✅ 과제1 +1.65→+2.13 · S2 A +2.40/S2 +1.27 전부 일치</td></tr>
+<tr><td><b>D. 논리 일관성</b> (6개 명제)</td><td class="pass">✅ 전부 통과</td></tr>
+</tbody></table>
+
+<h3>감사에서 새로 잡힌 것 2건</h3>
+<div class="card">
+<p><b>① S2 판정문의 '2단 Δ'는 혼합 정의였다.</b> 카드(40봉) vs 2단(126봉)을 비교해 지평 효과가 섞여 있다.
+분해해 보니 <b>지평 효과는 사실상 0.00%p</b>였고 보고된 Δ는 거의 전부 순수 분할 효과였다.
+<span class="d">→ 결론에 영향 없음. 다만 판정문에 정의를 명시해야 한다.</span></p>
+<p><b>② 형의 원본 <code>휩쏘_역사검정.py</code>가 pandas 3.x에서 죽는다.</b>
+<code>resample("M")</code>이 3.x에서 폐기됐다. 형 PC(pandas 2.3.3)에서는 지금 정상 동작하지만,
+<b>업그레이드하는 순간 30년 검정 재현 경로가 끊긴다.</b>
+<span class="d">→ <code>"M"</code> → <code>"ME"</code> 한 글자. 같은 패턴이 <code>휩쏘_고점분석.py</code> 등 다른 검정 엔진에도 있을 수 있다.</span></p>
+</div>
+
+<h2>7. 실전 반영</h2>
+<pre>[휩쏘 우선순위 — 오늘 검정으로 확정]
+  1순위  국면 게이트    🔴관찰만이면 밸류가 있어도 사지 않는다 (밸류O도 −0.02%)
+  2순위  신호 등급      정식A / S2-α > S2-β > S2-γ
+  3순위  밸류 태그      <b>가점이지 필터가 아니다.</b> 밸류 X도 🟢실행에선 +1.68%
+                       (필터로 쓰면 기회의 76%를 버린다)
+
+▸ 최상급 셀 = 🟢실행 × 밸류 × (정식A 또는 S2-α) → +3.59% · 승률 64.0% · 연 14회
+▸ 태그 2개 이상이면 승률 70.0% — 겹칠수록 좋다
+▸ 배당 2%+ 가 단일 태그 중 최강 (+3.21% · 승률 68.5%)
+▸ 청산은 2단(목표 50% 실현 + 잔여 트레일 −12% · 본전 하한 · 126봉)</pre>
+
+<h2>8. 한계</h2>
+<ul>
+<li><b>KRX 재무는 월말 스냅숏</b>이고 <b>2002-01부터</b>다. 그 이전 934건은 태그 자체가 불가라 <b>전 분석에서 제외</b>했다(밸류 없음에 섞으면 오염된다).</li>
+<li><b>밸류 태그 = 시점 저평가</b>이지 "좋은 회사"가 아니다. 저PBR은 망해가는 회사에도 붙는다. 이 검정은 "싼 걸 샀더니 좋았다"이지 "좋은 회사였다"를 증명하지 않는다.</li>
+<li><b>생존편향</b> — 상폐 종목 과소반영. 저PBR 구간이 특히 취약하다. 실제는 위 수치보다 나쁘다.</li>
+<li><b>사후 분해</b> — 태그별·등급별 쪼개기는 사전등록되지 않았다. 방향은 재무검정(2,074건)과 일치하나 세부 수치는 시사다.</li>
+<li>위기해 클러스터 · 거래비용 미반영.</li>
+</ul>
+
+<footer>
+재현: <code>휩쏘_밸류교집합.py</code> · <code>휩쏘_일관성감사.py</code> → <code>휩쏘_일관성감사_결과.txt</code><br>
+표본: <code>S2_이벤트_통합.csv</code>(7,071건) × <code>종목재무_KRX_{KOSPI,KOSDAQ}.csv</code><br>
+⚠️ 검정용 문서. 매매 추천이 아니다.
+</footer>
+</div></body></html>

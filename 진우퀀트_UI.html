@@ -1,0 +1,314 @@
+<!DOCTYPE html><html lang="ko" data-theme="dark"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>진우퀀트+K</title>
+<link rel="manifest" href="/manifest.json"><link rel="apple-touch-icon" href="/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="진우퀀트+K">
+<meta name="theme-color" content="#12100c">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700;900&display=swap">
+<style>
+:root, [data-theme=dark]{color-scheme:dark;
+ --bg:#12100c; --sf:#1d1912; --sf2:#262016; --bd:#453b28; --bdh:#e0be7a;
+ --ink:#f8f2e2; --ink2:#e6dcbd; --mut:#bcab7f;
+ --gold:#e0be7a; --goldbg:#2f2818;
+ --good:#63c98f; --goodbg:#1b2f22; --bad:#ef7264; --badbg:#38211d; --amber:#e8b04d;
+ --rise:#f2695c; --risebg:#361f1a; --fall:#6b9bef; --fallbg:#1a2436;
+ --glow:0 0 0 1px var(--bdh), 0 4px 16px rgba(224,190,122,.15);
+ --sh:0 2px 7px rgba(0,0,0,.4);}
+[data-theme=light]{color-scheme:light;
+ --bg:#eadfc4; --sf:#fffefa; --sf2:#f2e9d3; --bd:#a8956a; --bdh:#6b4e1f;
+ --ink:#1c150a; --ink2:#33290f; --mut:#57481f;
+ --gold:#6b4e1f; --goldbg:#efe0bd;
+ --good:#176a3d; --goodbg:#d3e9da; --bad:#a52a22; --badbg:#f2d5d0; --amber:#815605;
+ --rise:#c0301f; --risebg:#f4d5cd; --fall:#1f56c4; --fallbg:#d6e2f6;
+ --glow:0 0 0 1px var(--bdh), 0 5px 16px rgba(124,93,42,.28);
+ --sh:0 2px 6px rgba(105,80,35,.22);}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);overflow:hidden;display:flex;
+ font-family:"Pretendard Variable",Pretendard,-apple-system,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+ font-size:15px;line-height:1.55}
+.num,.kb .v,.pill{font-variant-numeric:tabular-nums}
+.app{height:100%;max-height:900px;width:100%;max-width:1280px;margin:auto;padding:14px 20px 10px;display:flex;flex-direction:column;gap:10px}
+/* 헤더 + 국면 한 줄 */
+.hd{display:flex;align-items:center;gap:10px;flex:none}
+.hd h1{font-size:19px;margin:0;display:flex;align-items:center;gap:8px;white-space:nowrap;letter-spacing:.4px}
+.logo{width:30px;height:30px;border-radius:8px;border:1px solid var(--bd)}
+.plusk{color:var(--gold);font-weight:800}
+.tgl{background:var(--sf);border:1px solid var(--bd);border-radius:18px;
+ padding:5px 13px;font-size:12px;cursor:pointer;color:var(--ink2);font-family:inherit;white-space:nowrap}
+.tgl:hover{border-color:var(--bdh)}
+#mtgl{margin-left:auto}
+/* 간단 모드: 일상용 최소 화면 */
+body.simple #reps, body.simple #etc, body.simple #docs,
+body.simple h2.h-reps, body.simple h2.h-etc, body.simple h2.h-docs{display:none}
+.ban{flex:none;padding:10px 16px;border-radius:12px;border:1px solid var(--bd);
+ border-left:6px solid var(--mut);background:var(--sf);box-shadow:var(--sh);
+ display:flex;align-items:center;gap:11px}
+.ban .dot{width:13px;height:13px;border-radius:50%;background:var(--mut);flex:none;
+ box-shadow:0 0 0 4px color-mix(in srgb,var(--mut) 22%,transparent)}
+.ban b{font-size:15.5px}.ban .why{color:var(--ink2);font-size:13px}
+/* 본문: 좌(요약) · 우(실행) */
+.main{flex:1;min-height:0;display:grid;grid-template-columns:290px 1fr;gap:12px}
+.left{display:flex;flex-direction:column;gap:10px;min-height:0}
+.left .kb{flex:1;display:flex;flex-direction:column;justify-content:center}
+.kb{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:12px 15px;box-shadow:var(--sh)}
+.kb .l{font-size:12.5px;color:var(--mut);letter-spacing:.3px;font-weight:600}
+.kb .v{font-size:24px;font-weight:800;margin-top:2px;letter-spacing:-.3px}
+span.money{background:linear-gradient(105deg,var(--gold2,#f0d79f),var(--gold) 55%,var(--bdh));
+ -webkit-background-clip:text;background-clip:text;color:transparent;font-size:25px;font-weight:800}
+.kb .s{font-size:13.5px;color:var(--ink2);margin-top:2px;font-weight:500}
+.pill{display:inline-block;border-radius:16px;padding:2px 10px;font-size:12.5px;font-weight:800;vertical-align:3px;margin-left:7px}
+.pill.up{background:var(--risebg);color:var(--rise)}.pill.dn{background:var(--fallbg);color:var(--fall)}
+.rise{color:var(--rise);font-weight:700}.fall{color:var(--fall);font-weight:700}
+.spark{width:100%;height:38px;margin-top:6px}
+.warn{flex:none;color:var(--mut);font-size:10.5px;text-align:center;padding-top:2px}
+/* 우측 */
+.right{display:flex;flex-direction:column;gap:7px;min-height:0}
+#ctrl{display:flex;flex-direction:column;gap:7px;flex:none}
+h2{font-size:12.5px;margin:2px 0 0;color:var(--gold);letter-spacing:1.6px;font-weight:800;
+ display:flex;align-items:center;gap:8px;flex:none}
+h2 small{color:var(--mut);font-weight:400;letter-spacing:0;font-size:11px}
+h2::after{content:"";flex:1;height:1px;background:var(--bd)}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;flex:none}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;flex:none}
+button.jb{position:relative;background:var(--sf);border:1px solid var(--bd);border-radius:11px;
+ padding:11px 12px 9px;font-size:13px;cursor:pointer;color:var(--ink);text-align:left;
+ font-family:inherit;box-shadow:var(--sh);transition:box-shadow .15s,transform .1s,border-color .15s}
+button.jb:hover{border-color:var(--bdh);box-shadow:var(--glow);transform:translateY(-1px)}
+button.jb:active{transform:translateY(0)}
+button.jb:disabled{opacity:.4;cursor:default;transform:none;box-shadow:var(--sh)}
+button.jb b{display:block;font-size:14.5px;font-weight:800}
+button.jb span{font-size:12.5px;color:var(--mut);display:block;margin-top:1px;line-height:1.4;font-weight:500;
+ overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.stp{position:absolute;top:-8px;left:10px;background:var(--gold);color:#12100c;font-size:11px;
+ font-weight:800;width:19px;height:19px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+[data-theme=light] .stp{color:#fffdf7}
+.st{position:absolute;top:7px;right:10px;font-size:13px}
+/* 문서: 남는 높이를 칩으로 채우고 넘치면 내부 스크롤 */
+.docs{flex:1;min-height:0;overflow-y:auto;display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;padding:2px}
+.docs a{background:var(--sf);border:1px solid var(--bd);border-radius:9px;
+ padding:7px 12px;text-decoration:none;color:var(--ink);font-size:13.5px;font-weight:500;box-shadow:var(--sh);white-space:nowrap}
+.docs a:hover{border-color:var(--bdh)}
+/* 실행 로그: 떠 있는 패널 */
+#logw{display:none;position:fixed;right:22px;bottom:22px;width:min(600px,calc(100vw - 44px));
+ max-height:55vh;border:1px solid var(--bdh);border-radius:14px;background:var(--sf);
+ box-shadow:0 10px 40px rgba(0,0,0,.55);overflow:hidden;z-index:50;flex-direction:column}
+#loghd{padding:11px 15px;font-size:14px;font-weight:800;display:flex;align-items:center;gap:8px;
+ border-bottom:1px solid var(--bd);background:var(--sf2)}
+#loghd .x{margin-left:auto;cursor:pointer;color:var(--mut);font-weight:400;font-size:12.5px}
+#log{padding:12px 15px;font:12px/1.55 ui-monospace,Consolas,monospace;white-space:pre-wrap;overflow:auto}
+.sp{display:inline-block;width:13px;height:13px;border:2px solid var(--gold);
+ border-top-color:transparent;border-radius:50%;animation:r .8s linear infinite}
+@keyframes r{to{transform:rotate(360deg)}}
+.b-ok{color:var(--good)}.b-info{color:var(--amber)}.b-err{color:var(--bad)}
+/* ── 오프닝 스플래시 (기관 스타일: 로고 펄스 + 진행선 + 오늘의 철칙) ── */
+#splash{position:fixed;inset:0;z-index:99;background:var(--bg);display:flex;flex-direction:column;
+ align-items:center;justify-content:center;gap:14px;transition:opacity .55s ease}
+#splash.hide{opacity:0;pointer-events:none}
+#splash img{width:76px;height:76px;border-radius:18px;border:1px solid var(--bd);
+ animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.92}50%{transform:scale(1.05);opacity:1}}
+#splash .snm{font-family:"Noto Serif KR",serif;font-size:27px;font-weight:900;letter-spacing:3px}
+#splash .snm b{background:linear-gradient(105deg,#f0d79f,var(--gold) 50%,#9c7a40);
+ -webkit-background-clip:text;background-clip:text;color:transparent}
+#splash .smotto{color:var(--ink2);font-size:13.5px;letter-spacing:1px;margin-top:-4px}
+#splash .sbar{width:170px;height:2px;border-radius:2px;background:var(--bd);overflow:hidden}
+#splash .sbar i{display:block;height:100%;width:40%;background:var(--gold);border-radius:2px;
+ animation:slide 1.1s ease-in-out infinite}
+@keyframes slide{0%{transform:translateX(-110%)}100%{transform:translateX(450%)}}
+#splash .srule{margin-top:6px;color:var(--mut);font-size:13px;letter-spacing:.3px;max-width:80%;text-align:center}
+#splash .srule b{color:var(--ink2)}
+.bench{margin-top:3px}
+/* 낮은 화면 → 더 조밀하게 */
+@media(max-height:820px){
+ .app{padding:10px 16px 8px;gap:8px}
+ .kb{padding:9px 13px}.kb .v{font-size:20px}
+ button.jb{padding:9px 11px 7px}button.jb b{font-size:13.5px}
+ button.jb span{-webkit-line-clamp:1}
+ .ban{padding:8px 14px}.ban b{font-size:14px}
+ .spark{height:30px}
+}
+/* 좁은 화면(모바일)만 스크롤 허용 — 상세 개선은 추후 */
+@media(max-width:800px){
+ body{overflow:auto}
+ .app{height:auto}
+ .main{grid-template-columns:1fr}
+ .flow,.row3{grid-template-columns:1fr 1fr}
+ .docs{overflow:visible;flex:none}
+}
+</style></head><body><div class="app">
+<div class="hd">
+ <h1><img class="logo" src="/icon-192.png" alt=""> 진우퀀트<span class="plusk">+K</span></h1>
+ <button class="tgl" id="mtgl" onclick="flipMode()">🔧 전체</button>
+ <button class="tgl" id="tgl" onclick="flipTheme()">☀️ 라이트</button>
+</div>
+<div class="ban" id="ban"><div class="dot"></div><div><b>국면 확인 중…</b></div></div>
+<div class="main">
+ <div class="left" id="kpis"></div>
+ <div class="right">
+  <div id="ctrl">
+   <h2>아침 루틴 <small>①→⑤ 순서대로</small></h2><div class="flow" id="flow"></div>
+   <h2 class="h-reps">리포트</h2><div class="row3" id="reps"></div>
+   <h2 class="h-etc">연구 · 정비 <small>가끔 한 번</small></h2><div class="row3" id="etc"></div>
+  </div>
+  <div id="vnote" style="display:none;background:var(--sf);border:1px solid var(--bd);border-radius:12px;
+   padding:14px 18px;color:var(--ink2);font-size:13.5px">
+   👀 <b>가족 열람 화면</b> — 계좌·국면·문서를 볼 수 있어요. 실행은 주인 PC에서만 됩니다.</div>
+  <h2 class="h-docs">문서</h2><div class="docs" id="docs"></div>
+ </div>
+</div>
+<div id="logw"><div id="loghd"><span id="loghd-t"></span><span class="x" onclick="document.getElementById('logw').style.display='none'">✕ 닫기</span></div><div id="log"></div></div>
+<div class="warn">⚠️ 관찰·기록·가상매매용 로컬 앱 · 실제 주문 아님 · 매매 추천 아님 · 창을 닫아도 엔진(exe)은 계속 실행 — 종료는 엔진 창에서</div>
+</div>
+<div id="splash"><img src="/icon-192.png" alt=""><div class="snm">진우퀀트<b>+K</b></div>
+<div class="smotto">얇은 우위를, 지치지 않고, 반복한다</div>
+<div class="sbar"><i></i></div><div class="srule" id="srule"></div></div>
+<script>
+const $=id=>document.getElementById(id);
+const fmt=n=>Number(n).toLocaleString("ko-KR");
+/* 직접 열기 방어 */
+if(location.protocol==="file:"){
+ document.body.innerHTML=`<div style="max-width:560px;margin:80px auto;padding:34px;background:var(--sf);border:1px solid var(--bd);border-radius:16px;text-align:center">
+ <div style="font-size:44px">⚠️</div><h2 style="margin:14px 0 6px;font-size:20px">이 파일은 직접 여는 게 아니에요</h2>
+ <p style="color:var(--ink2);font-size:15px;line-height:1.7">숫자와 버튼을 채워줄 <b>엔진</b>이 필요합니다.<br><br>
+ <b style="font-size:17px;color:var(--gold)">진우퀀트+K.exe</b> 를 실행하면 제대로 된 화면이 자동으로 열립니다.<br><br>
+ <span style="color:var(--mut);font-size:13px">이미 켜져 있다면 주소창에 → <b>127.0.0.1:8777</b></span></p></div>`;
+ throw new Error("file:// direct open");
+}
+/* 테마 — 다크 기본 */
+function setTheme(t){document.documentElement.dataset.theme=t;
+ $("tgl").textContent=t==="dark"?"☀️ 라이트":"🌙 다크";
+ try{localStorage.setItem("jq-theme",t)}catch(e){}}
+function flipTheme(){setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark")}
+try{setTheme(localStorage.getItem("jq-theme")||"dark")}catch(e){setTheme("dark")}
+/* 간단(일상) / 전체(개발자) 모드 — 기본은 간단 */
+function setMode(m){document.body.classList.toggle("simple", m==="simple");
+ $("mtgl").textContent=m==="simple"?"🔧 전체":"✨ 간단";
+ try{localStorage.setItem("jq-mode",m)}catch(e){}}
+function flipMode(){setMode(document.body.classList.contains("simple")?"full":"simple")}
+try{setMode(localStorage.getItem("jq-mode")||"simple")}catch(e){setMode("simple")}
+/* 스플래시: 오늘의 철칙 (30년 검정에서 살아남은 규칙들) */
+const RULES=["<b>2일누적 −12%</b>는 절대 완화하지 않는다",
+ "🔴 관찰만 국면에서는 밸류가 있어도 <b>사지 않는다</b>",
+ "승률에 속지 말 것 — 목표를 당기면 승률은 산수로 오른다",
+ "수익의 절반은 사는 것, 나머지 절반은 <b>안 사는 것</b>",
+ "규칙을 바꿔도 <b>국면</b>은 못 이긴다",
+ "고점은 신이 판 값 — 회수 대상이 아니다",
+ "밸류는 <b>가점</b>이지 필터가 아니다",
+ "사전등록 없이 좋아 보이는 것은 믿지 않는다"];
+document.getElementById("srule").innerHTML="“ "+RULES[Math.floor(Math.random()*RULES.length)]+" ”";
+const SPLASH_T0=Date.now();
+let SPLASH_DONE=false;
+function hideSplash(){
+ if(SPLASH_DONE) return; SPLASH_DONE=true;
+ const wait=Math.max(0, 1300-(Date.now()-SPLASH_T0));
+ setTimeout(()=>document.getElementById("splash").classList.add("hide"), wait);
+}
+/* 버크셔 방식: 같은 기간 KOSPI 대비 (연차보고서 1페이지 정신) */
+let BENCH=null, BENCH_TRIED=false;
+async function loadBench(startDate){
+ if(BENCH_TRIED||!startDate) return; BENCH_TRIED=true;
+ try{
+  const t=await (await fetch("/open?f=kospi_index_daily.csv")).text();
+  const rows=t.trim().split(/\r?\n/).slice(1);
+  let base=null,last=null;
+  for(const ln of rows){const i=ln.indexOf(","); if(i<0)continue;
+   const d=ln.slice(0,i).replace(/^﻿/,""), c=parseFloat(ln.slice(i+1));
+   if(!isFinite(c))continue;
+   if(base===null && d>=startDate) base=c;
+   last=c;}
+  if(base&&last) BENCH=(last/base-1)*100;
+ }catch(e){}
+}
+const FLOW=["탐지","관찰","가상추적","가상진입","매매카드"];
+const REPS=["일간리포트","주간리포트","월간리포트"];
+const HINT={"매매카드":"①탐지 실행한 날만 나옴","역사원장갱신":"⏱10~25분 · 월 1회"};
+const GUARD=["먼저","미등록","등록된 종목이 없","다른 작업이 실행 중","아직 없","원장 없음","오늘 탐지 없"];
+const RUNST={};
+const STCHIP={ok:"<span class='b-ok'>✓</span>",info:"<span class='b-info'>ⓘ</span>",err:"<span class='b-err'>✕</span>"};
+function btn(k,j,step){
+ const st=RUNST[k]?`<span class="st">${STCHIP[RUNST[k]]}</span>`:"";
+ const hint=HINT[k]||j.desc+(j.ok?"":" (도구 없음)");
+ return `<button class="jb" onclick="run('${k}')" ${j.ok?"":"disabled"}>${step?`<div class="stp">${step}</div>`:""}${st}<b>${k}</b><span>${hint}</span></button>`;}
+async function refresh(){
+ let s;
+ try{s=await (await fetch("/api/status")).json();}
+ catch(e){
+  const bn=$("ban"); bn.style.borderLeftColor="var(--bad)";
+  bn.children[1].innerHTML=`<b>엔진 연결 안 됨</b><span class="why"> — 진우퀀트+K.exe를 실행하면 살아납니다.</span>`;
+  hideSplash();
+  return;
+ }
+ hideSplash();
+ const rg=s.국면||{};
+ const M={"실행(유리)":["var(--good)","🟢"],"주의(중립)":["var(--amber)","🟡"],"관찰만(불리)":["var(--bad)","🔴"]}[rg.판정]||["var(--mut)","·"];
+ const bn=$("ban"); bn.style.borderLeftColor=M[0];
+ bn.querySelector(".dot").style.background=M[0];
+ bn.querySelector(".dot").style.boxShadow=`0 0 0 4px color-mix(in srgb,${M[0]} 24%,transparent)`;
+ bn.children[1].innerHTML=`<b>오늘 시장국면: ${rg.판정||"?"}</b><span class="why"> — ${rg.이유||""}</span>`;
+ const o=s.관찰||{},v=s.가상||{};
+ const osum=Object.entries(o.요약||{}).map(([k,n])=>`${k} ${n}`).join(" · ")||"-";
+ let curve="";
+ if((v.곡선||[]).length>1){const ys=v.곡선.map(p=>p[1]);
+  const mn=Math.min(...ys), mx=Math.max(...ys), n=v.곡선.length;
+  if((mx-mn)/(mn||1) < 0.0005){
+   // 아직 변화 없음(거래 전) — 점선 기준선 + 설명 한 줄
+   curve=`<svg class="spark" viewBox="0 0 300 40" preserveAspectRatio="none">
+    <line x1="0" y1="20" x2="300" y2="20" stroke="var(--bd)" stroke-width="1.6" stroke-dasharray="5 6"/></svg>
+    <div style="font-size:11.5px;color:var(--mut);margin-top:2px">자본곡선 — 첫 거래가 생기면 여기 그래프가 그려짐</div>`;
+  }else{
+   const lo=mn*.998, hi=mx*1.002;
+   const pts=v.곡선.map((p,i)=>`${(i/(n-1))*300},${36-((p[1]-lo)/(hi-lo||1))*30}`).join(" ");
+   curve=`<svg class="spark" viewBox="0 0 300 40" preserveAspectRatio="none">
+    <polyline points="0,40 ${pts} 300,40" fill="var(--goldbg)" stroke="none"/>
+    <polyline points="${pts}" fill="none" stroke="var(--gold)" stroke-width="1.8"/></svg>`;}}
+ const up=(v.수익률||0)>=0;
+ await loadBench(v.시작일);
+ let bench="";
+ if(BENCH!==null){
+  const traded=(v.보유||0)+(v.청산||0)>0;
+  const diff=(v.수익률||0)-BENCH;
+  const lead=!traded?`<span style="color:var(--mut)">현금 대기 중 — 신호를 기다린다</span>`
+   :diff>=0?`<span class='rise'>시장을 +${diff.toFixed(2)}%p 앞서는 중</span>`
+           :`<span class='fall'>시장에 ${diff.toFixed(2)}%p 뒤지는 중</span>`;
+  bench=`<div class="s bench">같은 기간 KOSPI ${BENCH>=0?"+":""}${BENCH.toFixed(2)}% · ${lead}</div>`;
+ }
+ const det=(s.탐지파일||[])[0];
+ const detD=det?det.replace("휩쏘탐지_","").replace(".csv",""):null;
+ const today=new Date().toISOString().slice(0,10).replace(/-/g,"");
+ $("kpis").innerHTML=`
+ <div class="kb"><div class="l">가상계좌 총자산 <small>(시작 ${fmt(v.시작||0)})</small></div>
+  <div class="v"><span class="money">${fmt(v.총자산||0)}원</span><span class="pill ${up?"up":"dn"}">${up?"▲":"▼"} ${Math.abs(v.수익률||0).toFixed(2)}%</span></div>
+  <div class="s">보유 ${v.보유||0} · 청산 ${v.청산||0} · 미진입 ${v.미진입||0} · ${v.시작일||""}~</div>${bench}${curve}</div>
+ <div class="kb"><div class="l">관찰 원장</div><div class="v">${o.총||0}종</div>
+  <div class="s">${osum}<br>갱신 ${o.갱신일||"-"}</div></div>
+ <div class="kb"><div class="l">마지막 탐지</div><div class="v" style="font-size:18px">${detD||"없음"}</div>
+  <div class="s">${detD===today?"<span class='b-ok'>오늘 실행함 ✓</span>":(s.뷰어?"오늘 아직 실행 전":"오늘 아직 — ①탐지 누르기")}</div></div>`;
+ if(s.뷰어){ $("ctrl").style.display="none"; $("vnote").style.display="block"; }
+ const J=s.작업||{};
+ $("flow").innerHTML=FLOW.filter(k=>J[k]).map((k,i)=>btn(k,J[k],i+1)).join("");
+ $("reps").innerHTML=REPS.filter(k=>J[k]).map(k=>btn(k,J[k])).join("");
+ $("etc").innerHTML=Object.keys(J).filter(k=>!FLOW.includes(k)&&!REPS.includes(k)).map(k=>btn(k,J[k])).join("");
+ $("docs").innerHTML=(s.문서||[]).map(([f,l])=>`<a href="/open?f=${encodeURIComponent(f)}" target="_blank">${l}</a>`).join("");
+}
+async function run(k){
+ const W=$("logw"),H=$("loghd-t"),L=$("log");
+ W.style.display="flex";
+ H.innerHTML=`<span class="sp"></span>&nbsp;[${k}] 실행 중…`;
+ L.textContent=k==="역사원장갱신"?"30년 검정 재실행 — 10~25분. 딴 일 봐도 됨.":"보통 1~3분.";
+ document.querySelectorAll("button.jb").forEach(b=>b.disabled=true);
+ try{
+  const r=await (await fetch("/api/run?job="+encodeURIComponent(k))).json();
+  const guard=!r.ok&&GUARD.some(g=>(r.out||"").includes(g));
+  RUNST[k]=r.ok?"ok":(guard?"info":"err");
+  H.innerHTML=r.ok?`<span class="b-ok">✅ [${k}] 완료</span>`
+   :guard?`<span class="b-info">ⓘ [${k}] 안내 — 오류 아님, 순서/조건 안내</span>`
+   :`<span class="b-err">❌ [${k}] 오류</span>`;
+  L.textContent=r.out||"(출력 없음)";
+ }catch(e){RUNST[k]="err";H.innerHTML=`<span class="b-err">❌ [${k}] 통신 오류</span>`;
+  L.textContent=String(e)+"\n\n엔진(진우퀀트+K.exe)이 켜져 있는지 확인.";}
+ document.querySelectorAll("button.jb").forEach(b=>b.disabled=false);
+ refresh();
+}
+refresh();setInterval(refresh,90000);
+</script></body></html>

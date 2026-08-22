@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>진우퀀트 현황 — 2026-08-01</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-0: #f6f6f4;
+    --surface-1: #fcfcfb;
+    --border:    #e0dfda;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #86847d;
+    --series-1: #2a78d6;
+    --series-2: #eb6834;
+    --series-3: #1baf7a;
+    --good:  #1a7f4b;
+    --bad:   #c0342f;
+    --grid:  #e8e7e2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --surface-0: #111110;
+      --surface-1: #1a1a19;
+      --border:    #33322f;
+      --text-primary:   #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted:     #8f8e85;
+      --series-1: #3987e5;
+      --series-2: #d95926;
+      --series-3: #199e70;
+      --good:  #4bb87c;
+      --bad:   #e66767;
+      --grid:  #2b2b28;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    background: var(--surface-0);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic",
+                 "Apple SD Gothic Neo", Roboto, sans-serif;
+    font-size: 15px; line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 40px 24px 80px; }
+  header { border-bottom: 2px solid var(--text-primary); padding-bottom: 18px; margin-bottom: 34px; }
+  h1 { font-size: 27px; margin: 0 0 6px; letter-spacing: -0.02em; font-weight: 700; }
+  .sub { color: var(--text-secondary); font-size: 14px; margin: 0; }
+  h2 {
+    font-size: 19px; margin: 46px 0 14px; font-weight: 650; letter-spacing: -0.01em;
+    display: flex; align-items: baseline; gap: 10px;
+  }
+  h2 .n { color: var(--text-muted); font-size: 14px; font-variant-numeric: tabular-nums; font-weight: 500; }
+  h3 { font-size: 15.5px; margin: 26px 0 10px; font-weight: 650; }
+  p { margin: 0 0 12px; }
+  .lead {
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-left: 3px solid var(--text-primary);
+    padding: 18px 20px; border-radius: 6px; margin-bottom: 8px;
+  }
+  .lead p { margin: 0; font-size: 16px; line-height: 1.7; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 16px; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  th { color: var(--text-secondary); font-weight: 600; font-size: 12.5px;
+       text-transform: none; letter-spacing: 0.02em; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: none; }
+  .card { background: var(--surface-1); border: 1px solid var(--border);
+          border-radius: 8px; padding: 18px 20px; margin: 14px 0; }
+  .pill { display: inline-block; padding: 1px 8px; border-radius: 100px;
+          font-size: 12px; font-weight: 650; white-space: nowrap; }
+  .pass { background: color-mix(in srgb, var(--good) 15%, transparent); color: var(--good); }
+  .fail { background: color-mix(in srgb, var(--bad) 15%, transparent); color: var(--bad); }
+  code, .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+                font-size: 13px; }
+  pre { background: var(--surface-1); border: 1px solid var(--border); border-radius: 6px;
+        padding: 12px 14px; overflow-x: auto; font-size: 13px; margin: 10px 0 16px; }
+  .note { color: var(--text-secondary); font-size: 13.5px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 720px) { .grid2 { grid-template-columns: 1fr; } }
+  .figtitle { font-size: 14.5px; font-weight: 650; margin: 0 0 2px; }
+  .figsub { font-size: 12.5px; color: var(--text-secondary); margin: 0 0 12px; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12.5px;
+            color: var(--text-secondary); margin-top: 8px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .swatch { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+  ul { margin: 0 0 14px; padding-left: 20px; }
+  li { margin-bottom: 5px; }
+  .warnbox { border-left: 3px solid var(--series-2); background: var(--surface-1);
+             border: 1px solid var(--border); border-left: 3px solid var(--series-2);
+             padding: 16px 18px; border-radius: 6px; margin: 14px 0; }
+  footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--border);
+           color: var(--text-muted); font-size: 12.5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>진우퀀트 현황</h1>
+  <p class="sub">2026-08-01 · 이 문서 하나로 현재 위치를 파악한다</p>
+</header>
+
+<div class="lead">
+  <p><strong>종목을 고르는 방법 네 가지를 검정했고 세 개가 죽었다.</strong> 살아남은 건 가치·배당 엔진 하나,
+  그리고 형이 직접 고르는 재량 레인이다. 시스템의 진짜 일은 종목 선정이 아니라 <strong>청산 규율</strong>이다.</p>
+</div>
+
+<h2><span class="n">01</span> 검정 성적표</h2>
+<table>
+  <thead><tr><th style="width:26%">검정</th><th>무엇을 물었나</th><th style="width:36%">결과</th></tr></thead>
+  <tbody>
+    <tr><td><strong>코어 TR 기준선</strong></td><td>가치·배당 4팩터 top30 + 10개월선 방어</td>
+        <td><span class="pill pass">통과</span> 2016–24 +5.82%p · 2026-06~07 급락 <strong>+23.08%p</strong></td></tr>
+    <tr><td><strong>고점 대량매도 신호</strong></td><td>고점권 대량 + 긴 위꼬리 = 분산 신호인가</td>
+        <td><span class="pill pass">통과</span> 형 인사이트 · 자동 알림 가동 중</td></tr>
+    <tr><td>위성엔진 OOS</td><td>저변동성 × 저PBR 조합</td>
+        <td><span class="pill fail">기각</span> 게이트 C 실패 (t 0.49 / 0.79 / 1.04)</td></tr>
+    <tr><td>횡단면 모멘텀 12-1</td><td>최근 오른 종목을 사면</td>
+        <td><span class="pill fail">기각</span> 롱온리 −9~−13%</td></tr>
+    <tr><td><strong>주도주 풀</strong></td><td>1·3·5년 모두 시장을 이긴 종목을 사면</td>
+        <td><span class="pill fail">기각</span> 12m −4.58% · 36m −30.56% (승률 <strong>8.9%</strong>)</td></tr>
+    <tr><td><strong>성장 팩터</strong></td><td>자본·이익이 실제로 성장하는 회사를 사면</td>
+        <td><span class="pill fail">기각</span> 자본 3년 CAGR 상위 30 → 12m −6.41% (승률 <strong>22.0%</strong>)</td></tr>
+  </tbody>
+</table>
+
+<div class="card">
+  <p style="margin:0"><strong>패턴이 보인다.</strong> "좋아 보이는 것을 사는" 형태는 전부 졌다 —
+  과거 성과가 좋았든, 실적이 성장하든, 저변동에 싸든. 이긴 건 <strong>싸고 배당 주는 것을 기계적으로 사고,
+  시장이 꺾이면 절반 빼는 것</strong> 하나다.</p>
+  <p class="note" style="margin:10px 0 0">왜 그런가 — 시장이 이미 아는 좋은 소식은 값에 들어가 있다.
+  성장률은 평균으로 회귀한다. 숫자로 '좋음'을 스크리닝하는 순간, 남들도 다 본 것을 사게 된다.</p>
+</div>
+
+<h2><span class="n">02</span> 구조 — 두 레인</h2>
+<table>
+  <thead><tr><th style="width:20%"></th><th>본체 (월간 포트)</th><th>재량</th></tr></thead>
+  <tbody>
+    <tr><td><strong>누가 고르나</strong></td><td>시스템 — 가치·배당 top30</td><td><strong>형</strong> — 대덕전자·하이닉스처럼 아는 종목</td></tr>
+    <tr><td><strong>근거</strong></td><td>전기간 검정 통과</td><td>형의 산업 이해. 팩터가 대신 못 함</td></tr>
+    <tr><td><strong>사이징</strong></td><td>동일가중 1/N · 종목캡 15% · <strong>섹터캡 35%</strong></td><td>위험 1%/건 · Σheat 6%</td></tr>
+    <tr><td><strong>청산</strong></td><td>재난 −40% / PBR 1.0 도달</td><td><strong>트레일 −15%</strong> · 고점대량매도 신호</td></tr>
+    <tr><td><strong>방어</strong></td><td colspan="2">KOSPI 월봉 &lt; 10개월선 → 투입 절반 (양 레인 공통)</td></tr>
+  </tbody>
+</table>
+<p class="note">시스템은 형이 아는 종목을 고르려 들지 않는다. 대신 형이 제일 약하다고 한 부분 —
+"매수만 잘하고 수익 다 까먹는" 청산 — 을 맡는다.</p>
+
+<h2><span class="n">03</span> 2026-07-31 — 섹터 사건이었다</h2>
+<p>전 종목 2,763 중 상승 2,332(84%). 상한가 29종, +20% 이상 122종.
+형의 가설 <strong>"강하게 눌린 게 강하게 오른다"</strong>를 기저율로 검사했다.</p>
+
+<div class="grid2">
+  <div class="card">
+    <p class="figtitle">리프트 — 무엇이 급등을 설명하나</p>
+    <p class="figsub">P(급등│조건) ÷ P(급등│조건 아님). 1.0이면 정보 없음</p>
+    <svg id="lift" viewBox="0 0 420 200" width="100%" role="img"
+         aria-label="눌림 raw 3.57배, 섹터 11.94배, 눌림 층화 1.12배"></svg>
+  </div>
+  <div class="card">
+    <p class="figtitle">분산 착시 — 실효 분산 종목수</p>
+    <p class="figsub">같은 비중 N종목을 들었을 때 실제로 몇 종목만큼 분산되나</p>
+    <svg id="div" viewBox="0 0 420 200" width="100%" role="img"
+         aria-label="상관 0.8이면 53종을 사도 실효 1.2종"></svg>
+    <div class="legend">
+      <span><i class="swatch" style="background:var(--series-1)"></i>상관 0.2</span>
+      <span><i class="swatch" style="background:var(--series-2)"></i>상관 0.5</span>
+      <span><i class="swatch" style="background:var(--series-3)"></i>상관 0.8</span>
+    </div>
+  </div>
+</div>
+
+<h3>기저율이 다 말해준다</h3>
+<table>
+  <tbody>
+    <tr><td>전체 종목 중 5년 고점 −30% 아래</td><td class="num"><strong>88.6%</strong> (2,011/2,270)</td></tr>
+    <tr><td>전체 중위 낙폭</td><td class="num"><strong>−65%</strong></td></tr>
+    <tr><td>급등주 중위 낙폭</td><td class="num">−54% &nbsp;← 오히려 덜 눌려 있었다</td></tr>
+  </tbody>
+</table>
+
+<h3>층화 — 섹터를 고정하고 눌림만 본다</h3>
+<table>
+  <thead><tr><th></th><th class="num">눌림</th><th class="num">안 눌림</th><th class="num">리프트</th></tr></thead>
+  <tbody>
+    <tr><td>반도체 체인 안에서</td><td class="num">15.24%</td><td class="num">13.64%</td><td class="num"><strong>1.12배</strong></td></tr>
+    <tr><td>체인 밖</td><td class="num">1.41%</td><td class="num">0.42%</td><td class="num">3.35배 <span class="note">(분모 1종 → 무의미)</span></td></tr>
+  </tbody>
+</table>
+<p><strong>"눌린 게 올랐다"가 아니라 "오른 섹터가 마침 눌려 있었다"가 맞다.</strong>
++20% 122종 중 <strong>약 110종(90%)이 반도체 밸류체인</strong>이다.</p>
+
+<div class="warnbox">
+  <p style="margin:0 0 8px"><strong>그래서 진짜 발견 — 분산 착시</strong></p>
+  <p style="margin:0">반도체 619종 중 94종이 <strong>같은 날 동시에</strong> +20% 넘게 올랐다.
+  상관 0.7~0.8이어야 나오는 그림이다. <strong>오르는 날의 상관계수는 내리는 날에도 똑같이 작동한다.</strong>
+  주도주 풀 53종을 나눠 사도 실효 1.2종 — 계좌엔 53줄이 찍히지만 위험은 한 종목이다.</p>
+  <p style="margin:8px 0 0" class="note">→ 통합한도의 섹터캡 35%를 매매카드에 배선했다.
+  금융/지주가 52%까지 차 있던 것도 같은 구멍이었다.</p>
+</div>
+
+<h3>거래대금이 가른 두 부류</h3>
+<ul>
+  <li><strong>상한가 잠김</strong> (0.4~0.8배) — 테스 0.4 · 삼성전기 0.4 · 티에스이 0.4.
+      물량이 안 나온다. 사고 싶어도 못 산다.</li>
+  <li><strong>회전</strong> (6~13배) — 한화갤러리아우 12.7 · 에스피지 8.5 · 데브시스터즈 6.4.
+      전부 체인 밖 잡주. 매집이 아니라 회전.</li>
+</ul>
+
+<h2><span class="n">04</span> 지금 할 일</h2>
+
+<div class="warnbox">
+  <p style="margin:0 0 8px"><strong>① 방어 상태를 다시 확인해야 한다 — 최우선</strong></p>
+  <p style="margin:0">7/30 종가 KOSPI 5,669 · 10개월선 5,799 → <strong>방어 ON</strong>이었다.
+  그런데 7/31에 시장이 크게 반등했고, <strong>7월 월봉 종가는 7/31 종가다.</strong>
+  그 값이 5,799를 넘었다면 8월은 <strong>방어 OFF</strong>로 바뀐다 — 투입 비중이 두 배가 된다.</p>
+</div>
+
+<pre>cd "$env:USERPROFILE\Desktop\진우퀀트"
+py 본체_이번달.py                                          <span style="color:var(--text-muted)"># ① 방어 판정 + 8월 선정</span>
+py 매매카드.py --pool 본체 --capital 10000000 --topn 30    <span style="color:var(--text-muted)"># ② 진입·청산 자리</span>
+py 급등주_수집.py                                          <span style="color:var(--text-muted)"># ③ 매일 — 이력 누적</span></pre>
+
+<p><code>--topn 30</code>이 검정된 사양(top30 동일가중)에 가깝다. topn 10은 집중 위험이 있는 부분집합이다.</p>
+<p><strong>이미 자동으로 도는 것</strong> — 청산규율 알림(평일 16:10, 카카오톡),
+주간 일봉 재앵커 배치.</p>
+
+<h2><span class="n">05</span> 보유</h2>
+<table>
+  <thead><tr><th>종목</th><th>트랙</th><th>상태</th></tr></thead>
+  <tbody>
+    <tr><td>대덕전자 (353200)</td><td><strong>예외 동결</strong></td>
+        <td>7/31 상한가 96,800원. 이번 검정 결과는 예외 자산에 적용하지 않는다</td></tr>
+    <tr><td>에코프로비엠 (247540)</td><td><strong>예외 동결</strong></td><td>일몰 조건 기존대로</td></tr>
+  </tbody>
+</table>
+<p class="note">예외 자산은 한도 계산의 분모에서 빠진다. 정확한 손익은 <code>py 진우_잔고감시.py</code>.</p>
+
+<h2><span class="n">06</span> 파일 지도</h2>
+<table>
+  <thead><tr><th style="width:22%">언제</th><th style="width:30%">무엇을</th><th>파일</th></tr></thead>
+  <tbody>
+    <tr><td>매월 초</td><td>본체 종목 선정</td><td class="mono">본체_이번달.py → 본체_선정.csv</td></tr>
+    <tr><td>매월 초</td><td>진입·청산 자리</td><td class="mono">매매카드.py --pool 본체 --topn 30</td></tr>
+    <tr><td>아는 종목 살 때</td><td>재량 카드</td><td class="mono">매매카드.py --code 000660 --track 성장</td></tr>
+    <tr><td>매일 (자동)</td><td>청산 신호</td><td class="mono">청산규율_알림.py → 카카오톡</td></tr>
+    <tr><td>매일</td><td>급등 이력</td><td class="mono">급등주_수집.py → 급등이력.csv</td></tr>
+    <tr><td>급등일 다음</td><td>착시 검사</td><td class="mono">급등_기저율.py --date YYYYMMDD</td></tr>
+    <tr><td>필요 시</td><td>잔고·한도</td><td class="mono">진우_잔고감시.py</td></tr>
+    <tr><td>연 1회</td><td>종목명 갱신</td><td class="mono">종목명_수집.py</td></tr>
+  </tbody>
+</table>
+<p class="note">한도의 단일 출처: <code>진우_통합한도.json</code> — 여기만 고치면 전 도구에 반영된다.</p>
+
+<h2><span class="n">07</span> 대기 중</h2>
+<ul>
+  <li><strong>20영업일 급등 이력</strong> → 사전등록 후 검정. 가설은 이미 좁혀졌다:
+      ① 섹터 급등의 다음 N일 예측력 ② 상한가 잠김 vs 회전의 차이 ③ 비용·슬리피지 후 실제 진입 가능 수익</li>
+  <li>핵심전략 후보 전진 원장 — 8월부터 병행 기록</li>
+  <li>12월 F게이트 판정</li>
+  <li>미국 주식 — 한국이 자리 잡은 뒤 별도 개발</li>
+</ul>
+
+<h2><span class="n">08</span> 판정문 원본</h2>
+<p class="mono note">주도주풀_판정문_2026-07-30.md · 주도주풀_사전등록.md · 성장팩터_판정문_2026-07-30.md ·
+위성엔진_OOS판정문_2026-07-28.md · 관찰기록_20260731_급등.md · 청산규율_판정문_2026-07-30.md ·
+고점매도신호_판정문.md</p>
+
+<footer>
+  과거 통계·측정 도구. 투자자문 아님. 결정과 책임은 본인.
+</footer>
+
+</div>
+
+<script>
+const NS = "http://www.w3.org/2000/svg";
+const cs = getComputedStyle(document.documentElement);
+const v = n => cs.getPropertyValue(n).trim();
+function el(tag, attrs, parent) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+
+/* ── 리프트 (수평 막대) — 단일 계열, 직접 라벨 */
+(function () {
+  const svg = document.getElementById("lift");
+  const data = [
+    { l: "섹터 (반도체 체인)", x: 11.94, c: "--series-1" },
+    { l: "눌림 — raw",        x: 3.57,  c: "--series-1" },
+    { l: "눌림 — 섹터 통제",   x: 1.12,  c: "--series-2" },
+  ];
+  const L = 132, R = 52, T = 14, H = 34, max = 12.5;
+  const W = 420 - L - R;
+  // 기준선 1.0 = 정보 없음
+  const x1 = L + (1.0 / max) * W;
+  el("line", { x1, x2: x1, y1: T - 4, y2: T + H * data.length - 6,
+               stroke: v("--text-muted"), "stroke-width": 1,
+               "stroke-dasharray": "3 3" }, svg);
+  const lab = el("text", { x: x1 + 4, y: T + H * data.length + 8,
+                           fill: v("--text-muted"), "font-size": 10.5 }, svg);
+  lab.textContent = "1.0 = 정보 없음";
+  data.forEach((d, i) => {
+    const y = T + i * H;
+    const t = el("text", { x: L - 10, y: y + 12, "text-anchor": "end",
+                           fill: v("--text-secondary"), "font-size": 12 }, svg);
+    t.textContent = d.l;
+    const w = Math.max(2, (d.x / max) * W);
+    el("rect", { x: L, y, width: w, height: 16, rx: 4,
+                 fill: v(d.c) }, svg);
+    const val = el("text", { x: L + w + 7, y: y + 12.5, fill: v("--text-primary"),
+                             "font-size": 12.5, "font-weight": 650 }, svg);
+    val.textContent = d.x.toFixed(2) + "배";
+  });
+})();
+
+/* ── 분산 착시 (선) — 3계열, 범례 + 끝점 직접 라벨 */
+(function () {
+  const svg = document.getElementById("div");
+  const N = [1, 3, 5, 10, 20, 53];
+  const rhos = [
+    { r: 0.2, c: "--series-1" },
+    { r: 0.5, c: "--series-2" },
+    { r: 0.8, c: "--series-3" },
+  ];
+  const L = 34, R = 44, T = 12, B = 30;
+  const W = 420 - L - R, H = 200 - T - B;
+  const yMax = 5;
+  const xs = i => L + (i / (N.length - 1)) * W;
+  const ys = e => T + H - ((e - 1) / (yMax - 1)) * H;
+  // grid
+  for (let g = 1; g <= 5; g++) {
+    const y = ys(g);
+    el("line", { x1: L, x2: L + W, y1: y, y2: y,
+                 stroke: v("--grid"), "stroke-width": 1 }, svg);
+    const t = el("text", { x: L - 7, y: y + 3.5, "text-anchor": "end",
+                           fill: v("--text-muted"), "font-size": 10 }, svg);
+    t.textContent = g;
+  }
+  N.forEach((n, i) => {
+    const t = el("text", { x: xs(i), y: T + H + 15, "text-anchor": "middle",
+                           fill: v("--text-muted"), "font-size": 10 }, svg);
+    t.textContent = n;
+  });
+  const ax = el("text", { x: L + W / 2, y: 197, "text-anchor": "middle",
+                          fill: v("--text-secondary"), "font-size": 10.5 }, svg);
+  ax.textContent = "보유 종목수";
+  rhos.forEach(({ r, c }) => {
+    const pts = N.map((n, i) => [xs(i), ys(1 / (1 / n + (1 - 1 / n) * r))]);
+    el("polyline", { points: pts.map(p => p.join(",")).join(" "), fill: "none",
+                     stroke: v(c), "stroke-width": 2, "stroke-linejoin": "round",
+                     "stroke-linecap": "round" }, svg);
+    const last = pts[pts.length - 1];
+    el("circle", { cx: last[0], cy: last[1], r: 4, fill: v(c),
+                   stroke: v("--surface-1"), "stroke-width": 2 }, svg);
+    const eff = 1 / (1 / 53 + (1 - 1 / 53) * r);
+    const t = el("text", { x: last[0] + 8, y: last[1] + 4, fill: v("--text-primary"),
+                           "font-size": 11.5, "font-weight": 650 }, svg);
+    t.textContent = eff.toFixed(1);
+  });
+})();
+</script>
+</body>
+</html>

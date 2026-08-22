@@ -1,0 +1,352 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>진우퀀트+K</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700;900&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+/* 단일 테마 쇼케이스 — 의도된 다크. 모든 색을 명시적으로 칠한다 */
+:root{
+ --bg:#0d0b07; --bg2:#12100a; --card:#171410;
+ --ink:#f2e8d0; --ink2:#c9bc9c; --mut:#8d7f5c;
+ --gold:#e0be7a; --gold2:#f0d79f; --golddeep:#9c7a40;
+ --hair:rgba(224,190,122,.22); --hair2:rgba(224,190,122,.4);
+ --rise:#f2695c; --fall:#6b9bef; --good:#63c98f; --bad:#ef7264;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font-family:"Pretendard Variable",Pretendard,-apple-system,"Malgun Gothic",sans-serif;
+ font-size:16.5px;line-height:1.75;-webkit-font-smoothing:antialiased}
+.serif{font-family:"Noto Serif KR",serif}
+.num{font-variant-numeric:tabular-nums}
+a{color:var(--gold)}
+.w{max-width:1020px;margin:0 auto;padding:0 24px}
+
+/* 리빌 애니메이션 */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .9s ease,transform .9s ease}
+.rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* ── 히어로 ── */
+.hero{min-height:96vh;display:flex;flex-direction:column;justify-content:center;
+ background:
+  radial-gradient(ellipse 90% 55% at 50% -10%, rgba(224,190,122,.13), transparent 60%),
+  var(--bg);
+ border-bottom:1px solid var(--hair);position:relative;padding:60px 0 70px}
+/* 차트 무대 */
+.stage{position:relative;margin-top:46px;border:1px solid var(--hair);border-radius:16px;
+ background:linear-gradient(180deg,#12100a, #0e0c07);overflow:hidden}
+.stage canvas{display:block;width:100%;height:340px}
+.slab{position:absolute;font-size:12.5px;letter-spacing:1px;color:var(--mut);
+ opacity:0;transition:opacity .6s ease}
+.slab.on{opacity:1}
+.slab b{color:var(--gold);font-size:13.5px}
+.slab.buy{color:var(--ink)}
+.slab.buy b{color:var(--rise)}
+@keyframes ring{0%{transform:scale(.4);opacity:.9}100%{transform:scale(2.6);opacity:0}}
+.replay{position:absolute;right:14px;bottom:12px;background:none;border:1px solid var(--hair);
+ color:var(--mut);border-radius:16px;padding:4px 14px;font-size:12px;cursor:pointer;font-family:inherit}
+.replay:hover{border-color:var(--hair2);color:var(--ink2)}
+.mark{display:flex;align-items:center;gap:12px;margin-bottom:34px}
+.mark img{width:44px;height:44px;border-radius:11px;border:1px solid var(--hair2)}
+.mark span{letter-spacing:4px;font-size:13px;color:var(--mut);font-weight:600}
+h1{font-family:"Noto Serif KR",serif;font-weight:900;font-size:clamp(40px,6.5vw,68px);
+ margin:0;line-height:1.25;letter-spacing:-.5px;text-wrap:balance}
+h1 .g{background:linear-gradient(105deg,var(--gold2),var(--gold) 45%,var(--golddeep));
+ -webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{margin:26px 0 0;font-size:19px;color:var(--ink2);max-width:34em;text-wrap:balance}
+.hstats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hair);
+ border:1px solid var(--hair);margin-top:26px}
+.hstats div{background:var(--bg2);padding:22px 26px}
+.hstats b{display:block;font-size:34px;font-weight:800;letter-spacing:-.5px;color:var(--gold)}
+.hstats small{color:var(--mut);font-size:13px;letter-spacing:1px}
+.scroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:var(--mut);
+ font-size:12px;letter-spacing:3px}
+
+/* ── 섹션 공통 ── */
+section{padding:96px 0;border-bottom:1px solid var(--hair)}
+.eyebrow{color:var(--gold);font-size:13px;letter-spacing:4px;font-weight:700;margin-bottom:14px}
+h2{font-family:"Noto Serif KR",serif;font-weight:700;font-size:clamp(26px,3.6vw,38px);
+ margin:0 0 18px;line-height:1.4;letter-spacing:-.3px;text-wrap:balance}
+.body{color:var(--ink2);max-width:38em}
+.body b{color:var(--ink)}
+
+/* 국면 게이트 바 */
+.gate{margin-top:44px;display:flex;flex-direction:column;gap:14px}
+.grow{display:grid;grid-template-columns:150px 1fr 120px;gap:18px;align-items:center}
+.grow .tag{font-weight:700;font-size:15.5px}
+.grow .bar{height:38px;border-radius:6px;position:relative;background:var(--card);border:1px solid var(--hair)}
+.grow .fill{position:absolute;top:0;bottom:0;left:0;border-radius:6px 0 0 6px}
+.grow .val{font-size:22px;font-weight:800;text-align:right}
+.zero{border-left:1px dashed var(--hair2);position:absolute;top:-6px;bottom:-6px}
+.cap{color:var(--mut);font-size:13.5px;margin-top:16px}
+
+/* 파이프라인 */
+.pipe{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px}
+.pnode{background:var(--card);border:1px solid var(--hair);border-radius:14px;padding:22px 20px;position:relative}
+.pnode em{font-style:normal;display:block;color:var(--gold);font-size:12px;letter-spacing:2.5px;font-weight:700;margin-bottom:8px}
+.pnode b{display:block;font-size:17px;margin-bottom:6px}
+.pnode p{margin:0;color:var(--ink2);font-size:14px;line-height:1.6}
+.pnode::after{content:""}
+
+/* 철칙 */
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:44px}
+.rule{background:var(--card);border:1px solid var(--hair);border-left:4px solid var(--golddeep);
+ border-radius:12px;padding:20px 24px}
+.rule b{font-size:16.5px}
+.rule p{margin:6px 0 0;color:var(--ink2);font-size:14px}
+
+/* 검증 스택 */
+.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px}
+.pf{background:var(--card);border:1px solid var(--hair);border-radius:14px;padding:24px}
+.pf b{display:block;font-size:28px;color:var(--gold);font-weight:800}
+.pf span{color:var(--mut);font-size:13px;letter-spacing:.5px}
+.pf p{margin:10px 0 0;color:var(--ink2);font-size:14px;line-height:1.6}
+.rejected{margin-top:26px;background:var(--bg2);border:1px solid var(--hair);border-radius:12px;padding:18px 24px;
+ color:var(--ink2);font-size:14.5px}
+.rejected b{color:var(--bad)}
+
+/* 라이브 */
+.live{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;margin-top:44px}
+.lv{background:var(--card);border:1px solid var(--hair);border-radius:14px;padding:26px}
+.lv .lbl{color:var(--mut);font-size:12.5px;letter-spacing:2px;font-weight:700;margin-bottom:10px}
+.dotg{display:inline-block;width:13px;height:13px;border-radius:50%;background:var(--good);
+ box-shadow:0 0 0 5px rgba(99,201,143,.16);margin-right:10px;vertical-align:-1px}
+.lv b.big{font-size:24px}
+.lv p{margin:8px 0 0;color:var(--ink2);font-size:14.5px}
+
+/* 마무리 */
+.fin{text-align:center;padding:110px 0 90px;border-bottom:none}
+.fin h2{font-size:clamp(28px,4vw,44px)}
+.fin .sig{margin-top:22px;color:var(--mut);letter-spacing:2px;font-size:13px}
+footer{padding:26px 0 44px;color:var(--mut);font-size:12.5px;text-align:center;line-height:1.9}
+
+@media(max-width:760px){
+ .hstats{grid-template-columns:1fr}
+ .pipe{grid-template-columns:1fr}
+ .pnode::after{content:"↓";right:auto;left:50%;top:auto;bottom:-18px;transform:translateX(-50%)}
+ .rules,.proof,.live{grid-template-columns:1fr}
+ .grow{grid-template-columns:90px 1fr 80px;gap:10px}
+ section{padding:70px 0}
+}
+</style></head><body>
+
+<div class="hero"><div class="w">
+ <div class="mark rv on"><img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23f8f4eb'/%3E%3Crect x='14' y='34' width='8' height='12' rx='1.5' fill='%23dec490'/%3E%3Crect x='26' y='27' width='8' height='19' rx='1.5' fill='%23c9a86a'/%3E%3Crect x='38' y='19' width='8' height='27' rx='1.5' fill='%23ba9658'/%3E%3Cpath d='M50 13l1.7 4.3L56 19l-4.3 1.7L50 25l-1.7-4.3L44 19l4.3-1.7z' fill='%2396743a'/%3E%3C/svg%3E" alt="">
+ <span>JINWOO QUANT +K</span></div>
+ <p class="rv on" style="margin:0 0 14px;color:var(--ink2);font-size:17px;letter-spacing:.3px">
+  <b style="color:var(--gold)">진우퀀트+K</b>는 한국 시장을 30년 데이터로 공략하는 <b>멀티전략 퀀트 하우스</b>입니다 —
+  세 개의 엔진이 각자의 시간축에서 일합니다.</p>
+ <h1 class="rv on">시장이 공포에 팔 때,<br><span class="g">30년의 데이터</span>가 사라고 말하는 자리</h1>
+ <div class="stage rv on">
+  <canvas id="cv"></canvas>
+  <div class="slab" id="lb1" style="left:4%;top:10%"><b>어느 종목의 어느 해</b> — 시장이 무너진다</div>
+  <div class="slab buy" id="lb2"><b>이틀째 급락 −12%</b> · 1년 구조선 지지 — 시스템이 산다</div>
+  <div class="slab" id="lb3"><b>+절반 되돌림</b>에서 기계적으로 판다</div>
+  <button class="replay" id="rp">↺ 다시 보기</button>
+ </div>
+ <div class="hstats rv on">
+  <div><small style="display:block;margin-bottom:6px;color:var(--ink2)">얼마나 검증했나</small>
+   <b class="num" data-cnt="30" data-suf="년">0년</b><small>한국시장 전체 · 실제 사례 7,071건</small></div>
+  <div><small style="display:block;margin-bottom:6px;color:var(--ink2)">그래서 벌었나</small>
+   <b class="num" data-cnt="2.40" data-suf="%" data-dec="2" data-pre="+">+0.00%</b><small>한 번 살 때마다 평균 · 승률 55.3%</small></div>
+  <div><small style="display:block;margin-bottom:6px;color:var(--ink2)">운은 아닌가</small>
+   <b class="num" data-cnt="1.20" data-suf="%" data-dec="2" data-pre="최소 +">최소 +0.00%</b><small>통계적 확신 하한 (95% 신뢰구간)</small></div>
+ </div>
+</div><div class="scroll">SCROLL</div></div>
+
+<section><div class="w">
+ <div class="eyebrow rv">01 · 하나의 하우스, 세 개의 엔진</div>
+ <h2 class="rv">시간축이 다른 세 전략이, 같은 규율 아래에서 일한다</h2>
+ <p class="body rv">단기 기회는 낚아채고, 중기는 팩터로 쌓고, 월간은 흐름을 탄다 —
+ 세 엔진 모두 <b>사전등록 · 게이트/방어 · 기록 공개</b>라는 같은 헌법을 따른다.</p>
+ <div class="pipe rv" style="grid-template-columns:repeat(3,1fr)">
+  <div class="pnode" style="border-color:var(--hair2)"><em>ENGINE 01 · 단기 — 기회 포착</em><b>휩쏘 역발상</b>
+   <p>폭락 이틀째의 우량주를 사서 반등의 절반을 취한다.<br><br>
+   <span style="color:var(--gold)">30년 · 7,071건 검정 · 건당 +2.40%</span><br>
+   상태: <b style="color:var(--good)">검증 완료 · 전진검증 가동</b></p></div>
+  <div class="pnode"><em>ENGINE 02 · 중기 — 핵심 보유</em><b>멀티팩터 포트폴리오</b>
+   <p>배당·가치·수익성 상위 30종을 매월 리밸런싱. 지수가 10개월선 아래면 현금 방어.<br><br>
+   <span style="color:var(--gold)">팩터 유효성 30년 검정 통과</span><br>
+   상태: <b style="color:#e8b04d">규칙 동결 · forward 검증 중</b></p></div>
+  <div class="pnode"><em>ENGINE 03 · 월간 — 흐름 추종</em><b>모멘텀 유니버스</b>
+   <p>시총 상위 풀에서 12개월 모멘텀 상위 30종 월간 회전. MA200 이탈 시 절반 현금.<br><br>
+   <span style="color:var(--gold)">규칙화 판정 통과 (2026-07)</span><br>
+   상태: <b style="color:#e8b04d">페이퍼 병행 검증 중</b></p></div>
+ </div>
+ <p class="cap rv" style="margin-top:20px">세 엔진의 성격이 서로를 보완한다 — 역발상은 폭락장에서, 팩터는 횡보장에서, 모멘텀은 추세장에서 일한다.
+ 어느 하나의 계절에 하우스 전체를 걸지 않는다.</p>
+</div></section>
+
+<section><div class="w">
+ <div class="eyebrow rv">02 · 대표 엔진의 증명 — 휩쏘 역발상</div>
+ <h2 class="rv">결과 ① 30년간 7,071번 샀다 —<br>폭락 국면에서만 벌었다</h2>
+ <p class="body rv">같은 급락 신호였는데 결과는 갈렸다.
+ 시장이 무너진 국면(🟢)에서는 <b style="color:var(--good)">한 번에 평균 +2.40%</b>,
+ 시장이 고점인 국면(🔴)에서는 <b style="color:var(--bad)">−0.60%</b>.</p>
+ <div class="gate rv">
+  <div class="grow"><span class="tag" style="color:var(--good)">🟢 실행 국면</span>
+   <span class="bar"><span class="fill" style="width:78%;background:linear-gradient(90deg,rgba(99,201,143,.75),rgba(99,201,143,.25))"></span></span>
+   <span class="val num" style="color:var(--good)">+2.40%</span></div>
+  <div class="grow"><span class="tag" style="color:#e8b04d">🟡 주의 국면</span>
+   <span class="bar"><span class="fill" style="width:6%;background:rgba(232,176,77,.5)"></span></span>
+   <span class="val num" style="color:#e8b04d">−0.12%</span></div>
+  <div class="grow"><span class="tag" style="color:var(--bad)">🔴 관찰만</span>
+   <span class="bar"><span class="fill" style="width:18%;background:rgba(239,114,100,.5)"></span></span>
+   <span class="val num" style="color:var(--bad)">−0.60%</span></div>
+ </div>
+ <p class="cap rv">한 번 살 때마다의 평균 수익 · 30년 전체 표본 →
+ <b style="color:var(--ink)">그래서 이 시스템의 행동원칙: 🔴에서는 사지 않는다.</b></p>
+
+ <h2 class="rv" style="margin-top:70px">결과 ② 파는 방법을 바꿨더니 한 번에 +0.48%p 더 벌었다</h2>
+ <p class="body rv">목표가에서 전량 파는 대신 <b>절반만 팔고 나머지를 규칙대로 끌고 갔다</b> —
+ 그게 더 벌었다. 서로 다른 데이터·다른 계산으로 <b>세 번 다시 확인해도 같은 답</b>이었다.</p>
+
+ <h2 class="rv" style="margin-top:70px">결과 ③ 싸고 배당 주는 회사가 +0.76%p 더 벌었다</h2>
+ <p class="body rv">같은 폭락이라도 저평가·배당주가 더 잘 일어섰다 — <b>승률 64%</b>.
+ 그래서 시스템은 이런 종목부터 산다.</p>
+
+ <p class="cap rv" style="margin-top:56px;border-top:1px solid var(--hair);padding-top:20px">
+ 이 세 가지만 남기기까지 <b style="color:var(--ink)">그럴듯해 보였던 전략 14개가 검정에서 지고 폐기됐다</b>
+ — 성장주 고르기(승률 22%), 봄까지 버티기(중앙 −10.9%), 1등주 따라가기(3년 −30.6%).
+ 살아남은 것만 여기 있다.</p>
+</div></section>
+
+<section><div class="w">
+ <div class="eyebrow rv">04 · 지금</div>
+ <h2 class="rv">이 하우스는 지금 이 순간도 가동 중이다</h2>
+ <div class="live rv" style="grid-template-columns:repeat(3,1fr)">
+  <div class="lv"><div class="lbl">오늘의 시장 판정</div>
+   <b class="big"><span class="dotg"></span>실행 국면</b>
+   <p>시장이 1년 고점 대비 −25%. 30년 데이터에서 이 시스템이 돈을 벌었던 바로 그 자리 —
+   엔진은 장전돼 있다.</p></div>
+  <div class="lv"><div class="lbl">자동 운영</div>
+   <b class="big">사람 없이 돈다</b>
+   <p>매일 아침 국면 판정 · 평일 17시 전 종목 급락 감시 · 매주 원장·리포트 자동 갱신.
+   폭락이 오면 시스템이 먼저 안다.</p></div>
+  <div class="lv"><div class="lbl">전진 검증 — 1차 관문 2026.11</div>
+   <b class="big">실전 동일 규칙 가동</b>
+   <p>합격 조건은 시작 전에 고정됐다 — 규칙 위반 0건, 30년 통계와 방향 일치.
+   <b>통과하면 실전 확대, 미달이면 그대로 공개.</b></p></div>
+ </div>
+</div></section>
+
+<section class="fin"><div class="w">
+ <h2 class="serif rv">내일의 시장은 아무도 모른다.<br><span style="color:var(--gold)">우리는 30년 동안 이겨온 자리에서만 산다.</span></h2>
+ <div class="sig rv">JINWOO QUANT +K · SEOUL · EST. 2026</div>
+</div></section>
+
+<footer><div class="w">
+관찰·기록·연구용 시스템 · 실제 주문 아님 · 매매 추천 아님 · 투자자문 아님<br>
+백테스트는 실현손익이 아니며 생존편향·위기해 클러스터 한계를 가진다 — 모든 수치의 한계 고지는 본 문서(인수인계·판정문)에 기록되어 있다
+</div></footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll(".rv:not(.on)").forEach(el=>io.observe(el));
+
+/* ── 숫자 카운트업 ── */
+const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function countUp(el){
+ const to=parseFloat(el.dataset.cnt), dec=+(el.dataset.dec||0),
+       suf=el.dataset.suf||"", pre=el.dataset.pre||"", fmt=el.dataset.fmt;
+ const t0=performance.now(), dur=RM?1:1700;
+ (function tick(t){
+  let p=Math.min(1,(t-t0)/dur); p=1-Math.pow(1-p,3);
+  let v=(to*p).toFixed(dec);
+  if(fmt) v=Number(v).toLocaleString("ko-KR");
+  el.textContent=pre+v+suf;
+  if(p<1) requestAnimationFrame(tick);
+ })(t0);
+}
+document.querySelectorAll("[data-cnt]").forEach(countUp);
+
+/* ── 히어로 차트: 폭락 → 골드 매수점 → 반등 ── */
+const cv=document.getElementById("cv"), ctx=cv.getContext("2d");
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+let PATH=[], BUY=0, W=0, H=0, anim=null;
+function buildPath(){
+ const r=rng(20260822); PATH=[];
+ let v=0.82;                       // 시작 높이(0~1, 위가 높음)
+ const N=240; BUY=Math.floor(N*0.62);
+ for(let i=0;i<=N;i++){
+  const x=i/N;
+  if(i<BUY-8)      v+= -0.0016 + (r()-0.5)*0.016;        // 완만한 하락장
+  else if(i<BUY)   v+= -0.030  + (r()-0.5)*0.006;        // 이틀 급락
+  else             v+=  0.0035 + (r()-0.5)*0.014;        // 반등
+  v=Math.max(0.06,Math.min(0.95,v));
+  PATH.push([x,v]);
+ }
+}
+function px(p){return [p[0]*W*0.94+W*0.03, H*0.92-p[1]*H*0.84]}
+function drawFrame(upto,pulseT){
+ ctx.clearRect(0,0,W,H);
+ // 은은한 그리드
+ ctx.strokeStyle="rgba(224,190,122,.07)";ctx.lineWidth=1;
+ for(let g=1;g<5;g++){ctx.beginPath();ctx.moveTo(0,H*g/5);ctx.lineTo(W,H*g/5);ctx.stroke()}
+ // 경로
+ for(let seg=0;seg<2;seg++){
+  const from=seg===0?0:BUY, to=Math.min(upto, seg===0?BUY:PATH.length-1);
+  if(to<=from) continue;
+  ctx.beginPath();
+  const [x0,y0]=px(PATH[from]); ctx.moveTo(x0,y0);
+  for(let i=from+1;i<=to;i++){const [x,y]=px(PATH[i]);ctx.lineTo(x,y)}
+  if(seg===0){ // 하락: 잿빛→마지막 급락은 빨강
+   ctx.strokeStyle="rgba(201,188,160,.65)";ctx.lineWidth=1.8;ctx.stroke();
+   const cs=Math.max(from,BUY-8), ce=Math.min(to,BUY);
+   if(ce>cs){ctx.beginPath();const[a,b]=px(PATH[cs]);ctx.moveTo(a,b);
+    for(let i=cs+1;i<=ce;i++){const[x,y]=px(PATH[i]);ctx.lineTo(x,y)}
+    ctx.strokeStyle="#f2695c";ctx.lineWidth=3;ctx.stroke()}
+  }else{      // 반등: 골드 + 글로우 + 면
+   const grad=ctx.createLinearGradient(0,0,W,0);
+   grad.addColorStop(0,"#e0be7a");grad.addColorStop(1,"#f0d79f");
+   ctx.strokeStyle=grad;ctx.lineWidth=3.2;ctx.shadowColor="rgba(224,190,122,.55)";ctx.shadowBlur=12;ctx.stroke();
+   ctx.shadowBlur=0;
+   ctx.lineTo(px(PATH[to])[0],H);ctx.lineTo(px(PATH[from])[0],H);ctx.closePath();
+   ctx.fillStyle="rgba(224,190,122,.08)";ctx.fill();
+  }
+ }
+ // 매수점
+ if(upto>=BUY){
+  const [bx,by]=px(PATH[BUY]);
+  if(pulseT!=null){const pr=(pulseT%1);
+   ctx.beginPath();ctx.arc(bx,by,8+pr*30,0,7);ctx.strokeStyle=`rgba(224,190,122,${.8*(1-pr)})`;ctx.lineWidth=2;ctx.stroke()}
+  ctx.beginPath();ctx.arc(bx,by,6.5,0,7);ctx.fillStyle="#e0be7a";ctx.fill();
+  ctx.beginPath();ctx.arc(bx,by,2.8,0,7);ctx.fillStyle="#0d0b07";ctx.fill();
+ }
+}
+function layout(){
+ const r=cv.getBoundingClientRect(); W=cv.width=r.width*devicePixelRatio; H=cv.height=340*devicePixelRatio;
+ cv.style.height="340px"; ctx.setTransform(1,0,0,1,0,0);
+ W=r.width; H=340; ctx.scale(devicePixelRatio,devicePixelRatio);
+}
+function labelPos(){
+ const [bx,by]=px(PATH[BUY]);
+ const lb2=document.getElementById("lb2"), lb3=document.getElementById("lb3");
+ lb2.style.left=Math.max(10,bx-130)+"px"; lb2.style.top=Math.min(H-40,by+26)+"px";
+ lb3.style.right="4%"; lb3.style.top="14%";
+}
+function play(){
+ if(anim) cancelAnimationFrame(anim);
+ ["lb1","lb2","lb3"].forEach(id=>document.getElementById(id).classList.remove("on"));
+ buildPath(); layout(); labelPos();
+ if(RM){drawFrame(PATH.length-1,0);["lb1","lb2","lb3"].forEach(id=>document.getElementById(id).classList.add("on"));return}
+ const t0=performance.now(), drawDur=5200;
+ document.getElementById("lb1").classList.add("on");
+ (function tick(t){
+  const el=t-t0;
+  const upto=Math.floor(Math.min(1,el/drawDur)*(PATH.length-1));
+  drawFrame(upto, upto>=BUY? el/1200 : null);
+  if(upto>=BUY) document.getElementById("lb2").classList.add("on");
+  if(upto>=PATH.length-1){document.getElementById("lb3").classList.add("on");
+   // 도달 후에도 맥동은 계속
+   (function idle(t2){drawFrame(PATH.length-1,t2/1200);anim=requestAnimationFrame(idle)})(t);
+   return}
+  anim=requestAnimationFrame(tick);
+ })(t0);
+}
+document.getElementById("rp").onclick=play;
+addEventListener("resize",()=>{layout();labelPos();drawFrame(PATH.length-1,0)});
+play();
+</script>
+</body></html>

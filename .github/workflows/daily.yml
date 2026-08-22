@@ -1,14 +1,13 @@
 name: 진우퀀트 v3.6 + v3.7.2 자동 점수 갱신 (Validation Gate)
 
+# 2026-08-16: GitHub Pages 배포 제거 (private repo·플랜상 Pages 비활성 → deploy-pages 14초 실패)
+#   deploy-pages 잡 삭제 · Pages 전용 설정(pages/id-token 권한, github-pages environment, concurrency) 정리
+#   docs/ 는 계속 갱신·커밋됨(로컬/향후 Pages 활성화 시 재사용 가능). 점수 파이프라인만 실행.
 # 2026-06-05: Node24 대응 액션 버전 업데이트 (GitHub 2026-06-16 Node24 강제 전환 대비)
-#   checkout v4→v5 · setup-python v5→v6 · configure-pages v4→v5
-#   deploy-pages@v4 · upload-pages-artifact@v3 는 이미 최신 major — 태그 내 Node24 패치 자동 수신
-# 2026-06-07: Node24 추가 대응 (Node20 런너 2026-09-16 제거 대비)
-#   checkout v5→v6 · github-script v7→v8 (Node24 버전)
-#   Pages 액션(configure-pages@v5·deploy-pages@v4·upload-pages-artifact@v3)은 아직 Node24 릴리스 미출시 → 출시 시 재업데이트
-# 2026-06-05: Validation Gate (#2) 머지 — score 생성 후 deploy 전 7가지 검사
+#   checkout v4→v5→v6 · setup-python v5→v6 · github-script v7→v8 (Node24 버전)
+# 2026-06-05: Validation Gate (#2) 머지 — score 생성 후 커밋 전 7가지 검사
 #   18종목 누락 / NaN·inf / 등급 / 포인트합 / 권장비중 / 급변동 / 신선도
-#   실패 시 deploy-pages 미실행 → 직전 dashboard 자동 유지 (롤백)
+#   실패 시 이후 스텝(커밋) 중단 → 직전 docs/ 유지 (롤백)
 #   실패 시 GitHub Issues 자동 생성
 
 on:
@@ -19,8 +18,6 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
   issues: write        # Validation 실패 시 이슈 자동 생성
 
 jobs:
@@ -210,27 +207,3 @@ jobs:
                 body: `${MARKER}\nValidation Gate 또는 점수 스텝 실패로 이번 배포를 건너뜀. 직전 대시보드가 그대로 유지됩니다(롤백).\n\n해결 후 이 이슈를 닫으세요(닫혀 있으면 다음 실패 때 새로 생성, 열려 있으면 코멘트로 누적).\n로그: ${runUrl}`
               });
             }
-
-  deploy-pages:
-    needs: update-scores         # update-scores 실패(=Validation 실패) 시 미실행 → 직전 Pages 유지
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          ref: main
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v6
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: './docs'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5

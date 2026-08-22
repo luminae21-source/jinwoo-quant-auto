@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>진우퀀트 전체 현황 · 도식 (2026-07-16)</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  :root{
+    --bg:#0f1216; --panel:#171b21; --panel2:#1d222a; --line:#2a323d;
+    --txt:#e6ebf1; --mut:#95a0ad; --accent:#5aa0ff;
+    --done:#2ecc71; --prog:#3d9bff; --todo:#ff5d5d; --warn:#ffc542; --hold:#8a94a1;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);
+    font-family:"Malgun Gothic","맑은 고딕",-apple-system,Segoe UI,Roboto,sans-serif;
+    line-height:1.6;padding:28px 20px 80px}
+  .wrap{max-width:1180px;margin:0 auto}
+  h1{font-size:26px;margin:0 0 4px}
+  h2{font-size:20px;margin:40px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+  h3{font-size:16px;margin:24px 0 8px;color:var(--accent)}
+  .sub{color:var(--mut);font-size:13px;margin-bottom:6px}
+  .disc{color:var(--warn);font-size:12px;margin-bottom:20px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:16px 0}
+  .kpi{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .kpi .n{font-size:24px;font-weight:700}
+  .kpi .l{font-size:12px;color:var(--mut)}
+  .mermaid{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;margin:12px 0;text-align:center}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--panel2);color:var(--accent);font-weight:600}
+  tr:nth-child(even) td{background:rgba(255,255,255,.015)}
+  .pill{display:inline-block;padding:1px 9px;border-radius:20px;font-size:11.5px;font-weight:700;white-space:nowrap}
+  .p-done{background:rgba(46,204,113,.16);color:var(--done)}
+  .p-prog{background:rgba(61,155,255,.16);color:var(--prog)}
+  .p-todo{background:rgba(255,93,93,.16);color:var(--todo)}
+  .p-warn{background:rgba(255,197,66,.16);color:var(--warn)}
+  .p-hold{background:rgba(138,148,161,.18);color:var(--hold)}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--mut);margin:8px 0 4px}
+  code{background:var(--panel2);padding:1px 6px;border-radius:5px;font-size:12px;color:#ffd08a}
+  .foot{color:var(--mut);font-size:12px;margin-top:30px;border-top:1px solid var(--line);padding-top:14px}
+  .goal{border-left:3px solid var(--accent);padding:4px 0 4px 14px;margin:10px 0}
+  .goal b{color:var(--txt)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>진우퀀트 — 전체 현황 도식판</h1>
+  <div class="sub">갱신 기준: 2026-07-17 · <b>팩터 검정 라인업 확정</b> — 저변동·저PBR 채택 / 중형결합 채택 / GP 기각(단기창) · 실행 스크리너 2종 배선 · 진우 사냥터 툴 기획 완료</div>
+  <div class="disc">※ 투자자문 아님. 매수/매도 판단·책임은 본인. 아래는 개발/작업 진행상황 정리용.</div>
+
+  <div class="grid">
+    <div class="kpi"><div class="n" style="color:var(--done)">4+1</div><div class="l">봉인 규칙(방어2·공격2) + 중형결합(조건부)</div></div>
+    <div class="kpi"><div class="n" style="color:var(--todo)">8</div><div class="l">기각된 아이디어 (GP 포함·헛돈 방지)</div></div>
+    <div class="kpi"><div class="n" style="color:var(--done)">2</div><div class="l">실행 스크리너 (진입엣지·jq_discover)</div></div>
+    <div class="kpi"><div class="n" style="color:var(--warn)">1</div><div class="l">최대 병목 (my_holdings.csv)</div></div>
+  </div>
+
+  <!-- ================= 1. 전체 파이프라인 플로우차트 ================= -->
+  <h2>1. 전체 파이프라인 — 데이터에서 실전까지</h2>
+  <div class="legend">
+    <span><span class="pill p-done">완료·봉인</span></span>
+    <span><span class="pill p-prog">진행중</span></span>
+    <span><span class="pill p-warn">보강필요</span></span>
+    <span><span class="pill p-todo">미완·병목</span></span>
+  </div>
+  <div class="mermaid">
+flowchart TB
+  subgraph L1["① 데이터 토대 (검증 기반)"]
+    A1["가격패널 30년<br/>5,057종목·1,470만행<br/>상폐포함·생존편향0"]:::done
+    A2["재무패널 KRX PBR/PER<br/>2002~2026·56만행"]:::done
+    A3["4대 안전장치<br/>상폐가정·비용0.45%·OOS봉인·사전등록"]:::done
+    A4["kospi_pit_daily 끝잘림<br/>재수집 필요"]:::warn
+  end
+
+  subgraph L2["② 검정 관문 (사전등록 → IN → 이상치 → OOS → 비용)"]
+    B1["4가설 30년 재검정<br/>3기각·1채택"]:::done
+    B2["청산규칙 검정<br/>18규칙·4관문 통과"]:::done
+    B3["진입엣지 검정<br/>저변동성·저PBR 채택"]:::done
+    B4["고변동성×스톱<br/>봉인완료(예측대로)"]:::done
+    B5["밸류 재검정<br/>KRX PBR·저PBR 채택"]:::done
+    B6["수익성(GP)팩터<br/>DART 2015+ 검정·기각"]:::done
+    B7["팩터결합 저변동×저PBR<br/>중형 채택·대형 기각"]:::done
+  end
+
+  subgraph L3["③ 증명된 규칙 (증명된_규칙 폴더 봉인)"]
+    C1["하순 필터<br/>방어·비용0"]:::done
+    C2["청산 하드스톱<br/>트레일-15/고정-8"]:::done
+    C3["저변동성<br/>공격·OOS+3~6%"]:::done
+    C4["저PBR<br/>공격·OOS+3.6~5.9%"]:::done
+  end
+
+  subgraph L4["④ 자동 디스패치 (예약 배치·매일/매주)"]
+    D1["익일예측 KOSDAQ<br/>스케줄 복구됨"]:::done
+    D2["시장브리핑 매일"]:::done
+    D3["주봉분석 매주"]:::done
+    D4["카드뉴스 자동"]:::done
+    D5["마감시황카드<br/>등록 1회 남음"]:::warn
+    D6["예약작업 재등록<br/>관리자 선택"]:::warn
+  end
+
+  subgraph L5["⑤ 실행 도구 (검정→실행)"]
+    F1["진입엣지 스크리너<br/>소=저변동/중=결합"]:::done
+    F2["jq_discover<br/>tier 기울기 배선"]:::done
+    F3["통합 매매 체크리스트"]:::done
+    F4["진우 사냥터 발굴툴<br/>기획 완료·별도 착수"]:::prog
+  end
+
+  subgraph L6["⑥ 보유 관리 도구 (계좌 연결)"]
+    E1["my_holdings.csv<br/>진입가·수량·진입일 입력"]:::todo
+    E2["보유점검"]:::warn
+    E3["Track W 원장<br/>2026-06 공백"]:::todo
+    E4["보유집중도·매도신호등"]:::warn
+  end
+
+  L1 --> L2 --> L3 --> L5
+  L3 --> L4
+  L3 --> L6
+  A2 --> B5 --> C3
+  B7 --> F1
+  E1 ==>|병목: 4개 도구가 여기 종속| E2
+  E1 ==> E3
+  E1 ==> E4
+
+  classDef done fill:#173a27,stroke:#2ecc71,color:#d7ffe6;
+  classDef prog fill:#123253,stroke:#3d9bff,color:#d8ecff;
+  classDef warn fill:#4a3c12,stroke:#ffc542,color:#fff2cc;
+  classDef todo fill:#4a1a1a,stroke:#ff5d5d,color:#ffd9d9;
+  </div>
+
+  <!-- ================= 2. 개발 진행 현황표 ================= -->
+  <h2>2. 개발 진행 현황표</h2>
+  <div class="card">
+  <table>
+    <tr><th>영역</th><th>작업</th><th>상태</th><th>핵심 내용 / 다음 액션</th></tr>
+
+    <tr><td rowspan="4">① 데이터</td><td>30년 가격패널 수집</td><td><span class="pill p-done">완료</span></td><td>5,057~5,169종목·1,470만행·상폐포함·생존편향 차단</td></tr>
+    <tr><td>재무패널 백필(KRX)</td><td><span class="pill p-done">완료</span></td><td>KOSPI 24년·KOSDAQ 20년·56만행. 단 PER은 60%만(적자 제외)</td></tr>
+    <tr><td>KOSPI 지수 복구</td><td><span class="pill p-done">완료</span></td><td>7,861행·1995~2026·결측 0</td></tr>
+    <tr><td><code>kospi_pit_daily.csv</code> 끝 잘림</td><td><span class="pill p-warn">보강필요</span></td><td>마지막 행 7컬럼→3컬럼 손상. 재수집 필요</td></tr>
+
+    <tr><td rowspan="4">② 검정</td><td>4가설 30년 최종판정</td><td><span class="pill p-done">완료</span></td><td>할로윈·월초강세·월중저점 기각 / 하순 채택</td></tr>
+    <tr><td>청산규칙 검정</td><td><span class="pill p-done">완료</span></td><td>18규칙×진입2×시총3, 4관문 통과. 파국률 2.7%→0.2%</td></tr>
+    <tr><td>진입엣지(저변동성·저PBR)</td><td><span class="pill p-done">완료</span></td><td>OOS 롱숏 t=4.69/5.04. 대형 기각(소>대 4번째)</td></tr>
+    <tr><td>고변동성×스톱</td><td><span class="pill p-done">완료</span></td><td>봉인. (A)재앙방지 통과·(B)절대복리 실패·(C)저변동성 못이김 — 예측대로</td></tr>
+
+    <tr><td rowspan="4">③ 규칙</td><td>하순 필터 규칙서·배선</td><td><span class="pill p-done">완료</span></td><td>셀프테스트 21/21·시총 tier 분기·비용 0</td></tr>
+    <tr><td>청산 하드스톱 규칙서</td><td><span class="pill p-done">완료</span></td><td>트레일−15 / 고정−8. 손상통제(알파 아님)</td></tr>
+    <tr><td>저변동성 진입엣지</td><td><span class="pill p-done">완료</span></td><td>소·중형 세션 첫 진입 알파</td></tr>
+    <tr><td>저PBR 진입엣지</td><td><span class="pill p-done">완료</span></td><td>싼 종목 우위·OOS 롱온리 +3.6~5.9%</td></tr>
+
+    <tr><td rowspan="3">④ 디스패치</td><td>익일예측·시황·주봉·카드뉴스</td><td><span class="pill p-done">완료</span></td><td><code>pause</code> 데드락 원인 제거 후 스케줄 정상화</td></tr>
+    <tr><td>마감시황카드 스케줄</td><td><span class="pill p-warn">선택</span></td><td><code>jq_close_register.bat</code> 1회 등록만 남음</td></tr>
+    <tr><td>예약작업 재등록(관리자)</td><td><span class="pill p-warn">선택</span></td><td><code>예약작업_재등록_전체.bat</code></td></tr>
+
+    <tr><td rowspan="4">⑤ 실전</td><td><code>my_holdings.csv</code> 재작성</td><td><span class="pill p-todo">미완·최대병목</span></td><td><b>[사용자]</b> 진입가·수량·진입일 입력. 에코프로머티 정리, 테크윙·주성엔지니어링 추가</td></tr>
+    <tr><td>Track W 원장</td><td><span class="pill p-todo">미완</span></td><td>#1 후 <code>py trackw_update.py</code> — 2026-06 공백 메움</td></tr>
+    <tr><td>보유점검 실전 가동</td><td><span class="pill p-warn">보강필요</span></td><td>#1 후 <code>보유점검_실행.bat</code></td></tr>
+    <tr><td>시총 tier 배선</td><td><span class="pill p-warn">선택</span></td><td>필터는 <code>tier=</code> 지원하나 엔진/발굴툴이 아직 미전달 → 현재 전종목 적용(보수적)</td></tr>
+  </table>
+  </div>
+
+  <!-- ================= 3. 부족한 부분 ================= -->
+  <h2>3. 부족한 부분 — 제대로 안 된 / 미완 작업</h2>
+  <div class="card">
+  <table>
+    <tr><th>구분</th><th>항목</th><th>무엇이 문제인가</th><th>영향</th><th>해결 방법</th></tr>
+    <tr>
+      <td><span class="pill p-todo">병목</span></td><td><code>my_holdings.csv</code></td>
+      <td>실제 잔고·진입가·진입일이 비어 있음. AI가 알 수 없는 값</td>
+      <td>보유점검·원장·집중도·매도신호등 <b>4개 도구 전부 정지</b></td>
+      <td>사용자가 5분 직접 입력 (양식 존재)</td>
+    </tr>
+    <tr>
+      <td><span class="pill p-todo">미완</span></td><td>수익성(GP) 팩터</td>
+      <td>DART 재무제표(2층) 미수집 → 마지막 팩터 판정 불가</td>
+      <td>팩터 라인업 미완성 (밸류만 확보)</td>
+      <td>DART 수집 → GP 검정 실행</td>
+    </tr>
+    <tr>
+      <td><span class="pill p-todo">미완</span></td><td>Track W 원장 2026-06 공백</td>
+      <td>보유 갱신이 끊겨 원장에 공백</td>
+      <td>수익률 추적 정확도 저하</td>
+      <td>my_holdings 입력 후 <code>trackw_update.py</code></td>
+    </tr>
+    <tr>
+      <td><span class="pill p-warn">보강</span></td><td><code>kospi_pit_daily.csv</code> 끝 잘림</td>
+      <td>마지막 행 컬럼 손상(7→3)</td>
+      <td>PIT 지수 데이터 신뢰도</td>
+      <td>재수집</td>
+    </tr>
+    <tr>
+      <td><span class="pill p-warn">보강</span></td><td>폴더 위생</td>
+      <td><code>할로윈_검증결과.md</code>(버그 잔재)·루트 <code>_*</code> 임시파일 다수</td>
+      <td>혼동·착시 위험</td>
+      <td>기각 규칙 잔재/백업(.bak 다수) 정리</td>
+    </tr>
+    <tr>
+      <td><span class="pill p-warn">보강</span></td><td>시총 tier 배선</td>
+      <td>필터는 tier 지원하나 엔진·발굴툴이 값을 안 넘김</td>
+      <td>규칙이 전종목에 적용(과도하게 보수적)</td>
+      <td>엔진→필터 tier 파라미터 연결</td>
+    </tr>
+    <tr>
+      <td><span class="pill p-warn">전략긴장</span></td><td>데이터 ↔ 실제 스타일 불일치</td>
+      <td>데이터는 "안정·저PBR 소중형"을 가리키는데 실제는 고변동성 성장주(반도체 장비주) 매매</td>
+      <td>증명된 엣지가 실전 스타일과 반대</td>
+      <td>스타일 내 기울기 적용(아래 발전방향 2)</td>
+    </tr>
+  </table>
+  </div>
+
+  <!-- ================= 4. 발전 방향 ================= -->
+  <h2>4. 발전해야 하는 작업 — 디벨롭 방향</h2>
+  <div class="card">
+  <table>
+    <tr><th>#</th><th>과제</th><th>내용</th><th>기대 효과</th><th>선행 조건</th></tr>
+    <tr><td>1</td><td>팩터 결합 <span class="pill p-done">완료</span></td><td>저변동성 × 저PBR 교집합(전체 5,057종목). <b>중형=채택</b>(IN t4.52·OOS t4.28·증분+1.0%p) · <b>소형=미결</b>(OOS는 강하나 IN t1.59로 검정력부족→단독 유지) · <b>대형=기각</b></td><td>중형만 결합 이득. 소형은 저변동성 <b>단독</b>으로 좁힘</td><td>완료 2026-07-16</td></tr>
+    <tr><td>2</td><td>진우 종목 내 기울기</td><td>반도체 장비주 안에서 상대적으로 싸거나 덜 출렁이는 종목이 이기는지</td><td>스타일 유지하며 엣지 얹기(전략긴장 해소)</td><td>없음</td></tr>
+    <tr><td>3</td><td>실전 규칙서 통합 <span class="pill p-done">완료</span></td><td>하순+청산+저변동+저PBR+중형결합을 단일 체크리스트로 → <code>증명된_규칙\실전_통합_매매체크리스트.md</code></td><td>검정 → 실행 전환 완료(시총별 분기·결정흐름 포함)</td><td>완료 2026-07-16</td></tr>
+    <tr><td>4</td><td>수익성(GP) 완성 <span class="pill p-done">완료·기각</span></td><td>DART FY2015~2025 수집(3,193종목)·검정. <b>전 세그먼트 기각</b> — 고GP 소·중형 롱숏 t≈0, 롱온리 net 약 −5%. 순풍 아님</td><td>팩터는 <b>저변동·저PBR 2종으로 확정</b>. GP 접음(복잡도↓). DataGuide 2002~로 정식창 재검정 여지</td><td>완료 2026-07-17(단기창)</td></tr>
+    <tr><td>5</td><td>밸류 재검정 마무리</td><td>C 스크립트 밸류 팩터를 KRX PBR로 갈아끼워 20년+ 판정</td><td>저PBR 근거 20년+로 확장</td><td>스크립트 수정</td></tr>
+    <tr><td>6</td><td>청산 민감도(보수 상폐) <span class="pill p-done">완료</span></td><td><code>--delisting conservative</code> 실행(셀프테스트 22/22)</td><td><b>판정 불변 확인</b> — 봉인 규칙이 보수 가정에서도 꼬리위험 축소. 강건성 통과</td><td>완료 2026-07-16</td></tr>
+  </table>
+  </div>
+
+  <!-- ================= 5. 발전 로드맵 플로우 ================= -->
+  <h3>발전 순서 (권장 흐름)</h3>
+  <div class="mermaid">
+flowchart LR
+  S["지금"] --> G0["★ my_holdings.csv<br/>입력 (사용자·5분)"]:::todo
+  G0 --> G1["원장·보유점검<br/>실전 가동"]:::prog
+  S --> P1["팩터 결합<br/>저변동성×저PBR"]:::prog
+  S --> P2["종목 내 기울기<br/>반도체 장비주"]:::prog
+  P1 --> P3["실전 규칙서 통합<br/>단일 체크리스트"]:::prog
+  P2 --> P3
+  S --> P4["DART 수집 →<br/>GP 팩터 판정"]:::todo
+  P3 --> FIN["실전 운용 전략 v2"]:::done
+  G1 --> FIN
+  P4 -.-> FIN
+
+  classDef done fill:#173a27,stroke:#2ecc71,color:#d7ffe6;
+  classDef prog fill:#123253,stroke:#3d9bff,color:#d8ecff;
+  classDef todo fill:#4a1a1a,stroke:#ff5d5d,color:#ffd9d9;
+  </div>
+
+  <!-- ================= 6. 목표 ================= -->
+  <h2>6. 목표 정리</h2>
+  <div class="card">
+    <div class="goal"><b>대원칙</b> — "검증된 규칙으로만 매매한다. 추측이 아니라 30년 데이터의 증거로." 되는 것을 찾는 것만큼 <b>안 되는 것을 걸러내는 것</b>이 중요.</div>
+    <div class="goal"><b>단기 (지금~7월)</b> — ① my_holdings.csv 입력으로 실전 4개 도구 가동 ② 하순 구간(7/21~7/27) 코스닥 소·중형 신규진입 보류 준수 ③ 폴더 위생 정리.</div>
+    <div class="goal"><b>중기 (분기)</b> — 팩터 결합·종목 내 기울기 검정 → 하순·청산·저변동성·저PBR을 <b>단일 실전 체크리스트</b>로 통합(검정→실행 전환).</div>
+    <div class="goal"><b>장기 (완성)</b> — <b>팩터 검정 라인업 확정 완료(2026-07-17):</b> 저변동성·저PBR 채택, 중형결합 채택, GP 기각. 마지막 미결이 닫혔다 → 전략은 <b>저변동·저PBR 2종 + 중형결합</b>으로 단순 확정. 남은 것은 실행(진입엣지 스크리너 월 1회)과 보유 관리(my_holdings). DataGuide 2002~ 확보 시 GP 정식창 재검정은 선택 과제.</div>
+    <div class="goal"><b>재판정 예약</b> — 2028-07. 하순 필터 forward 성과 확인. <b>그때 안 되면 버린다.</b></div>
+  </div>
+
+  <!-- ================= 7. 현재 자산 요약 ================= -->
+  <h3>지금 가진 것 / 하지 말 것</h3>
+  <div class="card">
+  <table>
+    <tr><th>가진 것</th><th>내용</th></tr>
+    <tr><td>방어 도구 2</td><td>하순(신규진입 보류·비용0) · 청산 하드스톱(재앙 방지)</td></tr>
+    <tr><td>순풍 팩터 2</td><td>저변동성 · 저PBR — 소·중형 롱온리로 시장 상회</td></tr>
+    <tr><td>하지 말 것 7</td><td>할로윈 · 월초강세(TOM) · 월중저점→고점 · 모멘텀/추격매수 · 52주신고가 돌파 · 저PER · 고변동성 맨몸매매</td></tr>
+    <tr><td>반복 패턴</td><td>하순·상폐·청산·저변동성·저PBR — <b>5번 모두 소중형 승·대형 패</b> (차익거래는 대형주부터 소진)</td></tr>
+  </table>
+  </div>
+
+  <div class="foot">
+    출처: <code>진우퀀트_한눈에.md</code> · <code>진우퀀트_작업현황판.md</code> · <code>증명된_규칙\</code> 규칙서·증거 · <code>가상매매\엔진</code> · 자동화 배치(.bat) 실제 파일 기준 · 생성 2026-07-16
+  </div>
+</div>
+
+<script>
+  mermaid.initialize({startOnLoad:true, theme:'dark',
+    themeVariables:{fontSize:'13px', fontFamily:'Malgun Gothic, sans-serif'},
+    flowchart:{curve:'basis', nodeSpacing:32, rankSpacing:44}});
+</script>
+</body>
+</html>

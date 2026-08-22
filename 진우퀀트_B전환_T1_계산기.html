@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>진우퀀트 B전환 T1 집행 계산기</title>
+<style>
+  :root{--bd:#d8d8d8;--mut:#666;--ok:#1a7f37;--warn:#b35900;--bad:#c0392b;--bg:#fafafa}
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,"Malgun Gothic",sans-serif;margin:0;padding:18px;color:#1a1a1a;background:#fff;line-height:1.5}
+  h1{font-size:19px;margin:0 0 2px} .sub{color:var(--mut);font-size:12.5px;margin:0 0 14px}
+  .card{border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin-bottom:14px;background:var(--bg)}
+  .row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end}
+  label{font-size:12.5px;color:var(--mut);display:block;margin-bottom:3px}
+  input[type=number]{width:110px;padding:6px 8px;border:1px solid var(--bd);border-radius:6px;font-size:14px;text-align:right}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:4px}
+  th,td{padding:6px 8px;border-bottom:1px solid #ececec;text-align:right;white-space:nowrap}
+  th{font-size:11.5px;color:var(--mut);font-weight:600;border-bottom:1px solid var(--bd)}
+  td.name,th.name{text-align:left}
+  td.gr{text-align:center;font-weight:600;color:#555}
+  input.px{width:78px;padding:4px 6px;border:1px solid var(--bd);border-radius:5px;text-align:right;font-size:13px}
+  tr.elig{background:#f0f7f1} tr.no{color:#aaa}
+  .pill{display:inline-block;padding:1px 7px;border-radius:10px;font-size:11px;font-weight:600}
+  .summary{font-size:14px} .summary b{font-size:16px}
+  .big{font-size:22px;font-weight:700}
+  .verdict{padding:8px 12px;border-radius:8px;font-size:13.5px;margin-top:8px}
+  .v-ok{background:#e8f5ea;color:var(--ok)} .v-warn{background:#fff3e0;color:var(--warn)} .v-bad{background:#fdecea;color:var(--bad)}
+  textarea{width:100%;height:120px;margin-top:8px;font-family:ui-monospace,monospace;font-size:12.5px;border:1px solid var(--bd);border-radius:6px;padding:8px}
+  .note{font-size:11.5px;color:var(--mut);margin-top:10px}
+  button{padding:6px 12px;border:1px solid var(--bd);border-radius:6px;background:#fff;cursor:pointer;font-size:12.5px}
+  .flag{color:var(--warn);font-size:11px}
+</style>
+</head>
+<body>
+<h1>진우퀀트 — B전환 T1 집행 계산기</h1>
+<p class="sub">실제 호가만 입력하면 편입 종목·수량·비중·잔여현금이 자동 계산됩니다. production v3.7.2 무수정 · <b>주문은 직접 집행</b> · 백테스트는 forward 아님(인샘플).</p>
+<p class="sub" style="color:#b35900;background:#fff8f0;border:1px solid #f0d9b8;border-radius:8px;padding:8px 10px">📌 <b>T1 결정(6/12)</b>: 아모레퍼시픽 MA200 아래 → 이번 트랜치 <b>제외</b>(호가 0 입력). 6종목이면 EW 16.7%&gt;15%cap이라 일부 cap 초과 정상 → <b>round 방식(현금 소진) 권장</b>(트랙 빌드 중, T2·T3에서 희석). 이 계산기는 <b>범용</b> — T2(7/1)·T3(8/3)에도 그날 호가·등급·MA200으로 다시 쓰세요. 기본값=6/12 현재가. ⚠️ <b>최신 6/13 실행체크리스트</b>는 7종 유지·<b>한미반도체(어닝쇼크)</b>도 제외후보로 명시 — 아모레(MA200)·한미(어닝) 둘 다 재량 제외후보. 집행 시 체크리스트 우선.</p>
+
+<div class="card">
+  <div class="row">
+    <div><label>① 에코프로머티 1/3 매도 실현현금 (만원)</label><input type="number" id="sell" value="167" step="1"></div>
+    <div><label>② 적립 (만원)</label><input type="number" id="add" value="50" step="1"></div>
+    <div><label>시스템 트랙 시작 평가액</label><input type="number" id="base" value="0" step="1"></div>
+    <div style="margin-left:auto;text-align:right">
+      <label>T (트랙 평가액)</label><div class="big" id="T">217만</div>
+    </div>
+    <div style="text-align:right">
+      <label>편입 상한 0.15·T</label><div class="big" id="thr">32.5만</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <p class="sub" style="margin:0 0 6px">S+/S/A 13종목 (6/2 dashboard 기준). 등급 바뀐 종목은 호가를 0으로 두면 제외됩니다. <b>MA200 아래</b>면 체크 → §10 방어 등급 자동 판정.</p>
+  <table>
+    <thead><tr>
+      <th class="name">종목</th><th>등급</th><th>호가(만원)</th><th>MA200↓</th>
+      <th>편입</th><th>수량</th><th>금액(만원)</th><th>비중</th>
+    </tr></thead>
+    <tbody id="tb"></tbody>
+  </table>
+  <div id="ma200" class="verdict v-ok"></div>
+</div>
+
+<div class="card summary">
+  <div class="row" style="gap:24px">
+    <div><label>편입 가능 종목수</label><div class="big" id="n">–</div></div>
+    <div><label>종목당 목표 (T/n)</label><div class="big" id="tgt">–</div></div>
+    <div><label>매수 합계</label><div class="big" id="buy">–</div></div>
+    <div><label>잔여현금 (→T2 이월)</label><div class="big" id="left">–</div></div>
+  </div>
+  <label style="margin-top:10px">주문 리스트 (복사용)</label>
+  <textarea id="out" readonly></textarea>
+  <button onclick="navigator.clipboard.writeText(document.getElementById('out').value)">복사</button>
+  <p class="note">수량 규칙: 목표÷호가 반올림(최소1주). 반올림이 종목 15% cap을 넘으면 자동 내림(⚠️ 표시). T1은 책이 작아 일부 종목이 cap 경계 — T2~T3에서 T 커지며 희석. 미편입(호가>상한)은 차기 트랜치. 실제 집행 전 dashboard 등급·MA200·호가 재확인.</p>
+</div>
+
+<script>
+const STOCKS = [
+  ["한화에어로","S+",107.0],["두산에너빌리티","S+",10.0],["삼양식품","S+",114.0],
+  ["NH투자증권","S+",3.07],["ISC","S+",21.15],["한미반도체","S+",27.55],
+  ["알테오젠","S",35.7],["SK하이닉스","S+",236.0],["삼성물산","S",48.55],
+  ["삼성전자","S",36.05],["NAVER","A",28.05],["아모레퍼시픽","A",10.93],["KT&G","A",18.46]
+];
+const tb=document.getElementById('tb');
+STOCKS.forEach((s,i)=>{
+  const tr=document.createElement('tr'); tr.id='r'+i;
+  tr.innerHTML=`<td class="name">${s[0]}</td><td class="gr">${s[1]}</td>
+    <td><input class="px" type="number" step="0.1" value="${s[2]}" data-i="${i}"></td>
+    <td><input type="checkbox" data-b="${i}"></td>
+    <td class="e">–</td><td class="q">–</td><td class="amt">–</td><td class="w">–</td>`;
+  tb.appendChild(tr);
+});
+const num=id=>parseFloat(document.getElementById(id).value)||0;
+function recompute(){
+  const T=num('base')+num('sell')+num('add'); const thr=0.15*T;
+  document.getElementById('T').textContent=T.toFixed(0)+'만';
+  document.getElementById('thr').textContent=thr.toFixed(1)+'만';
+  const pxs=[...document.querySelectorAll('input.px')].map(e=>parseFloat(e.value)||0);
+  const below=[...document.querySelectorAll('input[data-b]')].map(e=>e.checked);
+  const elig=[]; STOCKS.forEach((s,i)=>{ if(pxs[i]>0 && pxs[i]<=thr) elig.push(i); });
+  const n=elig.length, tgt=n?T/n:0;
+  let buy=0; const lines=[];
+  STOCKS.forEach((s,i)=>{
+    const tr=document.getElementById('r'+i);
+    const isE=elig.includes(i);
+    tr.className = isE?'elig':(pxs[i]>thr?'no':'');
+    let q=0,amt=0,w=0,flag='';
+    if(isE){
+      const qR=Math.max(1,Math.round(tgt/pxs[i]));
+      const qCap=Math.floor(thr/pxs[i]);            // 15% cap 한도 주수
+      q=Math.min(qR,qCap)||1;
+      if(qR>qCap) flag=' <span class="flag">⚠round '+qR+'주=cap초과→내림</span>';
+      amt=q*pxs[i]; w=amt/T*100; buy+=amt;
+      lines.push(`${s[0]} (${s[1]}) ${q}주  ${amt.toFixed(1)}만  ${w.toFixed(1)}%`);
+    }
+    tr.querySelector('.e').innerHTML=isE?'<span class="pill" style="background:#d6ecd9;color:#1a7f37">편입</span>':(pxs[i]>thr?'상한↑':'–');
+    tr.querySelector('.q').innerHTML=isE?(q+'주'+flag):'–';
+    tr.querySelector('.amt').textContent=isE?amt.toFixed(1):'–';
+    tr.querySelector('.w').textContent=isE?w.toFixed(1)+'%':'–';
+  });
+  document.getElementById('n').textContent=n+'종목';
+  document.getElementById('tgt').textContent=n?tgt.toFixed(1)+'만':'–';
+  document.getElementById('buy').textContent=buy.toFixed(1)+'만';
+  document.getElementById('left').textContent=(T-buy).toFixed(1)+'만 ('+(T?((T-buy)/T*100):0).toFixed(0)+'%)';
+  // MA200 방어 (§10) — 편입 후보 중 아래 개수
+  const bc=below.filter((b,i)=>b && pxs[i]>0).length;
+  const v=document.getElementById('ma200');
+  if(bc<=2){v.className='verdict v-ok';v.textContent=`MA200 아래 ${bc}종목 → 정상 진행 (점수 우선, MA200 참고만)`;}
+  else if(bc<=5){v.className='verdict v-warn';v.textContent=`MA200 아래 ${bc}종목 → 해당 종목 비중 축소 검토`;}
+  else{v.className='verdict v-bad';v.textContent=`MA200 아래 ${bc}종목 → 시장 추세 약함. 보수적 운영(현금 비중↑) — T1 규모 축소 고려: ①매도현금을 줄여 입력해 시뮬레이션`;}
+  document.getElementById('out').value =
+    `[B전환 T1]  T=${T.toFixed(0)}만 · 상한 ${thr.toFixed(1)}만 · 편입 ${n}종목 · MA200아래 ${bc}\n`+
+    lines.join('\n')+`\n매수합계 ${buy.toFixed(1)}만 / 잔여 ${(T-buy).toFixed(1)}만`;
+}
+document.querySelectorAll('input').forEach(e=>e.addEventListener('input',recompute));
+recompute();
+</script>
+</body>
+</html>

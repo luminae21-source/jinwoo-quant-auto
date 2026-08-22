@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>진우퀀트 학습 대시보드</title>
+<style>
+  :root{
+    --bg:#f7f8fa; --card:#ffffff; --ink:#1c2128; --sub:#5b626d; --line:#e4e7ec;
+    --accent:#c85426; --green:#1e8e5a; --greenbg:#e6f4ec; --red:#c0392b; --redbg:#fbecea;
+    --amber:#b7791f; --amberbg:#fdf3e2; --blue:#2f6fdb; --bluebg:#eaf1fd;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:'Malgun Gothic','Apple SD Gothic Neo',system-ui,sans-serif;line-height:1.6;}
+  .wrap{max-width:1080px;margin:0 auto;padding:32px 22px 80px;}
+  header.top{border-left:6px solid var(--accent);padding:8px 0 8px 18px;margin-bottom:8px;}
+  h1{font-size:27px;margin:0 0 4px;}
+  .muted{color:var(--sub);font-size:13.5px;}
+  h2{font-size:20px;margin:38px 0 12px;padding-bottom:7px;border-bottom:2px solid var(--line);}
+  h3{font-size:16px;margin:22px 0 8px;color:#33383f;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+  @media(max-width:760px){.grid2,.grid3{grid-template-columns:1fr;}}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:6px 0;}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{background:#f0f2f5;font-weight:700;font-size:12.5px;}
+  tr:last-child td{border-bottom:none;}
+  .b{display:inline-block;padding:1px 9px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;}
+  .ok{background:var(--greenbg);color:var(--green);}
+  .no{background:var(--redbg);color:var(--red);}
+  .cond{background:var(--amberbg);color:var(--amber);}
+  .info{background:var(--bluebg);color:var(--blue);}
+  .num{font-variant-numeric:tabular-nums;white-space:nowrap;}
+  code{background:#eef1f5;padding:1px 6px;border-radius:5px;font-size:12.5px;
+    font-family:'Consolas','D2Coding',monospace;}
+  .lead{font-size:14.5px;color:#333;}
+  .flow{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin:10px 0;}
+  .fbox{flex:1;min-width:150px;border-radius:10px;padding:11px 13px;font-size:13px;}
+  .fno{background:var(--redbg);border:1px solid #e0b4ad;}
+  .fok{background:var(--greenbg);border:1px solid #a9d6bd;}
+  .fend{background:#fff5ef;border:2px solid var(--accent);text-align:center;font-weight:700;}
+  .kfacts li{margin:4px 0;}
+  .warn{background:var(--amberbg);border-left:4px solid var(--amber);padding:10px 14px;border-radius:6px;font-size:13.5px;margin:10px 0;}
+  .foot{color:var(--sub);font-size:12px;margin-top:40px;border-top:1px solid var(--line);padding-top:14px;}
+  .tag{font-size:11.5px;color:var(--sub);}
+  ol.steps{margin:6px 0;padding-left:20px;}
+  ol.steps li{margin:5px 0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>진우퀀트 학습 대시보드</h1>
+  <div class="muted">30년 패널(1996–2026 · 5,057종목 · 상폐 포함 · 1,470만 행) 기반 검정 요약 · 2026-07-16 정리<br>
+  ⚠️ 투자자문 아님 · 발굴 ≠ 매수신호 · 매수/매도 판단·책임은 본인</div>
+</header>
+
+<p class="lead">이 문서는 이번 작업에서 <b>검정한 이론</b>, <b>배운 방법론</b>, <b>만들고 찾은 도구</b>를 한 곳에 정리한
+학습 자료입니다. 핵심 한 줄: <b>“고변동 추격은 손해, 스톱은 방어일 뿐, 진짜 개선은 더 싸고(저PBR) 덜 출렁이는(저변동) 쪽으로 기우는 것.”</b></p>
+
+<!-- ─────────── 큰 그림 ─────────── -->
+<h2>1. 큰 그림 — 여섯 검정이 한 결론으로</h2>
+<div class="card">
+  <p class="muted" style="margin-top:0">여섯 개의 독립된 검정(①②③④ + B·C)이 서로 다른 각도에서 출발해 같은 결론에 도달했다.
+  하나가 우연히 맞을 순 있어도 <b>여섯이 독립적으로 같은 방향을 가리킬 확률은 거의 없다</b> — 이게 단일 백테스트보다 믿을 만한 이유다.</p>
+  <div class="flow">
+    <div class="fbox fno"><b>✗ 안 되는 것</b><br>① 고변동 추격: 스톱 붙여도 기하 −4.2%<br>C 모멘텀·52주 신고가: OOS 사망<br>B 하드 스톱: 파국 방어일 뿐(알파 아님)</div>
+    <div class="fbox fok"><b>✓ 되는 것</b><br>C 저변동·저PBR: 전 시장 OOS 승<br>② 섹터 안에서도 저PBR·저변동 승<br>④ 소·중형은 두 팩터 결합이 최선</div>
+  </div>
+  <div class="flow"><div class="fbox fend" style="min-width:100%">결론 → 더 싸고 덜 출렁이는 쪽으로 기울여라 → ③ 발굴툴(jq_discover)에 실제 배선</div></div>
+  <p class="tag">그래픽 원본: <code>가상매매\검증\여섯검정_수렴도식.svg</code></p>
+</div>
+
+<!-- ─────────── 이론 정리 ─────────── -->
+<h2>2. 이론 정리 — 무엇이 되고 무엇이 안 되나</h2>
+<div class="card">
+<h3>2-1. 팩터별 판정 (전 시장 30년, 비용·상폐 반영)</h3>
+<table>
+<thead><tr><th>팩터 / 규칙</th><th>정의</th><th>핵심 근거(OOS)</th><th>판정</th></tr></thead>
+<tbody>
+<tr><td><b>저변동성</b></td><td>60일 일간수익 표준편차 낮은 쪽</td><td class="num">소·중형 롱숏 t=4.69 / 5.04 · 롱온리 순+5.7% / +3.0%</td><td><span class="b ok">채택</span></td></tr>
+<tr><td><b>저PBR</b></td><td>주가순자산비율 낮은 쪽(2002~)</td><td class="num">섹터·전시장 모두 OOS 유의 (②서 우세)</td><td><span class="b ok">채택</span></td></tr>
+<tr><td>모멘텀</td><td>최근 수익률 상위</td><td class="num">IN 화려 → OOS 소멸</td><td><span class="b no">기각</span></td></tr>
+<tr><td>52주 신고가</td><td>신고가 근접 돌파</td><td class="num">OOS 유의성 상실</td><td><span class="b no">기각</span></td></tr>
+<tr><td>대형주 저변동/저PBR</td><td>대형 구간 한정</td><td class="num">OOS 기각(소&gt;대 순서)</td><td><span class="b no">기각</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="card">
+<h3>2-2. 다섯 검정 요약 (①②③④ + B·C)</h3>
+<table>
+<thead><tr><th>코드</th><th>질문</th><th>결과</th><th>판정</th></tr></thead>
+<tbody>
+<tr><td><b>C</b></td><td>전 시장에서 어떤 진입 팩터가 이기나</td><td>저변동성(소·중형) 채택 · 모멘텀/신고가 기각</td><td><span class="b ok">채택</span></td></tr>
+<tr><td><b>②</b></td><td>진우 섹터(반도체장비 등 557종목) <b>안에서</b>도 되나</td><td>저PBR OOS t=3.17 · 저변동 t=2.68 (IN 관문 미달)</td><td><span class="b cond">조건부</span></td></tr>
+<tr><td><b>①</b></td><td>고변동 매매를 하드 스톱으로 살릴 수 있나</td><td>스톱은 파국 방어(2.7→0.6%)이나 기하 여전히 음수, 저변동에 못 미침</td><td><span class="b no">스톱=방어</span></td></tr>
+<tr><td><b>B</b></td><td>어떤 청산 규칙이 최선인가</td><td>트레일−15 / 고정−8 채택 — 꼬리위험 축소(손상통제)</td><td><span class="b info">방어채택</span></td></tr>
+<tr><td><b>④</b></td><td>저변동∩저PBR 결합이 단독보다 강한가</td><td>중형 채택 · 소형 조건부(OOS 증분+2.2) · 대형 기각</td><td><span class="b cond">부분채택</span></td></tr>
+<tr><td><b>③</b></td><td>검증된 기울기를 실전 툴에 어떻게 얹나</td><td>jq_discover 순위에 저PBR·저변동 가산(상태필터 불변)</td><td><span class="b ok">배선완료</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="card">
+<h3>2-3. ① 고변동 × 청산 — 진우 구간(시총 소, OOS)</h3>
+<table>
+<thead><tr><th>그룹·청산</th><th class="num">기하%</th><th class="num">최악5%</th><th class="num">파국%(≤−50)</th><th>의미</th></tr></thead>
+<tbody>
+<tr><td>고변동 Q5 · 무청산</td><td class="num">−7.31</td><td class="num">−39.8</td><td class="num">2.7</td><td>추격의 민낯</td></tr>
+<tr><td>고변동 Q5 · <b>트레일−15</b></td><td class="num">−4.21</td><td class="num">−14.0</td><td class="num">0.6</td><td>파국 4배↓·꼬리 1/3 (그래도 음수)</td></tr>
+<tr><td><b>저변동 Q1 · 무청산</b></td><td class="num">−1.35</td><td class="num">−27.0</td><td class="num">0.9</td><td>그냥 차분한 게 낫다</td></tr>
+</tbody>
+</table>
+<p class="tag">→ 스톱은 손상을 줄이지만 게임을 이기게 하진 못한다. 저변동을 든 것보다 못하다.</p>
+</div>
+
+<div class="card">
+<h3>2-4. ④ 팩터결합 — 시총별 (전체 5,057종목 · ★증분관문 = 결합이 단독을 이기나)</h3>
+<table>
+<thead><tr><th>시총</th><th class="num">OOS 롱숏 t</th><th class="num">결합 순%</th><th class="num">단독 최대%</th><th class="num">증분</th><th>판정</th></tr></thead>
+<tbody>
+<tr><td><b>중형</b></td><td class="num">+4.28</td><td class="num">+5.8</td><td class="num">+4.8</td><td class="num">+1.0</td><td><span class="b ok">결합 채택</span></td></tr>
+<tr><td><b>소형</b></td><td class="num">+4.27</td><td class="num">+8.1</td><td class="num">+5.8</td><td class="num">+2.2</td><td><span class="b cond">조건부 우호</span></td></tr>
+<tr><td>대형</td><td class="num">+0.91</td><td class="num">+0.3</td><td class="num">+0.5</td><td class="num">−0.2</td><td><span class="b no">기각</span></td></tr>
+</tbody>
+</table>
+<div class="warn">표본의 교훈: <b>예비(1500표본)에선 소형 증분이 −3.2(손해)였는데 전체(5057)에선 +2.2(이득)로 부호가 뒤집혔다.</b>
+얇은 표본은 못 믿는다 — 전체 실행이 판정을 바꿨다. (상폐 base·conservative 두 가정 모두 동일 → 강건)</div>
+</div>
+
+<div class="card">
+<h3>2-5. 판정 관문 — 모든 검정에 공통 적용한 규율</h3>
+<table>
+<thead><tr><th>관문</th><th>내용</th><th>왜</th></tr></thead>
+<tbody>
+<tr><td>(A) IN 유의</td><td>표본내 Newey-West t &gt; 2</td><td>효과가 실제로 존재하는가</td></tr>
+<tr><td>(B) 단조/이상치</td><td>분위 단조 · 소수 이상치 제거해도 생존</td><td>몇 개 사건에 기댄 착시 배제</td></tr>
+<tr><td>(C) <b>OOS 생존</b></td><td>표본외에서 부호·유의 유지</td><td><b>가장 중요</b> — 협상 대상 아님</td></tr>
+<tr><td>(D) 비용·상폐 후</td><td>왕복 0.45% + 상폐 페널티 반영해도 순+</td><td>현실에서 남는가</td></tr>
+<tr><td>★(E) 증분</td><td>결합이 단독을 이겨야 결합</td><td>과욕 방지(못 이기면 단독으로)</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ─────────── 방법론 교훈 ─────────── -->
+<h2>3. 방법론 — 배운 것(학습 포인트)</h2>
+<div class="grid2">
+  <div class="card"><h3>① OOS는 협상 대상이 아니다</h3>
+  <p class="muted" style="margin:0">월초강세는 IN에서 t=5.49(p≈0)로 어떤 논문이든 실었을 숫자였다. <b>그런데 OOS에서 전부 죽었다.</b>
+  <b>IN Sharpe와 OOS Sharpe의 상관 = −0.709</b> — 백테스트가 예쁠수록 실전에서 더 나빴다. → OOS를 데이터 보기 전에 잘라둔다.</p></div>
+
+  <div class="card"><h3>② 생존편향은 수집 방식에서 갈린다</h3>
+  <p class="muted" style="margin:0">종목코드로 부르면 상폐주가 조용히 누락된다(생존자만 남음). <b>날짜별</b>로 받으면 그날 살아있던 종목이 그대로 —
+  5,057종목·상폐 포함 패널을 그렇게 만들었다.</p></div>
+
+  <div class="card"><h3>③ 종목-일 풀링은 t를 뻥튀기한다</h3>
+  <p class="muted" style="margin:0">같은 데이터로 t=−12.24가 나왔다가, <b>동일가중 포트 + 월별 대응표본</b>으로 바꾸니 −1.56.
+  횡단면 상관을 무시하면 표본 수를 수천 배로 착각한다. → 월을 독립 단위로.</p></div>
+
+  <div class="card"><h3>④ 롱숏은 생존편향에 강건하다</h3>
+  <p class="muted" style="margin:0">싼-종목 vs 비싼-종목은 둘 다 생존자 풀에서 뽑으니 상폐 페널티가 상쇄된다.
+  그래서 절대수익보다 <b>롱숏(상대비교)으로 판정</b>했다(②·④).</p></div>
+
+  <div class="card"><h3>⑤ 사전등록 — 데이터 보기 전에 관문을 못 박는다</h3>
+  <p class="muted" style="margin:0">각 검정마다 사전등록서를 먼저 썼다(관문·OOS분할·예측). 결과를 보고 규칙을 고치면 그게 data snooping.
+  ②·④의 "IN 약함→OOS 강함"은 오버피팅의 <b>반대</b> 신호라 별도로 기록했다.</p></div>
+
+  <div class="card"><h3>⑥ 예비표본·마운트 뷰를 믿지 마라</h3>
+  <p class="muted" style="margin:0">예비 1500표본은 소형 결론을 뒤집었다(전체로 재확인). 또 파일이 "잘려 보이는" 착시가 잦았다 —
+  <b>실제 파일(Read)과 도구 뷰가 다르면 착시</b>, 같으면 진짜 손상. 매번 대조했다.</p></div>
+</div>
+
+<!-- ─────────── 도구 정리 ─────────── -->
+<h2>4. 도구 정리 — 만든 것 · 찾은 것</h2>
+
+<div class="card">
+<h3>4-1. 이번에 개발한 도구</h3>
+<table>
+<thead><tr><th>파일</th><th>역할</th><th>실행</th></tr></thead>
+<tbody>
+<tr><td><code>검정_섹터내_기울기_30년.py</code></td><td>② 진우 섹터 안에서 저PBR·저변동 유효성(터셔일 롱숏)</td><td><code>섹터내_기울기_실행.bat</code></td></tr>
+<tr><td><code>검정_고변동성_청산_30년.py</code></td><td>① 고변동 매매+스톱 상호작용(파국률·기하)</td><td><code>고변동성_청산_실행.bat</code></td></tr>
+<tr><td><code>검정_팩터결합_저변동성_저PBR.py</code></td><td>④ 저변동∩저PBR 결합의 증분 검정</td><td><code>팩터결합_검정_실행.bat</code></td></tr>
+<tr><td><code>jq_discover.py</code> <span class="tag">(개조)</span></td><td>③ 발굴 순위에 저PBR·저변동 기울기 배선(상태필터 불변)</td><td><code>py jq_discover.py [--breakout]</code></td></tr>
+<tr><td><code>발굴데이터_갱신.py</code></td><td>발굴 일봉을 30년 패널서 최신화(KOSDAQ 2024→2026·volume)</td><td><code>발굴데이터_갱신_실행.bat</code></td></tr>
+<tr><td><code>관심종목_상태.py</code></td><td>내 보유·관심종목 "지금 타점 형성됐나" 상태표</td><td><code>관심종목_상태_실행.bat</code></td></tr>
+<tr><td><code>발굴_전체_실행.bat</code></td><td>상태표+안정+돌파 올인원 한 번에</td><td><code>발굴_전체_실행.bat</code></td></tr>
+<tr><td><code>여섯검정_수렴도식.svg</code></td><td>큰 그림 그래픽</td><td>브라우저</td></tr>
+</tbody>
+</table>
+<p class="tag">모든 검정 스크립트는 셀프테스트를 먼저 통과해야 본 실행으로 넘어간다. 결과는 <code>가상매매\검증\*_결과.md</code>.</p>
+</div>
+
+<div class="card">
+<h3>4-2. 활용·확인한 기존 자산</h3>
+<table>
+<thead><tr><th>자산</th><th>내용</th></tr></thead>
+<tbody>
+<tr><td><code>종목일봉_30년_KOSPI/KOSDAQ.csv</code></td><td>1996–2026 · 5,057종목 · 상폐 포함 · 1,470만 행(volume 포함) — 모든 검정·발굴의 뿌리</td></tr>
+<tr><td><code>종목재무_KRX_KOSPI/KOSDAQ.csv</code></td><td>PBR 2002~ · 날짜별(생존편향 없음) · 저PBR 검정의 밸류 소스</td></tr>
+<tr><td><code>liquidity_sector.csv · kosdaq_industry.csv</code></td><td>업종 분류 — ② 섹터 유니버스(반도체·전자부품·이차전지 등 557종목) 정의</td></tr>
+<tr><td>증명된_규칙 / <code>진입엣지_규칙서.md</code></td><td>C 봉인(저변동 채택)</td></tr>
+<tr><td>증명된_규칙 / <code>청산규칙_규칙서.md</code></td><td>B 봉인(트레일−15·고정−8)</td></tr>
+<tr><td>증명된_규칙 / <code>하순필터_규칙서.md</code></td><td>③(하순) 진입 보류 필터(코스닥 소·중형)</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ─────────── 용어 사전 ─────────── -->
+<h2>5. 핵심 용어 사전 (학습용)</h2>
+<div class="grid2">
+  <div class="card"><table>
+  <tr><td><b>저변동성</b></td><td>최근 60일 하루수익 변동이 작은 종목. 차분한 종목이 역사적으로 더 나았다.</td></tr>
+  <tr><td><b>저PBR</b></td><td>주가/순자산이 낮은(=상대적으로 싼) 종목. 밸류 팩터.</td></tr>
+  <tr><td><b>OOS</b></td><td>Out-of-Sample. 규칙을 만들 때 안 본 기간. 여기서 살아남아야 진짜.</td></tr>
+  <tr><td><b>Newey-West t</b></td><td>자기상관을 보정한 t값. 시계열에서 유의성을 부풀리지 않게.</td></tr>
+  </table></div>
+  <div class="card"><table>
+  <tr><td><b>롱숏</b></td><td>좋은 그룹 매수 − 나쁜 그룹 매도. 시장·생존편향 상쇄해 순수 효과를 본다.</td></tr>
+  <tr><td><b>터셔일/퀸타일</b></td><td>3분위/5분위. 팩터로 줄 세워 상·하위를 비교.</td></tr>
+  <tr><td><b>기하평균</b></td><td>복리 수익률. 큰 손실이 있으면 산술평균이 양수여도 음수가 된다.</td></tr>
+  <tr><td><b>생존편향</b></td><td>망한 종목을 빼고 보면 성적이 부풀려지는 착시. 상폐 포함으로 차단.</td></tr>
+  </table></div>
+</div>
+
+<!-- ─────────── 플레이북 ─────────── -->
+<h2>6. 진우 플레이북 — 실전 요약</h2>
+<div class="card">
+<ol class="steps">
+  <li><b>스타일은 유지하되 기울기를 얹는다.</b> 반도체 장비주를 계속 봐도 좋다. 단 후보들 중 <b>더 싸고(저PBR) 덜 출렁이는(저변동)</b> 쪽으로 — 이미 <code>jq_discover</code>에 배선됨.</li>
+  <li><b>고변동 종목을 매매하면 트레일링 −15% 스톱.</b> 대참사(−50%↓)를 4배 줄이고 꼬리를 1/3로. 단 스톱이 게임을 이기게 하진 않는다.</li>
+  <li><b>소·중형은 저변동+저PBR 함께 본다</b>(④). 대형은 이 기울기가 안 통한다.</li>
+  <li><b>하순(월말 −9~−5거래일)엔 코스닥 소·중형 신규진입 보류.</b> 기존 보유·청산은 그대로.</li>
+  <li><b>타점 확인은 <code>관심종목_상태.py</code>.</b> 🟢돌파근접(상승추세+신고가95%내+유입)이 뜰 때가 자리. 없으면 서두르지 않는다.</li>
+  <li><b>발굴 ≠ 매수신호.</b> 모르는 업종이 떠도 추격하지 않는다 — 엣지는 아는 종목에서 나온다.</li>
+</ol>
+</div>
+
+<div class="foot">
+진우퀀트 학습 대시보드 · 2026-07-16 · 30년 패널 검정 기반 · 상세 근거는 <code>가상매매\검증\*_결과.md</code> 및 <code>증명된_규칙\</code> 참조.<br>
+본 자료는 학습·정리용이며 투자자문이 아닙니다. 모든 매매 판단과 책임은 본인에게 있습니다.
+</div>
+
+</div>
+</body>
+</html>

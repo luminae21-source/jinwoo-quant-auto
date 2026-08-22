@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>진우퀀트 통합 블루프린트</title>
+<style>
+ :root{--bg:#0f1620;--card:#18222f;--card2:#1d2937;--ink:#e8eef5;--sub:#9fb0c3;--line:#2b3a4d;--accent:#4fa8ff;--go:#34c98a;--warn:#ffc24d;--pill:#243345}
+ @media(prefers-color-scheme:light){:root{--bg:#f4f7fb;--card:#fff;--card2:#eef3f9;--ink:#16212e;--sub:#5b6b7d;--line:#d7e0ea;--accent:#1f73d6;--go:#11a06a;--warn:#b5790a;--pill:#e7eef6}}
+ *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+ body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-size:16px;line-height:1.55}
+ .wrap{max-width:560px;margin:0 auto;padding:14px 12px 60px}
+ h1{font-size:19px;margin:6px 2px 2px}
+ .vision{font-size:14px;color:var(--ink);background:var(--card2);border-left:3px solid var(--accent);padding:11px 13px;border-radius:10px;margin:10px 2px}
+ h2{font-size:15px;margin:22px 2px 6px;padding-bottom:5px;border-bottom:1px solid var(--line)}
+ .c{border:1px solid var(--line);border-radius:13px;background:var(--card);padding:13px 14px;margin:9px 0}
+ .c .h{font-weight:800;font-size:15px}
+ .c .s{font-size:13px;color:var(--sub);margin-top:3px}
+ .tag{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:20px;background:var(--pill);color:var(--accent);margin-right:6px}
+ .phone{border:2px solid var(--line);border-radius:18px;background:var(--card);padding:12px;margin:10px 0;font-size:13px}
+ .phone .bar{display:flex;justify-content:space-between;font-size:12px;color:var(--sub);border-bottom:1px solid var(--line);padding-bottom:7px;margin-bottom:7px}
+ .phone .todo{background:var(--card2);border-radius:9px;padding:8px 10px;margin-top:7px}
+ .phone .tabs{display:flex;gap:4px;margin-top:9px;border-top:1px solid var(--line);padding-top:8px}
+ .phone .tb{flex:1;text-align:center;font-size:11px;padding:6px 2px;border-radius:8px;background:var(--pill);color:var(--sub)}
+ .phone .tb.on{background:var(--accent);color:#fff;font-weight:700}
+ .flow{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px;white-space:pre;overflow-x:auto;background:var(--card2);border-radius:10px;padding:11px;color:var(--ink)}
+ ol{margin:6px 0 0;padding-left:20px}ol li{margin:5px 0;font-size:14px}
+ .note{font-size:12px;color:var(--sub);margin:2px}
+ .foot{font-size:11px;color:var(--sub);text-align:center;margin-top:20px}
+ b.go{color:var(--go)} b.warn{color:var(--warn)}
+</style></head><body><div class="wrap">
+<h1>진우퀀트 — 통합 블루프린트</h1>
+<p class="note">2단계 "단일 허브" 설계도 (아직 안 만듦). 조각은 계속 쌓고, 측정이 살아나면 이 그림대로 접는다. 엔진 무수정 — 허브는 보여주기만.</p>
+
+<div class="vision">📱 <b>한 줄 비전</b><br>폰에서 앱 하나 열면 → 오늘 뭘 볼지(시장)·뭘 할지(시스템·테마)·모르는 말 바로 찾고(사전)·내 판단이 맞는지(Track W)를 <b>한 화면</b>.</div>
+
+<h2>⚠ 왜 아직 통합하면 안 되나</h2>
+<div class="c"><div class="h">측정이 아직 0개월</div><div class="s">기계 선정 4종 기각됐고, 테마 lane은 테크윙 #1 <b>미진입</b>. 지금 굳히면 미완성을 고정함. <b class="go">Track W 1~2개월 + 시장스냅샷 몇 행</b>이 쌓여야 허브에 '살아있는 숫자'가 들어감.</div></div>
+
+<h2>단일 허브 = 탭 5개</h2>
+<div class="c"><div class="h"><span class="tag">①</span>오늘</div><div class="s">시장 한눈(코스피·코스닥·MA200·VKOSPI·다가오는 만기/금통위) + "오늘 할 일 0~1개". <br>접어넣음: 시장스냅샷·캘린더·지수대응 시나리오</div></div>
+<div class="c"><div class="h"><span class="tag">②</span>시스템(본체)</div><div class="s">이번 달 18종 등급·권장비중, 리밸 했나, MA200 상태. <br>접어넣음: v3.7.2 점수·운영가이드·플로우차트①</div></div>
+<div class="c"><div class="h"><span class="tag">③</span>테마</div><div class="s">워치리스트 + 신호 점등(촉매·확산·수급) + 선반영 Go/Stop. <br>접어넣음: 스캔 엔진·대시보드·플로우차트②</div></div>
+<div class="c"><div class="h"><span class="tag">④</span>내 기록</div><div class="s">Track W 현황(테크윙 #1)·직관판단 기록·매수/청산 체크. <br>접어넣음: Track W 등록표·직관판단 기록</div></div>
+<div class="c"><div class="h"><span class="tag">⑤</span>사전</div><div class="s">용어 검색(이미 만든 것 그대로 흡수).</div></div>
+
+<h2>화면 스케치 (①오늘 탭)</h2>
+<div class="phone">
+ <div class="bar"><span>진우퀀트</span><span>2026-06-14</span></div>
+ 코스피 ▼ · MA200 위 ✅ · VKOSPI 보통<br>코스닥 ▼ · MA200 아래 ⚠<br>⏰ 7/16 금통위 · 9/10 네 마녀
+ <div class="todo"><b>오늘 할 일</b><br>• 본체: 다음 리밸 7/1 (대기)<br>• 테마: 테크윙 선반영 PASS — 매수 판단</div>
+ <div class="tabs"><div class="tb on">오늘</div><div class="tb">시스템</div><div class="tb">테마</div><div class="tb">기록</div><div class="tb">사전</div></div>
+</div>
+
+<h2>데이터 흐름 — 어떻게 '살아있게'</h2>
+<div class="flow">PC(월 1~수회)              허브(폰, 매일)
+──────────────             ───────────
+fetch_..._panel.py  ┐
+score_v37_2.py      ├→ data.json →  허브가
+스캐너들            │   (한 개 파일)   읽어서
+track_w_v1.py       ┘                그림</div>
+<p class="note">핵심: 허브는 <b>계산 안 함</b> — PC가 만든 <b>data.json 하나</b>만 읽어 그린다. 그래서 폰에서 가볍고, 엔진은 그대로(무수정). <b>자동매매 아님.</b></p>
+
+<h2>단계적 통합 경로</h2>
+<ol>
+ <li><b>지금</b> — 조각 축적(엔진·판정·사전) + 이 청사진</li>
+ <li><b>통합-0</b> — Track W 1개월·스냅샷 2~3행 쌓이면 → 엔진들이 <b>data.json 한 개</b>로 출력하는 어댑터 1개</li>
+ <li><b>통합-1</b> — data.json 생기면 → 기존 플로우차트에 ①오늘·④기록 탭 추가 = <b class="go">허브 v1</b></li>
+ <li><b>통합-2</b> — 한 달 써보고 → 대시보드·사전 흡수, 탭 5개 완성</li>
+ <li><b>목표</b> — 폰 단일 앱 = 시장 조망 + 안전한 집행 도구</li>
+</ol>
+
+<h2>통합해도 안 변하는 원칙</h2>
+<div class="c"><div class="s">• 시스템(룰)은 자동·무변경, 직관은 기록·측정 — 허브는 보여주고 기록만, <b class="warn">자동매매 아님</b>.<br>• 모든 약어는 ⑤사전에서 즉시 풀림(불투명 0).<br>• 새 기능은 <b>검증/측정 통과 후에만</b> 허브에 노출(검증 안 된 건 '관찰' 딱지).</div></div>
+
+<p class="foot">설계도 — 정보·계획용. 투자 추천 아님.</p>
+</div></body></html>

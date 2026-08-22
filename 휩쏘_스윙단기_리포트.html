@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>휩쏘 §10-B 스윙/단기 분리 검정</title>
+<style>
+:root{--bg:#12100c;--sf:#1d1912;--sf2:#262016;--bd:#453b28;--ink:#f6efdd;--ink2:#d8cba8;
+--mut:#a3946f;--gold:#e0be7a;--good:#63c98f;--bad:#ef7264;--amber:#e8b04d;--amberbg:#332a15;--badbg:#38211d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:15.5px;line-height:1.7}
+.w{max-width:880px;margin:0 auto;padding:34px 22px 70px}
+h1{font-size:24px;margin:0 0 4px}.k{color:var(--gold)}
+.sub{color:var(--mut);font-size:13px;margin-bottom:24px}
+h2{font-size:18px;margin:34px 0 12px;color:var(--gold);letter-spacing:1px;display:flex;align-items:center;gap:10px}
+h2::after{content:"";flex:1;height:1px;background:var(--bd)}
+.verdict{background:var(--badbg);border:1px solid var(--bad);border-radius:14px;padding:20px 22px;margin:14px 0}
+.verdict b.big{font-size:21px;color:var(--bad)}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}
+th,td{border:1px solid var(--bd);padding:8px 11px;text-align:left}
+th{background:var(--sf2);color:var(--ink2);font-size:13px}
+.up{color:var(--good);font-weight:700}.dn{color:var(--bad);font-weight:700}.am{color:var(--amber);font-weight:700}
+.num{color:var(--gold);font-weight:700}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:13px;padding:16px 19px;margin:13px 0}
+.note{background:var(--amberbg);border:1px solid var(--amber);border-radius:12px;padding:13px 17px;margin:13px 0;font-size:14px}
+ul{margin:8px 0;padding-left:22px}li{margin:6px 0}
+.foot{color:var(--mut);font-size:12px;margin-top:38px;border-top:1px solid var(--bd);padding-top:13px}
+.tw{overflow-x:auto}
+</style></head><body><div class="w">
+
+<h1>휩쏘 §10-B <span class="k">스윙 / 단기매매 분리 검정</span></h1>
+<div class="sub">2026-08-21 · 사전등록 준수(실행 전 커밋·승인) · PRIMARY 🟢실행×정식A n=1,725 · 30년(1997~2026) · 비용 왕복 0.4% · 부트 2,000회</div>
+
+<div class="verdict">
+<b class="big">판정: 기각 — 표준 카드 단일 유지</b><br>
+"짧게 먹는 자리와 길게 끄는 자리는 다른 규칙을 써야 하는가" → <b>아니오.</b>
+회전 효율은 좋아지지만 건당 <b>−1.38%p</b>를 내주며, 사전 허용선(−1.0%p)을 넘는다.
+<div class="tw"><table>
+<tr><th>사전등록 채택 조건</th><th>결과</th><th>판정</th></tr>
+<tr><td>① 수익/보유일 CI 하한 &gt; 0</td><td>Δ+2.33%p/일 · CI [+2.21, +2.45]</td><td class="up">충족</td></tr>
+<tr><td>② 건당 수익 열위 ≤ 1.0%p</td><td>Δ−1.38%p · CI [−1.72, −1.04]</td><td class="dn">미충족 ❌</td></tr>
+</table></div>
+</div>
+
+<h2>본 결과</h2>
+<div class="tw"><table>
+<tr><th></th><th>건당 평균</th><th>승률</th><th>평균 보유</th><th>수익/보유일</th></tr>
+<tr><td><b>표준</b> (½되돌림→50%실현 · 트레일12%+본전플로어 · 126봉)</td>
+<td class="num">+2.72%</td><td>56.0%</td><td>8.8일</td><td>−1.18%/일</td></tr>
+<tr><td><b>단기형</b> (⅓되돌림→전량 · 트레일8% · 20봉)</td>
+<td>+1.35%</td><td class="am">62.2%</td><td><b>1.9일</b></td><td>+1.16%/일</td></tr>
+</table></div>
+
+<h2>숫자를 읽을 때 주의 3가지</h2>
+<div class="card"><ul>
+<li><b>승률에 속지 말 것.</b> 단기형 62.2% &gt; 표준 56.0%지만 수익은 절반.
+목표를 가깝게 당기면 승률은 반드시 올라간다 — 실력이 아니라 산수다.</li>
+<li><b>일당 지표는 단기형에 기계적으로 유리하다.</b> 손절은 며칠 만에 끝나 일당 손실이 크게 찍히고,
+표준의 큰 수익은 긴 보유로 희석된다. 실전 우위를 주장하려면 자본 재활용 포트폴리오 시뮬이 필요한데
+이번에 사전등록되지 않았다 → 재론은 <b>새 사전등록으로만</b>.</li>
+<li><b>깊은 휩쏘일수록 길게 끄는 것이 유리하다</b> (H2 시사 · 채택 기준 아님):
+낙폭 ≤−18%에서 표준 +5.15% vs 단기 +2.77% (내주는 폭이 얕은 낙폭의 2배).</li>
+</ul></div>
+
+<h2>H2 · 낙폭 2분할 (사전 지정 — 시사로만)</h2>
+<div class="tw"><table>
+<tr><th>구간</th><th>n</th><th>표준 건당</th><th>단기 건당</th><th>Δ건당(단기−표준)</th></tr>
+<tr><td>얕은 낙폭 (−12~−18%)</td><td>1,346</td><td class="num">+2.04%</td><td>+0.94%</td><td class="dn">−1.10%p</td></tr>
+<tr><td>깊은 낙폭 (≤−18%)</td><td>379</td><td class="num">+5.15%</td><td>+2.77%</td><td class="dn">−2.37%p</td></tr>
+<tr><td>참고 · 비실행 국면</td><td>680</td><td class="dn">−0.88%</td><td class="dn">−0.90%</td><td>−0.02%p</td></tr>
+</table></div>
+<div class="note">비실행 국면에서는 <b>둘 다 음수</b> — 규칙을 바꿔도 국면은 못 이긴다 (게이트 4번째 재확인).
+과제1의 "지평 연장 무의"와도 정합: 시간축을 늘리든 줄이든 표준 규칙의 우위는 바뀌지 않는다.</div>
+
+<h2>검증 (파이프라인 유효성)</h2>
+<div class="card"><ul>
+<li>~2024년 1,817건: 기존 정본 엔진과 <b class="up">100.0% 완전 일치 (차 0.0000%p)</b> — 로직 동일성 증명</li>
+<li>2025~ 588건 평균차 +0.60%p: 8/2 당시 미완결 창이 8/20 데이터로 완결된 개정분 (로직 차이 아님)</li>
+<li>30년 파일(8/20판): 원장 A 907종 전량 포함 · <b>2,405/2,405건</b> 시뮬 완료</li>
+</ul></div>
+
+<h2>재론 금지 등록</h2>
+<div class="card">
+❌ <b>단기형 카드(⅓되돌림·트레일8%·20봉) 분리 운용</b> — 건당 −1.38%p (허용 초과) · 2026-08-21 기각.<br>
+유일한 재론 경로: 자본 재활용 포트폴리오 시뮬을 <b>새 사전등록</b>으로 설계하는 경우.
+</div>
+
+<div class="foot">재현: py 휩쏘_스윙단기검정.py · 사전등록: 휩쏘_스윙단기_사전등록.md · 이벤트: 휩쏘_스윙단기_이벤트.csv(2,405) · 수치: 휩쏘_스윙단기_결과.json<br>
+한계: 생존편향 · 위기해 클러스터 · Δ는 시사이지 확정 아님 · ⚠️ 일관성감사 등록 TODO · 관찰·기록용, 매매 추천 아님</div>
+</div></body></html>

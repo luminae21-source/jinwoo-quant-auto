@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>휩쏘 · 1월 앵커 청산 규칙 — 30년 판정문</title>
+<style>
+:root{--bg:#0f1115;--panel:#171a21;--panel2:#1d212a;--line:#2a2f3a;--tx:#e6e8ee;--dim:#98a0b0;--dim2:#6d7484;
+ --good:#3fb98a;--bad:#e0596b;--warn:#e0a33f;--acc:#6aa6ff}
+@media(prefers-color-scheme:light){:root{--bg:#f7f8fa;--panel:#fff;--panel2:#f0f2f6;--line:#e2e5ec;--tx:#1a1d24;--dim:#5b6373;--dim2:#8a92a3}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:940px;margin:0 auto;padding:32px 20px 80px}
+h1{font-size:27px;margin:0 0 6px;letter-spacing:-.4px}
+.sub{color:var(--dim);font-size:14px;margin-bottom:26px}
+h2{font-size:19px;margin:38px 0 12px;padding-top:20px;border-top:1px solid var(--line)}
+p{margin:10px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0}
+.verdict{display:flex;gap:14px;align-items:flex-start;background:linear-gradient(135deg,rgba(224,163,63,.14),rgba(224,163,63,.03));
+ border:1px solid rgba(224,163,63,.42);border-radius:12px;padding:18px 20px;margin:18px 0}
+.verdict .ic{font-size:26px}
+.big{background:linear-gradient(135deg,rgba(106,166,255,.13),rgba(106,166,255,.03));border:1px solid rgba(106,166,255,.4);
+ border-radius:12px;padding:18px 20px;margin:18px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px}
+th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+thead th{color:var(--dim);font-weight:600;font-size:12.5px}
+tbody tr:hover{background:var(--panel2)}
+.g{color:var(--good)}.b{color:var(--bad)}.w{color:var(--warn)}.d{color:var(--dim2)}
+.hi{background:rgba(106,166,255,.10)}.hi td{font-weight:600}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.kpi .l{font-size:11.5px;color:var(--dim2)}.kpi .v{font-size:22px;font-weight:650;margin-top:3px;letter-spacing:-.5px}
+.kpi .n{font-size:11.5px;color:var(--dim);margin-top:2px}
+ul{margin:8px 0;padding-left:20px}li{margin:6px 0}
+ol{margin:8px 0;padding-left:22px}
+code{background:var(--panel2);padding:1.5px 6px;border-radius:5px;font-size:12.5px;font-family:ui-monospace,Menlo,monospace}
+pre{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:15px 17px;overflow-x:auto;
+ font-size:12.5px;line-height:1.75;font-family:ui-monospace,Menlo,monospace}
+.note{font-size:12.5px;color:var(--dim);border-left:2px solid var(--line);padding-left:13px;margin:14px 0}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;border:1px solid var(--line);color:var(--dim)}
+.ok{color:var(--good);border-color:rgba(63,185,138,.45)}.no{color:var(--bad);border-color:rgba(224,89,107,.45)}
+.mid{color:var(--warn);border-color:rgba(224,163,63,.45)}
+.ci{font-family:ui-monospace,monospace;font-size:12.5px}
+footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);color:var(--dim2);font-size:12px}
+</style></head><body><div class="wrap">
+
+<h1>1월 앵커 청산 규칙 — 30년 판정문</h1>
+<div class="sub">열린 과제 #2 · 2026-08-02 · 9~10월 진입 366건(🟢실행 229 · 밸류태그 45) · 사전등록 정책 13종</div>
+
+<div class="verdict"><div class="ic">🟠</div><div>
+<b style="font-size:17px">보류 — 카드 반영 보류, 관찰 원장에 사전등록 후 전진검증.</b><br>
+<span style="color:var(--dim)">"일반 종목 1월 정리"는 <b>방향은 맞지만</b> 현행 카드 대비 95% CI가 0을 포함한다([−0.18, +2.16]).
+"밸류만 4월 연장"은 <b class="b">기각</b> — 4월 연장이 1월의 이득을 전부 반납한다.</span>
+</div></div>
+
+<div class="kpis">
+<div class="kpi"><div class="l">E1 · 잔여 1월보유 (🟢실행)</div><div class="v g">+1.03%</div><div class="n">카드 +0.17% 대비 +0.86%p</div></div>
+<div class="kpi"><div class="l">부트 95% CI (vs 카드)</div><div class="v w ci">[−0.18,+2.16]</div><div class="n">0을 포함 → 채택 불가</div></div>
+<div class="kpi"><div class="l">표준편차</div><div class="v b">8.2 → 16.0</div><div class="n">거의 2배</div></div>
+<div class="kpi"><div class="l">4월 연장 (E2)</div><div class="v b">+0.13%</div><div class="n">1월 이득 전부 반납</div></div>
+</div>
+
+<h2>1. 큰 발견 — "1월 데드라인"은 조항으로 넣을 수가 없다</h2>
+<div class="big">
+과제1 채택안(2단 청산, 잔여 50%를 −12% 트레일)에 1월/4월 데드라인을 붙였더니 —<br><br>
+<b style="font-size:19px">366건 중 데드라인 발동 = <span class="b">0건</span></b><br><br>
+잔여분이 살아있던 <b>137건 전부</b>에서 트레일이 1월 말보다 먼저 발동했다(1월까지 중앙 81봉).
+→ 데드라인 조항은 <b>사문(死文)</b>이 된다. Δ평균: 1월 +0.04%p · 4월 <b>정확히 0.00%p</b>.
+</div>
+<p><b>"1월에 판다"를 데드라인으로 구현하는 길은 닫혔다.</b> 규칙이 되려면 잔여분 <b>운용방식 자체</b>를 바꿔야 한다 — 그래서 E1을 만들었다.</p>
+
+<h2>2. 형의 문장을 그대로 구현 — E1</h2>
+<div class="card">
+<b>E1</b> = 목표 도달 시 50% 실현 → 잔여 50%에 <b>트레일을 걸지 않고</b>, <b>본전(진입가) 손절만</b> 두고 이듬해 <b>1월 마지막 거래일</b>까지 보유.
+<div class="note">트레일로 조기 청산당하지 않고 1월 강세를 기다리는 형태. "1월 강세에 정리"의 가장 충실한 번역.</div>
+</div>
+<table>
+<thead><tr><th>정책 (🟢실행 n=229)</th><th>평균</th><th>중앙</th><th>승률</th><th>표준편차</th><th>vs 카드 Δ</th><th>부트 95% CI</th><th>판정</th></tr></thead>
+<tbody>
+<tr><td>B0 카드 (현행)</td><td>+0.17%</td><td>−5.00%</td><td>41.5%</td><td>8.2</td><td class="d">기준</td><td class="d">—</td><td class="d">—</td></tr>
+<tr><td>B0b 2단 (과제1 채택안)</td><td>+0.18%</td><td>−5.00%</td><td>41.0%</td><td>9.3</td><td>+0.01</td><td class="d">—</td><td class="d">—</td></tr>
+<tr class="hi"><td>E1 잔여 1월보유</td><td class="g">+1.03%</td><td>−5.00%</td><td>41.0%</td><td class="b">16.0</td><td class="g">+0.86%p</td><td class="ci w">[−0.18, +2.16]</td><td><span class="tag mid">보류</span></td></tr>
+<tr><td>E2 잔여 4월보유</td><td>+0.13%</td><td>−5.00%</td><td>41.0%</td><td>15.0</td><td class="b">−0.04%p</td><td class="ci d">[−1.07, +1.47]</td><td><span class="tag no">기각</span></td></tr>
+<tr><td>E3 밸류분기 (형 가설)</td><td>+0.93%</td><td>−5.00%</td><td>41.0%</td><td>15.9</td><td>+0.76%p</td><td class="ci d">[−0.04, +1.70]</td><td><span class="tag no">기각</span></td></tr>
+</tbody></table>
+<p>E1은 <b>2단 대비로는 유의</b>하다(Δ +0.85%p, CI [+0.07, +1.77], P=98.4%). 그러나 <b>현행 카드 대비로는 CI가 0을 포함</b>한다 — 이게 결정적이다.</p>
+
+<h2>3. "밸류만 4월 연장" — 기각</h2>
+<ul>
+<li>밸류분기(E3 <b>+0.93%</b>)가 <b>1월 단일 적용(E1 +1.03%)보다 못하다.</b> 분기를 넣어서 나빠졌다.</li>
+<li>4월 연장(E2 +0.13%)은 1월의 이득 <b>전부를 반납</b>한다.</li>
+<li>밸류태그 하위표본에서만 4월이 1월보다 낫지만(+0.40 vs −0.08) <b>n=45 · CI [−1.56, +3.33]</b> — 규칙 근거로 쓸 수 없다.</li>
+</ul>
+<div class="note">30년 원장에서 밸류태그 9~10월 진입은 <b>45건뿐</b>이다. 여기서 규칙을 만들면 그게 곧 과최적화다.</div>
+
+<h2>4. 달력 보유 — 여전히 확실한 기각 (+ 기존 수치 재현)</h2>
+<table>
+<thead><tr><th>정책 (전체 n=366)</th><th>평균</th><th>중앙</th><th>승률</th><th></th></tr></thead><tbody>
+<tr><td>C1 달력보유 1월 (손절만)</td><td class="b">−0.92%</td><td class="b">−6.04%</td><td class="b">10.4%</td><td class="d">손절을 달력이 무력화</td></tr>
+<tr><td>C2 달력보유 4월 (손절만)</td><td class="b">−2.67%</td><td class="b">−6.18%</td><td class="b">7.7%</td><td class="d">—</td></tr>
+<tr><td>D0 순수보유 1월 (손절조차 없음)</td><td class="b">−0.86%</td><td class="b">−6.65%</td><td>37.7%</td><td class="d">1월도 진다</td></tr>
+<tr class="hi"><td>D1 순수보유 4월 (손절조차 없음)</td><td class="b">−3.18%</td><td class="b">−10.85%</td><td>35.5%</td><td class="g">기존 판정문 −10.8% 정확 재현 ✓</td></tr>
+</tbody></table>
+<p><b>새 발견: 1월도 달력 보유로는 진다</b>(중앙 −6.65%). "4월까지 보유 기각"은 4월의 문제가 아니라 <b>달력 보유 자체의 문제</b>였다.</p>
+
+<h2>5. 예상 못 한 발견 — 9~10월 진입분은 평균 이하다</h2>
+<table>
+<thead><tr><th></th><th>평균</th><th>중앙</th><th>승률</th></tr></thead><tbody>
+<tr><td>전체 휩쏘 · 🟢실행 (n=1,437)</td><td class="g">+1.65%</td><td>+0.10%</td><td>50.2%</td></tr>
+<tr><td>9~10월 진입 · 🟢실행 (n=229)</td><td class="w">+0.18%</td><td class="b">−5.00%</td><td class="b">41.0%</td></tr>
+</tbody></table>
+<div class="card">
+형의 사이클 가설은 <b>지수 레벨</b>(8·9·10월만 마이너스, 4월 최강)과 <b>고점 분포</b>(9~10월 눌림 → 1월 고점 중앙 +6.1%)에서는 <b>실재</b>한다.
+그러나 <b>개별 종목 휩쏘 진입 시점</b>으로 보면 9~10월은 오히려 <b>평균보다 나쁜 자리</b>다.
+<div class="note">모순이 아니다. "고점이 1월에 온다"는 <b>언제 파는가</b>의 통계이고, "9~10월 진입 성과가 나쁘다"는 <b>얼마를 버는가</b>의 통계다.
+9~10월은 시장이 하락 중이라 진입 신호는 많지만(370건) 그만큼 계속 밀린다.</div>
+</div>
+
+<h2>6. 왜 채택하지 않는가 — 4가지</h2>
+<ol>
+<li><b>현행 카드 대비 CI가 0을 포함</b> ([−0.18, +2.16]). 2단 대비로만 유의한데, 2단 자체가 이번 달 채택안이라 기준으로 삼기엔 약하다.</li>
+<li><b>다중비교 미보정</b> — 정책 13종을 동시에 봤다. 보정하면 P=94.4%는 남지 않는다.</li>
+<li><b>연도 편중</b> — 229건 중 1999년 34건 · 2011년 42건. 5년 구간별로 <b>6구간 중 4구간만 개선</b>(2005–09 −1.19%p · 2010–14 −0.12%p). 한 해 제외 민감도 최악 +0.47%p로 부호는 유지되나 폭이 절반.</li>
+<li><b>변동성 2배</b> — 8.2 → 16.0. 손절을 트레일에서 본전으로 바꾸면 되밀림을 그대로 다 맞는다. 같은 평균이라도 실전 체감이 전혀 다르다.</li>
+</ol>
+
+<h2>7. 대신 이렇게 한다 — 사전등록</h2>
+<pre>[사전등록 · 1월 앵커 규칙]  등록일 2026-08-02
+대상 : 9~10월 진입 휩쏘 · 🟢실행 국면 · 목표가 도달분
+내용 : 잔여 50%에 트레일(−12%)을 걸지 않고, 본전 손절만 두고
+       이듬해 1월 마지막 거래일 종가까지 보유한다.
+비교 : 동일 이벤트의 2단 표준(잔여 트레일 −12%, 126봉) 성과
+판정 : 2026년 9~10월 진입분부터 전진 관찰. 표본 40건 이상 누적 시 재심.
+사전 기각 : 4월 연장 · 밸류 태그 분기 (본 검정에서 근거 없음 확인)</pre>
+<p><b>올해 실행 지침</b> (2026년 9~10월이 오면):</p>
+<ul>
+<li>카드는 <b>2단 표준 그대로</b>(잔여 트레일 −12%) 운용한다.</li>
+<li>9~10월 진입분은 <b>관찰 원장에 1월 앵커 가상성과를 병기</b>해 전진 기록한다.</li>
+<li>4~5월은 여전히 <b>목표가 아니라 데드라인</b>이다 — 이번 검정으로 이 문장은 더 강해졌다.</li>
+</ul>
+
+<h2>8. 한계</h2>
+<ul>
+<li>생존편향 · 9~10월 하위표본(366건, 실행 229건)의 연도 클러스터.</li>
+<li>밸류태그 45건은 결론 도출 불가 규모.</li>
+<li>정책 13종 <b>다중비교 미보정</b>.</li>
+<li><b>2002-02 이전 9~10월 진입 60건 전부</b>가 KRX 재무 부재로 자동 "밸류 없음"이 됐고, 공교롭게 <b>60건 모두 🟢실행 국면</b>이다 — 밸류 분기 결과가 이 편향에 오염됐을 수 있다.</li>
+<li>거래비용은 E1과 2단이 매도 횟수가 같아 차이 없음.</li>
+</ul>
+
+<footer>
+재현: <code>휩쏘_1월앵커_검정.py</code> → <code>휩쏘_1월앵커_이벤트.csv</code><br>
+원자료: <code>종목일봉_30년_{KOSPI,KOSDAQ}.csv</code> 백조정 · 이벤트: <code>휩쏘_910_리스트.csv</code>(370건)<br>
+⚠️ 검정용 문서. 매매 추천이 아니다.
+</footer>
+</div></body></html>
