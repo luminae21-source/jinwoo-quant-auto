@@ -1,0 +1,187 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>진우퀀트 마스터 맵</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{--bg:#12100c;--sf:#1d1912;--sf2:#262016;--bd:#453b28;--ink:#f6efdd;--ink2:#d8cba8;
+--mut:#a3946f;--gold:#e0be7a;--good:#63c98f;--goodbg:#1b2f22;--bad:#ef7264;--badbg:#2e1c18;
+--amber:#e8b04d;--amberbg:#332a15;--blue:#6b9bef}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5;
+font-family:"Pretendard Variable",Pretendard,-apple-system,"Malgun Gothic",sans-serif}
+.w{max-width:1280px;margin:0 auto;padding:26px 20px 50px}
+h1{font-size:22px;margin:0;letter-spacing:.5px}.k{color:var(--gold)}
+.upd{color:var(--mut);font-size:12.5px;margin:4px 0 20px}
+/* 흐름 헤더 */
+.flowbar{display:flex;align-items:center;gap:8px;color:var(--mut);font-size:12px;letter-spacing:1px;margin-bottom:14px}
+.flowbar b{color:var(--gold)}
+/* 칸반 */
+.board{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.col{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:14px;min-height:200px}
+.col h2{font-size:13px;margin:0 0 4px;letter-spacing:1.5px;display:flex;align-items:center;gap:7px}
+.col .sub{color:var(--mut);font-size:11px;margin-bottom:12px}
+.c1 h2{color:var(--blue)}.c2 h2{color:var(--amber)}.c3 h2{color:#d9c08a}.c4 h2{color:var(--good)}
+.card{background:var(--sf2);border:1px solid var(--bd);border-radius:10px;padding:9px 12px;margin-bottom:8px;font-size:13px;cursor:pointer;transition:border-color .15s,transform .1s}
+.card:hover{border-color:var(--gold);transform:translateY(-1px)}
+/* 상세 모달 */
+#mod{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:60;align-items:center;justify-content:center;padding:20px}
+#mbox{background:var(--sf);border:1px solid var(--gold);border-radius:16px;max-width:560px;width:100%;max-height:80vh;overflow:auto;padding:24px 26px;box-shadow:0 12px 50px rgba(0,0,0,.6)}
+#mbox h4{margin:0 0 4px;font-size:18px;color:var(--gold)}
+#mbox .mst{font-size:12px;color:var(--mut);margin-bottom:12px}
+#mbox .mdesc{font-size:14px;color:var(--ink2);line-height:1.7;margin-bottom:16px}
+#mbox .mdesc b{color:var(--ink)}
+.mlinks{display:flex;flex-wrap:wrap;gap:7px}
+.mlinks a,.mlinks span.off{border:1px solid var(--bd);border-radius:9px;padding:6px 12px;font-size:12.5px;text-decoration:none;color:var(--ink)}
+.mlinks a:hover{border-color:var(--gold)}
+.mlinks span.off{color:var(--mut);border-style:dashed}
+#mx{float:right;cursor:pointer;color:var(--mut);font-size:14px;margin-left:10px}
+.hint{color:var(--mut);font-size:11.5px;margin-top:2px}
+.card b{display:block;font-size:13.5px}
+.card small{color:var(--mut);font-size:11px;line-height:1.4;display:block;margin-top:1px}
+.card.hot{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.card.hot b::after{content:" ★";color:var(--gold)}
+.tag{display:inline-block;font-size:10px;padding:1px 7px;border-radius:9px;margin-top:4px;letter-spacing:.5px}
+.t-g{background:var(--goodbg);color:var(--good)}.t-a{background:var(--amberbg);color:var(--amber)}
+.t-b{background:#1a2436;color:var(--blue)}
+/* 하단 3단 */
+.foot3{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:12px;margin-top:14px}
+.fbox{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:14px 16px}
+.fbox h3{font-size:12.5px;margin:0 0 8px;color:var(--gold);letter-spacing:1.5px}
+.fbox table{border-collapse:collapse;width:100%;font-size:12.5px}
+.fbox td{padding:3px 6px;border-bottom:1px solid var(--bd);color:var(--ink2)}
+.fbox td:last-child{text-align:right;color:var(--ink)}
+.grave{color:var(--mut);font-size:12px;line-height:1.7}
+.grave s{color:#7d6f52}
+.law{font-size:12.5px;color:var(--ink2);line-height:1.8}
+.law b{color:var(--gold)}
+@media(max-width:900px){.board{grid-template-columns:1fr 1fr}.foot3{grid-template-columns:1fr}}
+@media(max-width:560px){.board{grid-template-columns:1fr}}
+</style></head><body><div class="w">
+
+<h1>진우퀀트<span class="k">+K</span> 마스터 맵</h1>
+<div class="upd">기준 2026-08-22 · 매주 월요일 아침 자동 갱신 · 오늘 국면: 🟢 실행 (1년고점比 −25%) · 정본 백로그는 Notion</div>
+
+<div class="flowbar">대화에 갇힘 → <b>회수</b> → 검정(사전등록) → 전진검증(기록) → <b>실전 가동</b> — 오른쪽으로 갈수록 진짜 돈에 가깝다</div>
+
+<div class="board">
+ <div class="col c1">
+  <h2>📨 회수 대기</h2><div class="sub">대화에 갇힌 자산 — "폴더에 파일로 커밋해줘" 한 줄로 회수</div>
+  <div class="card"><b>가상매매 엔진 Phase 1</b><small>현행 동결사양과 관계 확인</small></div>
+  <div class="card"><b>PEAD v3.9 (C)</b><small>실적발표 후 드리프트 — 4번째 엔진 후보</small></div>
+  <div class="card"><b>regime v4.0 (D)</b><small>국면 엔진 확장 — 휩쏘 게이트와 통합 검토</small></div>
+  <div class="card"><b>KOSDAQ 선정 v41 · 수급 오버레이 · 배당 인과검정</b><small>검정 후보·근거 문서</small></div>
+  <div class="card"><b>사냥터 발굴툴 + 테마lane</b><small>조사 트랙 정의와 통합</small></div>
+  <div class="card"><b>카톡 자동 전송</b><small>기존 푸시와 통합 여부</small></div>
+ </div>
+
+ <div class="col c2">
+  <h2>🔬 검정 (설계·대기)</h2><div class="sub">사전등록 → 30년 데이터 → 판정문</div>
+  <div class="card"><b>숙근매매 (격리 트랙)</b><small>사이클 순환매매 샌드박스 · 1차 검정 대기 · 실탄 금지</small><span class="tag t-a">별도 Cowork</span></div>
+  <div class="card"><b>미국주식 장기지도 (격리 트랙)</b><small>AAPL·MSFT·NVDA 등 8종 2·3·5·7년 지도 · 데이터 수집부터</small><span class="tag t-a">별도 Cowork</span></div>
+  <div class="card"><b>조사 트랙 검색 정의</b><small>형 결정 대기</small></div>
+  <div class="card"><b>5월 리서치 흡수 판정</b><small>섹터등급·F-Score·La Porta·상위1%플랜 — 흡수 or 아카이브</small></div>
+  <div class="card"><b>종목명 맵 재수집 · 일관성감사 등록</b><small>§8 잔여 정비</small></div>
+ </div>
+
+ <div class="col c3">
+  <h2>⏳ 전진검증 (기록 중)</h2><div class="sub">중간판정 금지 — 자동으로 쌓이는 중</div>
+  <div class="card hot"><b>가상매매 100만</b><small>실전 동일 규칙 · 1차 관문 2026-11 초</small><span class="tag t-a">판정 임박</span></div>
+  <div class="card"><b>A′ MA240 완화</b><small>40건 누적까지 (기한 2028-12)</small></div>
+  <div class="card"><b>1월 앵커 청산</b><small>9~10월 진입분부터 병기 기록</small></div>
+  <div class="card"><b>멀티팩터 forward</b><small>규칙 동결 · 월간 리밸런싱 (엔진 02)</small></div>
+  <div class="card"><b>모멘텀 유니버스</b><small>페이퍼 병행 (엔진 03)</small></div>
+  <div class="card"><b>사냥터 딥밸류 (엔진 04)</b><small>저PBR 바닥 반등 · 10~15종 장기보유 · 30년 IN/OOS 검증 · 모의매매장 기록 중</small></div>
+ </div>
+
+ <div class="col c4">
+  <h2>🟢 실전 가동</h2><div class="sub">검증 완료 — 지금 일하는 중</div>
+  <div class="card"><b>휩쏘 역발상 (엔진 01)</b><small>30년 7,071건 · 건당 +2.40% · CI [+1.20,+3.63]</small><span class="tag t-g">가동</span></div>
+  <div class="card"><b>국면 게이트</b><small>🟢+2.40 / 🟡−0.12 / 🔴−0.60% — 최대 수익원</small><span class="tag t-g">가동</span></div>
+  <div class="card"><b>2단 청산 + 밸류 가점</b><small>Δ+0.48%p(3회 재현) · Δ+0.76%p</small><span class="tag t-g">가동</span></div>
+  <div class="card"><b>서킷브레이커</b><small>정지선: 롤링30 −9%/연패22/계좌−15% · 셀프테스트 6/6 · 엔진 코드 강제 (08-22 사전등록)</small><span class="tag t-g">✅ 정상 감시 중</span></div>
+  <div class="card"><b>주문 실행 계층</b><small>주문생성(매수·익절) + KIS 어댑터(모의 기본·사람 승인) · 셀프테스트 23/23·19/19 (08-22 확인)</small><span class="tag t-g">1단계 가동 — 제안+승인</span></div>
+  <div class="card"><b>자동 감시망</b><small>평일 17시 급락감시 · 월 주간갱신 · 가족현황판·Notion로그·상태스냅샷·서킷점검</small><span class="tag t-g">가동</span></div>
+  <div class="card"><b>진우퀀트+K 앱</b><small>exe+PWA · 간단/전체/가족 3모드</small><span class="tag t-g">배치 완료</span></div>
+ </div>
+</div>
+
+<div class="foot3">
+ <div class="fbox"><h3>📅 판정 캘린더</h3><table>
+  <tr><td>가상매매 1차 관문 (규칙위반 0·방향 일치)</td><td>2026-11 초</td></tr>
+  <tr><td>1월 앵커 1차 데이터</td><td>2027 봄</td></tr>
+  <tr><td>A′ 40건 판정</td><td>~2027 (페이스 따라)</td></tr>
+  <tr><td>멀티팩터 forward 게이트</td><td>착수 후 6~12개월</td></tr>
+  <tr><td>소액 실전 → 주문 엔진 연결</td><td>가상 통과 후</td></tr>
+ </table></div>
+ <div class="fbox"><h3>🪦 기각 묘지 (재론 금지)</h3><div class="grave">
+  <s>단기형 카드(이중 기각)</s> · <s>달력 보유</s> · <s>성장 팩터 선정</s> · <s>주도주 풀</s> · <s>등급 가중</s> · <s>지평 연장</s> · <s>2일누적 완화 전부</s><br>
+  — 14+개. 묘지가 클수록 살아남은 것의 신뢰가 커진다.</div></div>
+ <div class="fbox"><h3>⚖️ 헌법 (불변)</h3><div class="law">
+  <b>2일누적 −12%</b> 완화 금지 · 밸류는 가점(필터 금지) · <b>🔴에서 사지 않는다</b> · 중간판정 금지 · 사전등록 없으면 안 믿는다 · <b>수익률 역산 금지</b> — 기대값×실행×복리로만</div></div>
+</div>
+
+<div class="upd" style="margin-top:16px">💡 카드를 클릭하면 설명과 관련 문서가 열립니다 · 백업 3층: PC 폴더(정본) · GitHub 6c67ce6(push 대기) · Notion 허브(주간 로그 자동) — ⚠️ 관찰·기록용 · 매매 추천 아님</div>
+</div>
+
+<div id="mod" onclick="if(event.target===this)this.style.display='none'">
+ <div id="mbox"><span id="mx" onclick="document.getElementById('mod').style.display='none'">✕ 닫기</span>
+ <h4 id="mt"></h4><div class="mst" id="ms"></div><div class="mdesc" id="md"></div>
+ <div class="mlinks" id="ml"></div>
+ <div class="hint" id="mh"></div></div>
+</div>
+
+<script>
+const NOTION_HUB="https://app.notion.com/p/3609d49eecbe819eb969f90646b2453c";
+const NOTION_BACKLOG="https://app.notion.com/p/3c49d49eecbe810eaa6fe4b2f3396459";
+const NOTION_RULES="https://app.notion.com/p/3c49d49eecbe8187bacacee2d44f6635";
+const ART_SHOW="https://claude.ai/code/artifact/530c6f76-e823-49e7-973d-215ade7b6dc0";
+const ART_FAM="https://claude.ai/code/artifact/5e9ac9e4-2724-47cc-a329-23a800cfb691";
+const LOCAL_OK = (location.protocol==="http:"); // 앱(127.0.0.1)을 통해 열었을 때만 폴더 문서 링크 활성
+function F(file,label){return {t:"f",file,label:label||file}}
+function U(url,label){return {t:"u",url,label}}
+const INFO={
+"주문 실행 계층":{s:"1단계 가동 — 엔진 제안 + 사람 승인 (무인 금지 로드맵 5단계)",d:"신호를 실제 주문으로 바꾸는 층. <b>진우_주문생성.py</b>(매수·익절 제안, 등가중 분산, HTML 승인표)와 <b>jq_broker_kis.py</b>(한국투자증권 REST, 모의투자 기본·실계좌는 allow_real 안전핀)가 폴더에 완성돼 있고 셀프테스트 42개 전부 통과(08-22). 원칙: <b>AI는 주문을 생성만, 체결은 사람만.</b> API 실집행은 라이브 기록 검증 후.",l:[F("사냥터_기획/핸드오프_주문엔진_반자동트레이딩.md","핸드오프 원문"),F("진우_주문생성_현황.html","최근 주문 제안")]},
+"사냥터 딥밸류 (엔진 04)":{s:"전진기록 중 · 장기보유 축",d:"저PBR 하위 20% ∩ 이격도<0.85 ∩ 20일수익>0 — 딥밸류 바닥 반등을 10~15종 분산·2~3년 보유. 30년·상폐 반영·IN/OOS 검증 완료(사냥터 트랙). 발굴툴이 매주 후보를 뱉고 주문생성기가 제안, 모의매매장에 기록. 휩쏘(단기 역발상)와 시간축이 정반대라 하우스의 보완 축.",l:[F("사냥터_기획/진우_사냥터_검증종합_한장.md","검증 종합 한 장"),F("진우_타점발굴.csv","최신 후보")]},
+"가상매매 엔진 Phase 1":{s:"회수 대기",d:"과거 대화에서 설계된 가상매매 엔진 초기 버전. 현재 가동 중인 가상매매.py(동결사양)와 무엇이 다른지 대조 후 흡수 또는 폐기 판정 필요.",l:[F("가상매매.py","현행 가상매매 엔진"),U(NOTION_BACKLOG,"📋 백로그")]},
+"PEAD v3.9 (C)":{s:"회수 대기 · 4번째 엔진 후보",d:"실적발표 후 주가 표류(Post-Earnings Announcement Drift) 전략. 회수 후 사전등록 방식으로 30년 검정을 통과해야 하우스 엔진으로 승격된다.",l:[U(NOTION_BACKLOG,"📋 백로그")]},
+"regime v4.0 (D)":{s:"회수 대기",d:"국면 판정 엔진의 확장판. 현행 시장국면.py(휩쏘 게이트)와 통합할지, 별도 축으로 둘지 검토 필요.",l:[F("시장국면.py","현행 국면 엔진"),U(NOTION_BACKLOG,"📋 백로그")]},
+"KOSDAQ 선정 v41 · 수급 오버레이 · 배당 인과검정":{s:"회수 대기 · 검정 후보들",d:"코스닥 종목 선정 로직, 수급(외인·기관) 오버레이 검증, 멀티팩터 배당 축의 인과 검정 문서. 각각 회수 후 일관성감사 체계에 등록.",l:[U(NOTION_BACKLOG,"📋 백로그")]},
+"사냥터 발굴툴 + 테마lane":{s:"회수 대기",d:"신규 종목 발굴 도구 기획과 테마 트랙. 조사 트랙 검색 정의(형 결정 대기)와 한 몸으로 통합하는 것이 효율적.",l:[U(NOTION_BACKLOG,"📋 백로그")]},
+"카톡 자동 전송":{s:"회수 대기 · 진행 중이던 대화",d:"카카오톡으로 신호·리포트를 자동 발송하는 기능. 현재의 푸시 알림(평일 17시 급락 감시)과 역할 중복 여부를 정리한 뒤 통합.",l:[U(NOTION_BACKLOG,"📋 백로그")]},
+"숙근매매 (격리 트랙)":{s:"별도 실험 트랙 · 개설 2026-08-22",d:"형의 순환매매 가설(수확창 안 +X% 익절 → −Y% 재매수)을 시험하는 <b>격리 샌드박스</b>. 본체와 자본·원장 완전 분리, 실탄은 백테스트+페이퍼 통과 전 금지. 기반 지도: 10월 진입 수확곡선(절정 140~200일 +12.5~14.8%), 삼성전자 7년 보유 승률 100%. 예측 대결 기록: Claude '보유 승' vs 형 '순환 승' — 데이터가 심판. <b>2026-08-22 별도 Cowork 대화로 분리</b> — 숙근매매_시작지시서.md의 프롬프트로 새 대화를 열면 인수됨.",l:[F("숙근매매_시작지시서.md","시작 지시서"),F("숙근매매_헌장.md","트랙 헌장"),F("사이클_수확곡선_리포트.md","수확곡선 리포트")]},
+"미국주식 장기지도 (격리 트랙)":{s:"별도 Cowork 트랙 · 개설 2026-08-22",d:"한국판 성장주 장기지도(3,304종 전수)와 <b>같은 방법</b>으로 미국 대표 성장주 8종(AAPL·MSFT·NVDA·GOOGL·AMZN·META·TSLA·AVGO)+지수의 2·3·5·7년 보유 승률/중앙/최악 지도를 만든다. 로컬 데이터가 없어 수집(Stooq/yfinance)부터. 지도 제작만 — 규칙 검정은 본체/숙근매매 관문 소관. 미국주식_시작지시서.md의 프롬프트로 새 대화를 열면 인수됨.",l:[F("미국주식_시작지시서.md","시작 지시서"),F("성장주_장기지도_리포트.md","한국판 지도")]},
+"조사 트랙 검색 정의":{s:"형 결정 대기",d:"휩쏘(급락 역발상) 외에 어떤 조건으로 종목을 '조사 원장'에 올릴지의 검색식 정의. S1/S2 스캐너는 준비돼 있고 검색 철학만 형이 정하면 된다.",l:[F("조사_스캐너.py","S1/S2/A′ 스캐너")]},
+"5월 리서치 흡수 판정":{s:"아카이브 판정 대기",d:"섹터 등급 방법론·F-Score·La Porta·상위 1% 플랜 등 5월의 리서치들. 현 시스템에 이미 흡수됐는지 판정하고 닫는 정리 작업.",l:[U(NOTION_BACKLOG,"📋 백로그")]},
+"종목명 맵 재수집 · 일관성감사 등록":{s:"§8 잔여 정비",d:"종목명 맵이 2,763행으로 부족(§8-4) — PC에서 수집 스크립트 재실행 필요. 종목군월별·스윙단기 검정의 일관성감사 등록도 대기.",l:[F("휩쏘_일관성감사.py","일관성 감사")]},
+"가상매매 100만":{s:"전진검증 · 1차 관문 2026-11 초",d:"실전과 동일한 규칙으로 2026-08-17부터 가동 중인 연습 계좌. 검증하는 것은 전략이 아니라 <b>실행</b> — 합격 조건(규칙 위반 0건·30년 통계와 방향 일치)은 시작 전에 고정됐다. 통과하면 소액 실전, 미달이면 그대로 공개.",l:[F("가상매매_현황.html","가상매매 현황"),F("가상매매_설정.json","동결 설정")]},
+"A′ MA240 완화":{s:"전진검증 · 40건 누적까지 중간판정 금지",d:"MA240 이격 +8~+12% 완화 신호. 사후 발견 +4.05%였으나 규율대로 사전등록 후 전진 관찰 중. 채택 조건: CI 하한>0 그리고 정식A 대비 Δ≥−1.0%p.",l:[F("휩쏘_MA240_사전등록.md","사전등록 원문")]},
+"1월 앵커 청산":{s:"전진검증 · 2026년 9~10월 진입분부터",d:"가을 진입분의 잔여 절반을 이듬해 1월까지 보유하는 청산 변형. 현행 카드 대비 CI가 0을 포함해 보류 — 40건 전진 관찰로 재심.",l:[F("휩쏘_1월앵커_판정문.md","판정문")]},
+"멀티팩터 forward":{s:"엔진 02 · 규칙 동결 검증 중",d:"배당·가치·수익성 상위 30종 월간 리밸런싱, 지수 10개월선 방어. 파라미터 수정 금지 기간(6~12개월) — 나쁜 결과도 데이터다. 월초 자동 리마인더가 관리.",l:[U(NOTION_HUB,"📊 Notion 허브")]},
+"모멘텀 유니버스":{s:"엔진 03 · 페이퍼 병행",d:"시총 상위 풀에서 12개월 모멘텀 상위 30종 월간 회전, MA200 이탈 시 절반 현금. 규칙화 판정 통과(2026-07), 슬리피지 실측 축적 중.",l:[U(NOTION_HUB,"📊 Notion 허브")]},
+"휩쏘 역발상 (엔진 01)":{s:"실전 가동 · 대표 엔진",d:"폭락 이틀째(−12%)+1년 구조선 지지의 우량주를 사서 반등의 절반을 취한다. 30년 7,071건 검정, 실행 국면 건당 +2.40%(CI 하한 +1.20%). 하우스에서 유일하게 완전 검증된 엔진.",l:[F("휩쏘_종합보고서.html","종합보고서 ★"),F("진우퀀트_시스템평가.html","시스템 평가서"),U(ART_SHOW,"🏛️ 쇼케이스")]},
+"국면 게이트":{s:"실전 가동 · 최대 수익원",d:"같은 신호도 국면이 수익의 부호를 바꾼다(🟢+2.40/🟡−0.12/🔴−0.60%). 수익의 절반은 🔴에서 <b>사지 않는 것</b>에서 나온다. 매일 아침 신호등이 이 판정.",l:[F("시장국면.py","국면 엔진"),F("휩쏘_역사검정_리포트.html","30년 검정 리포트")]},
+"2단 청산 + 밸류 가점":{s:"실전 가동",d:"목표에서 절반 실현+잔여 트레일·본전 플로어(Δ+0.48%p, 3회 독립 재현). 저PBR·저PER·배당 가점(Δ+0.76%p, 승률 64%) — 필터가 아니라 우선순위.",l:[F("휩쏘_2단청산_판정문.md","2단 청산 판정문"),F("휩쏘_재무검정_리포트.html","재무 팩터 리포트")]},
+"서킷브레이커":{s:"실전 가동 · ✅ 정상 감시 중 (08-22 배치)",d:"시장이 규칙을 깨는 날의 최후의 선. 30년 최악(롤링30 −7.05%·연패17)의 1.25배 밖에 정지선(−9.0%/연패22/계좌−15%). 정지되면 <b>코드가 신규 진입을 거부</b>하고, 재가동은 재검정+형 승인만. 셀프테스트 6/6 통과.",l:[F("휩쏘_서킷브레이커_사전등록.md","사전등록 원문"),F("서킷상태.json","현재 상태")]},
+"자동 감시망":{s:"실전 가동 · 사람 없이 돈다",d:"평일 17시 급락 감시(푸시), 매주 월 아침 원장·리포트·가족현황판·Notion 로그·상태 스냅샷·이 지도·서킷 점검 자동 갱신. 폭락이 오면 시스템이 먼저 안다.",l:[U(NOTION_RULES,"⚙️ 운영 규약"),U(NOTION_HUB,"📊 Notion 허브")]},
+"진우퀀트+K 앱":{s:"실전 배치 완료",d:"exe+PWA 로컬 앱. ✨간단(아침 2분 루틴)/🔧전체/👀가족 열람 3모드, 다크·라이트, 한국식 등락색. 화면은 진우퀀트_UI.html 파일이라 재빌드 없이 수정 가능.",l:[F("진우퀀트_디자인가이드.html","디자인 가이드"),U(ART_FAM,"✨ 가족 현황판")]}
+};
+document.querySelectorAll(".card").forEach(c=>{
+ c.addEventListener("click",()=>{
+  const t=c.querySelector("b")?.textContent.trim(); const info=INFO[t];
+  if(!info) return;
+  document.getElementById("mt").textContent=t;
+  document.getElementById("ms").textContent=info.s;
+  document.getElementById("md").innerHTML=info.d;
+  const ml=document.getElementById("ml"); ml.innerHTML="";
+  let hasOff=false;
+  (info.l||[]).forEach(x=>{
+   if(x.t==="u"){const a=document.createElement("a");a.href=x.url;a.target="_blank";a.textContent=x.label;ml.appendChild(a);}
+   else if(LOCAL_OK){const a=document.createElement("a");a.href="/open?f="+encodeURIComponent(x.file);a.target="_blank";a.textContent="📄 "+x.label;ml.appendChild(a);}
+   else{const s=document.createElement("span");s.className="off";s.textContent="📄 "+x.label;ml.appendChild(s);hasOff=true;}
+  });
+  document.getElementById("mh").textContent=hasOff?"점선 문서는 PC 진우퀀트 폴더에 있음 — 진우퀀트+K 앱의 문서 탭에서 열람":"";
+  document.getElementById("mod").style.display="flex";
+ });
+});
+</script>
+</body></html>
