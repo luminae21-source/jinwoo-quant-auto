@@ -5,18 +5,24 @@ cd /d "%~dp0"
 set LOG=%~dp0monthly_log.txt
 echo. >> "%LOG%"
 echo ================= %date% %time% ================= >> "%LOG%"
-echo [1/5] score_v37_2 (engine 02 quality) >> "%LOG%"
+echo [1/7] score_v37_2 (engine 02 quality) >> "%LOG%"
 py score_v37_2.py >> "%LOG%" 2>&1
 if errorlevel 1 (echo [FAIL] score_v37_2 >> "%LOG%") else (echo [OK] score_v37_2 >> "%LOG%")
-echo [2/5] market regime >> "%LOG%"
+echo [2/7] market regime >> "%LOG%"
 py 시장국면.py >> "%LOG%" 2>&1
 if errorlevel 1 (echo [FAIL] regime >> "%LOG%") else (echo [OK] regime >> "%LOG%")
-echo [3/5] style panel (DART) >> "%LOG%"
+echo [3/7] style panel (DART) >> "%LOG%"
 py 스타일패널_DART.py >> "%LOG%" 2>&1
 if errorlevel 1 (echo [FAIL] style panel >> "%LOG%") else (echo [OK] style panel >> "%LOG%")
-echo [4/5] engine02 forward signal >> "%LOG%"
+echo [4/7] engine02 forward signal >> "%LOG%"
 py 엔진02_신호.py >> "%LOG%" 2>&1
 if errorlevel 1 (echo [FAIL] forward signal >> "%LOG%") else (echo [OK] forward signal >> "%LOG%")
-echo [5/5] routine freshness >> "%LOG%"
+echo [5/7] engine03 momentum ledger >> "%LOG%"
+py 엔진03_모멘텀원장.py --run >> "%LOG%" 2>&1
+if errorlevel 1 (echo [FAIL] engine03 >> "%LOG%") else (echo [OK] engine03 >> "%LOG%")
+echo [6/7] engine04 hunting ledger >> "%LOG%"
+py 엔진04_사냥터원장.py >> "%LOG%" 2>&1
+if errorlevel 1 (echo [FAIL] engine04 >> "%LOG%") else (echo [OK] engine04 >> "%LOG%")
+echo [7/7] routine freshness >> "%LOG%"
 py 루틴_신선도점검.py >> "%LOG%" 2>&1
 echo ---- done ---- >> "%LOG%"
