@@ -21,6 +21,8 @@ WATCH = [
     ("실전준비/forward_ledger_v2.csv", 40, "엔진02 forward 원장(v2)",  "py 엔진02_신호.py"),
     ("엔진03_모멘텀_원장.csv",     40, "엔진03 모멘텀 원장",        "py 엔진03_모멘텀원장.py --run"),
     ("엔진04_사냥터_원장.csv",     40, "엔진04 사냥터 원장",        "py 엔진04_사냥터원장.py"),
+    ("종목재무_KRX_KOSPI.csv",  400, "KRX 재무패널 KOSPI(연1회 자격풀 재료)", "2027-06 전까지 복구 필요 — pykrx 의존 수집기 대체"),
+    ("종목재무_KRX_KOSDAQ.csv", 400, "KRX 재무패널 KOSDAQ(연1회 자격풀 재료)", "2027-06 전까지 복구 필요 — 동일"),
     ("kospi_index_daily.csv",     5, "KOSPI 지수 일봉",           "py 진우퀀트_KRX수집.py --index"),
 ]
 
