@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>진우 5대 트랙 검증 요약</title>
+<style>
+  :root{
+    --bg:#f7f6f3; --card:#ffffff; --ink:#2b2b2b; --sub:#6b6b6b; --line:#e7e4dd;
+    --reject:#b4654a; --partial:#c9973f; --cond:#c9973f; --move:#5b7fa6; --tool:#5a8f6b;
+    --pos:#5a8f6b; --neg:#b4654a; --bar:#8a8f98;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:44px 24px 64px}
+  header{margin-bottom:8px}
+  h1{font-size:26px;font-weight:700;margin:0 0 6px}
+  .date{color:var(--sub);font-size:14px}
+  .intro{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:18px 20px;margin:22px 0 28px;font-size:15px;color:#444}
+  .intro b{color:var(--ink)}
+  .grid{display:flex;flex-direction:column;gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+  .card .top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+  .num{width:30px;height:30px;border-radius:8px;background:#f0eee8;color:#555;
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;flex:0 0 auto}
+  .title{font-size:18px;font-weight:700;margin:0}
+  .badge{margin-left:auto;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px;color:#fff}
+  .b-reject{background:var(--reject)} .b-partial{background:var(--partial)}
+  .b-cond{background:var(--cond)} .b-move{background:var(--move)} .b-tool{background:var(--tool)}
+  .desc{color:#4a4a4a;font-size:14.5px;margin:2px 0 0}
+  .desc .hl{background:#fbf3e2;padding:1px 5px;border-radius:4px;font-weight:600;color:#8a6414}
+  .chart{margin-top:16px}
+  .clab{font-size:12.5px;color:var(--sub);margin-bottom:8px}
+  .barrow{display:grid;grid-template-columns:96px 1fr 62px;align-items:center;gap:10px;margin:5px 0}
+  .barrow .k{font-size:13px;color:#555;text-align:right}
+  .track{background:#f0eee8;border-radius:6px;height:22px;position:relative;overflow:hidden}
+  .fill{height:100%;border-radius:6px}
+  .barrow .v{font-size:13px;font-weight:700;text-align:right}
+  .foot{margin-top:34px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+  .foot h3{margin:0 0 12px;font-size:16px}
+  .foot ol{margin:0;padding-left:20px} .foot li{margin:6px 0;font-size:14.5px;color:#444}
+  .note{color:var(--sub);font-size:12.5px;margin-top:22px;text-align:center}
+  .zero{position:absolute;top:0;bottom:0;width:2px;background:#b8b3a8}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>진우 5대 ★★★ 트랙 — 검증 요약</h1>
+    <div class="date">2026-07-22 · 클라우드 재현 · 정직판정</div>
+  </header>
+
+  <div class="intro">
+    다섯 개를 다 돌렸어요. 결론부터: <b>명확히 채택된 건 없습니다 — 그리고 그게 건강한 결과예요.</b>
+    로드맵에 적어둔 대로 "절반은 기각된다"가 실제로 벌어졌고, 통과 못 한 것들은 왜 안 되는지가 데이터로 분명해졌습니다.
+    가장 큰 소득은 <b>순수 딥밸류 엣지 자체는 여러 각도에서 견고함이 재확인</b>됐다는 점.
+  </div>
+
+  <div class="grid">
+
+    <!-- #2 -->
+    <div class="card">
+      <div class="top">
+        <div class="num">2</div>
+        <p class="title">퀄리티 오버레이 (QMJ)</p>
+        <span class="badge b-reject">기각</span>
+      </div>
+      <p class="desc">딥밸류 안에서 우량주를 고르면 나아질 줄 알았는데, 오히려 <span class="hl">정크가 우량보다 수익이 유의하게 높았어요</span>.
+        딥밸류의 힘이 "싼 정크의 반등"에 실려 있어서, 퀄리티 필터가 그 상승분을 깎아버립니다.</p>
+      <div class="chart">
+        <div class="clab">딥밸류 종목의 12개월 뒤 수익 — 퀄리티 3분위 비교 (하락장 진입)</div>
+        <div class="barrow"><div class="k">정크(Q하)</div><div class="track"><div class="fill" style="width:45%;background:var(--pos)"></div></div><div class="v" style="color:var(--pos)">+29.2%</div></div>
+        <div class="barrow"><div class="k">중간</div><div class="track"><div class="fill" style="width:20%;background:var(--bar)"></div></div><div class="v">+13.1%</div></div>
+        <div class="barrow"><div class="k">우량(Q상)</div><div class="track"><div class="fill" style="width:25%;background:var(--bar)"></div></div><div class="v">+16.2%</div></div>
+        <div class="clab" style="margin-top:6px">※ 표본이 있는 곳(KOSPI 대형주)엔 밸류트랩이 거의 없어서, 정작 "트랩 회피"는 검증조차 불가했어요.</div>
+      </div>
+    </div>
+
+    <!-- #4 -->
+    <div class="card">
+      <div class="top">
+        <div class="num">4</div>
+        <p class="title">낙폭 완화 (국면 비중조절)</p>
+        <span class="badge b-partial">부분 채택</span>
+      </div>
+      <p class="desc">단순 국면(이동평균) 타이밍은 <span class="hl">오히려 낙폭을 못 줄였어요</span>(휩쏘). 대신
+        <span class="hl">변동성 타깃팅은 낙폭을 확실히 줄입니다</span> — 단 수익도 그만큼 줄어요(공짜는 아님).</p>
+      <div class="chart">
+        <div class="clab">KOSPI 지수 30년 — 최대낙폭(MDD, 짧을수록 좋음)</div>
+        <div class="barrow"><div class="k">무방어</div><div class="track"><div class="fill" style="width:95%;background:var(--neg)"></div></div><div class="v" style="color:var(--neg)">−49.2%</div></div>
+        <div class="barrow"><div class="k">국면현금화</div><div class="track"><div class="fill" style="width:100%;background:var(--neg)"></div></div><div class="v" style="color:var(--neg)">−51.8%</div></div>
+        <div class="barrow"><div class="k">변동성타깃</div><div class="track"><div class="fill" style="width:64%;background:var(--pos)"></div></div><div class="v" style="color:var(--pos)">−33.1%</div></div>
+        <div class="clab" style="margin-top:6px">※ 변동성타깃 σ*=10% 기준. 낙폭 −49%→−33%로 감소(수익은 +7.7%→+3.8%로 함께 감소).</div>
+      </div>
+    </div>
+
+    <!-- #3 -->
+    <div class="card">
+      <div class="top">
+        <div class="num">3</div>
+        <p class="title">비용·유동성 완비 (실전 관문)</p>
+        <span class="badge b-cond">조건부 · 용량제약</span>
+      </div>
+      <p class="desc">진짜 벽은 <span class="hl">유동성</span>이었어요. 비용·슬리피지를 다 넣으면 <span class="hl">소액에서만 겨우 살아남고, 자금이 커지면 무너집니다</span>.
+        딥밸류 후보들이 하루 5억 정도밖에 안 거래되거든요.</p>
+      <div class="chart">
+        <div class="clab">투자금액별 순수익(CAGR) — 비용·슬리피지 반영 후</div>
+        <div class="barrow"><div class="k">1억원</div><div class="track"><div class="zero" style="left:60%"></div><div class="fill" style="width:4%;margin-left:60%;background:var(--pos)"></div></div><div class="v" style="color:var(--pos)">+1.4%</div></div>
+        <div class="barrow"><div class="k">50억원</div><div class="track"><div class="zero" style="left:60%"></div><div class="fill" style="width:9%;margin-left:51%;background:var(--neg)"></div></div><div class="v" style="color:var(--neg)">−3.5%</div></div>
+        <div class="barrow"><div class="k">1000억원</div><div class="track"><div class="zero" style="left:60%"></div><div class="fill" style="width:34%;margin-left:26%;background:var(--neg)"></div></div><div class="v" style="color:var(--neg)">−14.1%</div></div>
+        <div class="clab" style="margin-top:6px">※ 세로선=0%. 참고로 이 기간 KOSPI 매수보유는 +19.8%(비현실 강세장)라 벤치 비교는 슬리브에 불리.</div>
+      </div>
+    </div>
+
+    <!-- #1 -->
+    <div class="card">
+      <div class="top">
+        <div class="num">1</div>
+        <p class="title">일본·홍콩 딥밸류 재현</p>
+        <span class="badge b-move">PC로 이관</span>
+      </div>
+      <p class="desc">클라우드에서도 해외 시세(야후·stooq)가 <span class="hl">차단</span>돼 있어요(진우님 PC 샌드박스와 동일).
+        그래서 <b>PC에서 그대로 돌릴 재현 스크립트</b>를 만들어 드렸습니다 — 생존편향(상폐 누락) 경고를 자동으로 붙이게 해뒀어요.</p>
+    </div>
+
+    <!-- #5 -->
+    <div class="card">
+      <div class="top">
+        <div class="num">5</div>
+        <p class="title">라이브 전진 기록</p>
+        <span class="badge b-tool">도구 완성</span>
+      </div>
+      <p class="desc">백테는 이미 있으니, 궁극의 증명은 "앞으로"의 실현이에요. <b>매월 수익 한 줄만 넣으면</b>
+        누적 성적 + <span class="hl">백테 기대와 어긋나는지 경보</span>를 내주는 장부 계산기를 드렸습니다. 증명은 이제 시간이 쌓아줍니다.</p>
+    </div>
+
+  </div>
+
+  <div class="foot">
+    <h3>진우님 PC에서 할 다음 3가지 (컨디션 좋은 날 하나씩)</h3>
+    <ol>
+      <li><b>#1 해외 재현</b> — <code>백테_해외_딥밸류_재현_PC실행.py --market TSE</code> (일본) / <code>--market HKEX</code> (홍콩)</li>
+      <li><b>#5 전진 기록</b> — <code>라이브_전진기록_갱신.py</code> 를 월말 루틴에 등록</li>
+      <li><b>#4 낙폭</b> — 견딜 수 있는 최대낙폭을 정하고, 거기에 맞춰 변동성타깃 σ* 값 결정</li>
+    </ol>
+  </div>
+
+  <div class="note">모든 수치는 상폐(부도) −100% 반영·IN/OOS 분할·부트스트랩 유의성 검정을 거친 값입니다. 자세한 근거는 종합리포트 md 참조.</div>
+</div>
+</body>
+</html>

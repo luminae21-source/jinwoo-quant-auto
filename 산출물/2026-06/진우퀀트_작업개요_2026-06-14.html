@@ -1,0 +1,130 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>진우퀀트 — 뜨거운 테마 + 진입 시스템 작업 개요 (2026-06-14)</title>
+<style>
+:root{--bg:#0f1115;--card:#181b22;--ink:#e8eaed;--mut:#9aa0aa;--line:#262a33;--acc:#ff7a45;--ok:#3fb37a;--warn:#ffd479;--bad:#e2606a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;padding:22px;line-height:1.5}
+h1{font-size:21px;margin:0 0 2px}
+h2{font-size:15px;margin:26px 0 10px;color:#fff;border-left:3px solid var(--acc);padding-left:9px}
+.sub{color:var(--mut);font-size:12.5px;margin-bottom:6px}
+.lead{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 15px;font-size:13px;margin:14px 0}
+.lead b{color:var(--acc)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0}
+.fstep{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:8px 11px;font-size:12.5px}
+.fstep b{display:block;color:#fff;font-size:12.5px}.fstep span{color:var(--mut);font-size:11px}
+.arr{color:var(--acc);font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:11px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:12px 14px}
+.card h3{margin:0 0 4px;font-size:13.5px;font-family:monospace;color:#cde}
+.card p{margin:3px 0;font-size:12px;color:var(--mut)}
+.badge{display:inline-block;font-size:10.5px;border-radius:5px;padding:1px 7px;margin-left:4px}
+.b-ok{background:#143b2a;color:#7ee0ad}.b-pc{background:#2a1d12;color:#ffc6a3}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
+th,td{padding:7px 9px;border-bottom:1px solid var(--line);text-align:left}
+th{color:var(--mut);font-size:11.5px}
+td .ok{color:var(--ok)}td .warn{color:var(--warn)}
+.honest{background:#2a1d12;border:1px solid #5a3a1f;color:#ffc6a3;border-radius:9px;padding:11px 14px;font-size:12.5px;margin-top:6px}
+.snap{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;min-width:120px}
+.kpi b{display:block;font-size:20px;color:var(--acc)}.kpi span{font-size:11.5px;color:var(--mut)}
+ul{margin:6px 0;padding-left:18px}li{font-size:12.5px;margin:3px 0}
+.foot{margin-top:22px;color:#5a6068;font-size:11px;line-height:1.6;border-top:1px solid var(--line);padding-top:12px}
+code{background:#11141a;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:11.5px}
+</style></head><body>
+
+<h1>🔥 진우퀀트 — 뜨거운 테마 + 진입 시스템</h1>
+<div class="sub">작업 개요 · 2026-06-14 세션 · KOSPI+KOSDAQ 642종 / 20 테마그룹</div>
+
+<div class="lead">
+한 줄: <b>발굴(뜨거운 테마) → 주봉 차트 → 진입 상태머신(언제 사고·어디서 손절) → 워치리스트 핸드오프 → Track W 측정</b>까지의 발굴 트랙을 한 흐름으로 완성. 모든 단계에 정합 게이트·셀프테스트를 박았고, 정본·heat 엔진·발굴트랙은 무수정(신규 파일만).
+</div>
+
+<h2>파이프라인</h2>
+<div class="flow">
+  <div class="fstep"><b>① 발굴 heat</b><span>테마 랭킹·모멘텀</span></div>
+  <span class="arr">→</span>
+  <div class="fstep"><b>② 주봉 차트</b><span>캔들·40주선·거래량·regime</span></div>
+  <span class="arr">→</span>
+  <div class="fstep"><b>③ 진입 상태머신</b><span>관망→셋업→임박→돌파</span></div>
+  <span class="arr">→</span>
+  <div class="fstep"><b>④ 핸드오프</b><span>돌파/임박 후보</span></div>
+  <span class="arr">→</span>
+  <div class="fstep"><b>⑤ 워치리스트</b><span>재량(진우)·무효화 먼저</span></div>
+  <span class="arr">→</span>
+  <div class="fstep"><b>⑥ Track W</b><span>사후 측정</span></div>
+</div>
+<div class="sub">경계: <b>발굴 ≠ 매수 ≠ 검증.</b> ①②③④는 후보·규율, ⑤ 결정은 사람, ⑥ 밥값 측정.</div>
+
+<h2>완료 모듈</h2>
+<div class="grid">
+  <div class="card"><h3>theme_heat.py <span class="badge b-ok">7/7</span></h3>
+    <p>전 시장 포괄 백본 위 heat_score 랭킹(3·6·1m 상대강도+breadth), supercycle·가속 태그, 종목 surfacing+재무(매출YoY·영업이익률·ROE).</p>
+    <p>산출: CSV 2종 · MD 브리핑 · HTML 패널(차트·진입 포함).</p></div>
+  <div class="card"><h3>entry_signals.py <span class="badge b-ok">9/9</span></h3>
+    <p>진입 상태머신: SEPA 8조건(주봉 10/30/40주선·52주 고저·RS) → 베이스 돌파 pivot → 손절(−8%/시황 −5.5%)·R, regime 라벨.</p>
+    <p>상태: 관망·셋업·트리거임박·돌파(거래량×1.3).</p></div>
+  <div class="card"><h3>verify_weekly_reconcile.py <span class="badge b-ok">PASS</span></h3>
+    <p>주봉↔월봉 정합 게이트 3종(월말종가·수익환원·주봉무결성). 주봉 도입 전 통과 필수.</p>
+    <p>KOSDAQ·KOSPI 둘 다 PASS.</p></div>
+  <div class="card"><h3>fetch_kospi_daily_full.py <span class="badge b-pc">PC 4/4</span></h3>
+    <p>KOSPI 전 시장 일봉 OHLCV(거래량 포함) 수집. heat 유니버스와 정합. 산출 kospi_pit_daily.csv(584종/92만행).</p></div>
+  <div class="card"><h3>진입_워치리스트_핸드오프_후보.md</h3>
+    <p>돌파/임박 종목을 active 워치리스트 형식으로 띄움. 무효화 트리거 먼저·thesis는 진우 기입. 정본은 시스템이 안 건드림.</p></div>
+  <div class="card"><h3>주간 알림 (스케줄)</h3>
+    <p><code>jinwoo-entry-scan-weekly</code> · 매주 토 08:05. 진입 스캔→돌파/임박 알림+데이터 신선도 경고.</p></div>
+</div>
+
+<h2>검증 결과</h2>
+<table>
+<thead><tr><th>항목</th><th>결과</th><th>비고</th></tr></thead>
+<tbody>
+<tr><td>theme_heat 셀프테스트</td><td><span class="ok">7/7</span></td><td>heat랭킹·모멘텀재계산·재무산식·월봉/주봉차트</td></tr>
+<tr><td>entry_signals 셀프테스트</td><td><span class="ok">9/9</span></td><td>상태전이·8조건·손익순서·R·거래량·regime·손절수계산</td></tr>
+<tr><td>게이트 A 월말종가(KOSPI)</td><td><span class="ok">99.8%</span></td><td>42189/42267 · worst=셀트리온 2019~20 옛 조정차</td></tr>
+<tr><td>게이트 B 수익환원(KOSPI)</td><td><span class="ok">100%</span></td><td>같은 월말 경계</td></tr>
+<tr><td>게이트 C 주봉무결성(KOSPI)</td><td><span class="ok">100%</span></td><td>주봉=해당주 마지막 거래일 일봉</td></tr>
+<tr><td>모멘텀 수동 교차검증</td><td><span class="ok">일치</span></td><td>반도체 6m초과 70.1%p = 엔진값</td></tr>
+<tr><td>패널 실데이터 대조</td><td><span class="ok">일치</span></td><td>삼성전자 2019~24 연말가 = 실제 역사</td></tr>
+<tr><td>JS 문법 (node --check)</td><td><span class="ok">OK</span></td><td>차트 캔들·매수/손절선 렌더</td></tr>
+<tr><td>차트/진입 데이터 무결성</td><td><span class="ok">0 오류</span></td><td>주봉 46종·plan 정합</td></tr>
+</tbody></table>
+
+<h2>현재 스냅샷 (2026-06)</h2>
+<div class="snap">
+  <div class="kpi"><b>20</b><span>테마그룹</span></div>
+  <div class="kpi"><b>48</b><span>surfacing 종목</span></div>
+  <div class="kpi"><b>46</b><span>주봉 차트</span></div>
+  <div class="kpi"><b>0</b><span>돌파</span></div>
+  <div class="kpi"><b>0</b><span>임박</span></div>
+  <div class="kpi"><b>NEUTRAL</b><span>regime</span></div>
+</div>
+<div class="sub">상위 heat: 전력/전기장비(수퍼사이클)·반도체/전자·로봇(가속). 진입은 <b>전부 관망</b> — 주도주가 파라볼릭 후 눌림(종가&lt;10주선·고점 −25%↓)이라 깨끗한 SEPA 매수 셋업 없음. "지금은 살 자리 아님"이 정직한 답.</div>
+
+<h2>정직 가드 (불변)</h2>
+<div class="honest">
+• 돌파를 <b>종목선택</b>으로 본 백테스트(backtest_kosdaq_breakout) = <b>FAIL</b>(알파 −1.1%p). 그래서 진입 층은 "오를 종목 찾기"가 아니라 <b>진입·리스크 규율</b>(어디서 사고 어디서 틀렸나).<br>
+• 2025~26 패널 꼬리는 극단 강세장(시장 EW 월 +20%대 존재) → 절대 모멘텀 과신 금지(자동 경고 표기).<br>
+• 백테스트 수익률을 forward 기대치로 쓰지 않음. 테마=백테스트 불가 → 측정은 Track W. 결정·책임은 진우.
+</div>
+
+<h2>병합 준비</h2>
+<ul>
+<li>이번 세션 신규 코드 4 + 설계메모 1 = 한 커밋 그룹 (<code>MERGE_PREP_2026-06-14.md</code> 참조).</li>
+<li>⚠️ <code>kospi_pit_daily.csv</code> 44MB → gitignore 권고(fetch로 재생성).</li>
+<li>작업트리 기존 미커밋 다수(변경 142·신규 86) → 이 커밋에 섞지 말고 별도 검토.</li>
+<li>push는 <code>git stash -u → pull --rebase → push</code> 절차, <b>진우 확인 후</b>.</li>
+</ul>
+
+<h2>다음 단계 후보</h2>
+<ul>
+<li>주봉 데이터 신선도 유지: 주기적 <code>fetch_kospi_daily_full.py</code> 재실행 → 게이트 PASS 확인.</li>
+<li>돌파/임박 발생 시 알림 → 워치리스트 핸드오프(무효화 먼저) → 매수 → 월말 Track W 반사실.</li>
+<li>SEPA 풀템플릿 미세조정·신규상장 주봉 보강(현재 2종 월봉 fallback).</li>
+</ul>
+
+<div class="foot">
+파일: theme_heat.py · entry_signals.py · verify_weekly_reconcile.py · fetch_kospi_daily_full.py · 진우퀀트_진입상태머신_설계메모_2026-06-14.md · 뜨거운테마_패널_2026-06-30.html · MERGE_PREP_2026-06-14.md · (스케줄) jinwoo-entry-scan-weekly<br>
+무수정 보장: production 스코어엔진·C/PEAD·D regime·영역3·v41·active 워치리스트 정본 — 손대지 않음. 본 개요는 투자 자문이 아니며 시스템은 가드레일·측정만 제공.
+</div>
+</body></html>

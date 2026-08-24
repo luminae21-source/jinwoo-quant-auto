@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>완전 통합 — 추천 엔진에 개편 스코어 반영</title>
+<style>
+  :root{--bg:#0f1216;--card:#181d24;--card2:#1f2630;--line:#2b333f;--tx:#e6ebf2;--mut:#95a0ae;
+        --grn:#37d67a;--red:#ff6b6b;--amb:#ffb454;--blu:#5aa9ff;--val:#5aa9ff;--grw:#b58bff;--accent:#7aa2ff;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--tx);font-family:'Segoe UI','Malgun Gothic',system-ui,sans-serif;line-height:1.6;font-size:15px}
+  .wrap{max-width:960px;margin:0 auto;padding:28px 20px 60px}
+  h1{font-size:24px;margin:0 0 4px}.sub{color:var(--mut);font-size:14px;margin-bottom:6px}
+  .meta{color:var(--mut);font-size:12.5px;margin-bottom:22px}
+  .verdict{background:linear-gradient(135deg,#1c3226,#182a20);border:1px solid #2f6b45;border-radius:14px;padding:20px 22px;margin-bottom:26px}
+  .grade{display:inline-block;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px;background:rgba(55,214,122,.14);color:var(--grn);border:1px solid rgba(55,214,122,.4);margin-bottom:10px}
+  .verdict h2{margin:2px 0 8px;font-size:18px}.verdict p{margin:6px 0 0;color:#d3dbe6;font-size:14.5px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .card h3{margin:0 0 10px;font-size:16.5px}
+  .qh{color:var(--mut);font-size:13px;margin:-6px 0 12px}
+  table{border-collapse:collapse;width:100%;font-size:13px;margin:6px 0}
+  th,td{padding:7px 8px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{color:var(--mut);font-weight:600;font-size:11.5px}
+  .pos{color:var(--grn)}.neg{color:var(--red)}.mut{color:var(--mut)}.amb{color:var(--amb)}
+  .tval{color:var(--val);font-weight:600}.tgrw{color:var(--grw);font-weight:600}
+  code{background:#11151b;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:12.5px;color:#cdd6e2}
+  pre{background:#11151b;border:1px solid var(--line);border-radius:8px;padding:12px 14px;overflow-x:auto;font-size:12.5px;color:#cdd6e2}
+  .foot{color:var(--mut);font-size:12px;margin-top:24px;border-top:1px solid var(--line);padding-top:14px}
+  b.hl{color:var(--tx)}
+  ul.rec{margin:6px 0 0;padding-left:0;list-style:none}
+  ul.rec li{padding:7px 0 7px 22px;position:relative;border-bottom:1px solid var(--line);font-size:14px}
+  ul.rec li:last-child{border-bottom:none}ul.rec li:before{content:"▸";position:absolute;left:2px;color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>완전 통합 — 추천 엔진에 개편 스코어 반영</h1>
+  <div class="sub">recommend_dashboard 2트랙 개별 가중(WV/WG) → 검증된 통합 멀티팩터 가중(모멘텀15%)</div>
+  <div class="meta">가격월 2026-07 · 재무월 2026-06 · top200 · 스테이징 데이터</div>
+
+  <div class="verdict">
+    <span class="grade">완료 · 개편이 이제 실제 추천을 구동</span>
+    <h2>연구용 스코어가 아니라 매수 리스트 엔진 자체가 통합 가중으로 바뀜</h2>
+    <p>지금까지 개편은 <code>multifactor_screen</code>(연구·랭킹)에만 있었고 실제 추천은 옛 2트랙 가중으로 나왔다. 이제 <code>recommend_dashboard.py</code>의 점수를 <b class="hl">통합 가중(배당0.27·B/P0.20·E/P0.17·성장0.11·ROE0.10·모멘텀0.15)</b>으로 교체 — 가치·성장 <b class="hl">트랙 구조(매도규칙·사이징)는 유지</b>하되 두 트랙 모두 동일 통합 점수를 각 트랙 유니버스 내 z로 산출(성장주가 B/P로 억울하게 안 깎임).</p>
+  </div>
+
+  <div class="card">
+    <h3>바뀐 것 — 코드</h3>
+    <pre># recommend_dashboard.py
+- WV={배당0.046,E/P0.033,B/P0.027}; WG={배당0.038,ROE0.025,EPS성장0.023}
+- VS=score(value,WV,{배당,E/P,B/P}); GS=score(growth,WG,{배당,ROE,EPS성장})
++ WUNI={배당0.270,B/P0.204,E/P0.166,성장0.110,ROE0.100,모멘텀0.150}
++ FUNI={배당,B/P,E/P,성장,ROE,모멘텀}          # 양 트랙 공통 팩터셋
++ VS=score(value,WUNI,FUNI); GS=score(growth,WUNI,FUNI)</pre>
+    <div class="qh" style="margin-top:8px">매도규칙(가치=재난−40%·성장=트레일−25%)·사이징(리스크1%)·추세 관문·유니버스(top200)는 모두 그대로. 점수 산식만 교체.</div>
+  </div>
+
+  <div class="card">
+    <h3>바뀐 것 — 추천 종목 (통합 전 → 후)</h3>
+    <table>
+      <thead><tr><th>트랙</th><th>유지</th><th class="pos">신규 편입</th><th class="neg">이탈</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tval">가치</span></td><td class="mut">DB손해보험·DGB금융·현대해상·GS·BNK·우리금융·JB금융·영원무역홀딩스 (8)</td><td class="pos">한국금융지주·휠라홀딩스</td><td class="neg">SK가스·코리안리</td></tr>
+        <tr><td><span class="tgrw">성장</span></td><td class="mut">SK스퀘어·SK하이닉스·에이피알·KT&G·삼성E&A·한국콜마·달바글로벌 (7)</td><td class="pos">LS·대우건설·삼성전기</td><td class="neg">HD현대마린·더존비즈온·제주반도체</td></tr>
+      </tbody>
+    </table>
+    <div class="qh" style="margin-top:8px">각 트랙 10종 중 2~3종만 교체 — 핵심(은행·보험 가치 / 반도체·뷰티 성장)은 유지. 통합 가중이 모멘텀·ROE·성장을 양 트랙에 고르게 반영한 결과.</div>
+  </div>
+
+  <div class="card">
+    <h3>확정 편입 책 — 통합 후에도 불변(견고성 확인)</h3>
+    <div class="qh">히트캡 6% 관문 통과 6종. 통합 전후 동일 — 최고 확신 종목은 가중 세부에 안 흔들림.</div>
+    <table>
+      <thead><tr><th>종목</th><th>트랙</th><th>통합%ile</th><th>비중</th><th>손절</th></tr></thead>
+      <tbody>
+        <tr><td class="nm">DB손해보험</td><td><span class="tval">가치</span></td><td>98%</td><td>2.5%</td><td class="neg">−40%(재난)</td></tr>
+        <tr><td class="nm">DGB금융지주</td><td><span class="tval">가치</span></td><td>97%</td><td>2.5%</td><td class="neg">−40%</td></tr>
+        <tr><td class="nm">현대해상</td><td><span class="tval">가치</span></td><td>96%</td><td>2.5%</td><td class="neg">−40%</td></tr>
+        <tr><td class="nm">SK스퀘어</td><td><span class="tgrw">성장</span></td><td>90%</td><td>4.0%</td><td class="neg">고점−25%(트레일)</td></tr>
+        <tr><td class="nm">SK하이닉스</td><td><span class="tgrw">성장</span></td><td>84%</td><td>4.0%</td><td class="neg">−25%</td></tr>
+        <tr><td class="nm">에이피알</td><td><span class="tgrw">성장</span></td><td>80%</td><td>4.0%</td><td class="neg">−25%</td></tr>
+      </tbody>
+    </table>
+    <div class="qh" style="margin-top:8px">총비중 19.5% · 포트 히트 6%(캡) · 현금 80%. 대기 리스트도 통합 후보 기준으로 갱신(한국금융지주·휠라홀딩스 등).</div>
+  </div>
+
+  <div class="card">
+    <h3>남은 것</h3>
+    <ul class="rec">
+      <li><b class="hl">로컬 실전 확정</b> — 이 결과는 스테이징 스냅샷. 진짜 편입은 로컬 <code>recommend_pipeline.py</code>(preflight 데이터관문 + 최신시세 + 리스크차단기)로 확정.</li>
+      <li><b class="hl">스크리너 백테 출력 보정</b>(4번, 소소) — <code>multifactor_screen</code> 내장 백테가 롱숏 Sharpe만 찍는 점. 원하면 롱온리 라인 추가.</li>
+      <li>EBITDA CSV amort 정리(선택·로컬 <code>--rebuild</code>).</li>
+    </ul>
+  </div>
+
+  <div class="foot">
+    변경 파일: recommend_dashboard.py(점수 통합)·편입확정.py(후보 점수도 통합 일치). 유지: 트랙 구조·매도규칙·사이징·추세 관문·히트캡. 통합 가중 근거: 밸류축_확정·가중개편안·비용반영_백테(롱온리 모멘텀15%).<br>
+    ⚠️ 스테이징 스냅샷·과거통계·미래보장 아님. 실전 확정은 로컬 파이프라인. 투자자문 아님·책임 본인.
+  </div>
+</div>
+</body>
+</html>

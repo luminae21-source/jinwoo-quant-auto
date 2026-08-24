@@ -1,0 +1,14 @@
+# 금고에서 뺄 폴더 이름 (파일시스템에서 읽은 표기 그대로)
+# 외부 논문 PDF · 임시 · 백업 폴더. 연구 기록이 아니다.
+자료실
+_백업
+_보관
+_보관_20260804
+_stage_tmp
+_stagetmp2
+_stagetmp3
+_archive
+_to_delete
+__pycache__
+.git
+.git-vault

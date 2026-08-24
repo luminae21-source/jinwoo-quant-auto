@@ -1,0 +1,118 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>코스피 예측 대시보드</title>
+<style>
+:root{--text-primary:#e8eaed;--text-secondary:#9aa0aa;--accent:#ff7a45;--chart-1:#3fb37a;--chart-3:#e0b020;--chart-4:#e2606a;--surface:#181b22;--border:#262a33}
+body{background:#0f1115;color:#e8eaed;margin:0;padding:12px;max-width:440px;margin:0 auto;font-family:-apple-system,'Malgun Gothic',sans-serif;line-height:1.5}
+h1{font-size:18px;margin:4px 0}
+h2{font-size:14px;color:#fff;border-left:3px solid var(--accent);padding-left:8px;margin:22px 0 8px}
+.sub{color:var(--text-secondary);font-size:12px;margin-bottom:6px}
+svg{width:100%;height:auto;background:transparent}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px}
+th,td{padding:7px 6px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+th{color:var(--text-secondary);font-size:11px}
+.g{color:var(--chart-1)}.r{color:var(--chart-4)}.mut{color:var(--text-secondary)}
+.step{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:10px 12px;margin:7px 0;font-size:12.5px}
+.step b{color:var(--accent)}
+.foot{color:#5a6068;font-size:11px;border-top:1px solid var(--border);padding-top:10px;margin-top:18px;line-height:1.6}
+.note{background:#2a1d12;border:1px solid #5a3a1f;color:#ffc6a3;border-radius:8px;padding:9px 12px;font-size:12px;margin:8px 0}
+</style></head><body>
+
+<h1>📈 코스피 예측 대시보드</h1>
+<div class="sub">10년·2,445일 검증 기반 · 투자자용 요약 · 출처: 시장영향_검증.py</div>
+
+<h2>① 코스피 익일을 움직이는 힘 (영향력 막대)</h2>
+<svg viewBox="0 0 380 350" xmlns="http://www.w3.org/2000/svg">
+<style>text{fill:#e8eaed}.mut{fill:#9aa0aa}.t{font-weight:700}.val{font-weight:700;font-size:11px}</style>
+<line x1="150" y1="14" x2="150" y2="300" stroke="var(--accent)" stroke-dasharray="4 3" stroke-width="1.5"/>
+<text x="152" y="12" font-size="9" fill="var(--accent)">통과선 2.3</text>
+<text x="10" y="35" font-size="11">美 반도체 ↑</text><rect x="92" y="24" width="232" height="18" rx="2" fill="var(--chart-1)"/><text x="328" y="37" class="val g">8.3</text>
+<text x="10" y="61" font-size="11">달러인덱스 ↓</text><rect x="92" y="50" width="137" height="18" rx="2" fill="var(--chart-1)"/><text x="233" y="63" class="val g">4.9</text>
+<text x="10" y="87" font-size="11">S&amp;P500 ↑</text><rect x="92" y="76" width="81" height="18" rx="2" fill="var(--chart-1)"/><text x="177" y="89" class="val g">2.9</text>
+<text x="10" y="113" font-size="11">외국인 ↑</text><rect x="92" y="102" width="67" height="18" rx="2" fill="var(--chart-1)"/><text x="163" y="115" class="val g">2.4</text>
+<text x="10" y="139" font-size="11" class="mut">美 금리커브</text><rect x="92" y="128" width="56" height="18" rx="2" fill="var(--chart-3)"/><text x="152" y="141" class="val" fill="var(--chart-3)">2.0</text>
+<text x="10" y="165" font-size="11" class="mut">선물옵션 만기</text><rect x="92" y="154" width="36" height="18" rx="2" fill="var(--text-secondary)"/><text x="132" y="167" class="val mut">1.3</text>
+<text x="10" y="191" font-size="11" class="mut">美10년 금리</text><rect x="92" y="180" width="14" height="18" rx="2" fill="var(--text-secondary)"/><text x="110" y="193" class="val mut">0.5</text>
+<text x="10" y="217" font-size="11" class="mut">원/달러</text><rect x="92" y="206" width="6" height="18" rx="2" fill="var(--text-secondary)"/><text x="102" y="219" class="val mut">0.2</text>
+<text x="14" y="250" font-size="10.5" class="mut">🟢 진짜 동인 · 🟡 경계 · ⚪ 탈락(통과선 미달=무관)</text>
+<text x="14" y="270" font-size="10.5" class="mut">막대=다변량 t값(클수록 통계적으로 확실)</text>
+<text x="14" y="290" font-size="10.5" class="mut">만기·금리·환율은 통과선을 못 넘음</text>
+</svg>
+
+<h2>② 어젯밤 미국 → 오늘 코스피 (연결 그림)</h2>
+<svg viewBox="0 0 380 345" xmlns="http://www.w3.org/2000/svg">
+<style>text{fill:#e8eaed}.mut{fill:#9aa0aa}.t{font-weight:700}</style>
+<defs>
+<marker id="ag" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--chart-1)"/></marker>
+<marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--chart-4)"/></marker>
+</defs>
+<rect x="244" y="86" width="120" height="86" rx="10" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
+<text x="304" y="122" font-size="14" text-anchor="middle" class="t">오늘</text><text x="304" y="142" font-size="14" text-anchor="middle" class="t">코스피</text>
+<rect x="10" y="22" width="120" height="34" rx="8" fill="var(--surface)" stroke="var(--chart-1)"/><text x="70" y="43" font-size="11" text-anchor="middle" class="t">美 반도체(SOX)</text>
+<rect x="10" y="70" width="120" height="34" rx="8" fill="var(--surface)" stroke="var(--chart-1)"/><text x="70" y="91" font-size="11" text-anchor="middle" class="t">S&amp;P500</text>
+<rect x="10" y="118" width="120" height="34" rx="8" fill="var(--surface)" stroke="var(--chart-1)"/><text x="70" y="139" font-size="11" text-anchor="middle" class="t">외국인 순매수</text>
+<rect x="10" y="166" width="120" height="34" rx="8" fill="var(--surface)" stroke="var(--chart-4)"/><text x="70" y="183" font-size="11" text-anchor="middle" class="t">달러인덱스</text><text x="70" y="195" font-size="8.5" text-anchor="middle" class="mut">강달러=코스피↓</text>
+<path d="M130,39 C190,39 190,106 244,114" fill="none" stroke="var(--chart-1)" stroke-width="5.5" marker-end="url(#ag)"/><text x="184" y="66" font-size="11" class="t g">8.3</text>
+<path d="M130,87 C190,87 200,116 244,124" fill="none" stroke="var(--chart-1)" stroke-width="2.2" marker-end="url(#ag)"/><text x="150" y="104" font-size="10" class="g">2.9</text>
+<path d="M130,135 C190,135 200,134 244,134" fill="none" stroke="var(--chart-1)" stroke-width="1.9" marker-end="url(#ag)"/><text x="150" y="128" font-size="10" class="g">2.4</text>
+<path d="M130,183 C190,183 200,151 244,146" fill="none" stroke="var(--chart-4)" stroke-width="3.6" marker-end="url(#ar)"/><text x="150" y="176" font-size="10" class="r">4.9↓</text>
+<rect x="10" y="216" width="354" height="58" rx="8" fill="var(--surface)" stroke="var(--border)"/>
+<text x="24" y="236" font-size="11" class="t">연결 끊김 (거의 안 닿음)</text>
+<text x="24" y="255" font-size="10" class="mut">✕ 만기(1.3)  ✕ 美10년 금리(0.5)  ✕ 원/달러(0.2)</text>
+<text x="24" y="270" font-size="9.5" class="mut">금리·환율은 이미 美증시·달러에 포함(중복)</text>
+<text x="14" y="298" font-size="10.5" class="mut">화살표 굵기=영향력 · 초록=같은방향 · 빨강=반대</text>
+<text x="14" y="318" font-size="10" class="mut">예: SOX 급등+달러 약세 → 오늘 코스피 상승 쪽 기대</text>
+<text x="14" y="336" font-size="9.5" class="mut">단 확률적 기대 — 매일 채점해 적중률로 검증(④)</text>
+</svg>
+
+<h2>③ 영향 주는 자료 — 매일 어디서 보나</h2>
+<table>
+<thead><tr><th>동인</th><th>지표/티커</th><th>확인 시점</th><th>방향</th></tr></thead>
+<tbody>
+<tr><td><b>美 반도체</b></td><td>SOX (^SOX)</td><td>한국 새벽<br>(美 마감)</td><td class="g">↑→코스피↑</td></tr>
+<tr><td><b>S&amp;P500</b></td><td>^GSPC</td><td>한국 새벽</td><td class="g">↑→↑</td></tr>
+<tr><td><b>외국인</b></td><td>코스피 외국인<br>순매수(KRX)</td><td>한국 장마감</td><td class="g">순매수→↑</td></tr>
+<tr><td><b>달러인덱스</b></td><td>DXY</td><td>한국 새벽</td><td class="r">↑→코스피↓</td></tr>
+</tbody>
+</table>
+<div class="note">이 4개는 <b>시장브리핑이 이미 매일 자동 수집</b> 중 — 브리핑만 봐도 동인 현황이 한눈에. 익일예측_모델이 이걸 받아 방향을 계산.</div>
+
+<h2>④ 적중률 추적 (예측이 진짜인지 검증)</h2>
+<div class="step">매일 <b>익일예측_실행.bat</b> 돌리면 → 그날 예상을 기록하고, 다음날 실제와 비교해 <b>맞았는지 자동 채점</b>. 적중률 곡선은 <b>익일예측_최신.html</b>에 매일 갱신돼(예측이 쌓일수록 채워짐).</div>
+<div class="note">⚠️ <b>적중률 50%는 동전던지기 = 무의미.</b> 수개월 쌓여 <b>55% 이상 꾸준</b>해야 예측력 인정. 그 전엔 참고용 — 이걸 믿고 큰돈 걸지 말 것.</div>
+
+<h2>⑤ 예측 모델 발전 로드맵</h2>
+<div class="step"><b>1단계 (지금)</b> — 4동인 다변량 예측 + 매일 자동 채점 ✅</div>
+<div class="step"><b>2단계</b> — 적중률 수개월 누적 → 50% 넘는지 관찰 (forward 검증)</div>
+<div class="step"><b>3단계</b> — 넘으면: 신뢰도·강도 구간화, 반도체 개별주로 확장</div>
+<div class="step"><b>4단계</b> — forward 통과 시 매매 보조 신호로 (거래비용 반영 후)</div>
+<div class="step mut"><b>못 넘으면</b> — 폐기 (만기효과처럼 정직하게 기각). 끼워맞추지 않음.</div>
+
+<h2>⑥ 왜 만기효과는 "있다 없다" 할까 (일관 vs 노이즈)</h2>
+<div class="sub">진짜 동인은 어떻게 재도 높음 · 만기는 잴 때마다 들쭉날쭉 = 노이즈</div>
+<svg viewBox="0 0 380 435" xmlns="http://www.w3.org/2000/svg">
+<style>text{fill:#e8eaed}.mut{fill:#9aa0aa}.t{font-weight:700}</style>
+<line x1="40" y1="70" x2="40" y2="380" stroke="var(--border)"/>
+<line x1="40" y1="380" x2="366" y2="380" stroke="var(--border)"/>
+<line x1="40" y1="344" x2="366" y2="344" stroke="var(--accent)" stroke-dasharray="4 3"/>
+<text x="44" y="341" font-size="9" fill="var(--accent)">통과선 2.3</text>
+<text x="20" y="74" font-size="9" class="mut">20</text><text x="22" y="240" font-size="9" class="mut">9</text><text x="24" y="383" font-size="9" class="mut">0</text>
+<text x="70" y="402" font-size="10.5" class="t" fill="var(--chart-1)">美 반도체 = 일관</text>
+<circle cx="95" cy="92" r="5" fill="var(--chart-1)"/><text x="104" y="95" font-size="9" class="mut">18.6</text>
+<circle cx="135" cy="251" r="5" fill="var(--chart-1)"/><text x="144" y="254" font-size="9" class="mut">8.3</text>
+<circle cx="110" cy="272" r="5" fill="var(--chart-1)"/><circle cx="155" cy="287" r="5" fill="var(--chart-1)"/>
+<text x="78" y="330" font-size="9" fill="var(--chart-1)">전부 통과선 위 ↑</text>
+<text x="244" y="402" font-size="10.5" class="t mut">선물 만기 = 들쭉날쭉</text>
+<circle cx="250" cy="360" r="5" fill="var(--text-secondary)"/><text x="259" y="363" font-size="9" class="mut">1.3</text>
+<circle cx="290" cy="360" r="5" fill="var(--text-secondary)"/><text x="299" y="363" font-size="9" class="mut">1.3</text>
+<circle cx="270" cy="377" r="5" fill="var(--text-secondary)"/><text x="279" y="375" font-size="9" class="mut">≈0</text>
+<circle cx="320" cy="120" r="5" fill="none" stroke="var(--chart-4)" stroke-width="1.5" stroke-dasharray="2 2"/>
+<text x="296" y="112" font-size="8.5" fill="var(--chart-4)">6/11 단일사례</text><text x="300" y="135" font-size="8" fill="var(--chart-4)">(우연·인상)</text>
+<text x="245" y="330" font-size="9" class="mut">대부분 통과선 아래 ↓</text>
+<text x="14" y="425" font-size="9.5" class="mut">초록=어떻게 재도 높음(진짜) · 회색=잴 때마다 낮음(노이즈)</text>
+</svg>
+<div class="step mut">한 번씩 강렬한 만기(6/11)는 <b>우연·인상</b>일 뿐. 10년 평균은 0. <b>일관되면 진짜, 들쭉날쭉하면 노이즈</b> — 그래서 만기는 매매에 안 씀.</div>
+
+<div class="foot">출처: 시장영향_검증.py(10년 2,445일, 사전등록·다중비교 방어·OOS). t=다변량 영향력.<br>
+⚠️ 영향 측정·예측 보조이지 매매 확정 아님. 강세장(2016~26) 편향. 결정·책임은 진우.</div>
+</body></html>

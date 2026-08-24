@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>진우퀀트 전략 v2.0 — 한 장 도표</title>
+<style>
+:root{--bg:#0f1115;--card:#171a21;--line:#2a3040;--tx:#e8eaf0;--dim:#8b93a7;--ac:#6ea8fe;
+--ok:#7ec699;--warn:#f0a868;--bad:#e06c75;--core:#1d2b45;--sat:#2e2440;--def:#1f3328}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);
+font:14.5px/1.6 -apple-system,"Segoe UI","Malgun Gothic",sans-serif;padding:26px 18px 60px}
+.wrap{max-width:960px;margin:0 auto}
+h1{font-size:21px;margin:0 0 2px}.sub{color:var(--dim);font-size:12.5px;margin-bottom:20px}
+.flow{display:flex;flex-direction:column;gap:0;align-items:stretch}
+.row{display:flex;gap:12px}.row>div{flex:1}
+.box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 16px;margin:0}
+.box h2{font-size:14.5px;margin:0 0 6px}.box .d{color:var(--dim);font-size:12.3px}
+.box ul{margin:6px 0 0;padding-left:17px;font-size:12.8px}.box li{margin:2px 0}
+.core{background:var(--core);border-color:#33507e}.sat{background:var(--sat);border-color:#5a4380}
+.def{background:var(--def);border-color:#3a6647}
+.arrow{text-align:center;color:var(--dim);font-size:17px;line-height:1;padding:5px 0}
+.split{display:flex;justify-content:space-around;color:var(--dim);font-size:12px;padding:3px 0 5px}
+.tag{display:inline-block;border-radius:999px;padding:1px 9px;font-size:11px;font-weight:600;margin-left:6px}
+.t-ok{background:#1e3527;color:var(--ok)}.t-warn{background:#3a2d1c;color:var(--warn)}.t-bad{background:#3a2226;color:var(--bad)}
+table{border-collapse:collapse;width:100%;font-size:12.8px;margin-top:8px}
+th,td{border:1px solid var(--line);padding:5px 9px;text-align:right}
+th{background:#1e222b}td:first-child,th:first-child{text-align:left}
+.hl{color:var(--ac);font-weight:700}.good{color:var(--ok);font-weight:600}.bad{color:var(--bad)}
+.note{background:#2a2118;border:1px solid #5a4326;border-radius:10px;padding:11px 14px;
+font-size:12.8px;color:#f4d9b0;margin:18px 0 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+@media(max-width:720px){.grid2{grid-template-columns:1fr}.row{flex-direction:column}}
+footer{color:var(--dim);font-size:11.5px;margin-top:26px;border-top:1px solid var(--line);padding-top:12px}
+</style></head><body><div class="wrap">
+<h1>진우퀀트 전략 v2.0 <span class="tag t-ok">사전등록 2026-07-27</span></h1>
+<div class="sub">집중 코어 + 성장 위성 · 목표 = 생존 제약(MDD −40%) 아래 장기 복리 극대화 · ⚠️ 검증용 · 투자자문 아님 · 책임 본인</div>
+
+<div class="flow">
+<div class="box" style="text-align:center"><h2>자본 100%</h2>
+<div class="d">진우 결정 · 실자본은 forward 판정(2026-12) 통과 후 단계 투입</div></div>
+<div class="split"><span>▼ 80%</span><span>▼ 20%</span></div>
+<div class="row">
+<div class="box core"><h2>① 코어 — 기계 (규칙 100%)</h2>
+<ul><li><b>멀티팩터 N=10 집중</b> — div·bp·ep·roe z합성</li>
+<li>시총 top100 풀 · 월간 리밸 · 동일가중→종목캡 15%</li>
+<li>시차: 점수·시총 전부 <b>전월말(shift 1)</b></li>
+<li>30년 실측 <span class="hl">8.2% · Sharpe 0.54 · MDD −38.5%</span><br>
+<span class="d">(KOSPI 7.7% · 0.40 · −69.6%)</span></li></ul></div>
+<div class="box sat"><h2>② 위성 — 성장·기술 재량</h2>
+<ul><li><b>진우 선정 + 기계 감독</b> (규칙 백테 불가 영역)</li>
+<li>"꾸준히 선호" 체크리스트 3항 필수·<b>ledger 선기록</b></li>
+<li>진입은 <b>추세위(≥MA10)만</b> — 백서 5장 검증</li>
+<li>리스크 1%/건 · heat≤6% · 최대 7종 · 킬스위치</li></ul></div>
+</div>
+<div class="arrow">▼</div>
+<div class="box def"><h2>③ 공통 방어 — KOSPI 10개월MA (전월말 확정)</h2>
+<div class="d">지수 &lt; MA → 코어 50% 현금 · 위성 신규진입 금지 &nbsp;|&nbsp; 30년 실측: MDD −55% → −38.5% · Sharpe +0.1↑</div></div>
+<div class="arrow">▼</div>
+<div class="box"><h2>④ 집행 게이트</h2>
+<div class="d">RiskGuard(15종·종목 20%·밴드 ±10%) + <b>진우퀀트_게이트.py 36항목</b> — 빨간불이면 그 달 집행 정지</div></div>
+<div class="arrow">▼</div>
+<div class="box"><h2>⑤ 최종심 — forward 원장 <span class="tag t-warn">현재 1/12개월</span></h2>
+<div class="d">매월 1영업일 기록 · top30 동결 라인 + <b>N=10 병행 라인</b> · <b>판정 2026-12</b>: 포트 &gt; B1(EW) 그리고 &gt; KOSPI, 낙폭 &gt; −25% 시 즉시 불통과</div></div>
+</div>
+
+<div class="grid2">
+<div class="box"><h2>가설 검증 결과 (2006~2026 · 245개월 동일조건)</h2>
+<table><tr><th>변형</th><th>CAGR</th><th>Sharpe</th><th>MDD</th><th>판정</th></tr>
+<tr><td>KOSPI(PR)</td><td>9.2%</td><td>0.51</td><td>−48.5%</td><td>벤치</td></tr>
+<tr><td class="hl">멀티팩터 N=10</td><td class="hl">9.2%</td><td class="good">0.60</td><td class="good">−37.5%</td><td class="good">채택</td></tr>
+<tr><td>멀티팩터 N=15</td><td>7.3%</td><td>0.52</td><td>−39.0%</td><td>차선</td></tr>
+<tr><td>성장 g1 단독 N=10</td><td class="bad">4.9%</td><td class="bad">0.33</td><td class="bad">−55.9%</td><td class="bad">기각</td></tr>
+<tr><td>성장블렌드 N=10</td><td class="bad">6.4%</td><td>0.40</td><td>−47.8%</td><td class="bad">기각</td></tr>
+<tr><td>멀티팩터+지속필터</td><td>8.2%</td><td>0.55</td><td>−37.8%</td><td>무개선</td></tr>
+<tr><td>모멘텀+지속필터</td><td>8.9%</td><td>0.46</td><td class="bad">−59.1%</td><td class="bad">낙폭 실격</td></tr></table>
+<div class="d" style="margin-top:6px">집중은 증폭기 — 검증된 신호(HAC t 4.10)에서만 통한다. 성장 규칙화는 기각 → 재량 위성으로. 지속성은 필터가 아니라 위성 체크리스트로.</div></div>
+<div class="box"><h2>낙폭 규칙 (MDD)</h2>
+<table><tr><th>선</th><th>레벨</th><th>동작</th></tr>
+<tr><td>운영 경보</td><td>월 −10% / 낙폭 −18%</td><td>기존 메타규칙 — 점검·축소</td></tr>
+<tr><td>조기경보</td><td>−20%</td><td>검증 구간 점검 (30년 중 12회 = 정상 범위)</td></tr>
+<tr><td class="hl">설계 한도</td><td class="hl">−40%</td><td class="hl">전략 중단 · 전면 재감사</td></tr></table>
+<div class="d" style="margin-top:6px">−40%만이 실측(−38.5%)이 지지하는 한도. 더 좁은 약속은 검증 안 된 약속.
+복리를 죽이는 건 수익 부족이 아니라 낙폭이다 — 지수 −69.6% 복구엔 +233%, −38.5%엔 +61%.</div></div>
+</div>
+
+<div class="note"><b>이 전략이 약속하지 않는 것</b> — ① 지수 초과수익(30년 초과확률 57% = 판별 불가)
+② 위성의 수익성(백테 불가 영역, 20% 상한이 약속의 전부) ③ 백테 재현(실측 슬리피지로 6개월 후 재교정)
+④ −40% 이내 보장(백테 최악치일 뿐 — 그래서 도달 시 중단 규칙이 있다).
+<b>최종심은 2026-12 forward 판정이며, 통과·불통과 모두 표본 6개월의 한계 안에서 읽는다.</b></div>
+
+<footer>진우퀀트 전략서 v2.0 · 2026-07-27 사전등록 · 정본: 실전준비\전략서_v2.md · 파라미터 SSOT: 진우_통합한도.json · 비용모델.py · 게이트 36/36 상태에서 등록</footer>
+</div></body></html>

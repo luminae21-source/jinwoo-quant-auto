@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>전략×보유기간 호라이즌 + 3-슬리브 배분 · 2026-07-23</title>
+<style>
+  :root{--bg:#0f1115;--panel:#171a21;--panel2:#1e222b;--ink:#e8eaed;--muted:#9aa0aa;--line:#2a2f3a;
+    --accent:#58a6ff;--pass:#3fb950;--warn:#d29922;--neg:#f85149;--pos:#3fb950;}
+  @media (prefers-color-scheme: light){:root{--bg:#f6f7f9;--panel:#fff;--panel2:#f0f2f5;--ink:#1a1d23;--muted:#5b626d;--line:#e2e5ea;}}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;font-size:15px}
+  .wrap{max-width:1000px;margin:0 auto;padding:32px 22px 80px}
+  h1{font-size:25px;margin:0 0 4px;letter-spacing:-.02em}
+  .sub{color:var(--muted);font-size:13.5px;margin-bottom:22px}
+  h2{font-size:18px;margin:32px 0 12px;padding-top:20px;border-top:1px solid var(--line)}
+  h2 .n{color:var(--accent);font-weight:700;margin-right:8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0}
+  .cores{display:grid;gap:10px}
+  .core{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:12px 16px}
+  .core b{color:var(--accent)}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0}
+  th,td{padding:6px 8px;text-align:right;border-bottom:1px solid var(--line)}
+  th:first-child,td:first-child{text-align:left}
+  thead th{color:var(--muted);font-weight:600;font-size:11.5px}
+  tr.hl td{background:var(--panel2);font-weight:600}
+  .verdict{font-size:18px;font-weight:800;text-align:center;padding:15px;border-radius:12px;margin:8px 0;background:linear-gradient(90deg,rgba(88,166,255,.12),rgba(63,185,80,.10));border:1px solid var(--line)}
+  .muted{color:var(--muted)}.pos{color:var(--pos)}.neg{color:var(--neg)}.k{font-size:12px;color:var(--muted)}
+  .cell{font-variant-numeric:tabular-nums;border-radius:4px;padding:4px 6px;text-align:center}
+  .bar-row{display:flex;align-items:center;gap:10px;margin:5px 0;font-size:12.5px}
+  .bar-row .lab{width:130px;color:var(--muted);text-align:right;flex-shrink:0}
+  .bar-row .val{width:52px;flex-shrink:0}
+  .bar{height:15px;border-radius:4px}
+  code{background:var(--panel2);padding:1px 6px;border-radius:4px;font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>전략 × 보유기간 호라이즌 + 3-슬리브 배분</h1>
+  <div class="sub">"어떤 교체주기가 옳은가" 데이터 판정 · 30년 상폐포함 · 다올 비용후 · 유동 top200 · 2026-07-23</div>
+
+  <div class="verdict">"하나의 옳은 교체주기"는 없다 — 신호마다 최적 호라이즌이 다르다</div>
+
+  <div class="cores">
+    <div class="core">① <b>내구성이 극과 극</b>: 모멘텀은 5년 보유 시 엣지의 <b class="neg">10%만</b> 남고(붕괴), <b class="pos">저PBR 가치는 68%</b>가 남는다(5년 Sharpe 0.75). → 회전은 모멘텀, 장기·사이클은 가치/역발상.</div>
+    <div class="core">② <b>3-슬리브 블렌드는 Sharpe 극대화용이 아니다</b>. 모멘텀 단독 0.96이 블렌드(0.82~0.88)보다 높다 — 롱온리 주식 상관 0.66~0.87로 분산 제한. 블렌드는 단일신호 의존·심리적 붕괴 완화용. 진짜 분산은 MA200 현금·롱숏에서.</div>
+    <div class="core">③ <b>자동화 완료</b>: 로컬 .bat+작업스케줄러(매월 1일) + 클라우드 월간 리마인더.</div>
+  </div>
+
+  <h2><span class="n">1</span>호라이즌 매트릭스 — 신호별 최적 보유기간 · 내구성</h2>
+  <div class="card">
+    <div class="k" style="margin-bottom:6px">셀 = 순 CAGR% / Sharpe · <b>굵게=Sharpe 최적</b> · 색: 초록=강함, 회색=약함</div>
+    <table>
+      <thead><tr><th>신호 \ 보유</th><th>1개월</th><th>3개월</th><th>6개월</th><th>12개월</th><th>24개월</th><th>60개월</th><th>내구성</th></tr></thead>
+      <tbody>
+        <tr><td>12-1 모멘텀</td>
+          <td class="cell" style="background:rgba(63,185,80,.28)"><b>28.4/0.94</b></td>
+          <td class="cell" style="background:rgba(63,185,80,.06)">8.7/0.42</td>
+          <td class="cell">4.6/0.30</td><td class="cell">1.9/0.21</td><td class="cell">2.4/0.23</td>
+          <td class="cell" style="background:rgba(248,81,73,.14)">−1.3/0.09</td>
+          <td class="neg">10% 붕괴</td></tr>
+        <tr><td>저PBR 가치</td>
+          <td class="cell" style="background:rgba(63,185,80,.34)"><b>27.3/1.10</b></td>
+          <td class="cell" style="background:rgba(63,185,80,.20)">16.6/0.76</td>
+          <td class="cell" style="background:rgba(63,185,80,.16)">14.6/0.68</td>
+          <td class="cell" style="background:rgba(63,185,80,.16)">14.4/0.67</td>
+          <td class="cell" style="background:rgba(63,185,80,.16)">15.2/0.69</td>
+          <td class="cell" style="background:rgba(63,185,80,.20)">16.2/0.75</td>
+          <td class="pos">68% 견고</td></tr>
+        <tr><td>저PER 가치</td>
+          <td class="cell" style="background:rgba(63,185,80,.40)"><b>29.1/1.21</b></td>
+          <td class="cell" style="background:rgba(63,185,80,.26)">20.3/0.92</td>
+          <td class="cell" style="background:rgba(63,185,80,.18)">16.5/0.77</td>
+          <td class="cell" style="background:rgba(63,185,80,.16)">14.3/0.69</td>
+          <td class="cell" style="background:rgba(63,185,80,.14)">13.3/0.64</td>
+          <td class="cell" style="background:rgba(63,185,80,.12)">11.8/0.62</td>
+          <td>51%</td></tr>
+        <tr><td>36m 역발상</td>
+          <td class="cell" style="background:rgba(63,185,80,.16)"><b>18.1/0.70</b></td>
+          <td class="cell">4.1/0.28</td>
+          <td class="cell" style="background:rgba(248,81,73,.06)">0.3/0.15</td>
+          <td class="cell" style="background:rgba(248,81,73,.10)">−0.4/0.13</td>
+          <td class="cell" style="background:rgba(248,81,73,.10)">−0.6/0.11</td>
+          <td class="cell" style="background:rgba(63,185,80,.06)">7.0/0.38</td>
+          <td class="warn" style="color:var(--warn)">U자형</td></tr>
+        <tr><td>저변동</td>
+          <td class="cell" style="background:rgba(63,185,80,.06)"><b>9.7/0.55</b></td>
+          <td class="cell">4.5/0.32</td><td class="cell">3.6/0.27</td><td class="cell">3.0/0.25</td>
+          <td class="cell">5.7/0.35</td><td class="cell">6.9/0.39</td>
+          <td class="pos">71% (저수익)</td></tr>
+        <tr><td>시총30 바이앤홀드</td>
+          <td class="cell" style="background:rgba(63,185,80,.10)"><b>19.8/0.78</b></td>
+          <td class="cell">8.2/0.42</td><td class="cell">6.1/0.35</td><td class="cell">4.3/0.29</td>
+          <td class="cell">3.3/0.25</td><td class="cell">2.9/0.24</td>
+          <td class="neg">31%</td></tr>
+      </tbody>
+    </table>
+    <div class="k" style="margin-top:8px">모멘텀=순수 월간 엣지(오래 들면 붕괴). 가치=장기 보유 가능한 유일 축. 역발상=월간 반등 or 초장기 사이클. 대형주 방치(바이앤홀드)는 리밸런싱보다 못하다.</div>
+  </div>
+
+  <div class="card">
+    <div class="k" style="margin-bottom:8px"><b>장기 내구성</b> — 5년 보유 시 최적 대비 Sharpe 유지율</div>
+    <div class="bar-row"><span class="lab">저변동</span><span class="val pos">71%</span><div class="bar" style="width:71%;background:var(--pass)"></div></div>
+    <div class="bar-row"><span class="lab">저PBR 가치</span><span class="val pos">68%</span><div class="bar" style="width:68%;background:var(--pass)"></div></div>
+    <div class="bar-row"><span class="lab">저PER 가치</span><span class="val">51%</span><div class="bar" style="width:51%;background:var(--accent)"></div></div>
+    <div class="bar-row"><span class="lab">시총30 바이앤홀드</span><span class="val neg">31%</span><div class="bar" style="width:31%;background:var(--warn)"></div></div>
+    <div class="bar-row"><span class="lab">12-1 모멘텀</span><span class="val neg">10%</span><div class="bar" style="width:10%;background:var(--neg)"></div></div>
+    <div class="k" style="margin-top:8px">→ 장기·사이클 보유(진우님 "1~2년·5년·10년") 취향은 <b>가치</b>에 실려야 산다. 모멘텀을 오래 들면 죽는다.</div>
+  </div>
+
+  <h2><span class="n">2</span>3-슬리브 배분 (2002~2026, 260개월)</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>구성</th><th>순 CAGR</th><th>Sharpe</th><th>MDD</th></tr></thead>
+      <tbody>
+        <tr><td>① 모멘텀-리더십(월간·MA200 50%)</td><td>21.7%</td><td class="pos">0.96</td><td>−41.8%</td></tr>
+        <tr><td>② 가치-코어(저PBR·연간)</td><td>14.2%</td><td>0.66</td><td>−51.1%</td></tr>
+        <tr><td>③ 저변동-방어(분기)</td><td>8.5%</td><td>0.58</td><td>−43.1%</td></tr>
+        <tr><td class="muted">KOSPI(벤치)</td><td class="muted">9.7%</td><td class="muted">0.52</td><td class="muted">−50.5%</td></tr>
+        <tr><td>블렌드 등가중</td><td>15.2%</td><td>0.82</td><td>−42.8%</td></tr>
+        <tr><td>블렌드 역변동성(36m)</td><td>15.0%</td><td>0.84</td><td>−42.5%</td></tr>
+        <tr class="hl"><td>블렌드 코어새틀라이트(50/35/15)</td><td>17.5%</td><td>0.88</td><td>−43.2%</td></tr>
+      </tbody>
+    </table>
+    <div class="k" style="margin-top:8px">슬리브 상관: 모멘텀↔가치 <b>+0.70</b> · 모멘텀↔저변동 +0.66 · 가치↔저변동 +0.87 (전부 롱온리 KR 주식 = 같은 시장 롱).</div>
+    <div class="k" style="margin-top:6px"><b>정직한 판정:</b> 블렌드 Sharpe(0.82~0.88) &lt; 최고 단일슬리브(모멘텀 0.96). 상관이 높아 분산으로 위험조정을 <b>높이지 못한다.</b> 블렌드의 값어치는 단일(호라이즌-취약) 신호 의존·심리적 붕괴 완화. <b>진짜 분산은 MA200 현금(이미 탑재)·롱숏·비주식에서.</b></div>
+  </div>
+
+  <h2><span class="n">3</span>진우 스타일 실전 설계</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>슬리브</th><th style="text-align:left">호라이즌</th><th style="text-align:left">규칙</th><th style="text-align:left">역할</th></tr></thead>
+      <tbody>
+        <tr><td>① 모멘텀-리더십</td><td style="text-align:left">월간 회전</td><td style="text-align:left">pool100·12-1·상위30·MA200 50%</td><td style="text-align:left">수익 엔진</td></tr>
+        <tr><td>② 가치-코어</td><td style="text-align:left">중장기 1~5년</td><td style="text-align:left">저PBR 상위·연간(내구성68%)</td><td style="text-align:left">밸러스트·사이클</td></tr>
+        <tr><td>③ 역발상/사이클</td><td style="text-align:left">초장기 5년+</td><td style="text-align:left">36m 패자·딥밸류(소액)</td><td style="text-align:left">사이클 회귀 베팅</td></tr>
+        <tr><td>(방어)</td><td style="text-align:left">상시</td><td style="text-align:left">MA200 현금 오버레이</td><td style="text-align:left">구조적 낙폭제어</td></tr>
+      </tbody>
+    </table>
+    <div class="k" style="margin-top:8px">권고 출발점: <b>코어새틀라이트 50/35/15 (17.5%/0.88/−43%)</b> — 모멘텀 수익 대부분을 취하되 단일 의존↓. 실행은 리스크예산(1%/트레이드·동시 5~7종). "10배 종목"은 ②③ 딥밸류 재량+Track W(팩터 평균이 못 담는 단일종목 사건).</div>
+  </div>
+
+  <h2><span class="n">4</span>자동화 — 월초 리스트 생성</h2>
+  <div class="card">
+    <p style="margin:4px 0">· <b>로컬(본체)</b>: <code>유니버스_월초생성_작업등록.bat</code> 한 번 실행 → 매월 1일 08:30 자동. 수동은 <code>유니버스_월초생성.bat</code> → <code>유니버스_규칙화_현재.csv</code> 갱신.</p>
+    <p style="margin:4px 0">· <b>클라우드 리마인더</b>: 매월 1일 아침 갱신·과열 점검 알림(스케줄 작업 등록됨).</p>
+    <div class="k" style="margin-top:8px">재현: <code>py 강화키트\전략_호라이즌_검정.py</code> · <code>py 강화키트\슬리브_배분_백테.py</code> · <code>py 강화키트\유니버스_규칙화_실행.py --now</code></div>
+  </div>
+
+  <div class="k" style="margin-top:22px;text-align:center">작성 2026-07-23 · 상폐포함·다올 비용후·유동 top200 · 실현손익 아님·투자자문 아님·책임 본인 · 진우퀀트 강화키트</div>
+</div>
+</body>
+</html>

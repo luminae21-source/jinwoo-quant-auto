@@ -1,0 +1,19 @@
+=== jq_kakao_send_merged 2026-07-27  0:48:05.78 === 
+
+[notice] A new release of pip is available: 26.0.1 -> 26.1.2
+[notice] To update, run: C:\Users\ê¸ì •ì ì¸_ì‚¶ì˜ìì„¸\AppData\Local\Python\pythoncore-3.14-64\python.exe -m pip install --upgrade pip
+[merge] 6Àå ¡æ Ä«µå´º½º_ÅëÇÕ_2026-07-24.png  (860x5618px)
+   + ½ÃÀåºê¸®ÇÎ_Ä«Åå.png
+   + Ú¸Á¾¸ñ_ÇÑ±¹¿µÇâ_Ä«µå.png
+   + ¿¬ÁØ_Fed_µ¿Çâ_Ä«µå.png
+   + ¸¶°¨ºê¸®ÇÎ_Ä«Åå.png
+   + ¸¶°¨Á¾¸ñ_Ä«Åå.png
+   + °ü½É¿öÄ¡¸®½ºÆ®_Ä«Åå.png
+[ÀúÀå] C:\Users\±àÁ¤ÀûÀÎ_»îÀÇÀÚ¼¼\Desktop\Áø¿ìÄöÆ®\Ä«µå´º½º_ÅëÇÕ_2026-07-24.png
+[jq_kakao_send] Æú´õ=C:\Users\±àÁ¤ÀûÀÎ_»îÀÇÀÚ¼¼\Desktop\Áø¿ìÄöÆ®
+  ´ë»ó 1Àå:
+   - Ä«µå´º½º_ÅëÇÕ_2026-07-24.png  ->  ?? ÅëÇÕ Ä«µå´º½º (6Àå)
+    [¸µÅ©] https://k.kakaocdn.net/dn/xbD4C/dJMcaae72Ey/mUgNNg5qW5kgLQKmA2j2q0/kakaolink40_original.png
+   [OK ¡¤ feed] Ä«µå´º½º_ÅëÇÕ_2026-07-24.png
+[jq_kakao_send] ¿Ï·á 1/1 Àå Àü¼Û
+EXITCODE=0 

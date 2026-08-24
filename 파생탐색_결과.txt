@@ -1,0 +1,106 @@
+============================================================
+파생/매크로/이벤트 데이터 실재성 탐색 — 2026-06-20
+원칙: 실재 데이터만. 추정·대체 금지. 반환 그대로 표기.
+============================================================
+
+● pykrx import: OK (1.2.8)
+● yfinance import: OK (1.3.0)
+
+--- pykrx.stock 사용가능 함수(키워드 매칭) ---
+  파생/지수/투자자 후보 26개:
+    - future_api
+    - get_etf_trading_volume_and_value
+    - get_future_ohlcv
+    - get_future_ohlcv_by_ticker
+    - get_future_ticker_list
+    - get_future_ticker_name
+    - get_index_fundamental
+    - get_index_fundamental_by_date
+    - get_index_fundamental_by_ticker
+    - get_index_listing_date
+    - get_index_ohlcv
+    - get_index_ohlcv_by_date
+    - get_index_ohlcv_by_ticker
+    - get_index_portfolio_deposit_file
+    - get_index_price_change
+    - get_index_price_change_by_name
+    - get_index_price_change_by_ticker
+    - get_index_ticker_list
+    - get_index_ticker_name
+    - get_market_trading_value_and_volume_by_ticker
+    - get_market_trading_value_by_date
+    - get_market_trading_value_by_investor
+    - get_market_trading_volume_by_date
+    - get_market_trading_volume_by_investor
+    - get_shorting_investor_value_by_date
+    - get_shorting_investor_volume_by_date
+  (전체 함수 90개 중)
+
+최근 영업일(기준일): 20260619
+
+========== 파생 포지션 ==========
+
+[1a. KOSPI200 현물 get_index_ohlcv(bd,bd,'1028')]
+  ✅ 반환: {'시가': {Timestamp('2026-06-19 00:00:00'): 1499.31}, '고가': {Timestamp('2026-06-19 00:00:00'): 1518.11}, '저가': {Timestamp('2026-06-19 00:00:00'): 1423.84}, '종가': {Timestamp('2026-06-19 00:00:00'): 1459.48}, '거래량': {Timestamp('2026-06-19 00:00:00'): 228408636}, '거래대금': {Timestamp('2026-06-19 00:00:00'): 62431942655298}, '상장시가총액': {Timestamp('2026-06-19 00:00:00'): 6950391167358345}}
+
+[1b. 선물 티커 목록 get_future_ticker_list — 시그니처 확인 후 인자 없이 호출]
+  시그니처: get_future_ticker_list() -> list
+  ✅ 반환 28개: ['KRDRVFUK2I', 'KRDRVFUMKI', 'KRDRVOPK2I', 'KRDRVOPWKI', 'KRDRVOPWKM', 'KRDRVOPMKI', 'KRDRVFUKQI', 'KRDRVFUQGI', 'KRDRVOPKQI', 'KRDRVOPWQI', 'KRDRVOPWQM', 'KRDRVFUXAT', 'KRDRVFUXI3', 'KRDRVFUVKI', 'KRDRVFUBM3', 'KRDRVFUBM5', 'KRDRVFUBMA', 'KRDRVFUBML', 'KRDRVFUB3A', 'KRDRVFURFR']
+
+[1c. 선물 OHLCV get_future_ohlcv — 시그니처 확인 후 호출, 컬럼 전체 확인]
+  시그니처: get_future_ohlcv(*args, **kwargs)
+  ❌ get_future_ohlcv 실패: NotImplementedError: 
+  ※ 인자순서 다르면 위 시그니처대로 PC에서 조정(추정 금지).
+
+[1d. 베이시스 = 선물 − KOSPI200현물(1028)]
+  ❌ 데이터부족(선물 종가 미확보) → 계산 안 함(추정 금지)
+
+[3. 현물 투자자별 순매수 get_market_trading_value_by_investor(bd,bd,'KOSPI')]
+  ✅ 반환: {'매도': {'금융투자': 4009097964094, '보험': 371840631215, '투신': 1859376662167, '사모': 913926458934, '은행': 11926042561, '기타금융': 20735861385, '연기금 등': 9997273632246, '기관합계': 17184177252602, '기타법인': 540394031381, '개인': 23192846446526, '외국인': 26178669077935, '기타외국인': 159083415943, '전체': 67255170224387}, '매수': {'금융투자': 3809735689131, '보험': 118103052398, '투신': 1990395097163, '사모': 534033799033, '은행': 16091700910, '기타금융': 20814708146, '연기금 등': 9470573944271, '기관합계': 15959747991052, '기타법인': 472497076695, '개인': 24840683944228, '외국인': 25826720921085, '기타외국인': 155520291327, '전체': 67255170224387}, '순매수': {'금융투자': …(생략)
+  ※ 선물 투자자거래·옵션 풋콜은 pykrx 함수 부재 → 아래 MDC 직접시도.
+
+[5. VKOSPI — 지수 티커목록 전 시장 '변동성/VKOSPI' 검색]
+  변동성 지수 검색결과: 없음(→ MDC/HTS)
+
+[5b. yfinance ^VKOSPI(검증용)]
+  ✅ 반환: []
+
+========== KRX MDC 직접통계 시도 (pykrx 미지원분) ==========
+  ※ data.krx.co.kr는 보통 OTP(generate.cmd) 토큰 + 정확 bld코드 필요. 아래는 1회 시도 — 반환 그대로 기록, 억지 생성 금지.
+  HTTP 400 · 본문앞: LOGOUT
+  → 정상 JSON 아니면 OTP/정확 bld 필요(수동 또는 별도 구현). VKOSPI·선물투자자·옵션 풋콜은 이 경로 확정 후 자동화.
+
+========== 금리/매크로 ==========
+
+[6. 美10년물 ^TNX]
+  ✅ 반환: [4.450999736785889]
+
+[6. 美13주 ^IRX]
+  ✅ 반환: [3.6580002307891846]
+
+[6. 美5년 ^FVX]
+  ✅ 반환: [4.224999904632568]
+
+[6. 美30년 ^TYX]
+  ✅ 반환: [4.901000022888184]
+  ※ 美2년물: yfinance 표준 티커 부재(확인됨이면 수동/FRED). 한미 금리차 = 美10년 − 한국기준금리(아래).
+
+[6b. 한국 기준금리]
+  ※ ECOS(한국은행) API 키 필요 → 키 없으면 '수동 입력'. 자동화하려면 ECOS 키 발급 후 별도 연동.
+
+========== 이벤트 ==========
+
+[7. 옵션·선물 만기일 — 날짜계산(자동 산출 가능)]
+  - 2026-07-09 : 월물 옵션만기
+  - 2026-08-13 : 월물 옵션만기
+  - 2026-09-10 : 분기 동시만기(네 마녀)
+  - 2026-10-08 : 월물 옵션만기
+  → 둘째 목요일 룰로 100%% 자동 산출 가능(외부데이터 불요).
+
+[8. FOMC·금통위·CPI·고용 일정]
+  - 금통위: theme_calendar_fixed.csv에 BOK 확정일 보유(자동). FOMC: 동 파일에 2026 일정 보유.
+  - CPI(美 ~매월 중순)·고용(NFP 첫 금요일): 날짜계산 근사 가능(theme_calendar_v1.py). 확정일은 공개일정 수동확인.
+  - 자동 무료 통합 캘린더 API는 별도 부재 → 위 파일 기반 + 수동 보정.
+
+============================================================
+결론 작성용: 위 ✅/❌를 보고 (자동가능 / KRX MDC필요 / HTS수동 / ECOS키필요)로 분류.

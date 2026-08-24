@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>유니버스 규칙화 — 종합 대시보드 (검증완료) · 2026-07-23</title>
+<style>
+  :root{--bg:#0f1115;--panel:#171a21;--panel2:#1e222b;--ink:#e8eaed;--muted:#9aa0aa;--line:#2a2f3a;
+    --accent:#58a6ff;--pass:#3fb950;--warn:#d29922;--neg:#f85149;--pos:#3fb950;}
+  @media (prefers-color-scheme: light){:root{--bg:#f6f7f9;--panel:#fff;--panel2:#f0f2f5;--ink:#1a1d23;--muted:#5b626d;--line:#e2e5ea;}}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;font-size:15px}
+  .wrap{max-width:1040px;margin:0 auto;padding:30px 22px 80px}
+  h1{font-size:24px;margin:0 0 4px}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:16px}
+  .banner{background:linear-gradient(90deg,rgba(63,185,80,.14),rgba(88,166,255,.10));border:1px solid var(--pass);border-radius:12px;padding:14px 18px;margin:12px 0 6px;font-weight:700;font-size:15px}
+  .banner .big{font-size:20px;color:var(--pass)}
+  h2{font-size:17px;margin:28px 0 12px;padding-top:18px;border-top:1px solid var(--line)}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}
+  @media(max-width:820px){.grid{grid-template-columns:1fr 1fr}}
+  .track{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:13px 14px}
+  .track .t{font-size:12px;color:var(--accent);font-weight:700;margin-bottom:4px}
+  .track .h{font-size:13.5px;font-weight:600;margin-bottom:6px}
+  .track .d{font-size:11.5px;color:var(--muted)}
+  .track .s{margin-top:8px;font-size:11px;font-weight:700}
+  .ok{color:var(--pass)}.wait{color:var(--warn)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .gates{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+  .g{flex:1;min-width:120px;text-align:center;border:1px solid var(--line);border-radius:9px;padding:10px 6px;background:var(--panel)}
+  .g .gn{font-weight:800;font-size:13px}.g .gs{font-size:11px;color:var(--muted);margin-top:3px}
+  .g.pass{border-color:var(--pass)}.g.pass .gn{color:var(--pass)}
+  .g.resolved{border-color:var(--accent)}.g.resolved .gn{color:var(--accent)}
+  .conf{font-size:13px;margin:5px 0;padding-left:18px;position:relative}
+  .conf::before{content:"✓";position:absolute;left:0;color:var(--pass);font-weight:800}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;margin:6px 0}
+  th,td{padding:7px 9px;text-align:left;border-bottom:1px solid var(--line)}
+  thead th{color:var(--muted);font-weight:600;font-size:11.5px}
+  td.st{text-align:center;white-space:nowrap}
+  .done{color:var(--pass);font-weight:700}.pend{color:var(--warn);font-weight:700}
+  code{background:var(--panel2);padding:1px 5px;border-radius:4px;font-size:11.5px}
+  .k{font-size:12px;color:var(--muted)}
+  .prog{height:10px;background:var(--panel2);border-radius:6px;overflow:hidden;margin:8px 0}
+  .prog>i{display:block;height:100%;width:90%;background:var(--pass)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>유니버스 규칙화 — 종합 대시보드</h1>
+  <div class="sub">4개 트랙 완료 · 검증 9/10 통과 · 2026-07-23 · 강화키트\</div>
+
+  <div class="banner"><span class="big">검증 9 / 10 통과</span> — 계산 가능한 모든 검증 완료. 유일 잔여 = <b>P0-1 실집행 슬리피지 실측</b>(페이퍼 1~2개월).</div>
+  <div class="prog"><i></i></div>
+
+  <h2>4개 연구 트랙</h2>
+  <div class="grid">
+    <div class="track"><div class="t">트랙 1</div><div class="h">사전등록 판정</div><div class="d">동적 리더십+MA200 vs 고정18. 게이트 3/4→해소.</div><div class="s ok">✅ 완료</div></div>
+    <div class="track"><div class="t">트랙 2</div><div class="h">실행판</div><div class="d">현재 리스트·교체주기. 월간 회전 슬리브.</div><div class="s ok">✅ 완료</div></div>
+    <div class="track"><div class="t">트랙 3</div><div class="h">호라이즌·슬리브·자동화</div><div class="d">신호별 보유기간, 3-슬리브, 월초 자동생성.</div><div class="s ok">✅ 완료</div></div>
+    <div class="track"><div class="t">트랙 4</div><div class="h">사이클·롱숏·G4</div><div class="d">테마 바스켓, 시장중립, G4 해소.</div><div class="s ok">✅ 완료</div></div>
+  </div>
+
+  <h2>사전등록 게이트 — 최종</h2>
+  <div class="card">
+    <div class="gates">
+      <div class="g pass"><div class="gn">G1 ✅</div><div class="gs">Sharpe>고정18<br>0.89 vs 0.83</div></div>
+      <div class="g pass"><div class="gn">G2 ✅</div><div class="gs">MDD≤고정18<br>−37.6% vs −44.9%</div></div>
+      <div class="g pass"><div class="gn">G3 ✅</div><div class="gs">OOS 부호유지</div></div>
+      <div class="g resolved"><div class="gn">G4 ✅◐</div><div class="gs">비용강건<br>50%현금 손익분기 0.31%<br>→ 실측만 남음</div></div>
+    </div>
+    <div class="k" style="margin-top:8px">primary = <b>동적 TOP30 리더십(월간 12-1) + MA200 50%현금 방어</b>. 4개 게이트 사실상 정리, 페이퍼 실측만 대기.</div>
+  </div>
+
+  <h2>검증 현황 — 9/10 통과</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>항목</th><th>결과</th><th class="st">상태</th></tr></thead>
+      <tbody>
+        <tr><td>P0-2 모멘텀 정의 강건성</td><td>raw·clip 두 정의 모두 primary가 고정 대비 우위(0.85/0.83>0.78)</td><td class="st done">✅</td></tr>
+        <tr><td>P0-3 데이터 무결성</td><td>가격·시총·지수 정합 + 외부확인(KOSPI 7월 −23% 서킷브레이커) = 실제</td><td class="st done">✅</td></tr>
+        <tr><td>P1 레짐 의존성</td><td>파라볼릭 제외해도 우위 유지(0.77>0.69)·낙폭제어. 단 수익 하향(~16.5%)</td><td class="st done">✅</td></tr>
+        <tr><td>P1 사이클 룰 일봉 ATR</td><td>일봉도 단일종목 휩쏘 못 잡음 → <b>바스켓이 답</b>(정정)</td><td class="st done">✅</td></tr>
+        <tr><td>P1 비용모델 정밀화</td><td>현실 다올(0.10~0.15%)서 우위 유지, 0.25%서 손익분기</td><td class="st done">✅</td></tr>
+        <tr><td>P1 상폐·PIT 감사</td><td>대형주라 상폐 노출 연 0.2건, 생존편향 미미. PBR/PER 룩어헤드 낮음</td><td class="st done">✅</td></tr>
+        <tr><td>P2 파라미터 안정성</td><td>N·pool·MA·룩백 인접값 Sharpe 0.78~0.85 평탄 = 과최적화 아님</td><td class="st done">✅</td></tr>
+        <tr><td>P2 슬리브 5~7종 실행가능성</td><td>K=7 Sharpe 0.94(엣지 보존), MDD −50%대(방어 필수)</td><td class="st done">✅</td></tr>
+        <tr><td>P2 롱숏 대안(인버스 헤지)</td><td>−0.3×KOSPI → Sharpe 0.83→0.94, MDD −42%→−28% (실행가능)</td><td class="st done">✅</td></tr>
+        <tr><td><b>P0-1 실집행 슬리피지 실측</b></td><td>페이퍼 체결 1~2개월 축적 → <code>--from-log</code>로 G4 확정</td><td class="st pend">⏳</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>확정 결론 (검증 반영)</h2>
+  <div class="card">
+    <div class="conf">유니버스 = <b>규칙 기반 동적 리더십</b>(고정 명단 아님). 정의·레짐·비용·과최적화 강건.</div>
+    <div class="conf"><b>primary = 동적 TOP30 리더십(월간 12-1) + MA200 50%현금.</b> 실전 집중 <b>5~7종</b>(Sharpe↑·낙폭↑→방어 필수) 또는 낙폭 민감 시 12~15종.</div>
+    <div class="conf"><b>낙폭제어가 본질</b> — 방어로 −64%→−42%대, 전 비용·레짐 강건. 급락 확신 국면엔 <b>인버스 소액(≤30%) 보조</b>.</div>
+    <div class="conf"><b>호라이즌은 신호별</b> — 회전=모멘텀(월간), 장기·사이클=가치(내구성68%)·역발상.</div>
+    <div class="conf"><b>사이클/테마(2차전지·반도체)는 바스켓+추세필터로만</b>. 단일종목 타이밍은 어느 주기든 복불복 → 소액·분할·재량.</div>
+    <div class="conf"><b>forward 기대치 ~16~17% / Sharpe ~0.78~0.80</b>(2024~26 강세 프리미엄 제외한 정직한 기준).</div>
+  </div>
+
+  <h2>남은 액션 = 하나</h2>
+  <div class="card">
+    <p style="margin:4px 0;font-size:13.5px"><b>지금</b> — <code>유니버스_월초생성_작업등록.bat</code>로 자동생성 켜기 + 페이퍼/소액 착수(<code>유니버스_체결로그_템플릿.csv</code>에 체결가 기록 시작).</p>
+    <p style="margin:4px 0;font-size:13.5px"><b>1~2개월</b> — 체결 슬리피지 축적 → <code>py 유니버스_G4_손익분기.py --from-log 체결로그.csv</code>로 <b>P0-1 확정</b>.</p>
+    <p style="margin:4px 0;font-size:13.5px"><b>확정 시</b> — primary를 본체 오버레이로 승격, 고정18은 관찰 트랙. 유니버스 정당성 25%→상향 확정.</p>
+    <div class="k" style="margin-top:8px">현재 국면: KOSPI 정점 −26%·7월 −23% 급락 진행 = MA200 방어의 실전 시험·회수 구간. <code>--now</code>로 방어상태 재확인 권장.</div>
+  </div>
+
+  <div class="k" style="margin-top:22px;text-align:center">작성 2026-07-23 · 검증 상세: <code>검증결과_P0P1_*.md</code>·<code>검증결과_잔여_P1P2_*.md</code> · 실현손익 아님·투자자문 아님·책임 본인</div>
+</div>
+</body>
+</html>

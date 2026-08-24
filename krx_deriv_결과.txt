@@ -1,0 +1,23 @@
+=== KRX 탐색 시작 (기준일 20260824) ===
+원칙: 공식 실데이터만. 실패=데이터부족. 가짜 금지. (MDC는 KRX 차단으로 ❌ 정상 가능)
+  세션 쿠키: 없음
+
+[① VKOSPI (pykrx)]
+  ❌ 예외: ModuleNotFoundError("No module named 'pykrx'")
+
+[② 선물 (pykrx)]
+  ❌ 예외: ModuleNotFoundError("No module named 'pykrx'")
+
+[③ KOSPI200 현물 (pykrx)]
+  ❌ 예외: ModuleNotFoundError("No module named 'pykrx'")
+
+[④ MDC 투자자/옵션 (세션+OTP)]
+  OTP: 미획득(getJsonData는 보통 OTP 불요)
+  bld=DCSTAT12701 HTTP=403 raw=Connection blocked by network allowlist → ❌ 데이터부족
+  bld=DCSTAT12502 HTTP=403 raw=Connection blocked by network allowlist → ❌ 데이터부족
+
+[⑤ 베이시스]
+  ❌ 데이터부족(현물=None 선물=None)
+
+=== 끝, 2개 시도 ===
+권고: MDC 막힘 확정. 정식 경로 krx_openapi.py(인증키 승인 후)가 안정적.

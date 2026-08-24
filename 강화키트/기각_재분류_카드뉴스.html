@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>기각 재분류 · 카드뉴스</title>
+<style>
+  :root{
+    --bg:#0d0d0d; --card:#17181a; --card2:#1f2124; --ink:#ffffff; --ink2:#c7c8cc; --muted:#8a8b90;
+    --line:#2c2e31; --ring:rgba(255,255,255,.08);
+    --blue:#3987e5; --good:#22c55e; --warn:#eab308; --A:#ef5350; --B:#eab308; --live:#22c55e; --accent:#3987e5;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:#000;color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI","Malgun Gothic",sans-serif;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    height:100vh;overflow:hidden;-webkit-font-smoothing:antialiased;padding:10px}
+
+  #stage{flex:1;display:flex;align-items:center;justify-content:center;width:100%;min-height:0}
+  #scaler{width:1080px;height:1350px;flex:none;transform-origin:center center}
+  .card{position:absolute;inset:0;width:1080px;height:1350px;background:var(--card);
+    border-radius:36px;padding:84px 78px;display:none;flex-direction:column;overflow:hidden;
+    box-shadow:0 30px 90px rgba(0,0,0,.6)}
+  .card.on{display:flex}
+  .card::after{content:"";position:absolute;left:0;top:0;height:10px;width:100%;
+    background:linear-gradient(90deg,var(--accent),#7db3f2)}
+
+  .kicker{font-size:26px;font-weight:700;letter-spacing:.14em;color:var(--accent);margin-bottom:20px}
+  .idx{position:absolute;right:70px;top:70px;font-size:24px;color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:.05em}
+  h1{font-size:80px;font-weight:800;line-height:1.1;letter-spacing:-.02em}
+  h2{font-size:52px;font-weight:780;line-height:1.15;letter-spacing:-.015em;margin-bottom:10px}
+  .lead{font-size:30px;color:var(--ink2);line-height:1.5;margin-top:22px}
+  .foot{margin-top:auto;font-size:20px;color:var(--muted);line-height:1.5}
+  b{color:#fff}
+  .hi{color:var(--accent)} .hg{color:var(--live)} .hw{color:var(--B)} .hr{color:var(--A)}
+
+  /* cover */
+  .cover{justify-content:center}
+  .cover .badge{display:inline-flex;align-self:flex-start;gap:12px;align-items:center;
+    background:color-mix(in srgb,var(--live) 16%,var(--card));color:var(--live);
+    font-size:30px;font-weight:750;padding:14px 26px;border-radius:100px;margin-top:34px}
+  .cover .date{font-size:26px;color:var(--muted);margin-top:30px;letter-spacing:.02em}
+
+  /* gate flow */
+  .gates{display:flex;flex-direction:column;gap:26px;margin-top:40px}
+  .gate{background:var(--card2);border:1px solid var(--ring);border-radius:24px;padding:34px 38px}
+  .gate .g{font-size:23px;font-weight:700;letter-spacing:.05em;color:var(--muted)}
+  .gate .q{font-size:38px;font-weight:750;margin:8px 0 12px}
+  .gate .d{font-size:26px;color:var(--ink2);line-height:1.45}
+  .abrow{display:flex;gap:24px;margin-top:34px}
+  .ab{flex:1;border-radius:22px;padding:28px 30px;font-size:25px;line-height:1.45}
+  .ab .t{font-size:30px;font-weight:800;display:block;margin-bottom:8px}
+  .ab.a{background:color-mix(in srgb,var(--A) 15%,var(--card));color:var(--ink2)} .ab.a .t{color:var(--A)}
+  .ab.b{background:color-mix(in srgb,var(--B) 15%,var(--card));color:var(--ink2)} .ab.b .t{color:var(--B)}
+
+  /* kpi */
+  .kgrid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:44px}
+  .k{background:var(--card2);border:1px solid var(--ring);border-radius:24px;padding:36px 34px}
+  .k .v{font-size:78px;font-weight:820;line-height:.95;letter-spacing:-.02em}
+  .k .l{font-size:27px;color:var(--ink2);margin-top:14px;font-weight:600}
+  .k .s{font-size:21px;color:var(--muted);margin-top:6px}
+  .k.red .v{color:var(--A)} .k.amb .v{color:var(--B)} .k.grn .v{color:var(--live)}
+  .k.wide{grid-column:1/3;display:flex;align-items:center;gap:30px}
+  .k.wide .v{font-size:60px} .k.wide .txt{flex:1}
+
+  /* chart card */
+  .csub{font-size:26px;color:var(--ink2);line-height:1.5;margin:14px 0 8px}
+  .chartbox{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;margin-top:10px}
+  svg{width:100%;height:auto;overflow:visible}
+  .axis{fill:var(--muted);font-size:24px;font-family:inherit}
+  .blab{font-size:30px;font-weight:750;font-family:inherit;font-variant-numeric:tabular-nums}
+  .clab{fill:var(--ink);font-size:27px;font-family:inherit;font-weight:600}
+  .leg{display:flex;gap:34px;flex-wrap:wrap;font-size:23px;color:var(--ink2);margin-top:8px}
+  .leg span{display:inline-flex;align-items:center;gap:10px}
+  .sw{width:20px;height:20px;border-radius:5px;display:inline-block}
+
+  /* table card */
+  table{width:100%;border-collapse:collapse;font-size:24px;margin-top:26px}
+  td,th{text-align:left;padding:17px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:21px;color:var(--muted);font-weight:600}
+  td.n{color:var(--muted);font-variant-numeric:tabular-nums;width:44px}
+  .nm{font-weight:700;font-size:25px}
+  .why{color:var(--ink2);font-size:22px;line-height:1.4}
+  .chip{display:inline-block;font-size:20px;font-weight:800;padding:5px 15px;border-radius:100px;white-space:nowrap}
+  .chip.A{background:color-mix(in srgb,var(--A) 20%,var(--card));color:var(--A)}
+  .chip.B{background:color-mix(in srgb,var(--B) 22%,var(--card));color:var(--B)}
+
+  /* conclusion */
+  .concl{justify-content:center;background:linear-gradient(160deg,color-mix(in srgb,var(--live) 12%,var(--card)),var(--card))}
+  .concl h2{font-size:60px}
+  .concl p{font-size:29px;color:var(--ink2);line-height:1.55;margin-top:24px}
+
+  /* nav */
+  #nav{display:flex;align-items:center;gap:22px;padding:16px 0 4px;flex:none}
+  .navbtn{width:56px;height:56px;border-radius:50%;border:1px solid var(--ring);background:#141414;color:#fff;
+    font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .navbtn:hover{background:#222}
+  .navbtn:disabled{opacity:.3;cursor:default}
+  .dots{display:flex;gap:11px}
+  .dot{width:11px;height:11px;border-radius:50%;background:#3a3a3a;cursor:pointer;transition:.15s}
+  .dot.on{background:var(--accent);transform:scale(1.25)}
+  #cnt{color:var(--muted);font-size:15px;margin-left:6px;font-variant-numeric:tabular-nums;min-width:44px}
+  .hint{color:#5a5a5a;font-size:13px;text-align:center;flex:none;padding-bottom:4px}
+</style>
+</head>
+<body>
+<div id="stage"><div id="scaler"></div></div>
+<div id="nav">
+  <button class="navbtn" id="prev" onclick="go(-1)">‹</button>
+  <div class="dots" id="dots"></div>
+  <span id="cnt"></span>
+  <button class="navbtn" id="next" onclick="go(1)">›</button>
+</div>
+<div class="hint">← → 키 · 스와이프 · 점 클릭으로 이동</div>
+
+<script>
+const cv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+/* ---------- chart builders (fixed 924px inner width) ---------- */
+const IW=924;
+function chartSignals(){
+  const A=[{n:'mom12',v:3.0,t:'3.8x',c:cv('--good')},
+           {n:'계절 순환',v:-0.4,t:'9.7x',c:cv('--B')},
+           {n:'저변동성',v:-6.9,t:'2.9x',c:cv('--A')}];
+  const W=IW,rowH=118,padT=40,padB=60,H=padT+A.length*rowH+padB;
+  const x0=210,x1=W-90,mid=(x0+x1)/2,half=(x1-x0)/2,dom=8,sx=v=>mid+(v/dom)*half;
+  let s=`<svg viewBox="0 0 ${W} ${H}">`;
+  for(let g=-8;g<=8;g+=4){const x=sx(g);s+=`<line x1="${x}" y1="${padT}" x2="${x}" y2="${padT+A.length*rowH}" stroke="${g===0?cv('--base')||'#4a4c4f':'#2c2e31'}" stroke-width="${g===0?3:1.5}"/>`;s+=`<text class="axis" x="${x}" y="${H-14}" text-anchor="middle">${g>0?'+':''}${g}</text>`;}
+  A.forEach((d,i)=>{const cy=padT+i*rowH+rowH/2,x=sx(d.v),zx=sx(0),bx=Math.min(x,zx),bw=Math.max(Math.abs(x-zx),3);
+    s+=`<text class="clab" x="${x0-24}" y="${cy+10}" text-anchor="end">${d.n}</text>`;
+    s+=`<rect x="${bx}" y="${cy-26}" width="${bw}" height="52" rx="9" fill="${d.c}"/>`;
+    const lx=d.v>=0?x+16:x-16;s+=`<text class="blab" x="${lx}" y="${cy+11}" text-anchor="${d.v>=0?'start':'end'}" fill="${d.c}">${d.v>0?'+':''}${d.v}%p</text>`;
+    s+=`<text class="axis" x="${x1+70}" y="${cy+10}" text-anchor="end" style="font-weight:700">${d.t}</text>`;});
+  s+='</svg>';return s;
+}
+function chartGP(){
+  const B=[{h:'월',g:13.6,t:'2.0x'},{h:'분기',g:4.8,t:'0.6x'},{h:'반기',g:2.2,t:'0.5x'},{h:'연',g:1.8,t:'0.4x'}],EW=18.7;
+  const W=IW,H=560,padB=96;const x0=70,x1=W-20,y0=40,y1=H-padB,ymax=20,sy=v=>y1-(v/ymax)*(y1-y0);
+  const n=B.length,step=(x1-x0)/n,bw=Math.min(150,step*0.5);let s=`<svg viewBox="0 0 ${W} ${H}">`;
+  for(let g=0;g<=20;g+=5){const y=sy(g);s+=`<line x1="${x0}" y1="${y}" x2="${x1}" y2="${y}" stroke="#2c2e31" stroke-width="1.5"/>`;s+=`<text class="axis" x="${x0-14}" y="${y+9}" text-anchor="end">${g}</text>`;}
+  const ewy=sy(EW);s+=`<line x1="${x0}" y1="${ewy}" x2="${x1}" y2="${ewy}" stroke="#6b6d70" stroke-width="3.5" stroke-dasharray="12 9"/>`;
+  s+=`<text class="axis" x="${x1}" y="${ewy-16}" text-anchor="end" style="fill:${cv('--ink2')};font-weight:750;font-size:26px">EW 벤치 18.7%</text>`;
+  const col=cv('--blue');
+  B.forEach((d,i)=>{const cx=x0+step*i+step/2,y=sy(d.g),h=y1-y;
+    s+=`<rect x="${cx-bw/2}" y="${y}" width="${bw}" height="${Math.max(h,3)}" rx="9" fill="${col}"/>`;
+    s+=`<text class="blab" x="${cx}" y="${y-16}" text-anchor="middle" fill="#fff">${d.g}%</text>`;
+    s+=`<text class="axis" x="${cx}" y="${y1+40}" text-anchor="middle" style="fill:${cv('--ink2')};font-size:28px;font-weight:600">${d.h}</text>`;
+    s+=`<text class="axis" x="${cx}" y="${y1+74}" text-anchor="middle">회전 ${d.t}</text>`;});
+  s+=`<line x1="${x0}" y1="${y1}" x2="${x1}" y2="${y1}" stroke="#4a4c4f" stroke-width="3"/>`;s+='</svg>';return s;
+}
+function chartGap(){
+  const C=[{n:'계절 순환',v:2.9,b:1},{n:'52주 신고가',v:-1.1},{n:'GP 롱온리',v:-5.1},{n:'코스닥 선정',v:-10.5},{n:'돌파·추격',v:-14.7}];
+  const W=IW,rowH=92,padT=44,padB=60,H=padT+C.length*rowH+padB;const x0=230,x1=W-70,half=(x1-x0),lo=-16,hi=4,span=hi-lo,sx=v=>x0+((v-lo)/span)*half;
+  let s=`<svg viewBox="0 0 ${W} ${H}">`;
+  for(let g=-16;g<=4;g+=4){const x=sx(g);s+=`<line x1="${x}" y1="${padT}" x2="${x}" y2="${padT+C.length*rowH}" stroke="${g===0?'#6b6d70':'#2c2e31'}" stroke-width="${g===0?3:1.5}"/>`;s+=`<text class="axis" x="${x}" y="${H-14}" text-anchor="middle">${g>0?'+':''}${g}</text>`;}
+  C.forEach((d,i)=>{const cy=padT+i*rowH+rowH/2,x=sx(d.v),zx=sx(0),bx=Math.min(x,zx),bw=Math.max(Math.abs(x-zx),3),col=d.b?cv('--B'):cv('--A');
+    s+=`<text class="clab" x="${x0-22}" y="${cy+10}" text-anchor="end" style="font-size:25px">${d.n}</text>`;
+    s+=`<rect x="${bx}" y="${cy-24}" width="${bw}" height="48" rx="8" fill="${col}"/>`;
+    const lx=d.v>=0?x+15:x-15;s+=`<text class="blab" x="${lx}" y="${cy+10}" text-anchor="${d.v>=0?'start':'end'}" fill="${col}" style="font-size:27px">${d.v>0?'+':''}${d.v}</text>`;});
+  s+='</svg>';return s;
+}
+
+/* ---------- cards ---------- */
+const T1=[['1','계절 순환','B','관문1 미약통과·회전세금 사망. 저회전 구제불가 — 완료'],
+['2','수급 v4.2/v4.3','A','IC≈0·αMKT 음수 (EW-gross 착시)'],
+['3','v4.1 코스닥선정','A','vs EW −10~14%p·IR_EW 음수'],
+['4','v3.8 GP·AG','A','본체 대비 증분 −3.56~−4.11%p'],
+['5','regime v4.0','A','2변형 모두 −1.42~−1.93%p'],
+['6','voltarget','A','수익신호 아님(리스크툴)']];
+const T2=[['7','Chandelier 청산','A','규칙형·신호 아님(손상통제)'],
+['8','돌파·추격 진입','A','비용0에도 alpha 음수'],
+['9','만기·할로윈·TOM','A','절대평균에 신호 없음(동전)'],
+['10','수익성 GP 롱온리','A','gross조차 EW 미달·저회전=비용무관'],
+['11','섹터모멘텀 롱온·롱숏','A','resid α −23.8%/−34.1% 음수'],
+['12','52주 신고가','A','vs EW −1.13%p·OOS 음전']];
+const trow=r=>`<tr><td class="n">${r[0]}</td><td class="nm">${r[1]}</td><td><span class="chip ${r[2]}">${r[2]}</span></td><td class="why">${r[3]}</td></tr>`;
+const tbl=rows=>`<table><thead><tr><th>#</th><th>항목</th><th>분류</th><th>사유</th></tr></thead><tbody>${rows.map(trow).join('')}</tbody></table>`;
+
+const CARDS=[
+ `<div class="card cover on">
+    <div class="kicker">진우퀀트 · 강화키트</div>
+    <h1>기각 전략<br>전수 재분류</h1>
+    <div class="lead">신호없음<span class="hr">(A)</span> vs 회전·세금 사망<span class="hw">(B)</span><br>기각 12항목을 <b>gross(비용0)</b> 근거로 다시 가른다.</div>
+    <div class="badge">✓ 되살릴 (B) 재검토 후보 = 0건</div>
+    <div class="date">2026-07-23 · 다올 비용 기준</div>
+    <div class="foot">검증용·실현손익 아님 · 투자자문 아님, 집행·책임은 진우.</div>
+  </div>`,
+
+ `<div class="card">
+    <span class="idx">02 / 09</span>
+    <div class="kicker">판정 프레임</div>
+    <h2>관문 2단계로 가른다</h2>
+    <div class="csub">한국에서 EW는 소형·반전 프리미엄을 먹는 강한 벤치. <b>gross로 EW를 이겨도 IC≈0이면 틸트 착시</b>지 신호가 아니다.</div>
+    <div class="gates">
+      <div class="gate"><div class="g">관문 1 · 신호 존재?</div><div class="q"><span class="hi">αMKT · IC</span>가 양(+)·유의한가</div><div class="d">시장대비 알파가 있어야 "거래 가능한 신호". 탈락 → (A).</div></div>
+      <div class="gate"><div class="g">관문 2 · 거래 가능?</div><div class="q">다올 비용·보유기간에 순(+)?</div><div class="d">비용 ∝ 회전율. 관문1 통과분만 검사. 순수익 사망 → (B).</div></div>
+    </div>
+    <div class="abrow">
+      <div class="ab a"><span class="t">(A) 신호없음</span>영구폐기. 회전 낮춰도 못 살림.</div>
+      <div class="ab b"><span class="t">(B) 회전·세금</span>관문1 통과·순수익만 사망. <b>이것만 재검토.</b></div>
+    </div>
+  </div>`,
+
+ `<div class="card">
+    <span class="idx">03 / 09</span>
+    <div class="kicker">결과 요약</div>
+    <h2>12항목, 어떻게 갈렸나</h2>
+    <div class="kgrid">
+      <div class="k red"><div class="v">11</div><div class="l">(A) 영구폐기</div><div class="s">신호 자체가 없음</div></div>
+      <div class="k amb"><div class="v">1</div><div class="l">(B) 회전·세금 사망</div><div class="s">계절순환 · 저회전 구제불가</div></div>
+      <div class="k"><div class="v">0</div><div class="l">되살릴 신규 전략</div><div class="s">부활 후보 없음</div></div>
+      <div class="k grn"><div class="v">1</div><div class="l">유일 거래가능 신호</div><div class="s">mom12 (이미 본체 내장)</div></div>
+      <div class="k wide grn"><div class="v">mom12</div><div class="txt"><div class="l">월 순−EW +3.0%p · 저회전</div><div class="s">본체 v3.7.2 Mom12·Echo가 이미 포착한 엣지</div></div></div>
+    </div>
+  </div>`,
+
+ `<div class="card">
+    <span class="idx">04 / 09</span>
+    <div class="kicker">도구 대조군</div>
+    <h2>월간 보유 순수익 (EW 대비)</h2>
+    <div class="csub">가격 신호 3원형을 다올 비용으로 대조. 관문1·2를 <b class="hg">동시 통과하는 건 mom12뿐</b>.</div>
+    <div class="chartbox">${chartSignals()}</div>
+    <div class="leg"><span><span class="sw" style="background:var(--good)"></span>순−EW 양(+)·거래가능</span><span><span class="sw" style="background:var(--B)"></span>≈0·경계</span><span><span class="sw" style="background:var(--A)"></span>음(−)·미달</span><span>우측 = 연 회전율</span></div>
+  </div>`,
+
+ `<div class="card">
+    <span class="idx">05 / 09</span>
+    <div class="kicker">#10 수익성 GP 롱온리 · 실측</div>
+    <h2>gross조차 EW를 못 넘는다</h2>
+    <div class="csub">GP=(매출−매출원가)/총자산 단독·PIT·다올비용. 보유 늘리면 붕괴. <b>회전 낮아(월 2.0회) 비용은 킬러 아님</b> → 회전세금 사망이 아니라 <b class="hr">애초에 신호 없음</b>.</div>
+    <div class="chartbox">${chartGP()}</div>
+    <div class="leg"><span><span class="sw" style="background:var(--blue)"></span>GP gross CAGR</span><span><span class="sw" style="width:26px;height:0;border-top:3px dashed #6b6d70;border-radius:0"></span>EW 18.7%</span></div>
+  </div>`,
+
+ `<div class="card">
+    <span class="idx">06 / 09</span>
+    <div class="kicker">관문1 (gross, 비용0)</div>
+    <h2>0선을 넘는 건 계절 하나뿐</h2>
+    <div class="csub">가격·EW로 직접 비교 가능한 항목. 나머지는 <b>비용 0으로 둬도 EW에 진다</b>. (증분·잔차α·IC로 죽은 항목은 다음 표.)</div>
+    <div class="chartbox">${chartGap()}</div>
+    <div class="leg"><span><span class="sw" style="background:var(--B)"></span>(B) 관문1 통과</span><span><span class="sw" style="background:var(--A)"></span>(A) gross부터 EW 미달</span><span>gross−EW (%p)</span></div>
+  </div>`,
+
+ `<div class="card">
+    <span class="idx">07 / 09</span>
+    <div class="kicker">전수 재분류표 · 1–6</div>
+    <h2>12항목 판정 <span style="font-size:30px;color:var(--muted)">(1/2)</span></h2>
+    ${tbl(T1)}
+    <div class="foot">지표가 항목마다 다름(EW·base·resid α·IC) — 각 원지표 기준 판정.</div>
+  </div>`,
+
+ `<div class="card">
+    <span class="idx">08 / 09</span>
+    <div class="kicker">전수 재분류표 · 7–12</div>
+    <h2>12항목 판정 <span style="font-size:30px;color:var(--muted)">(2/2)</span></h2>
+    ${tbl(T2)}
+    <div class="foot"><b class="hr">11개 전부 (A)</b> · (B)는 #1 계절순환 하나뿐, 그마저 구제불가.</div>
+  </div>`,
+
+ `<div class="card concl">
+    <span class="idx">09 / 09</span>
+    <div class="kicker">결론</div>
+    <h2>되살릴 (B)는 없다</h2>
+    <p>프로젝트 규율이 <b>12번 모두 옳게 기각</b>했다. (B)는 계절순환 하나뿐이었고 저회전 구제 불가.</p>
+    <p>관문1·2를 동시 통과하는 유일 신호 <b class="hg">mom12</b>는 <b>본체 v3.7.2가 이미 포착</b>. 다올 무료수수료 + 월1회 저회전 설계가 바로 이 엣지를 담는 정합적 구조.</p>
+    <p style="color:var(--muted);font-size:25px;margin-top:30px">→ 자원은 새 팩터 부활이 아니라 <b class="hi">규율·발굴·타이밍 고도화</b>에.</p>
+    <div class="foot">근거: 재검토_보유기간·GP_보유기간 백테 · 팩터vsEW 마스터노트 · 검증용, 책임 본인.</div>
+  </div>`,
+];
+
+/* ---------- render + nav ---------- */
+const scaler=document.getElementById('scaler');
+scaler.innerHTML=CARDS.join('');
+const cards=[...scaler.querySelectorAll('.card')];
+const dots=document.getElementById('dots');
+cards.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===0?' on':'');d.onclick=()=>set(i);dots.appendChild(d);});
+let cur=0;
+function set(i){cur=Math.max(0,Math.min(cards.length-1,i));
+  cards.forEach((c,j)=>c.classList.toggle('on',j===cur));
+  [...dots.children].forEach((d,j)=>d.classList.toggle('on',j===cur));
+  document.getElementById('prev').disabled=cur===0;
+  document.getElementById('next').disabled=cur===cards.length-1;
+  document.getElementById('cnt').textContent=(cur+1)+' / '+cards.length;}
+function go(d){set(cur+d);}
+addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1);});
+let tx=0;addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)go(dx<0?1:-1);},{passive:true});
+function fit(){const st=document.getElementById('stage');const s=Math.min(st.clientWidth/1080,st.clientHeight/1350);scaler.style.transform='scale('+s+')';}
+addEventListener('resize',fit);fit();set(0);
+</script>
+</body>
+</html>

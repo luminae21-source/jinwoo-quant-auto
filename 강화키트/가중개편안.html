@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>멀티팩터 가중 개편안</title>
+<style>
+  :root{--bg:#0f1216;--card:#181d24;--card2:#1f2630;--line:#2b333f;--tx:#e6ebf2;--mut:#95a0ae;
+        --grn:#37d67a;--red:#ff6b6b;--amb:#ffb454;--blu:#5aa9ff;--accent:#7aa2ff;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--tx);font-family:'Segoe UI','Malgun Gothic',system-ui,sans-serif;line-height:1.6;font-size:15px}
+  .wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px}
+  h1{font-size:24px;margin:0 0 4px}
+  .sub{color:var(--mut);font-size:14px;margin-bottom:6px}
+  .meta{color:var(--mut);font-size:12.5px;margin-bottom:22px}
+  .verdict{background:linear-gradient(135deg,#20303f,#1a2330);border:1px solid #34506e;border-radius:14px;padding:20px 22px;margin-bottom:26px}
+  .grade{display:inline-block;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px;background:rgba(55,214,122,.14);color:var(--grn);border:1px solid rgba(55,214,122,.4);margin-bottom:10px}
+  .verdict h2{margin:2px 0 8px;font-size:18px}
+  .verdict p{margin:6px 0 0;color:#d3dbe6;font-size:14.5px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .card h3{margin:0 0 4px;font-size:16.5px;display:flex;align-items:center;gap:8px}
+  .num{display:inline-flex;width:26px;height:26px;border-radius:7px;background:var(--card2);color:var(--accent);align-items:center;justify-content:center;font-size:14px;font-weight:700;flex:none}
+  .core{border-color:#34506e;box-shadow:0 0 0 1px rgba(90,169,255,.12) inset}
+  .qh{color:var(--mut);font-size:13px;margin:2px 0 12px}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;margin:6px 0}
+  th,td{padding:6px 9px;text-align:right;border-bottom:1px solid var(--line)}
+  th:first-child,td:first-child{text-align:left;color:var(--mut)}
+  thead th{color:var(--mut);font-weight:600}
+  .pos{color:var(--grn)}.neg{color:var(--red)}.mut{color:var(--mut)}.amb{color:var(--amb)}
+  .heat td{text-align:center;font-variant-numeric:tabular-nums;border:1px solid var(--bg)}
+  .note{color:var(--mut);font-size:13px;margin-top:10px}
+  .foot{color:var(--mut);font-size:12px;margin-top:24px;border-top:1px solid var(--line);padding-top:14px}
+  b.hl{color:var(--tx)}.imp{color:var(--amb);font-weight:600}
+  code{background:#11151b;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:12.5px;color:#cdd6e2}
+  pre{background:#11151b;border:1px solid var(--line);border-radius:8px;padding:12px 14px;overflow-x:auto;font-size:12.5px;color:#cdd6e2}
+  .bar{height:20px;border-radius:4px;display:inline-block;vertical-align:middle}
+  ul.rec{margin:8px 0 0;padding-left:0;list-style:none}
+  ul.rec li{padding:8px 0 8px 22px;position:relative;border-bottom:1px solid var(--line);font-size:14px}
+  ul.rec li:last-child{border-bottom:none}
+  ul.rec li:before{content:"▸";position:absolute;left:2px;color:var(--accent)}
+  .hi{background:rgba(55,214,122,.10)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>멀티팩터 가중 개편안</h1>
+  <div class="sub">밸류 75% 편중 → 축별 분산 인지 가중으로 재구성</div>
+  <div class="meta">축별 롱숏 상관·Sharpe 근거 · 2003~2026 231개월 · top200 · 상폐포함 · 룩어헤드X</div>
+
+  <div class="verdict">
+    <span class="grade">핵심 · 밸류를 1블록으로 묶고 모멘텀을 넣어라</span>
+    <h2>현행은 밸류 75% 편중, 밸류를 헤지하는 모멘텀은 0%</h2>
+    <p>밸류(합성)는 <b class="hl">성장과 −0.02, ROE와 −0.09로 직교</b>하고 <b class="hl">모멘텀과는 −0.54</b>로 강하게 반대로 움직인다 — 즉 모멘텀이 밸류 부진기를 메워주는 최고의 헤지축인데 현행 스크리너엔 0%다. 반대로 밸류엔 배당·E/P·B/P가 각각 실려 총 75%(사실상 한 베팅에 3배 노출). 사이즈는 top200 안에선 Sharpe −0.51로 역효과 → 제외.</p>
+    <p class="imp">→ 밸류를 '1블록(앵커=배당)'으로 묶어 ~38%로 낮추고, 성장·ROE·모멘텀으로 분산. 아래 WEIGHTS는 바로 교체 가능.</p>
+  </div>
+
+  <div class="card core">
+    <h3><span class="num">1</span> 축별 효력 + 축간 상관 (분산의 근거)</h3>
+    <table>
+      <thead><tr><th>축</th><th>평균 IC</th><th>IC t</th><th>롱숏 연%</th><th>Sharpe</th></tr></thead>
+      <tbody>
+        <tr class="hi"><td>밸류(합성)</td><td class="pos">+0.0418</td><td class="pos">3.50</td><td>+9.1%</td><td class="pos">0.44</td></tr>
+        <tr class="hi"><td>성장(EPS YoY)</td><td>+0.0154</td><td>2.09</td><td>+5.6%</td><td class="pos">0.44</td></tr>
+        <tr><td>퀄리티(ROE)</td><td>+0.0180</td><td>2.27</td><td>+2.8%</td><td>0.19</td></tr>
+        <tr><td>모멘텀(12-1)</td><td class="mut">+0.0074</td><td class="mut">0.61</td><td>+4.5%</td><td>0.20</td></tr>
+        <tr><td>사이즈(소형)</td><td class="neg">−0.0294</td><td class="neg">−3.81</td><td class="neg">−7.0%</td><td class="neg">−0.51</td></tr>
+      </tbody>
+    </table>
+    <div class="qh" style="margin-top:14px">축간 롱숏 월수익 상관 — 낮을수록(음수일수록) 합쳐서 분산됨</div>
+    <table class="heat">
+      <thead><tr><th></th><th>밸류</th><th>성장</th><th>ROE</th><th>모멘텀</th><th>사이즈</th></tr></thead>
+      <tbody>
+        <tr><td>밸류</td><td>1.00</td><td>−0.02</td><td>−0.09</td><td class="pos">−0.54</td><td>−0.17</td></tr>
+        <tr><td>성장</td><td>−0.02</td><td>1.00</td><td class="amb">0.60</td><td>0.14</td><td>−0.04</td></tr>
+        <tr><td>ROE</td><td>−0.09</td><td class="amb">0.60</td><td>1.00</td><td>0.13</td><td>−0.04</td></tr>
+        <tr><td>모멘텀</td><td class="pos">−0.54</td><td>0.14</td><td>0.13</td><td>1.00</td><td>0.09</td></tr>
+        <tr><td>사이즈</td><td>−0.17</td><td>−0.04</td><td>−0.04</td><td>0.09</td><td>1.00</td></tr>
+      </tbody>
+    </table>
+    <div class="note">밸류–모멘텀 <b class="pos">−0.54</b>가 이 표의 하이라이트: 모멘텀은 낮은 단독 신호(t=0.61)에도 <b class="hl">밸류 헤지축</b>으로 값어치가 있다. 성장–ROE <b class="amb">0.60</b>은 주의 — 이 둘은 서로 겹쳐(작은 밸류 3중 베팅), 합쳐서 과대평가 말 것.</div>
+  </div>
+
+  <div class="card core">
+    <h3><span class="num">2</span> 가중 비교 — 현행 vs 개편</h3>
+    <div class="qh">제안B = Sharpe ÷ (1+평균상관): 성과 좋고 남과 덜 겹치는 축에 더. 정규화(합 100%).</div>
+    <table>
+      <thead><tr><th>축</th><th>현행</th><th>제안B(권장)</th><th>변화</th></tr></thead>
+      <tbody>
+        <tr class="hi"><td>밸류(합성)</td><td class="amb">75.3%</td><td>38.1%</td><td class="pos">−37%p</td></tr>
+        <tr><td>성장(EPS YoY)</td><td>13.0%</td><td>32.1%</td><td class="pos">+19%p</td></tr>
+        <tr><td>퀄리티(ROE)</td><td>11.7%</td><td>13.9%</td><td>+2%p</td></tr>
+        <tr><td>모멘텀(12-1)</td><td class="neg">0.0%</td><td>15.9%</td><td class="pos">+16%p</td></tr>
+        <tr><td>사이즈</td><td>0.0%</td><td>0.0%</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <div class="note">밸류 편중 75%→38%. 밸류 블록 내부는 IC비례로 <b class="hl">배당 41% · B/P 32% · E/P 26%</b>(앵커=배당).</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">3</span> 교체용 WEIGHTS — 두 안</h3>
+    <div class="qh">multifactor_screen.py 의 <code>WEIGHTS</code> 를 교체. 상대비중만 중요(랭킹용).</div>
+    <p style="margin:6px 0 4px"><b class="hl">A. 권장(제안B·모델 산출)</b></p>
+    <pre>WEIGHTS = {"배당": 0.157, "B/P": 0.123, "E/P": 0.101,   # 밸류 블록 = 0.381
+           "성장": 0.321, "ROE": 0.139, "모멘텀": 0.159, "사이즈": 0.0}</pre>
+    <p style="margin:12px 0 4px"><b class="hl">B. 보수형(모멘텀 약한 단독신호 반영·절반)</b></p>
+    <pre>WEIGHTS = {"배당": 0.172, "B/P": 0.135, "E/P": 0.110,   # 밸류 블록 = 0.417
+           "성장": 0.351, "ROE": 0.152, "모멘텀": 0.080, "사이즈": 0.0}</pre>
+    <div class="note">A는 순수 데이터 최적(모멘텀을 헤지로 16%). B는 모멘텀 단독 t=0.61이 약한 점을 감안해 8%로 낮추고 나머지 축에 비례 환원 — 헤지 효과는 줄지만 검증 약한 축에 덜 베팅. 둘 다 합 1.0. 취향/신뢰도에 따라 선택.</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">4</span> 적용 시 주의 — 코드 변경 필요</h3>
+    <ul class="rec">
+      <li>현 <code>multifactor_screen.py</code>의 <code>build_scores</code>엔 <b class="hl">모멘텀 팩터가 없다</b>. 모멘텀을 쓰려면 <code>mom=(PX.shift(1)/PX.shift(12)-1)</code>를 팩터 딕셔너리에 추가해야 한다(가격 이미 로드됨).</li>
+      <li>사이즈는 top200 안에서 역효과(−0.51)라 <b class="hl">넣지 말 것</b>. (소형효과는 유니버스를 top200 밖으로 넓혀야 나타남 — 별도 검증 사안)</li>
+      <li>성장·ROE는 상관 0.60 — 둘 다 만점 주면 '퀄그로 축'에 이중 베팅. 합산 비중(제안B 46%)이 과하면 성장 쪽을 줄여 B안처럼.</li>
+      <li>이 가중은 <b class="hl">랭킹용 상대치</b>다. 실제 편입은 별도 리스크·집중도·비용 관문(기존 recommend_verify)을 통과해야 함.</li>
+    </ul>
+  </div>
+
+  <div class="foot">
+    방법: 각 축 = 매월 횡단면 z-score(±3윈저) 팩터. 밸류(합성)=배당·E/P·B/P 등가중 z. 롱숏=상위20%−하위20% EW 다음달수익. 축 상관=월 롱숏수익 피어슨. 가중 제안B: max(Sharpe,0)/(1+양의 평균상관) 정규화. 밸류 내부: 단독 IC 비례. 데이터: 종목재무_KRX·_월봉종가캐시(상폐포함)·종목시총_30년.<br>
+    한계: 과거통계·미래보장 아님. 모멘텀은 단독 유의성 약함(헤지 목적). 성장·ROE 상관 0.60. 사이즈 음(top200 한정). ⚠️ 정보용·투자자문 아님·책임 본인.
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>급등 이중바닥 · 모바일 · 20260715</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:'Malgun Gothic',system-ui,sans-serif;background:#eef0f3;color:#1b2430;font-size:14px}
+.top{position:sticky;top:0;background:#fff;border-bottom:1px solid#dfe3ea;padding:8px 10px;z-index:10}
+.top h1{font-size:15px;margin:0 0 6px}
+.f{display:flex;gap:6px;flex-wrap:wrap}
+input,select{padding:8px;border:1px solid#dfe3ea;border-radius:8px;font-size:14px;flex:1;min-width:70px}
+input{flex:1 1 100%}
+details.leg{background:#fff;border:1px solid#dfe3ea;border-radius:8px;margin:8px 10px;padding:0 10px}
+details.leg>summary{cursor:pointer;font-size:13px;font-weight:700;color:#1F3A5F;padding:9px 0}
+.leg svg{width:100%;height:auto;max-width:360px;display:block;margin:4px auto}
+.leg .txt{font-size:12.5px;line-height:1.8;padding-bottom:10px}.leg .k{border-radius:5px;padding:0 5px;font-size:11px;font-weight:700}
+.b-break{background:#d6ead6}.b-early{background:#eaf4ea}.b-near{background:#fbf3d9}
+#cnt{padding:6px 12px;color:#6b7684;font-size:12px}
+.card{background:#fff;border:1px solid#e4e8ee;border-radius:10px;margin:8px 10px;overflow:hidden}
+.card.up{border-left:4px solid#c0392b}
+.ch{padding:10px 12px;cursor:pointer}
+.nm{font-size:15px;font-weight:700}.nm .c{color:#aaa;font-weight:400;font-size:12px}
+.mt{color:#333;font-size:12.5px;margin-top:3px}.mt2{color:#6b7684;font-size:12px;margin-top:2px}
+.badge{border-radius:5px;padding:1px 6px;font-size:11px;margin-left:4px}
+.pos{color:#c0392b}.neg{color:#1f6fc0}
+.chart{padding:0 8px 10px}.chart canvas{width:100%;height:210px;display:block;border:1px solid#eef1f4;border-radius:8px;margin-top:6px}
+.chart .hint{font-size:11px;color:#6b7684;margin-top:4px}
+.tap{float:right;color:#1F3A5F;font-size:12px}
+.tabs{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}.tab{padding:5px 11px;border:1px solid #cdd5df;background:#fff;color:#1F3A5F;border-radius:15px;font-size:13px;cursor:pointer}.tab.on{background:#1F3A5F;color:#fff;border-color:#1F3A5F}.tabhelp{color:#6b7684;font-size:11px;margin-top:4px}.star{color:#e0a800;font-size:18px;margin-right:3px;cursor:pointer}.card.fav{border-left:4px solid #e0a800}
+</style></head><body>
+<div class="top"><h1>급등 이중바닥 · 2주 거래대금 (모바일)</h1>
+<div class="f">
+<input id="q" placeholder="종목·코드 검색" oninput="R()">
+<select id="fmk" onchange="R()"><option value="">시장</option><option>KOSPI</option><option>KOSDAQ</option></select>
+<select id="fdb" onchange="R()"><option value="">이중바닥</option><option value="Y">Y</option><option value="근접">근접</option><option value="넥라인돌파">넥라인돌파</option><option value="반등초입">반등초입</option><option value="넥근접">⭐넥라인임박·돌파</option></select>
+<select id="fsc" onchange="R()"><option value="">시총</option><option>대형</option><option>중형</option><option>소형</option><option>미상</option></select>
+<select id="fhk" onchange="R()"><option value="">재무</option><option>흑자</option><option>적자</option></select>
+<select id="fil" onchange="R()"><option value="">일봉위치</option><option>신고가권</option><option>상승추세</option><option>눌림목</option><option>횡보</option><option>바닥권</option><option>하락추세</option></select>
+<select id="fth" onchange="R()"><option value="">테마</option></select>
+<select id="grp" onchange="R()"><option value="">그룹없음</option><option value="sc">시총별</option><option value="hk">재무별</option><option value="th">테마별</option><option value="ilp">일봉위치별</option></select>
+<button onclick="topDB()" style="flex:1 1 100%;padding:7px;border:1px solid #1F3A5F;background:#1F3A5F;color:#fff;border-radius:8px;font-size:13px">⭐거래대금×이중바닥</button>
+<select id="sort" onchange="R()"><option value="v2">거래대금순</option><option value="chg">등락순</option></select>
+</div>
+<div class="tabs" id="vtabs"></div>
+<div class="tabhelp">💰 거래대금 구간 = 최근 10영업일 실제 거래대금 합. 큰 구간=유동성·수급 안정, 작은 구간=변동성 큼. ⭐관심=★ 저장된 종목만.</div>
+</div>
+<details class="leg" open><summary>📖 용어 설명</summary><svg viewBox="0 0 380 210" role="img"><line x1="40" y1="88" x2="360" y2="88" stroke="#888" stroke-dasharray="5 3"/><text x="44" y="82" font-size="10" fill="#555">넥라인</text><polyline points="20,40 95,165 165,88 240,168 295,120 350,55" fill="none" stroke="#c0392b" stroke-width="2.4"/><circle cx="95" cy="165" r="4" fill="#c0392b"/><text x="70" y="185" font-size="10" fill="#c0392b">1번 바닥</text><circle cx="240" cy="168" r="4" fill="#c0392b"/><text x="215" y="188" font-size="10" fill="#c0392b">2번 바닥</text><circle cx="240" cy="168" r="7" fill="none" stroke="#e08e0b" stroke-width="2"/><text x="250" y="150" font-size="9.5" fill="#e08e0b">바닥형성</text><circle cx="295" cy="120" r="6" fill="none" stroke="#2e7d32" stroke-width="2"/><text x="300" y="112" font-size="9.5" fill="#2e7d32">반등초입</text><circle cx="345" cy="60" r="6" fill="none" stroke="#127a2e" stroke-width="2.5"/><text x="286" y="44" font-size="9.5" fill="#127a2e">넥라인돌파</text></svg><div class="txt">
+<b>이중바닥(W)</b> 1번바닥→넥라인→2번바닥→재상승 · <span class="k b-early">Y</span> 상승전환 · <span class="k b-near">근접</span> 반등전<br>
+단계: <span class="k b-near">바닥형성</span>→<span class="k b-early">반등초입</span>→<span class="k b-break">넥라인돌파</span> · 넥대비% 음수=아래/양수=돌파<br>
+빈 이중바닥 칸 = 오늘 올랐지만 W 패턴 아님(정상) · ※ 매매신호 아님</div></details>
+<div id="cnt"></div><div id="list"></div>
+<script>
+const META=__META__,CD=__CD__,byc={};META.forEach(d=>byc[d.c]=d);
+(function(){var ths=Array.from(new Set(META.map(function(d){return d.th||'(미분류)';}))).sort();var el=document.getElementById('fth');ths.forEach(function(t){var o=document.createElement('option');o.value=t;o.textContent=t;el.appendChild(o);});})();
+function topDB(){document.getElementById('fdb').value='넥근접';vbk='';document.getElementById('grp').value='';document.getElementById('sort').value='v2';R();}
+function v(id){return document.getElementById(id).value}
+var vbk='';var WATCH=(function(){try{return new Set(JSON.parse(localStorage.getItem('jq_watch')||'[]'))}catch(e){return new Set()}})();
+function saveW(){try{localStorage.setItem('jq_watch',JSON.stringify([].concat(Array.from(WATCH))))}catch(e){}}
+function toggleW(c){if(WATCH.has(c))WATCH.delete(c);else WATCH.add(c);saveW();R();}
+var VB=[['','전체'],['t1','1조+'],['t2','3천억~1조'],['t3','1천~3천억'],['t4','300~1천억'],['t5','100~300억'],['t6','100억미만'],['fav','⭐관심']];
+function inBucket(x,k){if(x==null)return false;if(k==='t1')return x>=10000;if(k==='t2')return x>=3000&&x<10000;if(k==='t3')return x>=1000&&x<3000;if(k==='t4')return x>=300&&x<1000;if(k==='t5')return x>=100&&x<300;if(k==='t6')return x<100;return true;}
+function renderTabs(){document.getElementById('vtabs').innerHTML=VB.map(function(t){return '<span class="tab'+(vbk===t[0]?' on':'')+'" onclick="setVB(\''+t[0]+'\')">'+t[1]+(t[0]==='fav'?' ('+WATCH.size+')':'')+'</span>';}).join('');}
+function setVB(k){vbk=k;R();}
+function pass(d){var q=v('q').toLowerCase(),mk=v('fmk'),db=v('fdb'),sc=v('fsc'),hk=v('fhk'),il=v('fil'),th=v('fth');
+ if(mk&&d.mk!==mk)return 0;if(sc&&d.sc!==sc)return 0;if(hk&&d.hk!==hk)return 0;if(il&&d.ilp!==il)return 0;if(th&&(d.th||'(미분류)')!==th)return 0;
+ if(db==='넥라인돌파'&&d.ws!=='넥라인돌파')return 0;if(db==='반등초입'&&d.ws!=='반등초입')return 0;if(db==='Y'&&d.wf!=='Y')return 0;if(db==='근접'&&d.wf!=='근접')return 0;
+ if(db==='넥근접'&&!((d.ws==='반등초입'||d.ws==='넥라인돌파')&&d.wn!=null&&d.wn>=-5))return 0;
+ if(vbk==='fav'){if(!WATCH.has(d.c))return 0;}else if(vbk&&!inBucket(d.v2,vbk))return 0;
+ if(q&&(d.n+d.c).toLowerCase().indexOf(q)<0)return 0;return 1;}
+function stb(ws){if(!ws)return '';var cl=ws==='넥라인돌파'?'b-break':ws==='반등초입'?'b-early':'b-near';return '<span class="badge '+cl+'">'+ws+'</span>';}
+function spark(code){var x=CD[code];if(!x||!x.wc||x.wc.length<3)return '';var c=x.wc,n=c.length,lo=Math.min.apply(0,c),hi=Math.max.apply(0,c),r=(hi-lo)||1,W=300,H=42;
+function X(i){return i/(n-1)*W;}function Y(v){return (1-(v-lo)/r)*(H-6)+3;}
+var pts=c.map(function(v,i){return X(i).toFixed(1)+','+Y(v).toFixed(1);}).join(' ');var up=c[n-1]>=c[0];var db=x.dbw;
+var s='<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" style="width:100%;height:'+H+'px;display:block;background:#fafbfc;border-radius:6px">';
+if(db){var ny=Y(db.nk);s+='<line x1="0" y1="'+ny.toFixed(1)+'" x2="'+W+'" y2="'+ny.toFixed(1)+'" stroke="#aaa" stroke-dasharray="4 3" stroke-width="1"/>';}
+s+='<polyline points="'+pts+'" fill="none" stroke="'+(up?'#c0392b':'#1f6fc0')+'" stroke-width="1.6" vector-effect="non-scaling-stroke"/>';
+if(db){[['1',db.i1],['2',db.i2]].forEach(function(t){var i=t[1];if(i>=0&&i<n)s+='<circle cx="'+X(i).toFixed(1)+'" cy="'+Y(c[i]).toFixed(1)+'" r="3" fill="#c0392b"/>';});}
+return s+'</svg>';}
+function cardHtml(d){return '<div class="card'+(d.wf==='Y'||d.wf==='근접'?' up':'')+(WATCH.has(d.c)?' fav':'')+'" data-c="'+d.c+'"><div class="ch" onclick="tog(this)">'
+ +'<div class="nm"><span class="star" onclick="event.stopPropagation();toggleW(\''+d.c+'\')">'+(WATCH.has(d.c)?'★':'☆')+'</span> '+d.n+' <span class="c">('+d.c+')</span>'+stb(d.ws||'')+(d.wf==='Y'&&!d.ws?'<span class="badge b-early">Y</span>':'')+'<span class="tap">차트 ▼</span></div>'
+ +'<div class="mt"><b class="'+(d.chg>=0?'pos':'neg')+'">'+(d.chg>0?'+':'')+d.chg+'%</b> · 2주거래대금 <b>'+(d.v2||0).toLocaleString()+'억</b> · 추세 '+(d.tr!=null?d.tr+'x':'-')+' · '+(d.hk||'')+'</div>'
+ +'<div class="mt2">시총 '+(d.si!=null?d.si.toLocaleString()+'억':'-')+' · 테마 '+(d.th||'-')+' · 일봉 '+(d.ilp||'-')+' · 주봉 '+(d.jup||'-')+(d.wn!=null?' · 넥대비 '+(d.wn>0?'+':'')+d.wn+'%':'')+'</div>'
+ +'<div style="margin-top:5px">'+spark(d.c)+'<div style="font-size:9px;color:#bbb;text-align:right;margin-top:1px">주봉 미니 · 탭→일봉·주봉 상세</div></div>'+'</div><div class="chart" hidden></div></div>';}
+function R(){renderTabs();var s=v('sort'),rows=META.filter(pass);rows.sort(function(a,b){return (b[s]||-1e18)-(a[s]||-1e18);});
+ document.getElementById('cnt').textContent=rows.length+'종목 (탭하면 차트)';
+ var grp=v('grp'),h='';
+ if(grp){var gv=function(d){return grp==='th'?(d.th||'(미분류)'):d[grp];};var seen=[];rows.forEach(function(d){if(seen.indexOf(gv(d))<0)seen.push(gv(d));});
+  seen.forEach(function(g){var rs=rows.filter(function(d){return gv(d)===g;});var sv=rs.reduce(function(a,d){return a+(d.v2||0);},0);
+   h+='<div style="background:#1F3A5F;color:#fff;padding:7px 12px;margin:8px 10px 0;border-radius:8px;font-weight:700;font-size:13px">'+g+' · '+rs.length+'종목 · 거래대금 '+sv.toLocaleString()+'억</div>';
+   rs.forEach(function(d){h+=cardHtml(d);});});}
+ else rows.forEach(function(d){h+=cardHtml(d);});
+ document.getElementById('list').innerHTML=h;}
+function tog(ch){var card=ch.parentNode,ct=card.querySelector('.chart'),code=card.dataset.c;
+ if(!ct.hidden){ct.hidden=true;ch.querySelector('.tap').textContent='차트 ▼';return;}
+ ch.querySelector('.tap').textContent='차트 ▲';ct.hidden=false;
+ if(!ct.dataset.d){ct.innerHTML='<canvas></canvas><canvas></canvas><div class="hint">일봉(위)·주봉(아래)·MA·거래량·1·2번바닥·넥라인(점선)</div>';var cs=ct.querySelectorAll('canvas');var x=CD[code];
+  setTimeout(()=>{draw(cs[0],x.do,x.dh,x.dl,x.dc,x.dv,x.dt,x.dbd);draw(cs[1],x.wo,x.wh,x.wl,x.wc,x.wv,x.wt,x.dbw);},20);ct.dataset.d=1;}}
+function ma(a,k){var o=Array(a.length).fill(null),s=0;for(var i=0;i<a.length;i++){s+=a[i];if(i>=k)s-=a[i-k];if(i>=k-1)o[i]=s/k;}return o;}
+function draw(cv,o,h,l,c,vv,tk,db){var dpr=window.devicePixelRatio||1,W=cv.clientWidth,H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;var g=cv.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,W,H);
+ var n=c.length,pL=44,pR=6,pT=6,pB=13,vH=36,pH=H-pT-pB-vH-5,lo=Math.min.apply(0,l),hi=Math.max.apply(0,h),pr=(hi-lo)||1;lo-=pr*.05;hi+=pr*.05;
+ var X=i=>pL+(W-pL-pR)*(i+0.5)/n,Y=p=>pT+pH*(1-(p-lo)/(hi-lo)),bw=Math.max(1,(W-pL-pR)/n*.6);
+ g.font='8px sans-serif';g.textAlign='right';for(var k=0;k<=3;k++){var p=lo+(hi-lo)*k/3,y=Y(p);g.strokeStyle='#eee';g.beginPath();g.moveTo(pL,y);g.lineTo(W-pR,y);g.stroke();g.fillStyle='#999';g.fillText(Math.round(p).toLocaleString(),pL-2,y+3);}
+ for(var i=0;i<n;i++){var up=c[i]>=o[i];g.strokeStyle=up?'#c0392b':'#1f6fc0';g.fillStyle=up?'#c0392b':'#1f6fc0';var x=X(i);g.beginPath();g.moveTo(x,Y(h[i]));g.lineTo(x,Y(l[i]));g.stroke();var yo=Y(o[i]),yc=Y(c[i]);g.fillRect(x-bw/2,Math.min(yo,yc),bw,Math.max(1,Math.abs(yc-yo)));}
+ [[5,'#444'],[20,'#e08e0b'],[60,'#2e7d32'],[120,'#8e24aa']].forEach(function(m){if(n<m[0])return;var mm=ma(c,m[0]);g.strokeStyle=m[1];g.lineWidth=1;g.beginPath();var st=0;for(var i=0;i<n;i++){if(mm[i]==null)continue;var x=X(i),y=Y(mm[i]);if(!st){g.moveTo(x,y);st=1;}else g.lineTo(x,y);}g.stroke();});
+ if(db){g.strokeStyle='#555';g.setLineDash([4,3]);var y=Y(db.nk);g.beginPath();g.moveTo(pL,y);g.lineTo(W-pR,y);g.stroke();g.setLineDash([]);g.fillStyle='#c0392b';g.textAlign='center';[['1',db.i1],['2',db.i2]].forEach(function(t){var i=t[1];if(i<0||i>=n)return;var x=X(i),yy=Y(l[i]);g.beginPath();g.arc(x,yy+6,3,0,7);g.fill();g.fillText(t[0],x,yy+17);});}
+ var vt=pT+pH+5,vm=Math.max.apply(0,vv)||1;for(var i=0;i<n;i++){var up=c[i]>=o[i];g.fillStyle=up?'rgba(192,57,43,.5)':'rgba(31,111,192,.5)';var bh=vH*vv[i]/vm;g.fillRect(X(i)-bw/2,vt+vH-bh,bw,bh);}
+ g.fillStyle='#999';g.textAlign='center';(tk||[]).forEach(function(t){g.fillText(t[1],X(t[0]),H-2);});}
+renderTabs();R();
+</script></body></html>

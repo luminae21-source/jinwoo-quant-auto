@@ -1,0 +1,72 @@
+{
+ "n": 47,
+ "n_boot": 6000,
+ "point_sharpe": 2.357,
+ "point_cagr": 0.7693,
+ "sweep": [
+  {
+   "block": 1,
+   "eff_blocks": 47.0,
+   "sharpe_lo": 1.42,
+   "sharpe_hi": 3.53,
+   "sharpe_width": 2.12,
+   "cagr_lo": 0.3827,
+   "width_vs_iid": 1.0
+  },
+  {
+   "block": 2,
+   "eff_blocks": 23.5,
+   "sharpe_lo": 1.45,
+   "sharpe_hi": 3.5,
+   "sharpe_width": 2.05,
+   "cagr_lo": 0.3877,
+   "width_vs_iid": 0.97
+  },
+  {
+   "block": 3,
+   "eff_blocks": 15.7,
+   "sharpe_lo": 1.43,
+   "sharpe_hi": 3.47,
+   "sharpe_width": 2.03,
+   "cagr_lo": 0.3859,
+   "width_vs_iid": 0.96
+  },
+  {
+   "block": 4,
+   "eff_blocks": 11.8,
+   "sharpe_lo": 1.48,
+   "sharpe_hi": 3.37,
+   "sharpe_width": 1.89,
+   "cagr_lo": 0.3975,
+   "width_vs_iid": 0.89
+  },
+  {
+   "block": 6,
+   "eff_blocks": 7.8,
+   "sharpe_lo": 1.54,
+   "sharpe_hi": 3.32,
+   "sharpe_width": 1.78,
+   "cagr_lo": 0.4257,
+   "width_vs_iid": 0.84
+  },
+  {
+   "block": 9,
+   "eff_blocks": 5.2,
+   "sharpe_lo": 1.6,
+   "sharpe_hi": 3.19,
+   "sharpe_width": 1.59,
+   "cagr_lo": 0.4476,
+   "width_vs_iid": 0.75
+  },
+  {
+   "block": 12,
+   "eff_blocks": 3.9,
+   "sharpe_lo": 1.69,
+   "sharpe_hi": 3.13,
+   "sharpe_width": 1.44,
+   "cagr_lo": 0.4797,
+   "width_vs_iid": 0.68
+  }
+ ],
+ "note": "인샘플 해석 강건성. forward 아님. 6/15 GPT검토 line167 대응."
+}

@@ -1,0 +1,8 @@
+{
+  "price_band_pct": 10.0,
+  "max_weight_pct": 20.0,
+  "max_positions": 15,
+  "daily_loss_limit_pct": 3.0,
+  "per_name_daily_once": true,
+  "killswitch": false
+}

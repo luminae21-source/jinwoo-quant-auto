@@ -1,0 +1,130 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>진우퀀트 메커니즘 해설</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{--bg:#12100c;--sf:#1d1912;--sf2:#262016;--bd:#453b28;--ink:#f6efdd;--ink2:#d8cba8;
+--mut:#a3946f;--gold:#e0be7a;--good:#63c98f;--bad:#ef7264;--amber:#e8b04d;--blue:#8fb3f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-size:15.5px;line-height:1.75;
+font-family:"Pretendard Variable",Pretendard,-apple-system,"Malgun Gothic",sans-serif}
+.w{max-width:920px;margin:0 auto;padding:36px 22px 70px}
+h1{font-size:25px;margin:0 0 4px}.k{color:var(--gold)}
+.sub{color:var(--mut);font-size:13px;margin-bottom:8px}
+.toc{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 18px;font-size:13.5px;color:var(--ink2);margin:18px 0 8px}
+.toc a{color:var(--gold);text-decoration:none;margin-right:14px;white-space:nowrap}
+h2{font-size:19px;margin:44px 0 6px;color:var(--gold);letter-spacing:.3px}
+h2 small{color:var(--mut);font-size:12px;letter-spacing:1.5px;display:block;margin-bottom:2px;font-weight:600}
+.mech{border-left:3px solid var(--bd);padding-left:18px}
+.row{margin:10px 0}
+.lb{display:inline-block;min-width:86px;color:var(--mut);font-size:12px;letter-spacing:1px;font-weight:700;vertical-align:top}
+.tx{display:inline-block;width:calc(100% - 100px);color:var(--ink2)}
+.tx b{color:var(--ink)}
+.ok{color:var(--good);font-weight:700}.no{color:var(--bad);font-weight:700}.wt{color:var(--amber);font-weight:700}
+.ref{font-size:13px;color:var(--mut);line-height:1.7}
+.ref i{color:var(--blue);font-style:normal}
+.inv a{color:var(--gold);text-decoration:none;border-bottom:1px dotted var(--gold)}
+.box{background:var(--sf);border:1px solid var(--bd);border-radius:13px;padding:16px 20px;margin:14px 0;font-size:14px;color:var(--ink2)}
+.box b{color:var(--gold)}
+.foot{color:var(--mut);font-size:12px;margin-top:46px;border-top:1px solid var(--bd);padding-top:14px;line-height:1.8}
+</style></head><body><div class="w">
+
+<h1>진우퀀트<span class="k">+K</span> 투자 메커니즘 해설</h1>
+<div class="sub">1판 · 2026-08-22 · 하우스가 설계·검증한 모든 매커니즘의 체계적 기록 — 개념 · 우리의 구현 · 검증 결과(정직) · 학술 근거 · 계보 투자자</div>
+
+<div class="toc">
+<a href="#m1">① 역발상 휩쏘</a><a href="#m2">② 국면 게이트</a><a href="#m3">③ 밸류 팩터</a><a href="#m4">④ 모멘텀</a><a href="#m5">⑤ PEAD</a><a href="#m6">⑥ 딥밸류 사냥터</a><a href="#m7">⑦ 계절성</a><a href="#m8">⑧ 청산·사이징</a><a href="#m9">⑨ 연구 규율</a><a href="#m10">⑩ 벤치마크의 교훈</a>
+</div>
+
+<h2 id="m1"><small>MECHANISM 01 · 단기 역발상</small>휩쏘 재진입 — 과잉반응 반전</h2>
+<div class="mech">
+<div class="row"><span class="lb">개념</span><span class="tx">시장은 공포에 과잉반응한다. 급락 직후의 가격은 정보가치보다 감정가치가 커서, 단기 반전(reversal)이 통계적으로 존재한다.</span></div>
+<div class="row"><span class="lb">우리 구현</span><span class="tx">이틀 연속 급락 −12% + 1년 구조선(일240·주60주·월10) 지지 + 시총 3,000억↑. 2일째 종가 진입, 절반 되돌림 목표.</span></div>
+<div class="row"><span class="lb">검증 결과</span><span class="tx"><span class="ok">건당 +2.40% · 승률 55.3% · CI [+1.20,+3.63] (30년 7,071건)</span> — 절대수익 실재. <span class="no">단, 지수 대비 알파 아님</span>(08-22 3연전 기각: 단독 CAGR +1.82% vs KOSPI +8.17% · 상시위성 Δ−1.9%p · 딥크래시 문턱 전수 Δ≤0). 수익 원천의 대부분은 폭락 후 <b>시장 전체의 반등</b>이었다.</span></div>
+<div class="row"><span class="lb">학술 근거</span><span class="tx ref">De Bondt &amp; Thaler (1985), <i>“Does the Stock Market Overreact?”, Journal of Finance</i> — 과잉반응 가설의 원전 · Lehmann (1990), <i>QJE</i> · Jegadeesh (1990), <i>JF</i> — 단기 반전의 실증.</span></div>
+<div class="row"><span class="lb">계보</span><span class="tx inv"><a href="https://en.wikipedia.org/wiki/John_Templeton">존 템플턴</a> — "최대 비관의 순간이 최고의 매수 시점" · <a href="https://en.wikipedia.org/wiki/Howard_Marks_(investor)">하워드 막스</a> — 사이클과 역발상.</span></div>
+</div>
+
+<h2 id="m2"><small>MECHANISM 02 · 조건부 실행</small>국면 게이트 — 같은 신호, 다른 세상</h2>
+<div class="mech">
+<div class="row"><span class="lb">개념</span><span class="tx">전략의 기대값은 시장 상태(레짐)에 조건부다. 신호가 아니라 <b>신호가 놓인 환경</b>이 수익의 부호를 정한다.</span></div>
+<div class="row"><span class="lb">우리 구현</span><span class="tx">지수 1년고점比 낙폭·변동성으로 🟢실행/🟡주의/🔴관찰만 3분류. 🔴에서는 밸류가 있어도 사지 않는다.</span></div>
+<div class="row"><span class="lb">검증 결과</span><span class="tx"><span class="ok">🟢+2.40% / 🟡−0.12% / 🔴−0.60%</span> — 이 시스템 최대 발견. S2 구간에서도 동일 부호. 형의 가설이 데이터로 증명된 사례.</span></div>
+<div class="row"><span class="lb">학술 근거</span><span class="tx ref">Hamilton (1989), <i>Econometrica</i> — 레짐 스위칭 모형의 원전 · Moreira &amp; Muir (2017), <i>“Volatility-Managed Portfolios”, JF</i> — 변동성 조건부 노출 조절의 실증.</span></div>
+<div class="row"><span class="lb">계보</span><span class="tx inv"><a href="https://en.wikipedia.org/wiki/Ray_Dalio">레이 달리오</a> — 경제 기계와 국면 · <a href="https://en.wikipedia.org/wiki/Stanley_Druckenmiller">드러켄밀러</a> — "언제가 무엇보다 중요하다".</span></div>
+</div>
+
+<h2 id="m3"><small>MECHANISM 03 · 횡단면 팩터</small>밸류 — 싸다는 것의 프리미엄</h2>
+<div class="mech">
+<div class="row"><span class="lb">개념</span><span class="tx">장부가·이익·배당 대비 싼 주식의 장기 초과수익. 위험 보상인지 행동 편향인지는 학계 논쟁 중이나 실증은 한 세기.</span></div>
+<div class="row"><span class="lb">우리 구현</span><span class="tx">저PBR&lt;0.8 · 저PER&lt;8(EPS&gt;0) · 배당≥2% — <b>가점이지 필터가 아니다</b>(필터 시 기회 76% 상실). 멀티팩터 코어(엔진02)의 축이기도.</span></div>
+<div class="row"><span class="lb">검증 결과</span><span class="tx"><span class="ok">3차 독립 확인</span>: 국면 통제 후 Δ+0.76%p·승률 64%(최상급 셀 +3.59%). 배당이 단일 최강. 적자·고PER 가감점은 기각(중립).</span></div>
+<div class="row"><span class="lb">학술 근거</span><span class="tx ref">Fama &amp; French (1992, 1993), <i>JF/JFE</i> — 가치 팩터의 표준화 · Lakonishok, Shleifer &amp; Vishny (1994), <i>JF</i> — 행동적 설명 · La Porta (1996), <i>JF</i> — 성장 기대의 과잉(형이 직접 학습한 논문) · Piotroski (2000), <i>JAR</i> — F-Score.</span></div>
+<div class="row"><span class="lb">계보</span><span class="tx inv"><a href="https://en.wikipedia.org/wiki/Benjamin_Graham">벤저민 그레이엄</a> — 가치투자의 아버지 · <a href="https://en.wikipedia.org/wiki/Eugene_Fama">유진 파마</a> · <a href="https://en.wikipedia.org/wiki/Cliff_Asness">클리프 아스네스</a>(AQR) — 팩터의 산업화.</span></div>
+</div>
+
+<h2 id="m4"><small>MECHANISM 04 · 추세 지속</small>모멘텀 — 오르는 것이 더 오른다</h2>
+<div class="mech">
+<div class="row"><span class="lb">개념</span><span class="tx">직전 3~12개월 승자가 이후 수개월 더 이긴다. 가장 강건한 이상현상이나, 폭락기 모멘텀 크래시가 약점.</span></div>
+<div class="row"><span class="lb">우리 구현</span><span class="tx">엔진03: 시총 상위 풀 12−1개월 모멘텀 상위 30종 월간 회전 + MA200 이탈 시 절반 현금(크래시 방어). 규칙화 판정 통과(2026-07), 페이퍼 중.</span></div>
+<div class="row"><span class="lb">검증 결과</span><span class="tx"><span class="wt">페이퍼 전진 기록 중</span> — 슬리피지 실측 후 G4 재판정 예정. 주의: 개별 "주도주 풀 따라가기"는 <span class="no">기각</span>(3년 −30.6%) — 규칙 없는 추종과 팩터는 다르다.</span></div>
+<div class="row"><span class="lb">학술 근거</span><span class="tx ref">Jegadeesh &amp; Titman (1993), <i>JF</i> — 모멘텀의 원전 · Carhart (1997), <i>JF</i> — 4팩터 · Asness, Moskowitz &amp; Pedersen (2013), <i>“Value and Momentum Everywhere”, JF</i>.</span></div>
+<div class="row"><span class="lb">계보</span><span class="tx inv"><a href="https://en.wikipedia.org/wiki/Richard_Driehaus">리처드 드리하우스</a> — 모멘텀 투자의 개척자.</span></div>
+</div>
+
+<h2 id="m5"><small>MECHANISM 05 · 정보 확산 지연</small>PEAD — 실적 발표 후 표류</h2>
+<div class="mech">
+<div class="row"><span class="lb">개념</span><span class="tx">어닝 서프라이즈 후 주가가 그 방향으로 수 주~수 개월 더 표류한다. 정보가 가격에 즉시 반영되지 않는다는 고전적 증거.</span></div>
+<div class="row"><span class="lb">우리 구현</span><span class="tx">엔진 후보 C v3.9 — <span class="wt">회수·검정 대기</span> (백로그). 한국 시장 30년 사전등록 검정을 통과해야 승격.</span></div>
+<div class="row"><span class="lb">학술 근거</span><span class="tx ref">Ball &amp; Brown (1968), <i>JAR</i> — 회계정보와 주가의 원전 · Bernard &amp; Thomas (1989), <i>JAR</i> — PEAD의 체계적 실증.</span></div>
+</div>
+
+<h2 id="m6"><small>MECHANISM 06 · 장기 딥밸류</small>사냥터 — 바닥에서 사서 세월로 번다</h2>
+<div class="mech">
+<div class="row"><span class="lb">개념</span><span class="tx">극단적으로 싼(저PBR 하위 20%) 종목이 하락을 멈추고 돌아서는 지점(이격&lt;0.85 ∩ 20일수익&gt;0)의 장기 보유.</span></div>
+<div class="row"><span class="lb">우리 구현</span><span class="tx">엔진04: 10~15종 분산 · 2~3년 보유 · 강함에 익절(이격≥1.5·+100%·PBR≥1.0). 발굴툴→주문생성기→사람 승인 파이프라인 가동.</span></div>
+<div class="row"><span class="lb">검증 결과</span><span class="tx"><span class="ok">30년·상폐 반영·IN/OOS 검증 완료</span>(사냥터 트랙) · 모의매매장 전진 기록 중.</span></div>
+<div class="row"><span class="lb">학술 근거</span><span class="tx ref">Graham &amp; Dodd (1934), <i>Security Analysis</i> · Fama-French 가치 극단 분위 실증 · Piotroski (2000) — 싼 것 중 좋은 것 고르기.</span></div>
+<div class="row"><span class="lb">계보</span><span class="tx inv"><a href="https://en.wikipedia.org/wiki/Walter_Schloss">월터 슐로스</a> — 딥밸류 분산의 전설 · <a href="https://en.wikipedia.org/wiki/Warren_Buffett">워런 버핏</a> 초기(담배꽁초) 시절.</span></div>
+</div>
+
+<h2 id="m7"><small>MECHANISM 07 · 계절성</small>사이클 — 아버지의 가르침, 데이터의 답</h2>
+<div class="mech">
+<div class="row"><span class="lb">개념</span><span class="tx">"가을(9~10월)에 눌린 것을 사서 봄에 거둔다" — 형이 아버지께 배운 명제.</span></div>
+<div class="row"><span class="lb">검증 결과</span><span class="tx"><span class="ok">지수 수준에서 실재</span>: 30년 월별 8·9·10월만 마이너스, 4월 +3.47%·1월 +3.22%. <span class="no">단 달력 보유 전략은 전부 기각</span>(순수보유 중앙 −10.9%) — 사이클은 <b>진입 지도</b>이지 청산 규칙이 아니다. 1월 앵커는 전진관찰 중.</span></div>
+<div class="row"><span class="lb">학술 근거</span><span class="tx ref">Rozeff &amp; Kinney (1976), <i>JFE</i> — 1월 효과 · Bouman &amp; Jacobsen (2002), <i>“The Halloween Indicator”, AER</i> — Sell in May의 국제 실증.</span></div>
+</div>
+
+<h2 id="m8"><small>MECHANISM 08 · 실행 공학</small>청산·사이징 — 파는 법과 거는 크기</h2>
+<div class="mech">
+<div class="row"><span class="lb">우리 구현</span><span class="tx">2단 청산(목표 50% 실현 + 잔여 트레일 −12% + <b>본전 플로어</b> + 126봉) — <span class="ok">Δ+0.48%p · 3회 독립 재현</span>. 사이징: 위험 1%/건 · 히트캡 6% · 정수 주식만. 서킷브레이커(롤링30 −9%/연패22/계좌−15%)가 최후의 선.</span></div>
+<div class="row"><span class="lb">학술 근거</span><span class="tx ref">Kelly (1956), <i>Bell System Technical Journal</i> — 최적 베팅 비율의 원전 (우리는 파산 방지를 위해 켈리보다 훨씬 보수적) · 트레일링·분할 청산은 실무 전통 — 그래서 우리가 직접 30년 검정으로 증명했다.</span></div>
+<div class="row"><span class="lb">계보</span><span class="tx inv"><a href="https://en.wikipedia.org/wiki/Edward_O._Thorp">에드 소프</a> — 켈리 기준의 실전화.</span></div>
+</div>
+
+<h2 id="m9"><small>MECHANISM 09 · 연구 규율</small>사전등록·다중비교·서킷 — 우리를 우리에게서 지키는 것</h2>
+<div class="mech">
+<div class="row"><span class="lb">개념</span><span class="tx">백테스트의 최대 적은 시장이 아니라 연구자 자신이다. 좋아 보이는 걸 사후에 고르면(스누핑) 어떤 데이터에서도 "성배"가 나온다.</span></div>
+<div class="row"><span class="lb">우리 구현</span><span class="tx">가설·판정 기준 선고정 후 실행 · 중간판정 금지(40건) · 훈련/검증 분리 · 기각 목록 영구 기록(14+개) · 점검 증명 의무(인용 없는 판정 무효).</span></div>
+<div class="row"><span class="lb">학술 근거</span><span class="tx ref">Harvey, Liu &amp; Zhu (2016), <i>“…and the Cross-Section of Expected Returns”, RFS</i> — 다중검정 보정 없이 발표된 팩터 대부분이 허상 · Bailey &amp; López de Prado (2014) — 백테스트 과적합과 Deflated Sharpe.</span></div>
+<div class="row"><span class="lb">계보</span><span class="tx inv"><a href="https://en.wikipedia.org/wiki/Jim_Simons">짐 사이먼스</a>/르네상스 — 검증 문화의 정점 · <a href="https://en.wikipedia.org/wiki/Marcos_L%C3%B3pez_de_Prado">로페즈 데 프라도</a> — 금융 ML의 방법론 경찰.</span></div>
+</div>
+
+<h2 id="m10"><small>LESSON · 2026-08-22</small>벤치마크의 교훈 — 절대수익과 알파는 다르다</h2>
+<div class="box">
+오늘 하우스는 가장 비싼 수업을 무료로 들었다. 휩쏘의 건당 +2.40%는 30년 내내 진짜였지만,
+<b>같은 창에서 지수도 반등했기에</b> "그냥 들고 있기"를 이기지 못했다 (3연전 전패: 단독 +1.82% vs KOSPI +8.17% · 상시위성 Δ−1.9%p · 딥크래시 전 문턱 Δ≤0).
+<br><br>
+교훈: <b>모든 전략은 반드시 "그 돈으로 할 수 있었던 가장 게으른 대안"과 비교하라.</b>
+전략의 수익이 아니라 <b>대안 대비 초과</b>가 진짜 실력이다. 이 원칙은 이후 하우스의 모든 검정에 기본 탑재된다 —
+코어 엔진들(멀티팩터·사냥터·모멘텀)의 forward 판정도 같은 잣대(vs 지수 보유)를 받는다.
+<br><br>
+<span class="ref">근거 판정문: 휩쏘_핵심위성_판정문.md · 휩쏘_딥크래시_판정문.md · 관련 문헌: Sharpe (1991), <i>“The Arithmetic of Active Management”, FAJ</i> — 능동 운용의 산술.</span>
+</div>
+
+<div class="foot">
+작성 2026-08-22 · 정본: PC 진우퀀트 폴더 · 모든 검증 수치의 재현 스크립트는 폴더에 있음 (인수인계 문서 참조)<br>
+인용 문헌은 각 분야의 표준 원전이며, 우리의 결과는 한국 시장 30년(1997–2026)에서의 독립 재검증임 ·
+⚠️ 연구·기록용 · 투자자문 아님 · 백테스트는 실현손익이 아님
+</div>
+</div></body></html>

@@ -1,0 +1,69 @@
+<!doctype html><html lang=ko><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>진우퀀트 — 빠른 사용법</title><style>
+:root{--bg:#0b1020;--card:#141b2e;--ink:#e8edf6;--sub:#9fb0c9;--line:#243149;--acc:#5b9dff;--ok:#16a34a;--warn:#e0a32e}
+@media(prefers-color-scheme:light){:root{--bg:#f6f8fc;--card:#fff;--ink:#0f1830;--sub:#5a6a86;--line:#e3e9f4;--acc:#2563eb}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;padding:24px;line-height:1.6}
+.wrap{max-width:720px;margin:0 auto}h1{font-size:22px;margin:0 0 2px}.sub{color:var(--sub);font-size:13px;margin-bottom:20px}
+.big{background:var(--card);border:1px solid var(--acc);border-radius:16px;padding:18px 20px;margin-bottom:16px}
+.big h2{font-size:16px;margin:0 0 6px;color:var(--acc)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:14px}
+h3{font-size:14.5px;margin:0 0 10px}
+.step{display:flex;gap:12px;align-items:flex-start;margin:12px 0}
+.num{flex:none;width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+.step div{font-size:13.5px}.step b{color:var(--ink)}
+code{background:rgba(148,163,184,.16);border-radius:5px;padding:2px 7px;font-size:12.5px}
+.cols{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.col{background:rgba(91,157,255,.12);border:1px solid var(--line);border-radius:9px;padding:8px 12px;font-size:12.5px;font-weight:600}
+.col span{display:block;color:var(--sub);font-weight:400;font-size:11px;margin-top:1px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:600px){.two{grid-template-columns:1fr}}
+.mini{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+.mini h4{margin:0 0 5px;font-size:13px}.mini p{margin:0;font-size:12px;color:var(--sub);line-height:1.55}
+.note{color:var(--sub);font-size:12.5px}.note b{color:var(--ink)}
+.warn{color:var(--warn);font-size:11.5px;margin-top:6px}
+ul{margin:6px 0 0;padding-left:18px}li{font-size:13px;margin:4px 0}
+</style></head><body><div class=wrap>
+<h1>진우퀀트 — 빠른 사용법</h1>
+<div class=sub>지표가 많아 보여도, 매달 볼 건 딱 하나입니다. 나머지는 '왜 이 규칙인가'의 근거일 뿐.</div>
+
+<div class=big>
+<h2>매달 이것만 하면 됩니다</h2>
+<div class=step><div class=num>1</div><div><b>집행 시트 열기</b> — <code>risk_manager.py</code> 실행(또는 예약 자동). 끝에 나오는 표 하나가 그달의 답.</div></div>
+<div class=step><div class=num>2</div><div><b>표대로 사고 손절 걸기</b> — 표의 종목을, 적힌 비중만큼, 적힌 손절가에 스톱 설정. 그게 전부.</div></div>
+<div class=step><div class=num>3</div><div><b>보유분은 규칙대로 정리</b> — 성장주는 트레일(고점 −25%)에 닿으면, 가치주는 PBR≥1.0/+100% 도달 또는 −40% 재난선에 팔기.</div></div>
+</div>
+
+<div class=card>
+<h3>시트에서 볼 칸은 딱 4개</h3>
+<div class=cols>
+<div class=col>종목<span>무엇을</span></div>
+<div class=col>비중<span>얼마나</span></div>
+<div class=col>손절가<span>언제 나올까</span></div>
+<div class=col>매도규칙<span>어떻게 관리</span></div>
+</div>
+<div class=note style="margin-top:10px">IC·Sharpe·t값·롱숏% 같은 숫자는 <b>규칙을 만들 때 쓴 근거</b>지, 매매할 때 볼 필요 없어요. 이미 그 검증을 통과한 규칙만 시트에 반영돼 있습니다.</div>
+</div>
+
+<div class=card>
+<h3>파일은 두 무더기로 생각하세요</h3>
+<div class=two>
+<div class=mini><h4>📌 매달 쓰는 것 (1개)</h4><p><code>risk_manager.py</code> → 집행 시트. 진입·비중·손절·매도까지 한 장에.<br>(참고: <code>entry_screener</code>=후보 목록, <code>universe_now</code>=주도주)</p></div>
+<div class=mini><h4>🗄️ 한 번 보고 넣어둘 것</h4><p>factor_efficacy · style_conditional · entry_timing · exit_routing · ev_fcf …<br>= "왜 이 규칙인가"의 검증 근거. 분기 재점검 때만.</p></div>
+</div>
+</div>
+
+<div class=card>
+<h3>이 기계가 하는 일 (한 문장씩)</h3>
+<ul>
+<li><b>고를 종목을 좁힌다</b> — 시총 상위에서 가치/성장 두 갈래로.</li>
+<li><b>검증된 잣대로 점수 매긴다</b> — 가치=배당·저PER, 성장=ROE·이익성장.</li>
+<li><b>지금 들어갈 때인지 본다</b> — 추세 위(A진입)만 후보, 아래(B관찰)는 대기.</li>
+<li><b>얼마·어디서 자를지 정한다</b> — 종목당 손실 1%로 균등, 트랙별 매도규칙.</li>
+</ul>
+</div>
+
+<div class=card>
+<h3>지금(2026-07) 시스템이 하는 말</h3>
+<div class=note><b>"크게 들어갈 때 아니다."</b> 급락장이라 진입 후보(A진입)가 적고, 집행 시트도 6종·투입 21%·<b>현금 79%</b>. 이건 시스템이 방어 중이라는 뜻 — 억지로 다 채우지 않는 게 정상입니다.</div>
+<div class=warn>⚠️ 전부 정보·검증용 도구입니다. 미래·수익 보장 아님. 최종 판단과 책임은 본인에게 있습니다.</div>
+</div>
+</div></body></html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>진우퀀트 — 점수×heat 교차분석 (a·b·c)</title>
+<style>
+:root{--bg:#0f1115;--card:#181b22;--ink:#e8eaed;--mut:#9aa0aa;--line:#262a33;--acc:#ff7a45;--ok:#3fb37a;--bad:#e2606a;--blue:#6b9bd1}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;padding:22px;line-height:1.5}
+h1{font-size:21px;margin:0 0 2px}h2{font-size:15px;margin:24px 0 9px;color:#fff;border-left:3px solid var(--acc);padding-left:9px}
+.sub{color:var(--mut);font-size:12.5px;margin-bottom:8px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 15px;font-size:13px;margin:10px 0}
+.box.amber{background:#2a1d12;border-color:#5a3a1f;color:#ffc6a3}
+.box.risk{background:#2c1416;border-color:#5e2a2e;color:#ffb9bd}
+.kpis{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 13px;min-width:120px}
+.kpi b{display:block;font-size:19px;color:var(--acc)}.kpi span{font-size:11px;color:var(--mut)}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-top:6px}
+th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left}
+th{color:var(--mut);font-size:11px}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.pos{color:var(--ok)}.neg{color:var(--bad)}.gr{font-weight:700}
+.gsp{color:#81c784}.gs{color:#aed581}
+.foot{margin-top:20px;color:#5a6068;font-size:11px;line-height:1.6;border-top:1px solid var(--line);padding-top:12px}
+code{background:#11141a;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:11.5px}
+</style></head><body>
+
+<h1>진우퀀트 — 점수 × 뜨거운테마 교차분석</h1>
+<div class="sub">2026-06-14 · 기준 2026-06 · production 점수(287종) × heat 상위 테마 × 보유 18종 · 투자 자문 아님</div>
+
+<div class="box">
+한 줄: production 점수와 12M초과의 상관은 <b>0.06</b>(이 쏠림장에서 점수≠수익). 해법은 점수 엔진을 만지는 게 아니라, <b>점수(퀄리티)를 주도 테마로 거르고(b)</b> 보유의 <b>숨은 집중을 직시(c)</b>하는 것.
+</div>
+
+<h2>(a) 결정 — 점수 엔진은 손대지 않는다</h2>
+<div class="box amber">
+점수(F·Sloan·NOA·Mom12·BAB·Echo)는 <b>퀄리티+가치+저베타</b> 성향 → 2025~26 고베타 반도체 쏠림장과 구조적 불일치(BAB가 주도주를 감점). 이를 맞추려 가중치·임계값을 비틀면 <b>오버핏</b>(이미 프로젝트 결론: 쏠림장 가치/저베타 열위는 노선의 한계지 버그 아님). → 엔진 <b>무수정</b> 유지, 부족분은 <b>heat(발굴)·진입 트랙</b>으로 보완. 점수=후보 품질 필터, 주도성=heat, 타이밍·리스크=진입.
+</div>
+
+<h2>(b) S+/S ∩ 뜨거운 테마 — "퀄리티 + 주도" 교집합</h2>
+<div class="kpis">
+  <div class="kpi"><b>26</b><span>교집합 종목(S+12·S14)</span></div>
+  <div class="kpi"><b>+92%</b><span>교집합 평균 12M초과</span></div>
+  <div class="kpi"><b>+23%</b><span>전체 S+ 평균(대조)</span></div>
+  <div class="kpi"><b>19/26</b><span>시장 초과 플러스</span></div>
+  <div class="kpi"><b>관망</b><span>현 진입상태 전원</span></div>
+</div>
+<div class="sub">점수만으론 적중이 약했지만(상관 0.06), <b>주도 테마로 거르니 평균 초과가 4배</b>로 뛰고 적중률도 19/26. 단 지금은 전부 <b>관망</b>(주도주 눌림 → 깨끗한 매수 셋업 없음). 셋업/돌파 전환 시 핸드오프 대상.</div>
+<table><thead><tr><th>종목</th><th>테마</th><th>등급</th><th class="num">점수</th><th class="num">12M초과</th><th>진입</th></tr></thead><tbody>
+<tr><td>LG이노텍</td><td>반도체/전자</td><td class="gr gsp">S+</td><td class="num">15.0</td><td class="num pos">+672%</td><td>관망</td></tr>
+<tr><td>삼성전자</td><td>반도체</td><td class="gr gs">S</td><td class="num">12.3</td><td class="num pos">+426%</td><td>관망</td></tr>
+<tr><td>LG전자</td><td>반도체/전자</td><td class="gr gsp">S+</td><td class="num">15.3</td><td class="num pos">+355%</td><td>관망</td></tr>
+<tr><td>인텍플러스</td><td>반도체</td><td class="gr gsp">S+</td><td class="num">14.3</td><td class="num pos">+265%</td><td>관망</td></tr>
+<tr><td>원익IPS</td><td>반도체</td><td class="gr gs">S</td><td class="num">13.0</td><td class="num pos">+193%</td><td>관망</td></tr>
+<tr><td>네패스</td><td>반도체</td><td class="gr gsp">S+</td><td class="num">14.7</td><td class="num pos">+146%</td><td>관망</td></tr>
+<tr><td>한양디지텍</td><td>반도체</td><td class="gr gsp">S+</td><td class="num">14.3</td><td class="num pos">+127%</td><td>관망</td></tr>
+<tr><td>네패스아크</td><td>반도체</td><td class="gr gsp">S+</td><td class="num">14.0</td><td class="num pos">+92%</td><td>관망</td></tr>
+<tr><td>현대모비스</td><td>자동차</td><td class="gr gs">S</td><td class="num">13.7</td><td class="num pos">+88%</td><td>관망</td></tr>
+<tr><td>이오테크닉스</td><td>반도체</td><td class="gr gs">S</td><td class="num">12.3</td><td class="num pos">+80%</td><td>관망</td></tr>
+<tr><td>후성</td><td>반도체</td><td class="gr gsp">S+</td><td class="num">15.0</td><td class="num pos">+47%</td><td>관망</td></tr>
+<tr><td>한화엔진</td><td>기계/장비</td><td class="gr gs">S</td><td class="num">13.3</td><td class="num pos">+28%</td><td>관망</td></tr>
+<tr><td>HD현대일렉트릭</td><td>전력/전기장비</td><td class="gr gs">S</td><td class="num">13.3</td><td class="num pos">+19%</td><td>관망</td></tr>
+<tr><td>LG디스플레이</td><td>반도체/전자</td><td class="gr gsp">S+</td><td class="num">18.7</td><td class="num pos">+9%</td><td>관망</td></tr>
+<tr><td>현대위아</td><td>자동차</td><td class="gr gsp">S+</td><td class="num">14.0</td><td class="num pos">+8%</td><td>관망</td></tr>
+<tr><td>HL만도</td><td>자동차</td><td class="gr gsp">S+</td><td class="num">17.3</td><td class="num pos">+6%</td><td>관망</td></tr>
+<tr><td>DN오토모티브</td><td>2차전지</td><td class="gr gs">S</td><td class="num">13.0</td><td class="num pos">+9%</td><td>관망</td></tr>
+<tr><td>더존비즈온</td><td>반도체/전자</td><td class="gr gsp">S+</td><td class="num">15.7</td><td class="num pos">+1%</td><td>관망</td></tr>
+<tr><td>삼성에스디에스</td><td>반도체/전자</td><td class="gr gs">S</td><td class="num">12.3</td><td class="num pos">+0%</td><td>관망</td></tr>
+<tr><td>아이티센글로벌</td><td>반도체/전자</td><td class="gr gs">S</td><td class="num">13.0</td><td class="num neg">−4%</td><td>관망</td></tr>
+<tr><td>디아이</td><td>반도체</td><td class="gr gs">S</td><td class="num">13.3</td><td class="num neg">−15%</td><td>관망</td></tr>
+<tr><td>씨아이에스</td><td>기계/장비</td><td class="gr gs">S</td><td class="num">12.0</td><td class="num neg">−18%</td><td>관망</td></tr>
+<tr><td>성우하이텍</td><td>자동차</td><td class="gr gs">S</td><td class="num">12.7</td><td class="num neg">−55%</td><td>관망</td></tr>
+<tr><td>SNT에너지</td><td>기계/장비</td><td class="gr gsp">S+</td><td class="num">15.0</td><td class="num neg">−93%</td><td>관망</td></tr>
+</tbody></table>
+<div class="sub">전체 26종·정렬본: <code>점수xheat_교집합_latest.csv</code>. 주의: 주도 테마라도 종목별 편차 큼(SNT에너지 −93%) — 테마 멤버십 ≠ 자동 강세. 진입 시스템(셋업/돌파)으로 한 번 더 거름.</div>
+
+<h2>(c) 보유 18종 — '겉 분산, 속 집중' 리스크</h2>
+<div class="kpis">
+  <div class="kpi"><b>+130%</b><span>EW 포트 12M (시장 +78%)</span></div>
+  <div class="kpi"><b>81%</b><span>수익의 반도체 5종 비중</span></div>
+  <div class="kpi"><b>52%</b><span>상위 2종(하이닉스·삼전) 비중</span></div>
+  <div class="kpi"><b>1.80</b><span>반도체코어 베타(나머지 0.84)</span></div>
+</div>
+<div class="box risk">
+포트는 18종·다(多)테마로 <b>분산처럼 보이지만</b>, 12M 수익의 <b>81%가 반도체 5종(평균 +377%)</b>, 절반이 단 2종(SK하이닉스·삼성전자)에서 나왔어. 나머지 13종은 평균 +35%(시장 하회). 실질은 <b>고베타 반도체/AI 집중 베팅</b>(코어 베타 1.8).<br>
+<b>시나리오</b>: 다음 구간 반도체코어 −30%·나머지 0%면 EW 포트 ≈ <b>−8%</b> — 캐리가 빠지면 나머지가 못 받쳐(이미 약하고 저베타). 즉 상승도 하락도 반도체에 달려 있음.
+</div>
+<table><thead><tr><th>구분</th><th class="num">종목수</th><th class="num">평균 12M</th><th class="num">기여(EW)</th><th class="num">베타</th></tr></thead><tbody>
+<tr><td>반도체 코어(하이닉스·삼전·SDI·ISC·한미)</td><td class="num">5</td><td class="num pos">+377%</td><td class="num pos">+105%p</td><td class="num">1.80</td></tr>
+<tr><td>나머지 13종</td><td class="num">13</td><td class="num">+35%</td><td class="num">+25%p</td><td class="num">0.84</td></tr>
+<tr><td><b>전체 포트(EW)</b></td><td class="num">18</td><td class="num pos"><b>+130%</b></td><td class="num">—</td><td class="num">1.10</td></tr>
+</tbody></table>
+<div class="sub">※ 진우 '수익 우선' 철학 존중 — 이건 디리스킹 권고가 아니라 <b>네가 지금 들고 있는 베팅의 실체</b>(반도체 집중·고베타) 수치화야. 의식하고 들고 가든, 일부 헤지/트림하든 선택은 진우.</div>
+
+<div class="foot">
+산출: 점수xheat_교집합_latest.csv · 본 보고서. 점수=production 엔진(무수정·읽기만). 12M초과=종목 12M − 시장 EW 12M(+78%). 베타=최근 36M 월수익 회귀.<br>
+정직: 백테스트·과거 초과수익을 forward 기대치로 쓰지 않음. 점수≠매수신호. 결정·책임은 진우, 시스템은 후보·측정·리스크 가시화만.
+</div>
+</body></html>

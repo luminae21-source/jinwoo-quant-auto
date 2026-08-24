@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>진우 사냥터 — 사용설명서</title>
+<style>
+:root{--bg:#0f1115;--panel:#171a21;--line:#242a35;--acc:#ff7a45;--gold:#ffca3a;--txt:#e8eaed;--sub:#9aa0aa;--grn:#3fb37a;--red:#e2606a;--blu:#5aa0f0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:'Malgun Gothic',system-ui,sans-serif;line-height:1.55}
+.w{max-width:960px;margin:0 auto;padding:30px 20px 60px}
+.hero{border-bottom:2px solid var(--acc);padding-bottom:16px;margin-bottom:8px}
+.hero h1{font-size:28px;margin:0 0 4px}.hero .sub{color:var(--sub);font-size:13.5px}
+h2{font-size:19px;margin:30px 0 12px;color:var(--acc);border-left:4px solid var(--acc);padding-left:11px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--sub);font-weight:600;background:#141821}
+.ok{color:var(--grn);font-weight:700}.no{color:var(--red);font-weight:700}.warn{color:var(--gold);font-weight:700}
+.step{display:flex;gap:14px;margin:10px 0;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.step .n{flex:0 0 38px;height:38px;border-radius:50%;background:var(--acc);color:#161616;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center}
+.step .b{flex:1}.step h3{margin:0 0 4px;font-size:15px}.step p{margin:2px 0;font-size:13px;color:var(--sub)}
+.step code{background:#0d1016;border:1px solid #2a3140;border-radius:5px;padding:1px 7px;color:#ffcaa0;font-size:12.5px}
+.tool{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 15px;margin:8px 0;font-size:13px}
+.tool b{font-size:14px}.tool .file{color:#ffcaa0;font-size:12px}.tool p{margin:4px 0 0;color:var(--sub)}
+.note{background:#1a2418;border:1px solid #2f4a2a;border-radius:10px;padding:12px 16px;font-size:13px;color:#c8e0c0;margin:10px 0}
+.warnbox{background:#26191a;border:1px solid #5a3232;border-radius:10px;padding:12px 16px;font-size:13px;color:#e6b4b4;margin:10px 0}
+.foot{color:var(--sub);font-size:11.5px;margin-top:26px;border-top:1px solid var(--line);padding-top:12px;line-height:1.7}
+.tag{display:inline-block;font-size:11px;padding:2px 9px;border-radius:20px;margin-left:6px}
+.tg{background:#1a2418;color:var(--grn);border:1px solid #2f4a2a}.tn{background:#26191a;color:var(--red);border:1px solid #5a3232}
+</style></head><body><div class="w">
+
+<div class="hero">
+  <h1>진우 사냥터 — 사용설명서</h1>
+  <div class="sub">① 연구 정리 · ② 사용법 · ③ 발굴툴 순서 · 2026-07-19</div>
+</div>
+
+<!-- ① 연구 정리 도표 -->
+<h2>① 연구 정리 (한눈에)</h2>
+<table>
+<tr><th>주제</th><th>검증 결과</th><th>수치</th><th>판정</th></tr>
+<tr><td><b>딥밸류바닥</b><br>저PBR+과매도+턴</td><td>하락장 12개월 선행수익이 시장의 약 2배. 전 시장 유효(강세장도), 2008 리먼 +56%. IN/OOS·상폐반영·look-ahead 통과</td><td>+28.6% vs 시장 +13.5%</td><td class="ok">✔ 검증(주력)</td></tr>
+<tr><td><b>분산</b></td><td>1종 집중은 −100%(파산). 10종 분산해야 생존. 분산은 선택이 아니라 생존 조건</td><td>10종·3년 = CAGR +47%·Sharpe 0.50 (시장 +7%)</td><td class="ok">✔ 검증(필수)</td></tr>
+<tr><td><b>보유</b></td><td>딥밸류는 스톱이 휩쏘(독). 승자 미절단·2~3년 장기보유가 최고. MDD −70%는 감내(입장료)</td><td>보유 +36% vs 스톱류 +2~9%</td><td class="ok">✔ 검증</td></tr>
+<tr><td><b>익절</b></td><td>스톱과 반대 — 강함(과열·적정가 도달)에 판다. 중앙값·대박포착·자본효율 개선</td><td>이격≥1.5 · +100% · PBR≥1.0</td><td class="ok">✔ 검증</td></tr>
+<tr><td><b>모멘텀·SEPA 진입</b></td><td>신고가 추격은 시장에 짐(한국은 평균회귀 보상). SEPA는 더 나쁨</td><td>SEPA +3.5% &lt; 시장 +11.8%</td><td class="no">✘ 엣지 없음</td></tr>
+<tr><td><b>테마 진입</b></td><td>테마맵이 현재(2026) 고정 = 과거 적용 시 look-ahead 편향. 정직한 백테스트 불가</td><td>—</td><td class="warn">△ 검증 불가</td></tr>
+<tr><td><b>외국인·기관 수급</b></td><td>단독 신호는 실패(IC≈0). 딥밸류+기관매집은 예비 유망(+34%)하나 표본 작아 미검증</td><td>단독 IC≈0 / 조건부 n=128</td><td class="warn">△ 검증 중</td></tr>
+<tr><td><b>엣지 지속성</b></td><td>양 시대 유효(과최적 아님)하나 초과수익 <b>감쇠 중</b>(전반기 대비 반토막)</td><td>배수 2.6→2.2배</td><td class="warn">△ 감쇠 관찰</td></tr>
+</table>
+<div class="note"><b>한 줄</b>: 딥밸류바닥(싸게+과매도+턴) → 분산 → 장기보유 → 강함에 익절. 이 4개가 30년 검증을 통과한 전부. 모멘텀·테마·수급단독은 기각/보류.</div>
+
+<!-- ② 사용법 -->
+<h2>② 사용법 — 매일/매주 이렇게</h2>
+<div class="step"><div class="n">1</div><div class="b"><h3>데이터는 자동 최신 (확인만)</h3>
+<p>평일 07:30 자동 갱신됨. 확인하려면 <code>py 진우_데이터점검.py</code> → "최신 ✔"이면 OK. (수동 갱신: <code>진우_자동갱신_파이프라인.bat</code> 더블클릭)</p></div></div>
+<div class="step"><div class="n">2</div><div class="b"><h3>지금이 사냥철인가? — 시장 확인</h3>
+<p><b>타점발굴 표</b>를 열면 상단에 시장 표시. <span class="ok">하락장</span>=◆딥밸류바닥 후보가 잘 뜸(기회, 3~6M 반등). <span style="color:var(--sub)">강세장</span>=후보 적음(정상, 무리 금지). 지금은 강세장이라 후보 0~소수.</p></div></div>
+<div class="step"><div class="n">3</div><div class="b"><h3>후보 보기 — ◆딥밸류바닥 필터</h3>
+<p><code>진우_타점발굴_표_차트.html</code> 열고 <b>◆딥밸류바닥</b> 버튼 클릭. 종목 행을 누르면 캔들 차트·매수타점·손절이 팝업. 비었으면 <b>△바닥반등</b>(약한 보조)으로 넓게 봐도 됨.</p></div></div>
+<div class="step"><div class="n">4</div><div class="b"><h3>고르기 — 분산이 규칙</h3>
+<p>한 번에 몰빵 금지. <b>10~15종</b> 목표로 소액씩. 섹터당 2종·같은 그룹 1종. (한 종목 −50%·상폐돼도 포트 무해하게)</p></div></div>
+<div class="step"><div class="n">5</div><div class="b"><h3>매수 — 타점·손절 확인</h3>
+<p>표의 <b>매수타점</b>(MA20 부근)·손절 참고. 딥밸류바닥은 타이트 스톱 대신 넓은 재난백스톱(−40%대)만. 실제 매수 전 <b>모의매매</b>로 연습 권장.</p></div></div>
+<div class="step"><div class="n">6</div><div class="b"><h3>기록 — 모의매매장</h3>
+<p><code>진우_모의매매장.csv</code>에 <code>날짜,코드,종목명,구분(매수/매도/입금),가격,수량</code> 기록 → <code>py 진우_모의매매.py</code> → <b>진우_모의매매_현황.html</b>에서 손익·현금·규칙신호 확인.</p></div></div>
+<div class="step"><div class="n">7</div><div class="b"><h3>보유 중 — 익절 신호만 보면 됨</h3>
+<p>모의매매 현황이 자동으로 알려줌: <b>익절검토</b>(이격≥1.5 / +100% / PBR 적정권) 뜨면 강함에 분할 익절. 안 뜨면 <b>그냥 보유</b>(승자 미절단, 최대 3년).</p></div></div>
+<div class="warnbox"><b>딱 3개만 기억</b>: ① 하락장에 ◆딥밸류바닥을 ② 10~15종 분산해서 사고 ③ 익절검토 뜰 때까지(강함에) 보유. 나머지는 도구가 계산해줌.</div>
+
+<!-- ③ 발굴툴 순서 -->
+<h2>③ 발굴툴 — 순서대로</h2>
+<p style="color:var(--sub);font-size:13px">자동갱신 파이프라인이 이 순서로 돕니다. 사람이 볼 땐 <b>3→7(타점발굴 표·차트)</b>와 <b>11(모의매매)</b>만 봐도 충분.</p>
+<div class="tool"><b>1. 데이터점검</b> <span class="file">진우_데이터점검.py</span> <span class="tag tg">확인</span><p>데이터가 최신인지 신선도 점검(며칠 지연 경고).</p></div>
+<div class="tool"><b>2. 일봉 증분수집</b> <span class="file">진우_일봉_증분수집.py</span> <span class="tag tg">데이터</span><p>빠진 영업일만 pykrx로 받아 30년 패널에 이어붙임 [PC 전용].</p></div>
+<div class="tool"><b>3. 사냥터 스크리너</b> <span class="file">진우사냥터_스크리너.py</span> <span class="tag tg">선별</span><p>저PBR·저변동 가치주 랭킹(유니버스 선별).</p></div>
+<div class="tool"><b>4. 매매방식 가이드</b> <span class="file">진우_매매방식_가이드.py</span> <span class="tag tg">분류</span><p>종목별 매매스타일 분류·규칙 매핑.</p></div>
+<div class="tool"><b>5. 테마발굴</b> <span class="file">진우_테마발굴.py</span> <span class="tag tg">참고</span><p>반도체·2차전지·로봇·원전·방산 등 테마군 스캔(정성 참고, 검증 엣지 아님).</p></div>
+<div class="tool"><b>6. ★ 타점발굴</b> <span class="file">진우_타점발굴.py</span> <span class="tag tg">핵심</span><p>◆딥밸류바닥·△바닥반등 후보 + 매수타점·손절 + 시장 regime. 시스템의 심장.</p></div>
+<div class="tool"><b>7. ★ 타점발굴 표+차트</b> <span class="file">진우_타점발굴_표_차트.html</span> <span class="tag tg">보는 것</span><p>필터·정렬·검색 + 종목 클릭→캔들 팝업. <b>매일 여기 봄.</b></p></div>
+<div class="tool"><b>8. 진입신호(SEPA)</b> <span class="file">진우_진입신호.py</span> <span class="tag tn">관찰용</span><p>주봉 트렌드템플릿 상태머신. 검증상 엣지 약함 → 매수근거 아님.</p></div>
+<div class="tool"><b>9. 현황판 · 카드 · 통합대시보드 · 차트뷰</b> <span class="file">진우사냥터_현황판/카드/통합대시보드/차트뷰</span> <span class="tag tg">시각화</span><p>전 종목 그래픽·PNG 카드·인터랙티브 차트.</p></div>
+<div class="tool"><b>10. 안전보유 점검</b> <span class="file">진우_안전보유_점검.py</span> <span class="tag tg">관리</span><p>보유 포트폴리오 추세·분산·방어신호 점검.</p></div>
+<div class="tool"><b>11. ★ 모의매매</b> <span class="file">진우_모의매매.py</span> <span class="tag tg">연습·추적</span><p>매매 기록→손익·현금·규칙신호. 실전 전 훈련 + 보유 추적.</p></div>
+<div class="note"><b>참고 문서</b>(도구 아님): <code>매도규칙서.md §9</code>(팔지 헷갈릴 때) · <code>진우_실전카드.png</code>(4줄 요약) · <code>사냥터_기획/</code> 폴더(검증 근거 전부).</div>
+
+<div class="foot">
+진우 사냥터 사용설명서 · 2026-07-19 · 30년·상폐반영 검증 기반.<br>
+★=매일 보는 핵심 · [PC 전용]=데이터 수집은 진우 PC에서 · 신호효능 연구이지 미래 보장 아님 · 투자자문 아님 · 집행·책임 본인.
+</div>
+
+</div></body></html>

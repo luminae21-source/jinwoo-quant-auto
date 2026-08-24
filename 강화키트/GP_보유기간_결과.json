@@ -1,0 +1,52 @@
+{
+  "GP_longonly": [
+    {
+      "H": 1,
+      "n": 123,
+      "turnover_yr": 2.04,
+      "gross_cagr": -1.2,
+      "net_cagr": -1.8,
+      "net_sharpe": 0.02,
+      "ew_cagr": 2.5,
+      "vs_ew_gross": -3.7,
+      "vs_ew": -4.3,
+      "보유": "월"
+    },
+    {
+      "H": 3,
+      "n": 123,
+      "turnover_yr": 0.59,
+      "gross_cagr": -1.0,
+      "net_cagr": -1.2,
+      "net_sharpe": 0.05,
+      "ew_cagr": 2.5,
+      "vs_ew_gross": -3.5,
+      "vs_ew": -3.7,
+      "보유": "분기"
+    },
+    {
+      "H": 6,
+      "n": 123,
+      "turnover_yr": 0.44,
+      "gross_cagr": -0.7,
+      "net_cagr": -0.8,
+      "net_sharpe": 0.06,
+      "ew_cagr": 2.5,
+      "vs_ew_gross": -3.2,
+      "vs_ew": -3.3,
+      "보유": "반기"
+    },
+    {
+      "H": 12,
+      "n": 123,
+      "turnover_yr": 0.34,
+      "gross_cagr": -1.1,
+      "net_cagr": -1.2,
+      "net_sharpe": 0.04,
+      "ew_cagr": 2.5,
+      "vs_ew_gross": -3.7,
+      "vs_ew": -3.8,
+      "보유": "연"
+    }
+  ]
+}

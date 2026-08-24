@@ -1,0 +1,19 @@
+{
+  "n": 161,
+  "t_ls": 1.71,
+  "ls_ann_pct": 5.32,
+  "oos_t": [
+    0.72,
+    2.3
+  ],
+  "drop3_t": 0.95,
+  "topq_cagr": 1.92,
+  "ew_cagr": 1.6,
+  "gates": {
+    "g1_유의": false,
+    "g2_oos": true,
+    "g3_이상치강건": false,
+    "g4_vsEW": true
+  },
+  "passed": 2
+}

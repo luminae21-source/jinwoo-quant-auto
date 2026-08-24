@@ -1,0 +1,20 @@
+{
+  "window": "2002-05~2026-07",
+  "n": 257,
+  "ls_pbr": {
+    "mean_ann": 2.8,
+    "sharpe": 0.12,
+    "mdd": -91.9
+  },
+  "ls_per": {
+    "mean_ann": 1.2,
+    "sharpe": 0.06,
+    "mdd": -82.7
+  },
+  "corr_mom_lspbr": -0.17,
+  "corr_mom_lsper": -0.3,
+  "overlay_best_w": 0.25,
+  "mom_sharpe": 1.04,
+  "overlay_sharpe": 1.08,
+  "overlay_mdd": -40.5
+}

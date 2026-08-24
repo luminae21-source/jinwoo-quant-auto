@@ -1,0 +1,75 @@
+<!doctype html><html lang=ko><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>진우퀀트 개발 스레드 지도</title><style>
+:root{--bg:#0b1020;--card:#141b2e;--ink:#e8edf6;--sub:#9fb0c9;--line:#243149;--acc:#5b9dff;--ok:#16a34a;--warn:#e0a32e;--wait:#8a93a8;--purple:#a06bff}
+@media(prefers-color-scheme:light){:root{--bg:#f4f6fb;--card:#fff;--ink:#0f1830;--sub:#5a6a86;--line:#e3e9f4;--acc:#2563eb;--wait:#7a839a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;padding:22px;line-height:1.55}
+.wrap{max-width:920px;margin:0 auto}h1{font-size:22px;margin:0 0 2px}.sub{color:var(--sub);font-size:12.5px;margin-bottom:18px}
+h3{font-size:14px;margin:22px 0 10px;color:var(--acc);letter-spacing:.3px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 17px;margin-bottom:12px}
+.hd{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.hd .t{font-size:15px;font-weight:700}
+.badge{font-size:11px;font-weight:700;padding:2px 10px;border-radius:999px}
+.b-wait{background:rgba(138,147,168,.18);color:var(--wait)}
+.b-go{background:rgba(91,157,255,.16);color:var(--acc)}
+.b-done{background:rgba(22,163,74,.16);color:var(--ok)}
+.row{font-size:12.7px;margin:5px 0;color:var(--ink)}.row b{color:var(--sub);font-weight:600;display:inline-block;min-width:60px}
+.k{color:var(--ink)}.file{font-family:ui-monospace,Consolas,monospace;font-size:11.5px;background:rgba(148,163,184,.14);border-radius:5px;padding:1.5px 7px}
+details{margin-top:8px}summary{cursor:pointer;font-size:11.5px;color:var(--acc)}
+pre{background:rgba(148,163,184,.10);border:1px solid var(--line);border-radius:8px;padding:9px 11px;font-size:11px;white-space:pre-wrap;color:var(--sub);margin:7px 0 0;line-height:1.5}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:640px){.two{grid-template-columns:1fr}}
+.mini{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:11px 13px}
+.mini .t{font-size:12.5px;font-weight:700;margin-bottom:3px}.mini p{margin:0;font-size:11.5px;color:var(--sub)}
+.note{color:var(--sub);font-size:11.5px;margin-top:6px}.warn{color:var(--warn);font-size:11px;margin-top:14px}
+.dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:2px}
+</style></head><body><div class=wrap>
+<h1>진우퀀트 개발 스레드 지도</h1>
+<div class=sub>주제별 개별 대화의 상태·핸드오프·다음 단계를 한 곳에서 · 갱신 2026-07-26 · 각 핸드오프 문서는 <span class=file>강화키트\</span>에 있음</div>
+
+<h3>🧵 활성 개발 스레드 (별도 대화에서 진행)</h3>
+
+<div class=card>
+<div class=hd><span class=t>① 기각 재분류 + 무기후보 등록부</span><span class="badge b-wait">대기</span></div>
+<div class=row><b>목적</b> <span class=k>기각 전략을 (A)신호없음 / (B)회전·비용 사망으로 분류 → 재검토 가치 있는 (B)만 선별</span></div>
+<div class=row><b>핵심</b> <span class=k>실제 순수익 나는 (B)는 <span class=file>무기후보_등록부.csv</span>에 자동 축적 · 현재 🟢 <b>mom12</b>(월간, 순−EW +3.0%p)</span></div>
+<div class=row><b>다음</b> <span class=k>기각 항목 각각을 <span class=file>재검토_보유기간.py</span>에 넣어 등록부 채우기</span></div>
+<div class=row><b>핸드오프</b> <span class=file>기각_재분류_핸드오프.md</span></div>
+<details><summary>시작 프롬프트 보기</summary><pre>진우퀀트 기각 전략들을 (A)신호없음/(B)회전세금사망으로 재분류하자. 강화키트/재검토_보유기간.py와 각 전략 백테 출력(gross 수치)을 근거로, (B) 재검토 후보만 골라내고 다올 비용·저회전으로 순수익을 재판정. 핸드오프: 강화키트/기각_재분류_핸드오프.md.</pre></details>
+</div>
+
+<div class=card>
+<div class=hd><span class=t>② 유니버스 규칙화 (동적 리더십)</span><span class="badge b-done">1차 판정 3/4</span></div>
+<div class=row><b>목적</b> <span class=k>고정 18 대형주 → "주도주 top30 동적 + MA200 방어"로 전환 검정</span></div>
+<div class=row><b>핵심</b> <span class=k>50%현금 방어가 스윗스팟: MDD −64%→<b>−44%</b>·CAGR 20.1% 유지·<b>Sharpe 0.85</b>. 단 고슬리피지서 대형주 초과 얇음(G4 미달)</span></div>
+<div class=row><b>다음</b> <span class=k>고슬리피지 강건성 보강 / 실전 반영 결정 · <b>(현행 시스템에 이미 반영됨 — 주도주 유니버스 가동)</b></span></div>
+<div class=row><b>핸드오프</b> <span class=file>유니버스_규칙화_핸드오프.md</span> · 판정 <span class=file>유니버스_규칙화_판정_2026-07-23.md</span></div>
+</div>
+
+<div class=card>
+<div class=hd><span class=t>③ 배당 인과 검정</span><span class="badge b-wait">대기 · 신규</span></div>
+<div class=row><b>목적</b> <span class=k>배당이 수익의 <b>독립적 원인</b>인가, 밸류(저PBR·저PER)의 <b>대리변수</b>인가</span></div>
+<div class=row><b>핵심</b> <span class=k>중요: 밸류의 변장이면 멀티팩터 합성(배당+E/P+B/P)은 "밸류 3중 베팅"·분산 착시 → 합성 안전성 직결</span></div>
+<div class=row><b>다음</b> <span class=k>①상관행렬 ②직교화 증분 IC ③밸류×배당 이중정렬 ④스패닝 알파 ⑤금리 레짐 분할</span></div>
+<div class=row><b>핸드오프</b> <span class=file>배당_인과검정_핸드오프.md</span></div>
+<details><summary>시작 프롬프트 보기</summary><pre>진우퀀트에서 배당이 수익의 독립적 계기인지, 밸류의 대리변수인지 검정하자. 배당_인과검정.py를 만들어 ①팩터 상관행렬 ②직교화 증분 IC ③밸류×배당 이중정렬 ④스패닝 알파 ⑤금리 레짐 분할을 30년 상폐포함 패널로 돌려줘. 판정선: 잔차IC t≥2.3 & 스패닝알파 t≥2.0이면 독립. 근거: 강화키트/배당_인과검정_핸드오프.md.</pre></details>
+</div>
+
+<h3>🔄 자동화 스레드 (스케줄)</h3>
+<div class=two>
+<div class=mini><div class=t>📄 백서 주간 갱신</div><p>매주 월 08:00 · 형식+라이브 수치 반영 · 새 산출물(factor_efficacy·허브)에 재연결됨</p></div>
+<div class=mini><div class=t>📘 백서 월간 심층 개정</div><p>매월 7일 08:00 · 검증 리포트 읽어 패러다임 반영 · 카톡/푸시 알림</p></div>
+<div class=mini><div class=t>📊 추천·집행 (기존)</div><p>매주 월 08:25 recommend_auto → 카톡 · 매월 6일 재검증</p></div>
+<div class=mini><div class=t>🗂 허브 = SSOT</div><p>라이브 수치의 진실 · jq_history.db 자동 축적 · 백서는 근거 레퍼런스</p></div>
+</div>
+
+<h3>✅ 최근 완료 (강화 산출물)</h3>
+<div class=two>
+<div class=mini><div class=t>백서 2세대 개정</div><p>주도주·2트랙·배당 최강으로 중심축 교체, v3.7.2는 발전사로</p></div>
+<div class=mini><div class=t>알파 3분해</div><p>수익엔진 귀속 — 유니버스 44% + 선정·틸트 56%(힌드사이트 포함)</p></div>
+<div class=mini><div class=t>매도규칙 v3 통일</div><p>진입유형별 라우터(core·momentum·deepvalue)</p></div>
+<div class=mini><div class=t>통합 한도 JSON</div><p>모든 리스크 파라미터 단일화 + 집행 런북</p></div>
+<div class=mini><div class=t>계절순환 기각</div><p>깨끗한 30년서 0/4 · 회전세금이 신호 초과(다올도)</p></div>
+<div class=mini><div class=t>재검토 도구</div><p>보유기간별 순수익 → 무기후보 자동 등록</p></div>
+</div>
+
+<div class=warn>⚠️ 정보·검증용. 미래·수익 보장 아님. 라이브 수치는 허브(SSOT). 투자자문 아님 · 최종 판단·책임 본인.</div>
+</div></body></html>

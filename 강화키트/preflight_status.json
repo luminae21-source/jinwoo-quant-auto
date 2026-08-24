@@ -1,0 +1,13 @@
+{
+  "ts": "2026-08-24T08:25:27",
+  "asof": "2026-08",
+  "overall": "WARN",
+  "data": "WARN",
+  "stale": false,
+  "selftests": {
+    "진우_한도로더.py": "PASS",
+    "사이징_강제.py": "SKIP(없음)",
+    "매도규칙_라우터.py": "PASS",
+    "pit_lag.py": "PASS"
+  }
+}

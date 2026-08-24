@@ -1,0 +1,5 @@
+﻿month,W_ret,sys_ret,themeEW_ret,note
+# month=YYYY-MM, 수익 소수. W=실보유 가중(auto), sys=선별18 EW 반사실, themeEW=보유테마버킷 EW.
+# auto=trackw_update.py 자동기입(buy-hold근사). 실현치 다르면 해당월 W_ret 수기수정 가능.
+2026-05,0.62848,0.02971,-0.07774,auto(buy-hold가중근사) 테마=2차전지·반도체/전자
+2026-06,-0.21018,-0.07682,-0.19566,auto(buy-hold가중근사) 테마=2차전지·반도체/전자

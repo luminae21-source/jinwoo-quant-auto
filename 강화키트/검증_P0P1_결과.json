@@ -1,0 +1,52 @@
+{
+  "p0_2": {
+    "raw·50": {
+      "cagr": 20.1,
+      "sharpe": 0.85,
+      "mdd": -44.2
+    },
+    "clip·50": {
+      "cagr": 19.3,
+      "sharpe": 0.83,
+      "mdd": -41.8
+    }
+  },
+  "p1": {
+    "전체(1996~2026)": {
+      "prim_cagr": 19.3,
+      "prim_sh": 0.83,
+      "prim_mdd": -41.8,
+      "nod_cagr": 21.4,
+      "nod_sh": 0.78,
+      "nod_mdd": -53.6,
+      "fixed_sh": 0.78
+    },
+    "2024이전(~2023-12)": {
+      "prim_cagr": 16.5,
+      "prim_sh": 0.77,
+      "prim_mdd": -41.8,
+      "nod_cagr": 17.6,
+      "nod_sh": 0.69,
+      "nod_mdd": -53.6,
+      "fixed_sh": 0.69
+    },
+    "2025이전(~2024-12)": {
+      "prim_cagr": 16.6,
+      "prim_sh": 0.78,
+      "prim_mdd": -41.8,
+      "nod_cagr": 17.9,
+      "nod_sh": 0.71,
+      "nod_mdd": -53.6,
+      "fixed_sh": 0.69
+    },
+    "최근만(2024-01~)": {
+      "prim_cagr": 52.2,
+      "prim_sh": 1.34,
+      "prim_mdd": -24.9,
+      "nod_cagr": 68.8,
+      "nod_sh": 1.55,
+      "nod_mdd": -24.9,
+      "fixed_sh": 1.55
+    }
+  }
+}

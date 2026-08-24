@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>하순 필터 도식 — 진우퀀트</title>
+<style>
+  :root{
+    --bg:#ffffff; --ink:#16181d; --sub:#5b6270; --line:#dfe3e8;
+    --red:#c62828; --redbg:#fdecea; --green:#1b7f4b; --greenbg:#e8f5ee;
+    --amber:#c77700; --amberbg:#fff4e2; --panel:#f6f8fa;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;padding:36px 28px 80px;background:var(--bg);color:var(--ink);
+       font-family:"Malgun Gothic","맑은 고딕",system-ui,-apple-system,sans-serif;
+       font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto}
+  h1{font-size:32px;margin:0 0 6px;letter-spacing:-.5px}
+  .sub{color:var(--sub);font-size:15px;margin-bottom:34px}
+  h2{font-size:23px;margin:52px 0 6px;padding-top:26px;border-top:2px solid var(--line)}
+  h2 .n{display:inline-block;width:34px;height:34px;line-height:34px;text-align:center;
+        background:var(--ink);color:#fff;border-radius:9px;font-size:18px;margin-right:10px;vertical-align:2px}
+  .lead{color:var(--sub);font-size:15px;margin:0 0 22px}
+  b{color:var(--ink)}
+  .red{color:var(--red);font-weight:700}
+  .grn{color:var(--green);font-weight:700}
+
+  /* ── 타임라인 ── */
+  .tl{display:flex;gap:3px;margin:26px 0 0}
+  .d{flex:1;height:64px;border-radius:6px;display:flex;align-items:center;justify-content:center;
+     font-size:15px;font-weight:600;border:2px solid transparent}
+  .ok{background:var(--greenbg);border-color:#a8d5bd;color:#2b6f4d}
+  .late{background:var(--redbg);border-color:var(--red);color:var(--red);font-size:18px;font-weight:800}
+  .bar{display:flex;gap:3px;margin-top:8px}
+  .lab{border-radius:6px;padding:9px 0;text-align:center;font-size:15px;font-weight:700}
+  .lab.g{background:var(--greenbg);color:var(--green)}
+  .lab.r{background:var(--red);color:#fff;font-size:17px}
+  .datebox{margin-top:14px;background:var(--redbg);border-left:6px solid var(--red);
+           padding:14px 18px;border-radius:0 8px 8px 0;font-size:17px}
+
+  .callout{margin-top:24px;background:var(--panel);border:2px solid var(--line);
+           border-radius:12px;padding:20px 22px;font-size:17px;line-height:1.8}
+
+  /* ── 시총 막대 ── */
+  .bars{margin-top:26px}
+  .row{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+  .row .nm{width:90px;text-align:right;font-weight:700;font-size:17px}
+  .track{flex:1;height:38px;background:var(--panel);border-radius:6px;position:relative;overflow:hidden}
+  .fill{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:14px;
+        color:#fff;font-weight:700;font-size:15px;white-space:nowrap}
+  .thr{position:absolute;top:-6px;bottom:-6px;left:33%;width:0;border-left:2px dashed var(--amber)}
+  .note{width:290px;font-size:14px;color:var(--sub)}
+  .note.bad{color:var(--red);font-weight:700}
+
+  /* ── 2단 카드 ── */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:26px}
+  .card{border-radius:14px;padding:22px 24px;border:2px solid}
+  .card.bad{background:var(--redbg);border-color:var(--red)}
+  .card.good{background:var(--greenbg);border-color:var(--green)}
+  .card h3{margin:0 0 4px;font-size:19px}
+  .card .cs{font-size:14px;color:var(--sub);margin:0 0 16px}
+  .kv{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed rgba(0,0,0,.12);font-size:15px}
+  .kv:last-of-type{border:0}
+  .flow{display:flex;align-items:center;gap:8px;margin:16px 0;flex-wrap:wrap}
+  .chip{background:#fff;border:2px solid var(--green);border-radius:8px;padding:8px 12px;
+        font-size:14px;font-weight:600;color:var(--green)}
+  .chip.r{border-color:var(--red);color:var(--red)}
+  .arw{color:var(--sub);font-size:18px}
+  .verdict{margin-top:16px;font-size:17px;font-weight:800}
+
+  /* ── 관문표 ── */
+  table{width:100%;border-collapse:collapse;margin-top:24px;font-size:16px}
+  th{background:var(--panel);padding:13px 10px;font-size:14px;color:var(--sub);
+     border-bottom:2px solid var(--line);text-align:center}
+  th:first-child{text-align:left;padding-left:16px}
+  td{padding:15px 10px;text-align:center;border-bottom:1px solid var(--line)}
+  td:first-child{text-align:left;font-weight:700;padding-left:16px}
+  tr.win{background:var(--greenbg)}
+  tr.win td{border-color:#a8d5bd}
+  tr.lose td:first-child{color:var(--sub)}
+  .mk{font-size:22px;font-weight:800}
+  .mk.o{color:var(--green)}
+  .mk.x{color:var(--red)}
+  .dash{color:#c3c8cf}
+  .vd{font-size:15px;font-weight:800}
+
+  .warn{margin-top:30px;background:var(--amberbg);border:2px solid var(--amber);
+        border-radius:14px;padding:22px 24px}
+  .warn h3{margin:0 0 12px;color:#a35f00;font-size:19px}
+  .warn p{margin:8px 0;font-size:16px;line-height:1.75}
+
+  .final{margin-top:44px;background:var(--greenbg);border:3px solid var(--green);
+         border-radius:16px;padding:28px 30px}
+  .final .t{color:var(--green);font-weight:800;font-size:15px;letter-spacing:1px;margin-bottom:12px}
+  .final .l1{font-size:24px;font-weight:800;line-height:1.5;margin-bottom:10px}
+  .final .l2{font-size:16px;color:var(--sub)}
+  .foot{margin-top:30px;font-size:13px;color:#9aa1ab;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>하순(下旬) 필터</h1>
+  <div class="sub">30년 데이터로 살아남은 <b>단 하나의</b> 달력 규칙 · 1996~2026 · 5,051종목(상폐 포함) · 1,470만 행 · OOS 사전봉인<br>
+  <span style="color:#b0b6bf">투자자문 아님. 매수·매도 판단과 책임은 본인.</span></div>
+
+  <!-- 1 -->
+  <h2><span class="n">1</span>하순이란 무엇인가</h2>
+  <p class="lead">달력 날짜가 아니라 <b>거래일</b>로 센다. 마지막 거래일이 −1. 거기서 거꾸로 9번째부터 5번째까지가 하순이다.<br>
+  이 창(−9 ~ −5)은 <b>Lakonishok &amp; Smidt (1988)</b>가 정의한 것이다. 내가 데이터를 보고 고른 게 아니다.</p>
+
+  <div class="tl">
+    <div class="d ok">−20</div><div class="d ok">−19</div><div class="d ok">−18</div><div class="d ok">−17</div>
+    <div class="d ok">−16</div><div class="d ok">−15</div><div class="d ok">−14</div><div class="d ok">−13</div>
+    <div class="d ok">−12</div><div class="d ok">−11</div><div class="d ok">−10</div>
+    <div class="d late">−9</div><div class="d late">−8</div><div class="d late">−7</div>
+    <div class="d late">−6</div><div class="d late">−5</div>
+    <div class="d ok">−4</div><div class="d ok">−3</div><div class="d ok">−2</div><div class="d ok">−1</div>
+  </div>
+  <div class="bar">
+    <div class="lab g" style="flex:11">신규 진입 가능</div>
+    <div class="lab r" style="flex:5">하순 — 신규 진입 보류</div>
+    <div class="lab g" style="flex:4">진입 재개</div>
+  </div>
+
+  <div class="datebox"><b>2026년 7월의 하순 = 7/21(화) ~ 7/27(월)</b></div>
+
+  <div class="callout">
+    <span class="red">막는 것은 “신규 진입”뿐이다.</span><br>
+    기존에 들고 있는 종목은 <b>그대로 보유</b>한다. 청산·손절은 평소대로 한다.<br>
+    → <b>매매 횟수가 늘지 않는다. 그래서 비용이 0이다.</b> 이게 이 규칙이 살아남은 이유의 절반이다.
+  </div>
+
+  <!-- 2 -->
+  <h2><span class="n">2</span>왜 소·중형주에만 쓰는가</h2>
+  <p class="lead">OOS(2013~2026, 봉인을 딱 한 번 열어 확인) p값. <b>낮을수록 강한 증거.</b> 주황 점선이 기준선 0.05.</p>
+
+  <div class="bars">
+    <div class="row">
+      <div class="nm">시총 <b>소</b></div>
+      <div class="track"><div class="thr"></div><div class="fill" style="width:4%;background:#1b7f4b"></div>
+        <span style="position:absolute;left:60px;top:9px;font-weight:800;color:#1b7f4b;font-size:16px">p = 0.0002</span></div>
+      <div class="note grn">✅ Bonferroni×12(0.0024)까지 통과</div>
+    </div>
+    <div class="row">
+      <div class="nm">시총 <b>중</b></div>
+      <div class="track"><div class="thr"></div><div class="fill" style="width:8%;background:#4a9d70"></div>
+        <span style="position:absolute;left:80px;top:9px;font-weight:800;color:#2b7f52;font-size:16px">p = 0.0041</span></div>
+      <div class="note grn">✅ 통과</div>
+    </div>
+    <div class="row">
+      <div class="nm">시총 <b>대</b></div>
+      <div class="track"><div class="thr"></div><div class="fill" style="width:80%;background:#c62828">p = 0.1211 &nbsp;— 기준선을 한참 넘었다</div></div>
+      <div class="note bad">❌ 기각 — 대형주엔 쓰지 않는다</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b style="font-size:19px">소 &gt; 중 &gt; 대 — 이 순서가 30년 내내 유지된다.</b><br>
+    차익거래는 <b>유동성이 큰 대형주부터</b> 먹어치운다. 그래서 대형주에선 이미 사라졌고, 소형주엔 아직 남아 있다.<br>
+    <span class="grn">경제 논리와 데이터가 같은 방향을 가리킨다.</span> 우연히 나온 숫자라면 이런 질서가 나오지 않는다.<br>
+    <span style="color:#5b6270;font-size:15px">효과 크기: 일간 −0.16%p (시총 소·OOS). 하순 5일이면 월 0.8% 차이. 의미는 있지만 인생을 바꾸진 않는다.</span>
+  </div>
+
+  <!-- 3 -->
+  <h2><span class="n">3</span>가장 중요한 구분 — 필터는 되고, 타이밍은 안 된다</h2>
+  <p class="lead">같은 발견인데 <b>어떻게 쓰느냐</b>에 따라 결과가 정반대다. 여기서 대부분의 백테스터가 죽는다.</p>
+
+  <div class="two">
+    <div class="card bad">
+      <h3 style="color:#c62828">❌ 타이밍 규칙</h3>
+      <p class="cs">“하순엔 전량 현금, 나머지는 보유” → <b>연 24회 왕복 매매</b><br>
+      한국 왕복비용 = 매도세 0.18% + 수수료 + 슬리피지 ≈ <b>0.45%</b></p>
+      <div class="kv"><span>buy &amp; hold</span><b>CAGR 11.81%</b></div>
+      <div class="kv"><span>하순회피 · 비용 0 <span style="color:#9aa1ab">(신기루)</span></span><b class="grn">18.32% &nbsp;+6.51%p</b></div>
+      <div class="kv"><span><b>하순회피 · 0.45% (현실)</b></span><b style="color:#c77700">11.89% &nbsp;+0.09%p</b></div>
+      <div class="kv"><span>하순회피 · 0.70%</span><b class="red">8.47% &nbsp;−3.34%p</b></div>
+      <div class="verdict" style="color:#c62828">→ 비용이 우위를 전부 먹는다. 무승부거나 손해.</div>
+    </div>
+
+    <div class="card good">
+      <h3 style="color:#1b7f4b">✅ 진입 필터</h3>
+      <p class="cs">“어차피 살 종목의 <b>시점만</b> 미룬다” → <b>매매 추가 0건</b></p>
+      <div class="flow">
+        <span class="chip">진입 신호 발생</span><span class="arw">→</span>
+        <span class="chip r">지금 하순?</span><span class="arw">→</span>
+        <span class="chip">−4일 이후에 진입</span>
+      </div>
+      <div class="kv"><span>추가되는 매매</span><b>0 건</b></div>
+      <div class="kv"><span>추가되는 비용</span><b class="grn">0 원</b></div>
+      <div class="kv"><span>기존 보유·청산</span><b>영향 없음</b></div>
+      <div class="verdict" style="color:#1b7f4b">→ 비용 관문 자동 통과. <b>이 방식으로만 채택.</b></div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <h2><span class="n">4</span>4개 가설이 관문을 통과한 기록</h2>
+  <p class="lead">관문은 <b>데이터를 보기 전에</b> 정해서 봉인했다. 결과가 마음에 안 든다고 바꾸지 않았다.<br>
+  (A) IN 구간 유의 · (B) 이상치 빼도 살아남음 · (C) <b>봉인한 OOS에서 생존</b> · (D) 비용 후에도 이득</p>
+
+  <table>
+    <tr>
+      <th>가설</th><th>(A) IN 유의</th><th>(B) 이상치 강건</th><th>(C) OOS 생존</th><th>(D) 비용</th><th>판정</th>
+    </tr>
+    <tr class="lose">
+      <td>① 할로윈 (5~10월 약세)</td>
+      <td class="mk o">✅</td><td class="mk x">❌</td><td class="dash">—</td><td class="dash">—</td>
+      <td class="vd" style="color:#c62828">기각</td>
+    </tr>
+    <tr class="lose">
+      <td>② 월초 강세 (TOM)</td>
+      <td class="mk o">✅</td><td class="mk o">✅</td><td class="mk x">❌</td><td class="dash">—</td>
+      <td class="vd" style="color:#c62828">기각</td>
+    </tr>
+    <tr class="win">
+      <td style="color:#1b7f4b">③ 하순 조정</td>
+      <td class="mk o">✅</td><td class="mk o">✅</td><td class="mk o">✅</td>
+      <td class="grn" style="font-size:14px">진입필터<br>= 비용 0</td>
+      <td class="vd" style="color:#1b7f4b">★ 채택</td>
+    </tr>
+    <tr class="lose">
+      <td>④ 월중 저점 → 고점</td>
+      <td class="mk x">❌</td><td class="dash">—</td><td class="mk x">❌</td><td class="dash">—</td>
+      <td class="vd" style="color:#c62828">기각</td>
+    </tr>
+  </table>
+
+  <div class="warn">
+    <h3>⚠ ②가 이 표에서 가장 무서운 줄이다</h3>
+    <p>월초 강세는 IN 구간에서 <b>t = 5.49, p = 0.0000</b> 이었다. 이상치 6개를 빼도 p=0.0000.<br>
+    <b>어떤 논문이든 실었을 숫자다. 나라도 믿었다.</b></p>
+    <p><span class="red">그런데 봉인을 열자 OOS에서 전멸했다 (p = 0.1310).</span></p>
+    <p>OOS를 <b>데이터 보기 전에</b> 잘라두지 않았다면, 오늘 이걸 규칙으로 넣었을 것이다. 그리고 실전에서 잃었을 것이다.<br>
+    <b>IN Sharpe와 OOS Sharpe의 상관 = −0.709.</b> 백테스트가 예쁠수록 실전에서 더 나빴다.</p>
+  </div>
+
+  <div class="final">
+    <div class="t">한 줄 요약</div>
+    <div class="l1">코스닥 소·중형주는 월말 −9~−5 거래일에 약하다.<br>
+    그 구간엔 <span style="color:#c62828">신규 진입만</span> 미룬다.</div>
+    <div class="l2">팔지 않는다. 대형주엔 쓰지 않는다. 넣었다 뺐다 하지 않는다.<br>
+    <b>2028년 7월에 다시 판정한다 — 그때 안 되면 버린다.</b></div>
+  </div>
+
+  <div class="foot">진우퀀트 · 2026-07-14 · 근거: 증명된_규칙\증거\ (사전등록서 · 재검정결과 · 비용관문결과)</div>
+</div>
+</body>
+</html>

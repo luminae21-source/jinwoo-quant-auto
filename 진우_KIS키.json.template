@@ -1,0 +1,10 @@
+{
+  "_주의": "이 파일을 '진우_KIS키.json' 으로 복사한 뒤 값을 채우세요. 실제 키 파일은 절대 공유/커밋 금지(.gitignore 등록).",
+  "_발급": "KIS Developers(apiportal.koreainvestment.com) 로그인 → 모의투자 신청 → 앱 등록 → APP KEY/SECRET 발급.",
+  "appkey": "여기에_모의투자_APP_KEY",
+  "appsecret": "여기에_APP_SECRET",
+  "account": "계좌번호_앞8자리",
+  "account_prod": "01",
+  "_account_설명": "account=계좌번호 앞 8자리, account_prod=뒤 2자리(보통 01). 모의계좌 먼저.",
+  "_환경변수_대안": "파일 대신 KIS_APPKEY / KIS_APPSECRET / KIS_ACCOUNT / KIS_ACCOUNT_PROD 환경변수로도 가능."
+}

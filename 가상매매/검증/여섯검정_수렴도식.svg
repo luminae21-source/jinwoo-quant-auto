@@ -1,0 +1,67 @@
+<svg viewBox="0 0 880 700" xmlns="http://www.w3.org/2000/svg" role="img" font-family="'Malgun Gothic', system-ui, sans-serif">
+<title>여섯 검정이 하나의 결론으로 수렴하는 도식</title>
+<desc>고변동 추격·모멘텀·스톱=알파는 기각되고, 저변동·저PBR·소중형 결합은 채택되어, 더 싸고 덜 출렁이는 쪽으로 기울이라는 결론으로 수렴하며 발굴툴에 배선됨</desc>
+<defs>
+<marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 z" fill="#7a7f88"/></marker>
+<marker id="arG" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 z" fill="#1e8e5a"/></marker>
+</defs>
+
+<rect x="0" y="0" width="880" height="700" fill="#ffffff"/>
+<text x="440" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#1a1a1a">여섯 검정 → 하나의 결론</text>
+<text x="440" y="56" text-anchor="middle" font-size="13" fill="#6b7079">①②③④ + B·C 가 독립적으로 같은 방향을 가리킨다</text>
+
+<text x="222" y="90" text-anchor="middle" font-size="15" font-weight="700" fill="#c0392b">✗ 안 되는 것 (기각)</text>
+<text x="658" y="90" text-anchor="middle" font-size="15" font-weight="700" fill="#1e8e5a">✓ 되는 것 (채택)</text>
+
+<g>
+<rect x="44" y="104" width="356" height="70" rx="9" fill="#fbecea" stroke="#e0b4ad"/>
+<text x="60" y="132" font-size="15" font-weight="700" fill="#8f2a20">① 고변동 추격</text>
+<text x="60" y="156" font-size="12.5" fill="#6b4b47">스톱 붙여도 기하 −4.2% · 저변동을 못 이김</text>
+</g>
+<g>
+<rect x="44" y="188" width="356" height="70" rx="9" fill="#fbecea" stroke="#e0b4ad"/>
+<text x="60" y="216" font-size="15" font-weight="700" fill="#8f2a20">C 모멘텀 · 52주 신고가</text>
+<text x="60" y="240" font-size="12.5" fill="#6b4b47">IN에선 화려하나 OOS에서 사망</text>
+</g>
+<g>
+<rect x="44" y="272" width="356" height="70" rx="9" fill="#fbecea" stroke="#e0b4ad"/>
+<text x="60" y="300" font-size="15" font-weight="700" fill="#8f2a20">B 하드 스톱</text>
+<text x="60" y="324" font-size="12.5" fill="#6b4b47">파국 방어일 뿐 — 알파 아님(손상통제)</text>
+</g>
+
+<g>
+<rect x="480" y="104" width="356" height="70" rx="9" fill="#e6f4ec" stroke="#a9d6bd"/>
+<text x="496" y="132" font-size="15" font-weight="700" fill="#186b45">C 저변동 · 저PBR</text>
+<text x="496" y="156" font-size="12.5" fill="#3f5a4c">전 시장 OOS 롱숏 t=4.7 / 5.0 · 채택</text>
+</g>
+<g>
+<rect x="480" y="188" width="356" height="70" rx="9" fill="#e6f4ec" stroke="#a9d6bd"/>
+<text x="496" y="216" font-size="15" font-weight="700" fill="#186b45">② 섹터 내 기울기</text>
+<text x="496" y="240" font-size="12.5" fill="#3f5a4c">진우 사냥터 안에서도 OOS 승 (저PBR 우세)</text>
+</g>
+<g>
+<rect x="480" y="272" width="356" height="70" rx="9" fill="#e6f4ec" stroke="#a9d6bd"/>
+<text x="496" y="300" font-size="15" font-weight="700" fill="#186b45">④ 저변동 ∩ 저PBR</text>
+<text x="496" y="324" font-size="12.5" fill="#3f5a4c">소·중형은 두 팩터 결합이 최선</text>
+</g>
+
+<path d="M222,342 L222,392 L410,392 L440,418" fill="none" stroke="#7a7f88" stroke-width="1.6" marker-end="url(#ar)"/>
+<path d="M658,342 L658,392 L470,392 L440,418" fill="none" stroke="#1e8e5a" stroke-width="1.6" marker-end="url(#arG)"/>
+
+<rect x="196" y="424" width="488" height="74" rx="11" fill="#fff5ef" stroke="#e8703a" stroke-width="2"/>
+<text x="440" y="454" text-anchor="middle" font-size="17" font-weight="700" fill="#c85426">결론 — 더 싸고 덜 출렁이는 쪽으로 기울여라</text>
+<text x="440" y="480" text-anchor="middle" font-size="12.5" fill="#6b7079">고변동 추격도 스톱도 답이 아니다 · 저PBR·저변동으로의 기울기가 유일한 개선</text>
+
+<path d="M440,498 L440,536" fill="none" stroke="#7a7f88" stroke-width="1.6" marker-end="url(#ar)"/>
+
+<rect x="150" y="542" width="580" height="78" rx="11" fill="#eef1f5" stroke="#c2c8d2"/>
+<text x="440" y="570" text-anchor="middle" font-size="15" font-weight="700" fill="#22262c">③ 발굴툴(jq_discover)에 배선 완료</text>
+<text x="440" y="592" text-anchor="middle" font-size="12" fill="#4b515b">순위 점수에 저PBR·저변동 가산 · 상태필터 불변 · 스타일 안 바꾸고 기울기만 얹음</text>
+<text x="440" y="610" text-anchor="middle" font-size="12" fill="#4b515b">소·중형에선 저변동+저PBR 함께 · 고변동은 트레일−15 스톱으로 방어</text>
+
+<rect x="44" y="650" width="15" height="12" rx="2" fill="#fbecea" stroke="#e0b4ad"/>
+<text x="66" y="660" font-size="11.5" fill="#6b7079">기각</text>
+<rect x="120" y="650" width="15" height="12" rx="2" fill="#e6f4ec" stroke="#a9d6bd"/>
+<text x="142" y="660" font-size="11.5" fill="#6b7079">채택</text>
+<text x="210" y="660" font-size="11.5" fill="#94a3b8">30년 패널 5,057종목 · IN 2002–2012 / OOS 2013–2026 · 비용·상폐 반영</text>
+</svg>

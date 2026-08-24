@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>밸류축 확정 — 배당·E/P·B/P·EV/EBIT</title>
+<style>
+  :root{--bg:#0f1216;--card:#181d24;--card2:#1f2630;--line:#2b333f;--tx:#e6ebf2;--mut:#95a0ae;
+        --grn:#37d67a;--red:#ff6b6b;--amb:#ffb454;--blu:#5aa9ff;--accent:#7aa2ff;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--tx);font-family:'Segoe UI','Malgun Gothic',system-ui,sans-serif;line-height:1.6;font-size:15px}
+  .wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px}
+  h1{font-size:24px;margin:0 0 4px}
+  .sub{color:var(--mut);font-size:14px;margin-bottom:6px}
+  .meta{color:var(--mut);font-size:12.5px;margin-bottom:22px}
+  .verdict{background:linear-gradient(135deg,#20303f,#1a2330);border:1px solid #34506e;border-radius:14px;padding:20px 22px;margin-bottom:26px}
+  .grade{display:inline-block;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px;background:rgba(255,180,84,.16);color:var(--amb);border:1px solid rgba(255,180,84,.4);margin-bottom:10px}
+  .verdict h2{margin:2px 0 8px;font-size:18px}
+  .verdict p{margin:6px 0 0;color:#d3dbe6;font-size:14.5px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .card h3{margin:0 0 4px;font-size:16.5px;display:flex;align-items:center;gap:8px}
+  .num{display:inline-flex;width:26px;height:26px;border-radius:7px;background:var(--card2);color:var(--accent);align-items:center;justify-content:center;font-size:14px;font-weight:700;flex:none}
+  .core{border-color:#34506e;box-shadow:0 0 0 1px rgba(90,169,255,.12) inset}
+  .win{font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:6px;margin-left:auto;background:var(--card2);color:var(--mut)}
+  .qh{color:var(--mut);font-size:13px;margin:2px 0 12px}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;margin:6px 0}
+  th,td{padding:6px 9px;text-align:right;border-bottom:1px solid var(--line)}
+  th:first-child,td:first-child{text-align:left;color:var(--mut)}
+  thead th{color:var(--mut);font-weight:600}
+  .pos{color:var(--grn)}.neg{color:var(--red)}.mut{color:var(--mut)}.amb{color:var(--amb)}
+  .heat td{text-align:center;font-variant-numeric:tabular-nums;border:1px solid var(--bg)}
+  .note{color:var(--mut);font-size:13px;margin-top:10px}
+  .foot{color:var(--mut);font-size:12px;margin-top:24px;border-top:1px solid var(--line);padding-top:14px}
+  b.hl{color:var(--tx)}.imp{color:var(--amb);font-weight:600}
+  ul.rec{margin:8px 0 0;padding-left:0;list-style:none}
+  ul.rec li{padding:8px 0 8px 22px;position:relative;border-bottom:1px solid var(--line);font-size:14px}
+  ul.rec li:last-child{border-bottom:none}
+  ul.rec li:before{content:"▸";position:absolute;left:2px;color:var(--accent)}
+  .hi{background:rgba(55,214,122,.10)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>밸류축 확정</h1>
+  <div class="sub">배당·E/P·B/P·EV/EBIT — 얼마나 겹치나(3중 베팅?), 합성이 진짜 분산되나, 각자 증분이 있나</div>
+  <div class="meta">장기 2003-02~2026-05 (251개월) · 단기 2021-04~2026-05 (55개월, EV/EBIT 포함) · 시총 top200 · 상폐포함 · 룩어헤드X</div>
+
+  <div class="verdict">
+    <span class="grade">결론 · 밸류는 사실상 한 베팅 · 앵커는 배당</span>
+    <h2>배당·E/P·B/P를 각각 만점 주면 밸류에 3배 노출된다</h2>
+    <p>세 밸류 팩터의 <b class="hl">롱숏 월수익 상관이 평균 0.65</b> — 따로 보여도 함께 움직인다(사실상 한 베팅). 게다가 나머지 둘을 통제하면 증분이 살아남는 건 <b class="hl">배당뿐</b>(잔차 IC t=3.23), E/P·B/P는 서로 중복돼 소멸(t&lt;1). 등가중 합성 Sharpe 0.44는 배당 단독 0.59를 <b class="hl">못 넘는다</b>. EV/EBIT은 E/P·B/P 대비 증분 없음(t=−1.26).</p>
+    <p class="imp">→ 밸류축은 3~4팩터 나열이 아니라 '밸류 합성 1블록'으로 묶어 축 비중을 통제. 블록 앵커는 배당(최강·최저중복), E/P·B/P는 보조. EV/EBIT·EV/EBITDA·FCF는 축에서 제외.</p>
+  </div>
+
+  <div class="card core">
+    <h3><span class="num">3</span> 롱숏 월수익 상관 — 분산효과의 핵심<span class="win">장기 2003~ · 247개월</span></h3>
+    <div class="qh">단독 IC가 아무리 좋아도, 롱숏 <b>수익</b>이 같이 움직이면 합쳐도 분산이 안 된다.</div>
+    <table class="heat">
+      <thead><tr><th></th><th>배당</th><th>E/P</th><th>B/P</th></tr></thead>
+      <tbody>
+        <tr><td>배당</td><td>1.00</td><td>0.63</td><td>0.54</td></tr>
+        <tr><td>E/P</td><td>0.63</td><td>1.00</td><td class="amb">0.77</td></tr>
+        <tr><td>B/P</td><td>0.54</td><td class="amb">0.77</td><td>1.00</td></tr>
+      </tbody>
+    </table>
+    <div class="note">평균 비대각 상관 <b class="amb">0.65</b> → 밸류 3중 베팅 확인. 특히 <b class="hl">E/P–B/P 0.77</b>은 거의 같은 팩터. 배당은 상대적으로 덜 붙는다(0.54~0.63).</div>
+  </div>
+
+  <div class="card core">
+    <h3><span class="num">4</span> 증분 잔차 IC — 나머지 둘 통제 후 남는가<span class="win">장기 2003~</span></h3>
+    <div class="qh">각 팩터를 나머지 두 밸류 팩터에 매월 회귀한 잔차의 IC. 살아남아야 '고유 정보'.</div>
+    <table>
+      <thead><tr><th>팩터</th><th>통제</th><th>잔차 IC</th><th>t</th><th>판정</th></tr></thead>
+      <tbody>
+        <tr class="hi"><td><b>배당</b></td><td class="mut">E/P + B/P</td><td class="pos">+0.0220</td><td class="pos">3.23</td><td class="pos">유의 — 고유 정보</td></tr>
+        <tr><td>E/P</td><td class="mut">배당 + B/P</td><td>+0.0060</td><td class="neg">0.86</td><td class="mut">소멸 — 중복</td></tr>
+        <tr><td>B/P</td><td class="mut">배당 + E/P</td><td>+0.0088</td><td class="neg">1.00</td><td class="mut">소멸 — 중복</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><span class="imp">반전 포인트.</span> 인과검정에선 배당이 '약한 독립'이었지만, <b class="hl">순수 밸류 3종 안에서는 배당이 유일하게 고유 정보를 가진 팩터</b>다. E/P·B/P는 서로(그리고 배당과) 겹쳐 통제 후 신호가 사라진다. 즉 밸류 블록의 정보 대부분을 배당이 이미 담고 있다.</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">1·2</span> 상관·단독 효력<span class="win">장기 2003~</span></h3>
+    <table>
+      <thead><tr><th>팩터</th><th>평균 IC</th><th>IC t</th><th>롱숏 연%</th><th>Sharpe</th></tr></thead>
+      <tbody>
+        <tr class="hi"><td><b>배당</b></td><td class="pos">+0.0461</td><td class="pos">5.40</td><td>+8.8%</td><td class="pos">0.59</td></tr>
+        <tr><td>B/P</td><td>+0.0361</td><td>2.96</td><td>+9.9%</td><td>0.45</td></tr>
+        <tr><td>E/P</td><td>+0.0295</td><td>2.72</td><td>+8.3%</td><td>0.45</td></tr>
+        <tr><td class="mut" colspan="5" style="text-align:left">등가중 합성: IC +0.0418 (t 3.50) · 롱숏 +9.1% · Sharpe <b class="amb">0.44</b> &lt; 배당단독 0.59</td></tr>
+      </tbody>
+    </table>
+    <div class="note">횡단면 상관: 배당–E/P 0.53 · E/P–B/P 0.58 · 배당–B/P 0.41. 배당이 단독 예측력도 최강(t=5.4)이고 중복도 가장 낮다.</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">+</span> EV/EBIT — 별도 슬롯 값어치 있나<span class="win">단기 2021~ · 55개월</span></h3>
+    <table>
+      <thead><tr><th>팩터</th><th>평균 IC</th><th>IC t</th><th>Sharpe</th></tr></thead>
+      <tbody>
+        <tr><td>배당</td><td>+0.0569</td><td>2.73</td><td>0.51</td></tr>
+        <tr><td>E/P</td><td>+0.0513</td><td>2.21</td><td>0.43</td></tr>
+        <tr><td>B/P</td><td>+0.0472</td><td>1.84</td><td>0.30</td></tr>
+        <tr><td>EV/EBIT</td><td>+0.0339</td><td class="neg">1.69</td><td class="neg">0.11</td></tr>
+      </tbody>
+    </table>
+    <div class="note">단기 창에선 4종 상관이 0.53~0.77로 더 높다(배당–E/P 0.70). EV/EBIT 증분(E/P·B/P 통제 후) 잔차IC <b class="neg">−0.014, t=−1.26</b> → 부채정보를 얹어도 더 주는 게 없다. EV/EBIT은 밸류축에서 제외, EV/EBITDA(커버리지 26%)·FCF(무효)와 함께 보류.</div>
+  </div>
+
+  <div class="card">
+    <h3>권고 — 밸류축 구성</h3>
+    <ul class="rec">
+      <li>배당·E/P·B/P는 <b class="hl">'밸류 합성 1블록'</b>으로 묶어라. 각각 독립 슬롯으로 만점 주면 밸류에 3배 노출(롱숏 상관 0.65)로 의도치 않은 집중이 생긴다.</li>
+      <li>블록 <b class="hl">앵커는 배당</b> — 단독 최강(t=5.4)이자 나머지 통제 후 유일하게 증분 생존(t=3.23). E/P·B/P는 확인용 보조(서로 중복 0.77).</li>
+      <li>현재 multifactor_screen 가중(배당0.049+B/P0.037+E/P0.030 = 밸류 0.116 ≈ 총 0.154의 75%)은 <b class="amb">밸류 편중</b>. 밸류 블록 상한을 두고, 남는 여력을 밸류와 덜 겹치는 축(성장·ROE·모멘텀·사이즈)으로 재배분.</li>
+      <li>EV/EBIT·EV/EBITDA·FCF는 밸류축에서 제외(증분 없음·커버리지·무효). EBITDA 커버리지는 감가상각_진단.py 결과에 따라 회수 가능성만 확인.</li>
+    </ul>
+  </div>
+
+  <div class="foot">
+    방법: 각 월 횡단면 z-score(±3 윈저) 후 팩터 구성. IC=스피어만(지표랭크 vs 다음달수익랭크). 롱숏=상위20%−하위20% EW. 롱숏 상관=월수익 시계열 피어슨. 증분 잔차 IC=팩터를 통제팩터에 OLS 회귀한 잔차의 IC. EV/EBIT=DART op_income·net_debt(PIT 4월지연)+시총. 데이터: 종목재무_KRX·_월봉종가캐시(상폐포함)·종목시총_30년·재무상세_EBITDA.csv.<br>
+    한계: 과거통계, 미래보장 아님. 단기 창(2021~)은 55개월로 표본 작음(EV/EBIT 증분 t는 참고). ⚠️ 정보용·투자자문 아님·책임 본인.
+  </div>
+</div>
+</body>
+</html>

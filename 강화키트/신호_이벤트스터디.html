@@ -1,0 +1,32 @@
+<!DOCTYPE html><html lang=ko><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>신호 이벤트 스터디</title><style>
+:root{--bg:#0f1115;--panel:#171a21;--ink:#e8eaed;--muted:#9aa0aa;--line:#2a2f3a;--pos:#3fb950;--neg:#f85149}
+@media(prefers-color-scheme:light){:root{--bg:#f6f7f9;--panel:#fff;--ink:#1a1d23;--muted:#5b626d;--line:#e2e5ea}}
+body{margin:0;font-family:-apple-system,"Segoe UI","Noto Sans KR",sans-serif;background:var(--bg);color:var(--ink);font-size:13px}
+.wrap{max-width:640px;margin:0 auto;padding:26px 18px 60px}
+h1{font-size:20px;margin:0 0 2px}.sub{color:var(--muted);font-size:12px;margin-bottom:14px}
+.big{background:linear-gradient(90deg,rgba(63,185,80,.12),rgba(248,81,73,.10));border:1px solid var(--line);border-radius:12px;padding:12px 15px;margin:12px 0;font-size:13.5px}
+.big b{color:var(--pos)}
+h3{font-size:14px;margin:20px 0 4px}
+table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{padding:6px 7px;border-bottom:1px solid var(--line);text-align:right}
+th:first-child,td:first-child{text-align:left}thead th{color:var(--muted);font-size:11px;font-weight:600}
+td.n{font-weight:600}.dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:5px}
+.note{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 13px;font-size:12px;margin:12px 0}
+.k{font-size:11px;color:var(--muted);margin-top:12px}</style></head><body><div class=wrap>
+<h1>신호별 후속 상승확률·손익비</h1><div class=sub>30년 상폐포함 월봉 · top200 유동 · 이벤트 스터디 · 다올 비용후</div>
+<div class=big>핵심: <b>고른 종목이 오를 확률은 ~46~51%(거의 반반)</b>. 신호가 적중률을 크게 못 높인다. 그런데 <b>손절로 자르고 추세면 들고가면</b> 손익비 2.2~2.7 → <b>기대값이 플러스</b>. 돈은 적중률이 아니라 손익 비대칭에서 나온다.</div>
+
+<h3>① 후속 상승확률 & 평균수익 (진입 후 그냥 보유)</h3>
+<table><thead><tr><th>신호</th><th>표본</th><th>상승확률 1/2/3M</th><th>평균수익 1/2/3M</th></tr></thead><tbody><tr><td class=n><span class=dot style='background:#f85149'></span>🚀돌파</td><td>15,988</td><td>49/49/49%</td><td>+1.6/+2.7/+4.3%</td></tr><tr><td class=n><span class=dot style='background:#3fb950'></span>🟢추세복구</td><td>5,501</td><td>47/47/47%</td><td>+0.8/+1.4/+2.1%</td></tr><tr><td class=n><span class=dot style='background:#d29922'></span>🟡초기반등</td><td>4,028</td><td>46/46/47%</td><td>-0.5/+0.1/+1.3%</td></tr><tr><td class=n><span class=dot style='background:#a371f7'></span>🟣상승준비</td><td>15,980</td><td>49/48/47%</td><td>+0.4/+1.8/+2.8%</td></tr><tr><td class=n><span class=dot style='background:#6b7280'></span>(베이스)</td><td>61,257</td><td>48/48/47%</td><td>+0.8/+1.7/+2.7%</td></tr></tbody></table>
+<div class=k>→ 전 신호 상승확률 46~49%로 베이스(48%)와 큰 차이 없음. "이 종목 오를까?"의 답은 대략 반반.</div>
+
+<h3>② 실전 기대값 (손절 포함: MA3 이탈 청산·최대12M)</h3>
+<table><thead><tr><th>신호</th><th>승률</th><th>평균이익</th><th>평균손실</th><th>손익비</th><th>기대값/트레이드</th></tr></thead><tbody><tr><td class=n><span class=dot style='background:#f85149'></span>🚀돌파</td><td>35%</td><td style='color:#3fb950'>+29%</td><td style='color:#f85149'>-12%</td><td><b>2.36</b></td><td style='color:#3fb950'><b>+2.2%</b></td></tr><tr><td class=n><span class=dot style='background:#3fb950'></span>🟢추세복구</td><td>33%</td><td style='color:#3fb950'>+30%</td><td style='color:#f85149'>-11%</td><td><b>2.66</b></td><td style='color:#3fb950'><b>+2.3%</b></td></tr><tr><td class=n><span class=dot style='background:#d29922'></span>🟡초기반등</td><td>31%</td><td style='color:#3fb950'>+26%</td><td style='color:#f85149'>-12%</td><td><b>2.17</b></td><td style='color:#f85149'><b>-0.2%</b></td></tr><tr><td class=n><span class=dot style='background:#a371f7'></span>🟣상승준비</td><td>36%</td><td style='color:#3fb950'>+21%</td><td style='color:#f85149'>-10%</td><td><b>1.98</b></td><td style='color:#3fb950'><b>+0.9%</b></td></tr><tr><td class=n><span class=dot style='background:#6b7280'></span>(베이스)</td><td>35%</td><td style='color:#3fb950'>+24%</td><td style='color:#f85149'>-11%</td><td><b>2.20</b></td><td style='color:#3fb950'><b>+1.3%</b></td></tr></tbody></table>
+<div class=k>→ 손절 넣으면 승률은 33~36%로 낮아지지만(자주 털림), 이익이 손실의 2.2~2.7배라 기대값 플러스. <b>🚀돌파·🟢추세복구가 최고(+2.2~2.3%/트레이드)</b>, 🟡초기반등은 −0.2%(가장 약함).</div>
+
+<h3>③ 레짐별 3개월 승률 — 지금 왜 '기다려'인가</h3>
+<table><thead><tr><th>신호</th><th>상승레짐 승률</th><th>하락레짐 승률</th></tr></thead><tbody><tr><td class=n><span class=dot style='background:#f85149'></span>🚀돌파</td><td style='color:#3fb950'>51%</td><td style='color:#f85149'>43%</td></tr><tr><td class=n><span class=dot style='background:#3fb950'></span>🟢추세복구</td><td style='color:#3fb950'>50%</td><td style='color:#f85149'>43%</td></tr><tr><td class=n><span class=dot style='background:#d29922'></span>🟡초기반등</td><td style='color:#3fb950'>51%</td><td style='color:#f85149'>45%</td></tr><tr><td class=n><span class=dot style='background:#a371f7'></span>🟣상승준비</td><td style='color:#3fb950'>45%</td><td style='color:#f85149'>50%</td></tr><tr><td class=n><span class=dot style='background:#6b7280'></span>(베이스)</td><td style='color:#3fb950'>48%</td><td style='color:#f85149'>46%</td></tr></tbody></table>
+<div class=note>상승레짐: 🚀51% · 🟢50% / 하락레짐: 🚀43% · 🟢43% — <b>급락장에선 승률 7~8%p 하락</b>. 지금 KOSPI −23% 국면에서 스캐너가 '기다려'를 가리키는 게 통계적으로도 맞다. (예외: 🟣상승준비는 하락레짐서 오히려 나음 = 방어적)</div>
+
+<div class=note><b>결론 — "몇 %냐"의 정직한 답:</b> ① 오를 확률 ≈ 50%(반반). ② 하지만 <b>손절 −10%대 + 추세 편승</b>이면 🚀·🟢 신호에서 <b>기대값 +2%대/트레이드, 손익비 2.5배</b>. ③ 3번 중 2번 틀려도(승률 33%) 이기는 구조. ④ 충분히 반복(1%/트레이드·5~7종)해야 이 확률이 실현됨. ⑤ 지금 하락장은 승률이 낮으니 소량·대기.</div>
+<div class=k>월봉 근사·과거통계 → 미래 보장 아님 · 재현: py 신호_이벤트스터디.py · 투자자문 아님·책임 본인</div>
+</div></body></html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>배당 인과 검정 — 독립 계기 vs 밸류 대리변수</title>
+<style>
+  :root{--bg:#0f1216;--card:#181d24;--card2:#1f2630;--line:#2b333f;--tx:#e6ebf2;--mut:#95a0ae;
+        --grn:#37d67a;--red:#ff6b6b;--amb:#ffb454;--blu:#5aa9ff;--accent:#7aa2ff;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--tx);font-family:'Segoe UI','Malgun Gothic',system-ui,sans-serif;
+       line-height:1.6;font-size:15px}
+  .wrap{max-width:960px;margin:0 auto;padding:28px 20px 60px}
+  h1{font-size:24px;margin:0 0 4px}
+  .sub{color:var(--mut);font-size:14px;margin-bottom:6px}
+  .meta{color:var(--mut);font-size:12.5px;margin-bottom:22px}
+  .verdict{background:linear-gradient(135deg,#20303f,#1a2330);border:1px solid #34506e;border-radius:14px;
+           padding:20px 22px;margin-bottom:26px}
+  .grade{display:inline-block;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px;
+         background:rgba(255,180,84,.16);color:var(--amb);border:1px solid rgba(255,180,84,.4);margin-bottom:10px}
+  .verdict h2{margin:2px 0 8px;font-size:18px}
+  .verdict p{margin:6px 0 0;color:#d3dbe6;font-size:14.5px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .card h3{margin:0 0 4px;font-size:16.5px;display:flex;align-items:center;gap:8px}
+  .num{display:inline-flex;width:26px;height:26px;border-radius:7px;background:var(--card2);color:var(--accent);
+       align-items:center;justify-content:center;font-size:14px;font-weight:700;flex:none}
+  .core{border-color:#34506e;box-shadow:0 0 0 1px rgba(90,169,255,.12) inset}
+  .tag{font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:6px;margin-left:auto}
+  .tag.pass{background:rgba(55,214,122,.15);color:var(--grn)}
+  .tag.warn{background:rgba(255,180,84,.15);color:var(--amb)}
+  .tag.fail{background:rgba(255,107,107,.15);color:var(--red)}
+  .qh{color:var(--mut);font-size:13px;margin:2px 0 12px}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;margin:6px 0}
+  th,td{padding:6px 9px;text-align:right;border-bottom:1px solid var(--line)}
+  th:first-child,td:first-child{text-align:left;color:var(--mut)}
+  thead th{color:var(--mut);font-weight:600;border-bottom:1px solid var(--line)}
+  .pos{color:var(--grn)}.neg{color:var(--red)}.mut{color:var(--mut)}
+  .kv{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+  .kv .b{background:var(--card2);border:1px solid var(--line);border-radius:9px;padding:9px 13px;flex:1;min-width:150px}
+  .kv .b .l{font-size:12px;color:var(--mut)}
+  .kv .b .v{font-size:19px;font-weight:700;margin-top:2px}
+  .heat td{text-align:center;font-variant-numeric:tabular-nums;border:1px solid var(--bg)}
+  .note{color:var(--mut);font-size:13px;margin-top:10px}
+  .foot{color:var(--mut);font-size:12px;margin-top:24px;border-top:1px solid var(--line);padding-top:14px}
+  b.hl{color:var(--tx)}
+  .imp{color:var(--amb);font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>배당 인과 검정</h1>
+  <div class="sub">배당수익률은 수익의 <b class="hl">독립 계기</b>인가, 밸류(저PER·저PBR)의 <b class="hl">대리변수</b>인가?</div>
+  <div class="meta">패널 2003-02 ~ 2026-06 · 252개월 · 시총 top200 · 상폐포함 월봉 · 룩어헤드X(t지표→t+1수익) · 스피어만 IC / Fama-MacBeth / 스패닝 회귀</div>
+
+  <div class="verdict">
+    <span class="grade">등급 · 약한 독립(부분)</span>
+    <h2>사전등록 관문은 통과했지만, "완전독립"은 아니다</h2>
+    <p>배당은 <b class="hl">순수 밸류 변장이 아니다</b> — 밸류와의 상관은 0.41~0.53로 완전중복(0.7↑)에 못 미치고, 성장주에서도·금리 상승·하락기 양쪽에서 작동한다. 그러나 E/P·B/P·ROE·시총을 <b class="hl">전부 통제</b>하면 증분 예측력은 순위(랭크)상 약하게만 남고(잔차 IC t=2.58), <b class="hl">선형 한계효과는 사실상 0</b>(Fama-MacBeth t=−0.81, 윈저 0.18)이다.</p>
+    <p class="imp">→ 실무 결론: 배당 가중(0.049) 소폭 하향 검토 + E/P·B/P·배당이 같은 밸류축에 삼중으로 실리는 "밸류 3중 베팅" 경계. 멀티팩터 합성의 분산효과는 "배당 완전독립" 전제만큼 크지 않다.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">1</span> 팩터 상관행렬<span class="tag warn">부분중복</span></h3>
+    <div class="qh">월별 횡단면 스피어만 상관의 시계열 평균. 0.7↑이면 사실상 같은 팩터.</div>
+    <table class="heat">
+      <thead><tr><th></th><th>배당</th><th>E/P</th><th>B/P</th><th>ROE</th><th>사이즈</th></tr></thead>
+      <tbody>
+        <tr><td>배당</td><td>1.00</td><td>0.53</td><td>0.41</td><td>0.24</td><td>−0.10</td></tr>
+        <tr><td>E/P</td><td>0.53</td><td>1.00</td><td>0.58</td><td>0.40</td><td>−0.02</td></tr>
+        <tr><td>B/P</td><td>0.41</td><td>0.58</td><td>1.00</td><td>−0.33</td><td>0.02</td></tr>
+        <tr><td>ROE</td><td>0.24</td><td>0.40</td><td>−0.33</td><td>1.00</td><td>−0.08</td></tr>
+        <tr><td>사이즈</td><td>−0.10</td><td>−0.02</td><td>0.02</td><td>−0.08</td><td>1.00</td></tr>
+      </tbody>
+    </table>
+    <div class="note">배당–E/P 0.53, 배당–B/P 0.41 — 겹치지만 <b class="hl">완전중복은 아님</b>. 배당은 E/P(이익수익률)와 가장 닮았다.</div>
+  </div>
+
+  <div class="card core">
+    <h3><span class="num">2</span> 직교화 증분 IC + Fama-MacBeth <span style="font-size:12px;color:var(--accent)">핵심</span><span class="tag warn">갈림</span></h3>
+    <div class="qh">배당을 E/P·B/P·ROE·log시총에 매월 회귀한 <b>잔차</b>의 IC(랭크) + 다음달수익 회귀의 배당 계수(선형).</div>
+    <table>
+      <thead><tr><th>지표</th><th>평균</th><th>t</th><th>NW t</th><th>해석</th></tr></thead>
+      <tbody>
+        <tr><td>배당 원본 IC</td><td class="pos">+0.0358</td><td>3.74</td><td>3.92</td><td class="mut">통제 전 (공통표본)</td></tr>
+        <tr><td>배당 <b>잔차</b> IC</td><td class="pos">+0.0175</td><td class="pos">2.58</td><td>2.74</td><td class="mut">통제 후 — 절반으로 감소, 유의는 유지</td></tr>
+        <tr><td>FM 배당계수(원수익)</td><td class="neg">−0.0008</td><td class="neg">−0.81</td><td>−0.79</td><td class="mut">선형 한계효과 ≈ 0</td></tr>
+        <tr><td>FM 배당계수(±40%윈저)</td><td>+0.0002</td><td>0.18</td><td>0.19</td><td class="mut">극단치 완화해도 ≈ 0</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><span class="imp">두 측정이 갈린다.</span> 랭크기반 잔차 IC는 "약하지만 일관된" 증분 신호를 잡지만(t=2.58), 선형 배당계수는 극단치를 완화해도 0에 붙는다. → 배당의 밸류 초과분은 <b class="hl">순위상 존재·크기론 미미</b>. 통제 전 IC의 약 절반이 밸류·퀄·사이즈와 겹친다.</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">3</span> 밸류(B/P) × 배당 이중정렬<span class="tag pass">유지</span></h3>
+    <div class="qh">같은 밸류 구간 안에서 배당 상·하위 다음달 수익차가 남는가. 셀=다음달 월평균 수익(%).</div>
+    <table class="heat">
+      <thead><tr><th></th><th>배당1(저)</th><th>배당2</th><th>배당3</th><th>배당4</th><th>배당5(고)</th></tr></thead>
+      <tbody>
+        <tr><td>B/P1(고밸류X)</td><td>−0.38</td><td>0.42</td><td>0.42</td><td>1.28</td><td>0.81</td></tr>
+        <tr><td>B/P2</td><td>0.42</td><td>0.92</td><td>0.65</td><td>1.10</td><td>1.19</td></tr>
+        <tr><td>B/P3</td><td>0.37</td><td>0.85</td><td>1.16</td><td>0.89</td><td>0.58</td></tr>
+        <tr><td>B/P4</td><td>0.92</td><td>1.40</td><td>1.28</td><td>0.84</td><td>1.31</td></tr>
+        <tr><td>B/P5(저PBR)</td><td>1.41</td><td>1.49</td><td>0.98</td><td>1.51</td><td>1.26</td></tr>
+      </tbody>
+    </table>
+    <div class="note">밸류분위 통제 후 배당 상−하위 월평균차 <b class="pos">+0.48%</b> (t=2.18). 밸류만 통제하면 배당차가 살아남는다. <span class="mut">단, 이 검정은 B/P만 통제(E/P·ROE 미통제)라 ②의 全통제보다 관대함 — 그래서 ②·③이 갈린다.</span></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">4</span> 스패닝 회귀 (알파)<span class="tag pass">알파 유의</span></h3>
+    <div class="qh">배당 롱숏 월수익 ~ 시장 + 밸류LS + 사이즈LS. 절편(알파)이 유의하면 기존 팩터로 설명 안 됨.</div>
+    <table>
+      <thead><tr><th>항</th><th>β</th><th>t</th><th>NW t</th></tr></thead>
+      <tbody>
+        <tr><td><b>알파(절편)</b></td><td class="pos">+0.0057</td><td class="pos">+2.69</td><td>+2.55</td></tr>
+        <tr><td>시장</td><td class="neg">−0.237</td><td>−6.75</td><td>−5.41</td></tr>
+        <tr><td>밸류LS</td><td class="pos">+0.350</td><td>+10.63</td><td>+8.56</td></tr>
+        <tr><td>사이즈LS</td><td class="neg">−0.146</td><td>−2.66</td><td>−2.84</td></tr>
+      </tbody>
+    </table>
+    <div class="kv">
+      <div class="b"><div class="l">배당 롱숏 연수익</div><div class="v pos">+8.8%</div></div>
+      <div class="b"><div class="l">Sharpe</div><div class="v">0.59</div></div>
+      <div class="b"><div class="l">알파(연)</div><div class="v pos">+6.9%</div></div>
+    </div>
+    <div class="note">알파 유의(t=2.69). <span class="mut">단, 이 회귀도 밸류LS(B/P)·사이즈만 통제하고 E/P·ROE는 팩터로 넣지 않았다 — ②의 全통제에 견주면 관대. 알파 유의성은 부분통제 결과.</span></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">5</span> 금리 레짐 분할<span class="tag pass">양쪽 유효</span></h3>
+    <div class="qh">배당이 채권 대용이면 금리 하락기에만 통해야 한다. (⚠️ 국고채 월수익 미보유 → 한국은행 <b>기준금리</b> 전년비 방향으로 대용)</div>
+    <table>
+      <thead><tr><th>레짐</th><th>배당 IC</th><th>t</th><th>개월</th></tr></thead>
+      <tbody>
+        <tr><td>금리 상승기</td><td class="pos">+0.0466</td><td class="pos">3.22</td><td>94</td></tr>
+        <tr><td>금리 하락기</td><td class="pos">+0.0504</td><td class="pos">4.06</td><td>119</td></tr>
+        <tr><td>동결</td><td>+0.0050</td><td class="mut">0.20</td><td>22</td></tr>
+      </tbody>
+    </table>
+    <div class="note">상승·하락기 <b class="hl">양쪽에서 유의</b> → 순수 채권 대용(레짐 의존)이 아니다. 배당이 밸류 변장에 그치지 않는다는 방증.</div>
+  </div>
+
+  <div class="card">
+    <h3>종합 판정 (사전등록 기준)</h3>
+    <table>
+      <thead><tr><th>관문</th><th>값</th><th>기준</th><th>판정</th></tr></thead>
+      <tbody>
+        <tr><td>② 잔차 IC t</td><td>2.58</td><td>≥ 2.3</td><td class="pos">통과</td></tr>
+        <tr><td>④ 스패닝 알파 t</td><td>2.69</td><td>≥ 2.0</td><td class="pos">통과</td></tr>
+        <tr><td>③ 밸류통제 후 배당차 t</td><td>2.18</td><td>&gt; 2.0(유지)</td><td class="pos">유지</td></tr>
+        <tr><td>[반증] FM 선형계수 t</td><td>−0.81 / 0.18</td><td>|t|≥2 이면 확증</td><td class="fail" style="color:var(--amb)">미확증</td></tr>
+      </tbody>
+    </table>
+    <div class="note">사전등록 관문(②·④) 통과 → 형식상 <b class="hl">독립</b>. 그러나 全통제 선형계수(FM)가 확증하지 못해 등급을 <b class="imp">"약한 독립(부분)"</b>으로 격하. 잔차 IC·알파의 유의성은 부분통제(밸류축)에 기댄 것이고, 밸류·퀄·사이즈를 모두 넣은 선형 한계효과는 0에 가깝다.</div>
+  </div>
+
+  <div class="foot">
+    방법: 각 월 횡단면 z-score(±3 윈저) → 배당 잔차 = 배당을 E/P·B/P·ROE·log시총에 OLS 회귀한 잔차. IC=스피어만. FM=다음달수익 다변량 회귀의 배당계수 시계열. NW=Newey-West(6랙) 보정. 데이터: 종목재무_KRX(2002~2026)·_월봉종가캐시(상폐포함)·종목시총_30년. 코드 재사용: multifactor_screen.py·factor_efficacy.py.<br>
+    한계: 금융서 엄밀 "인과" 증명 불가 — 실무 기준은 "공범 통제 후 증분 예측력". 메커니즘(미스프라이싱/퀄리티/위험프리미엄)은 백테로 규명 불가. ⑤ 금리 레짐은 국고채 수익률이 아닌 정책금리 방향 대용. 본 검정의 원본 배당 IC(+0.036)는 통제팩터가 모두 존재하는 공통표본 기준이라, 전체표본 단독 IC(+0.046, t=5.4)·factor_efficacy 헤드라인(+0.049)보다 낮다.<br><br>
+    ⚠️ 정보용·과거통계. 미래보장 아님. 투자자문 아님 · 책임 본인.
+  </div>
+</div>
+</body>
+</html>

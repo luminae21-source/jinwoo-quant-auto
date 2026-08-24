@@ -1,0 +1,1 @@
+decision_id,decision_ts_kst,ticker,name,action,tag,conviction,thesis_1line,catalyst,horizon_m,size_pct,executed,exec_ts,exec_price,exit_ts,exit_price,exit_reason,bm1_kospi_at_decision,bm2_kq150_at_decision,notes,row_sha

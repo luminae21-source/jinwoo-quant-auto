@@ -1,0 +1,56 @@
+/sessions/inspiring-optimistic-ramanujan/mnt/진우퀀트/진우_월간자동화.py:111: RuntimeWarning: Mean of empty slice
+  w=CL[:,m-9:m+1]; ma[:,m]=np.where((~np.isnan(w)).sum(1)==10,np.nanmean(w,1),np.nan)
+■ 진우 사냥터 · 월간 자동화  (신호월 2026-06 · 생성 2026-08-01)
+
+[A] 딥밸류바닥 정식 후보 — 1종  (저PBR20% ∩ 이격<0.85 ∩ 턴 ∩ 유동성)
+  code   종목            PBR    이격   20일%    시총조
+  013890 지누스          0.31  0.75    +0%   0.2
+
+[B] 관심권(2/3 충족·PBR≤30%) — 25종  ※정식신호 아님, 트리거 대기용
+  code   종목            PBR    이격   20일%  결측조건
+  001130 대한제분         0.18  0.09    -3%  턴
+  001230 동국홀딩스        0.15  0.24   -15%  턴
+  053350 ·            0.38  0.52    +1%  저PBR
+  035760 ·            0.24  0.53   -20%  턴
+  036220 ·            0.28  0.55   -15%  턴
+  019680 대교           0.27  0.56   -20%  턴
+  002030 아세아          0.24  0.58   -15%  턴
+  082850 ·            0.26  0.59   -32%  턴
+  084010 대한제강         0.26  0.62   -13%  턴
+  009580 무림P&P        0.16  0.62   -26%  턴
+  038110 ·            0.23  0.64   -25%  턴
+  034120 SBS          0.16  0.66   -16%  턴
+  363280 티와이홀딩스       0.08  0.67   -21%  턴
+  000105 유한양행우        0.00  0.67   -15%  턴
+  001520 동양           0.14  0.67   -10%  턴
+  006840 AK홀딩스        0.18  0.68   -22%  턴
+  108230 ·            0.28  0.68   -25%  턴
+  079980 휴비스          0.24  0.68   -18%  턴
+  063080 ·            0.32  0.68   -23%  턴
+  272550 삼양패키징        0.32  0.68   -14%  턴
+  039020 ·            0.31  0.68   -16%  턴
+  009200 무림페이퍼        0.13  0.69   -17%  턴
+  053700 ·            0.21  0.69   -31%  턴
+  027970 한국제지         0.25  0.70   -24%  턴
+  024880 ·            0.28  0.71   -23%  턴
+
+[C] 보유 익절 시그널Traceback (most recent call last):
+  File "/sessions/inspiring-optimistic-ramanujan/mnt/진우퀀트/진우_월간자동화.py", line 204, in <module>
+    if __name__=="__main__": main()
+  File "/sessions/inspiring-optimistic-ramanujan/mnt/진우퀀트/진우_월간자동화.py", line 154, in main
+    hold=pd.read_csv(hp,dtype={"code":str}); hold["code"]=hold["code"].str.zfill(6)
+  File "/usr/local/lib/python3.10/dist-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/usr/local/lib/python3.10/dist-packages/pandas/io/parsers/readers.py", line 626, in _read
+    return parser.read(nrows)
+  File "/usr/local/lib/python3.10/dist-packages/pandas/io/parsers/readers.py", line 1923, in read
+    ) = self._engine.read(  # type: ignore[attr-defined]
+  File "/usr/local/lib/python3.10/dist-packages/pandas/io/parsers/c_parser_wrapper.py", line 234, in read
+    chunks = self._reader.read_low_memory(nrows)
+  File "pandas/_libs/parsers.pyx", line 838, in pandas._libs.parsers.TextReader.read_low_memory
+  File "pandas/_libs/parsers.pyx", line 905, in pandas._libs.parsers.TextReader._read_rows
+  File "pandas/_libs/parsers.pyx", line 874, in pandas._libs.parsers.TextReader._tokenize_rows
+  File "pandas/_libs/parsers.pyx", line 891, in pandas._libs.parsers.TextReader._check_tokenize_status
+  File "pandas/_libs/parsers.pyx", line 2061, in pandas._libs.parsers.raise_parser_error
+pandas.errors.ParserError: Error tokenizing data. C error: Expected 1 fields in line 3, saw 3
+

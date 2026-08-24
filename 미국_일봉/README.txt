@@ -1,0 +1,1 @@
+source: Yahoo Finance chart API v8, interval=1d, period1=0, fetched 2026-08-22 via browser. adjclose = dividend+split adjusted. columns: date,open,high,low,close,adjclose,volume

@@ -1,0 +1,107 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>진우퀀트 KOSDAQ 진행 대시보드 2026-06-13</title>
+<style>
+:root{--bg:#0f1216;--card:#171c23;--bd:#2a313b;--tx:#e7ecf2;--mut:#9aa7b4;--ok:#3fb950;--warn:#d6932f;--bad:#e5534b;--acc:#4a8fe7;--soft:#1f2731}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',sans-serif;line-height:1.5;padding:28px 20px 60px}
+.wrap{max-width:1080px;margin:0 auto}
+h1{font-size:23px;margin:0 0 4px}.sub{color:var(--mut);font-size:13px;margin-bottom:22px}
+h2{font-size:16px;margin:30px 0 12px;border-left:3px solid var(--acc);padding-left:9px}
+.row{display:flex;gap:14px;flex-wrap:wrap}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:11px;padding:15px 17px;flex:1;min-width:210px}
+.card h3{margin:0 0 6px;font-size:14px}.card p{margin:3px 0;font-size:12.5px;color:var(--mut)}
+.b{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;margin-left:6px}
+.b.ok{background:rgba(63,185,80,.15);color:var(--ok)}.b.warn{background:rgba(214,147,47,.15);color:var(--warn)}
+.b.bad{background:rgba(229,83,75,.15);color:var(--bad)}.b.you{background:rgba(74,143,231,.15);color:var(--acc)}
+.flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin-top:6px}
+.step{background:var(--soft);border:1px solid var(--bd);border-radius:9px;padding:10px 12px;flex:1;min-width:120px;position:relative}
+.step .t{font-weight:700;font-size:13px}.step .d{font-size:11px;color:var(--mut);margin-top:3px}
+.arr{display:flex;align-items:center;color:var(--mut);font-size:18px;padding:0 4px}
+.big{font-size:21px;font-weight:800}.red{color:var(--bad)}.grn{color:var(--ok)}.amb{color:var(--warn)}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
+th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--bd)}th{color:var(--mut);font-weight:600}
+.chk{font-size:13px;margin:5px 0}.chk .m{color:var(--mut)}
+.disc{margin-top:28px;padding:12px 15px;background:var(--soft);border-radius:9px;color:var(--mut);font-size:12px}
+.tag{font-size:10.5px;color:var(--mut)}
+code{background:#0c0f13;padding:1px 5px;border-radius:4px;font-size:11.5px;color:#cdd9e5}
+</style></head><body><div class="wrap">
+
+<h1>진우퀀트 — KOSDAQ 테마 lane 진행 대시보드</h1>
+<div class="sub">2026-06-13 · 정본 Desktop\진우퀀트 · 매수신호 아님 / 정보·연구</div>
+
+<div class="card" style="border-color:var(--acc)">
+<h3>한 줄 현황</h3>
+<p style="color:var(--tx)">기계적 종목선정 후보(backward v4.1 · 수급 v4.2)가 <b class="red">둘 다 데이터로 FAIL</b> → KOSDAQ 알파 = <b class="grn">forward 테마</b> 확정. 발굴·재량·검증 3트랙 구조화 완료. <b class="amb">Track W 측정 시작(2026-05, 1개월) — 누적 6~12개월까지 진행 중.</b></p>
+</div>
+
+<h2>투자 파이프라인 (발굴 → 매수 → 검증)</h2>
+<div class="flow">
+<div class="step"><div class="t">① 발굴<span class="b ok">가동</span></div><div class="d">2소스 surfacing<br>monthly_scan + 웹·DART</div></div>
+<div class="arr">→</div>
+<div class="step"><div class="t">② 2+ 점등<span class="b ok">규칙</span></div><div class="d">A촉매∩B확산∩C수급<br>2개↑ 동시 = 승격</div></div>
+<div class="arr">→</div>
+<div class="step"><div class="t">③ 가드레일<span class="b ok">가동</span></div><div class="d">부도·동전주 배제<br>선반영 veto</div></div>
+<div class="arr">→</div>
+<div class="step"><div class="t">④ 워치리스트<span class="b you">진우</span></div><div class="d">thesis·무효화 먼저<br>cap ≤10%</div></div>
+<div class="arr">→</div>
+<div class="step"><div class="t">⑤ 매수<span class="b you">진우</span></div><div class="d">재량 판단</div></div>
+<div class="arr">→</div>
+<div class="step"><div class="t">⑥ 측정<span class="b warn">대기</span></div><div class="d">Track W 반사실<br>6월말 due</div></div>
+</div>
+<p class="tag" style="margin-top:9px">④⑤는 설계상 진우 몫(갭 아님). 어떤 도구도 매수신호 안 줌 — 시스템은 후보 surfacing + 규율만.</p>
+
+<h2>3트랙 분리</h2>
+<div class="row">
+<div class="card"><h3>발굴 <span class="b ok">가동</span></h3><p>후보 surfacing(2소스·2+점등). 매수신호 아님. 백테스트와 무관하게 상시.</p></div>
+<div class="card"><h3>재량 <span class="b you">진우</span></h3><p>active 워치리스트 수기 — thesis·무효화·사이징.</p></div>
+<div class="card"><h3>검증 <span class="b you">Track W 가동</span></h3><p>엣지 측정(반사실). v42=완료(FAIL). Track W=시작(1개월).</p></div>
+</div>
+
+<h2>검증 결과 (이번 세션)</h2>
+<div class="row">
+<div class="card"><h3>v4.2 수급팩터 <span class="b bad">FAIL</span></h3>
+<p>외국인 IC <b class="red">0.013</b> · 기관 IC <b class="red">≈0</b> · MKT 대비 <b class="red">−10~13%p</b> · 동반신호도 무의미(+0.07%)</p>
+<p>350종목 PIT(생존편향 통제) · 동일윈도우 65월 재확인 · 사전등록 11번째 기각</p>
+<p style="color:var(--tx)">→ "수급도 안 됨" 데이터 확정. 폐기가 fiat 아님.</p></div>
+<div class="card"><h3>regime 29% 어긋남 <span class="b warn">노이즈·미편입</span></h3>
+<p>전이월 집중 <b>71%</b> · KOSPI detector가 KOSDAQ 예측 우위 · 불일치 '공격콜' −5.77%</p>
+<p style="color:var(--tx)">→ 운용 미편입(관찰만), 9월 재점검.</p></div>
+</div>
+
+<h2>발굴 A레이어 라이브 (DART 공시, 최근 14일)</h2>
+<div class="row">
+<div class="card"><h3>카탈리스트 15건</h3>
+<p>수주·공급 5 · 임상 2 · 실적 1 · 주주환원 1 · <span class="amb">자본조달(역) 6</span></p>
+<p>자사주 취득/처분 분리 패치 완료(처분=중립·주의)</p></div>
+<div class="card" style="border-color:var(--ok)"><h3>승격 후보 1호 <span class="b ok">A·B 점등</span></h3>
+<p style="color:var(--tx)"><b>비에이치아이(083650)</b> — 웹스캔(SMR 발주 thesis) ↔ DART(공급계약 공시) <b>둘 다 점등</b>.</p>
+<p>워치리스트 우선검토(매수·thesis는 진우). 자본조달 역신호 종목은 추격 금지.</p></div>
+</div>
+
+<h2>진행 체크리스트</h2>
+<div class="chk">✅ 테마 현재 스캔(12테마·3계층·단계) <span class="m">— 웹 다중리서치</span></div>
+<div class="chk">✅ 크로스체크(웹스캔 ↔ monthly_scan) <span class="m">— 펩트론 2층점등, 미용 디버전스</span></div>
+<div class="chk">✅ regime 29% 어긋남 검증 <span class="m">— 노이즈, 미편입</span></div>
+<div class="chk">✅ v4.2 수급팩터 사전등록→fetch→판정 <span class="m">— FAIL, 11번째 기각</span></div>
+<div class="chk">✅ 종목선정 기법 정본화 <span class="m">— 공식없음·프로세스있음·엣지미입증</span></div>
+<div class="chk">✅ 발굴 트랙 분리 설계 <span class="m">— 3트랙 경계 고정</span></div>
+<div class="chk">✅ Track W 반사실 스코어러 + 원장틀 <span class="m">— 검증완료, 기입 대기</span></div>
+<div class="chk">✅ DART 공시 스캐너(A레이어 자동화 1단계) <span class="m">— 라이브, 분류 7/7</span></div>
+<div class="chk">🟡 <b class="amb">Track W 측정 시작</b> <span class="m">— 2026-05 1개월(재량 W +11.5% vs 시스템 +3.0% vs 테마EW +4.1%). n=1, 6~12개월 누적까지 판정 보류</span></div>
+<div class="chk">⬜ 발굴 자동화 다음(C 검색량 과열필터 · 2+점등 통합게이트)</div>
+<div class="chk">⬜ (9월) regime · v4.1 gw0.5 재점검</div>
+
+<h2>주요 산출물 (Desktop\진우퀀트)</h2>
+<table>
+<tr><th>파일</th><th>역할</th></tr>
+<tr><td>진우퀀트_KOSDAQ_세션핸드오프_2026-06-13.md</td><td>새 세션 복원 1장</td></tr>
+<tr><td>진우퀀트_KOSDAQ_종목선정기법_정본_2026-06-13.md</td><td>종목선정 기법 정본</td></tr>
+<tr><td>진우퀀트_KOSDAQ_발굴트랙_분리설계_2026-06-13.md</td><td>발굴 트랙 독립 설계</td></tr>
+<tr><td>진우퀀트_v42_kosdaq_flow_판정_2026-06-13.md</td><td>수급팩터 FAIL 판정</td></tr>
+<tr><td>trackw_score.py + trackw_ledger.csv</td><td>Track W 반사실 측정</td></tr>
+<tr><td>dart_disclosure_scanner.py</td><td>발굴 A레이어(공시 카탈리스트)</td></tr>
+<tr><td>backtest_v42_kosdaq_flow.py / fetch_v42_*.py</td><td>수급 검증 엔진·수집기</td></tr>
+</table>
+
+<div class="disc">⚠️ 면책: 정보 제공·연구 목적이며 특정 종목 매수·매도 권유가 아니다. 백테스트≠미래, 발굴=후보 surfacing(매수신호 아님), 검증은 forward(Track W)로만. 매수·thesis·무효화는 진우. production·C·D·영역3·v41·active 워치리스트 무수정. 투자 판단과 책임은 본인에게 있다.</div>
+</div></body></html>

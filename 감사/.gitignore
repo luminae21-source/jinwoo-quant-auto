@@ -1,0 +1,50 @@
+# === 진우퀀트 .gitignore — 비밀키·토큰·대용량데이터·로그 제외 ===
+# (Codex/GitHub 연결 전 리포 루트에 두기)
+
+# --- 비밀키·토큰 (절대 커밋 금지) ---
+.kis_key
+.kis_token
+.dart_key
+ecos_key.txt
+krx_authkey.txt
+naver_api.json
+재무_APIKEY.txt
+jq_kakao_token.json
+jq_kakao_config.txt
+*_token.json
+*_authkey.txt
+*.key
+.env
+.env.*
+# 실제 키가 들어가는 json (템플릿/예시는 유지 위해 아래에서 예외)
+.kis_key.json
+진우_KIS키.json
+!*.example
+!*.template
+
+# --- 인증·발송 로그 (개인정보/토큰 흔적) ---
+*_auth_log.txt
+*_log.txt
+jq_kakao_log.txt
+jq_kakao_auth_log.txt
+krx_openapi_결과.txt
+
+# --- 대용량 데이터 (감사엔 미니샘플로 충분, 리포 비대화 방지) ---
+_월봉종가캐시_*.csv
+종목시총_30년.csv
+종목일봉_30년_*.csv
+종목재무_KRX_*.csv
+_일봉*.csv
+kospi_monthly_prices.csv
+재무상세_EBITDA.csv
+*.db
+
+# --- 파이썬 아티팩트 ---
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# --- 산출/캐시 (선택) ---
+_adj_ckpt_*.json
+_adj_실패_*.csv
+*.png

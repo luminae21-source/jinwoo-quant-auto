@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>코스피 익일 동인 — 도식</title>
+<style>
+:root{--text-primary:#e8eaed;--text-secondary:#9aa0aa;--accent:#ff7a45;--chart-1:#3fb37a;--chart-3:#e0b020;--chart-4:#e2606a;--surface:#181b22;--border:#262a33}
+body{background:#0f1115;margin:0;padding:10px;max-width:430px;margin:0 auto}
+svg{width:100%;height:auto}
+.cap{color:#9aa0aa;font:12px -apple-system,'Malgun Gothic',sans-serif;line-height:1.6;padding:6px 6px 18px}
+.cap b{color:#e8eaed}
+</style></head><body>
+<svg viewBox="0 0 380 690" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,'Malgun Gothic',sans-serif">
+<style>
+text{fill:var(--text-primary,#e8eaed)} .mut{fill:var(--text-secondary,#9aa0aa)} .t{font-weight:700} .val{font-weight:700;font-size:11px}
+</style>
+<text x="14" y="24" font-size="15" class="t">코스피 익일을 움직이는 힘</text>
+<text x="14" y="41" font-size="10.5" class="mut">10년·2,445일 검증 · 막대=영향력(|t|값) · 길수록 강함</text>
+<line x1="150" y1="58" x2="150" y2="356" stroke="var(--accent,#ff7a45)" stroke-dasharray="4 3" stroke-width="1.5"/>
+<text x="152" y="56" font-size="9" fill="var(--accent,#ff7a45)">통과선 2.3 →오른쪽=진짜 동인</text>
+<text x="10" y="79" font-size="11">美 반도체 ↑</text>
+<rect x="92" y="68" width="232" height="18" rx="2" fill="var(--chart-1,#3fb37a)"/>
+<text x="328" y="81" class="val" fill="var(--chart-1,#3fb37a)">8.3</text>
+<text x="10" y="105" font-size="11">달러인덱스 ↓</text>
+<rect x="92" y="94" width="137" height="18" rx="2" fill="var(--chart-1,#3fb37a)"/>
+<text x="233" y="107" class="val" fill="var(--chart-1,#3fb37a)">4.9</text>
+<text x="10" y="131" font-size="11">S&amp;P500 ↑</text>
+<rect x="92" y="120" width="81" height="18" rx="2" fill="var(--chart-1,#3fb37a)"/>
+<text x="177" y="133" class="val" fill="var(--chart-1,#3fb37a)">2.9</text>
+<text x="10" y="157" font-size="11">외국인 순매수 ↑</text>
+<rect x="92" y="146" width="67" height="18" rx="2" fill="var(--chart-1,#3fb37a)"/>
+<text x="163" y="159" class="val" fill="var(--chart-1,#3fb37a)">2.4</text>
+<text x="10" y="183" font-size="11" class="mut">美 금리커브</text>
+<rect x="92" y="172" width="56" height="18" rx="2" fill="var(--chart-3,#e0b020)"/>
+<text x="152" y="185" class="val" fill="var(--chart-3,#e0b020)">2.0</text>
+<text x="10" y="209" font-size="11" class="mut">선물옵션 만기</text>
+<rect x="92" y="198" width="36" height="18" rx="2" fill="var(--text-secondary,#9aa0aa)"/>
+<text x="132" y="211" class="val mut">1.3</text>
+<text x="10" y="235" font-size="11" class="mut">美10년 금리</text>
+<rect x="92" y="224" width="14" height="18" rx="2" fill="var(--text-secondary,#9aa0aa)"/>
+<text x="110" y="237" class="val mut">0.5</text>
+<text x="10" y="261" font-size="11" class="mut">원/달러</text>
+<rect x="92" y="250" width="6" height="18" rx="2" fill="var(--text-secondary,#9aa0aa)"/>
+<text x="102" y="263" class="val mut">0.2</text>
+<text x="14" y="298" font-size="10.5" class="mut">🟢 통과(진짜 동인) · 🟡 경계 · ⚪ 탈락(영향 없음/약함)</text>
+<text x="14" y="316" font-size="10.5" class="mut">→ 통과선을 못 넘으면 "코스피 방향과 무관"</text>
+<text x="14" y="334" font-size="10.5" class="mut">→ 만기·금리·환율은 여기서 탈락</text>
+<rect x="14" y="372" width="352" height="86" rx="8" fill="var(--surface,#181b22)" stroke="var(--border,#262a33)"/>
+<text x="26" y="393" font-size="12" class="t">왜 "금리"는 탈락했나? (착시 주의)</text>
+<text x="26" y="414" font-size="10.5" class="mut">금리만 따로 보면: 강해 보임</text>
+<rect x="200" y="405" width="70" height="12" rx="2" fill="var(--chart-4,#e2606a)"/>
+<text x="276" y="415" font-size="10" fill="var(--chart-4,#e2606a)">t = 4.1</text>
+<text x="26" y="434" font-size="10.5" class="mut">美증시와 같이 보면: 사라짐</text>
+<rect x="200" y="425" width="8" height="12" rx="2" fill="var(--text-secondary,#9aa0aa)"/>
+<text x="214" y="435" font-size="10" class="mut">t = 0.5</text>
+<text x="26" y="452" font-size="10" class="mut">→ 금리 정보가 이미 美증시·달러에 들어있어서</text>
+<text x="14" y="486" font-size="12" class="t">한 줄 그림 — 코스피는 "어젯밤 미국의 메아리"</text>
+<rect x="14" y="500" width="104" height="58" rx="8" fill="var(--surface,#181b22)" stroke="var(--chart-1,#3fb37a)"/>
+<text x="66" y="520" font-size="10.5" text-anchor="middle" class="t">어젯밤 미국</text>
+<text x="66" y="536" font-size="9.5" text-anchor="middle" class="mut">반도체·S&amp;P</text>
+<text x="66" y="550" font-size="9.5" text-anchor="middle" class="mut">+외국인·달러</text>
+<text x="132" y="534" font-size="20" fill="var(--accent,#ff7a45)">→</text>
+<rect x="156" y="500" width="104" height="58" rx="8" fill="var(--surface,#181b22)" stroke="var(--accent,#ff7a45)"/>
+<text x="208" y="525" font-size="11" text-anchor="middle" class="t">오늘 코스피</text>
+<text x="208" y="543" font-size="9.5" text-anchor="middle" class="mut">방향 따라감</text>
+<text x="274" y="534" font-size="20" class="mut">✕</text>
+<rect x="292" y="500" width="74" height="58" rx="8" fill="var(--surface,#181b22)" stroke="var(--border,#262a33)"/>
+<text x="329" y="522" font-size="10" text-anchor="middle" class="mut">만기·금리</text>
+<text x="329" y="537" font-size="10" text-anchor="middle" class="mut">·환율</text>
+<text x="329" y="551" font-size="8.5" text-anchor="middle" class="mut">영향 적음</text>
+<text x="14" y="592" font-size="12" class="t">그래서 매일 예측 + 채점</text>
+<text x="14" y="612" font-size="10.5" class="mut">어젯밤 미국·외국인·달러 넣으면 → 오늘 코스피 방향 예상</text>
+<text x="14" y="629" font-size="10.5" class="mut">매일 "맞았나?" 자동 채점 → 적중률 누적</text>
+<text x="14" y="648" font-size="10.5" fill="var(--accent,#ff7a45)">⚠️ 적중률 50% 꾸준히 넘기 전엔 참고용 (시장은 효율적)</text>
+<text x="14" y="668" font-size="9.5" class="mut">수치=다변량 t값(클수록 통계적으로 확실). 출처: 시장영향_검증.py 10년</text>
+</svg>
+<div class="cap">
+<b>읽는 법</b> — 막대가 길수록(=t값 클수록) 코스피 익일에 주는 영향이 통계적으로 확실. 주황 점선(통과선 2.3)을 넘고 방향이 맞아야 '진짜 동인'으로 인정.<br><br>
+<b>진짜 동인 4개</b>: 美 반도체(8.3·압도적) · 달러인덱스(4.9) · S&amp;P500(2.9) · 외국인 순매수(2.4).<br>
+<b>탈락</b>: 선물옵션 만기(1.3)·美10년 금리(0.5)·원달러(0.2) — 통과선 못 넘음. 특히 금리는 혼자 보면 강한데(4.1) 美증시와 같이 보면 사라짐(0.5) = 美증시에 이미 포함된 착시.<br><br>
+<b>결론</b>: 코스피는 어젯밤 미국(특히 반도체)·외국인·달러를 따라간다. 만기·금리·환율은 따로 챙길 필요 적음. 이 4개로 매일 예측하고 매일 채점한다.
+</div>
+</body></html>

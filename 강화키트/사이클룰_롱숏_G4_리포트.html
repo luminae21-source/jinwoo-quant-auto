@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>사이클룰 · 시장중립가치 · G4 재판정 · 2026-07-23</title>
+<style>
+  :root{--bg:#0f1115;--panel:#171a21;--panel2:#1e222b;--ink:#e8eaed;--muted:#9aa0aa;--line:#2a2f3a;
+    --accent:#58a6ff;--pass:#3fb950;--warn:#d29922;--neg:#f85149;--pos:#3fb950;}
+  @media (prefers-color-scheme: light){:root{--bg:#f6f7f9;--panel:#fff;--panel2:#f0f2f5;--ink:#1a1d23;--muted:#5b626d;--line:#e2e5ea;}}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;font-size:15px}
+  .wrap{max-width:1000px;margin:0 auto;padding:32px 22px 80px}
+  h1{font-size:24px;margin:0 0 4px;letter-spacing:-.02em}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:20px}
+  h2{font-size:18px;margin:30px 0 12px;padding-top:18px;border-top:1px solid var(--line)}
+  h2 .n{color:var(--accent);font-weight:700;margin-right:8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:13px 0}
+  .cores{display:grid;gap:10px}
+  .core{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:12px 16px}
+  .core b{color:var(--accent)}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0}
+  th,td{padding:6px 8px;text-align:right;border-bottom:1px solid var(--line)}
+  th:first-child,td:first-child{text-align:left}
+  thead th{color:var(--muted);font-weight:600;font-size:11.5px}
+  tr.hl td{background:var(--panel2);font-weight:600}
+  .pos{color:var(--pos)}.neg{color:var(--neg)}.muted{color:var(--muted)}.k{font-size:12px;color:var(--muted)}
+  .badge{font-size:11px;font-weight:800;padding:2px 8px;border-radius:20px}
+  .bp{background:rgba(63,185,80,.15);color:var(--pass);border:1px solid var(--pass)}
+  .bf{background:rgba(248,81,73,.15);color:var(--neg);border:1px solid var(--neg)}
+  .bar-row{display:flex;align-items:center;gap:10px;margin:5px 0;font-size:12.5px}
+  .bar-row .lab{width:110px;color:var(--muted);text-align:right;flex-shrink:0}
+  .bar-row .val{width:56px;flex-shrink:0}
+  .bar{height:15px;border-radius:4px}
+  code{background:var(--panel2);padding:1px 6px;border-radius:4px;font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>사이클 매매룰 · 시장중립 가치 · G4 재판정</h1>
+  <div class="sub">2차전지·반도체 사이클 종목 매매룰 + 롱숏 분산 + G4 해소 · 30년 상폐포함·다올 비용후 · 2026-07-23</div>
+
+  <div class="cores">
+    <div class="core">ⓐ <b>사이클 룰은 바스켓에선 이기고 단일종목에선 도박.</b> 고변동 바스켓 MDD <b class="neg">−82%</b>→<b class="pos">−48%</b>(Sharpe 0.72→0.84). 개별종목 월간 MA룰은 SK하이닉스·에코프로 대성공, 엘앤에프·이수페타시스는 휩쏘. → 단일종목은 일봉 ATR 트레일로.</div>
+    <div class="core">① <b>시장중립 가치 = 진짜 분산이나 약한 헤지.</b> 모멘텀 상관 <b>−0.17/−0.30</b>(롱온리 +0.70 대비 급감)이나 팩터 자체 약함(연 2.8%·MDD −92%). 소액 오버레이만 Sharpe 1.04→1.08. 개인 숏 실행난.</div>
+    <div class="core">② <b>G4 해소.</b> 50%현금 방어(권고 주력) 손익분기 슬리피지 <b class="pos">≈0.31%/편도</b> → 대형주 실집행(0.03~0.15%)에 강건 → 사실상 통과. primary를 50%현금으로 확정.</div>
+  </div>
+
+  <h2><span class="n">ⓐ</span>사이클 매매룰 — 테마·사이클 종목</h2>
+  <div class="card">
+    <div class="k" style="margin-bottom:8px"><b>바스켓(고변동 top30, 월 EW)</b> — "10개월 MA 위에서만 보유" 규칙이 낙폭을 34%p 줄이며 Sharpe↑</div>
+    <table>
+      <thead><tr><th>룰</th><th>순 CAGR</th><th>Sharpe</th><th>MDD</th><th>평균투자</th></tr></thead>
+      <tbody>
+        <tr><td>바이앤홀드</td><td>21.7%</td><td>0.72</td><td class="neg">−82.0%</td><td>99%</td></tr>
+        <tr class="hl"><td>MA추세(10개월)</td><td>17.5%</td><td class="pos">0.84</td><td class="pos">−48.0%</td><td>52%</td></tr>
+        <tr><td>MA추세(6개월)</td><td>17.3%</td><td>0.82</td><td>−46.4%</td><td>52%</td></tr>
+        <tr><td>트레일링 −25%</td><td>15.6%</td><td>0.78</td><td>−57.1%</td><td>53%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="k" style="margin-bottom:8px"><b>단일종목(2차전지·반도체)</b> — 월간 MA룰은 신뢰 못 함 (BH 배수 → 룰 배수 / MDD)</div>
+    <table>
+      <thead><tr><th>종목</th><th>BH→룰 배수</th><th>BH MDD</th><th>룰 MDD</th><th></th></tr></thead>
+      <tbody>
+        <tr><td>SK하이닉스</td><td>3.3x → <b class="pos">41.9x</b></td><td>−99.7%</td><td class="pos">−81.2%</td><td><span class="badge bp">방어성공</span></td></tr>
+        <tr><td>에코프로</td><td>1.8x → <b class="pos">2.4x</b></td><td>−96.6%</td><td class="pos">−78.0%</td><td><span class="badge bp">방어성공</span></td></tr>
+        <tr><td>엘앤에프</td><td><b class="neg">31.2x → 14.1x</b></td><td>−89.7%</td><td>−79.9%</td><td><span class="badge bf">휩쏘</span></td></tr>
+        <tr><td>이수페타시스</td><td><b class="neg">23.4x → 8.6x</b></td><td>−70.6%</td><td class="neg">−80.0%</td><td><span class="badge bf">휩쏘</span></td></tr>
+        <tr><td>삼성SDI</td><td>2.7x → 1.7x</td><td>−81.5%</td><td>−77.1%</td><td><span class="badge bf">휩쏘</span></td></tr>
+      </tbody>
+    </table>
+    <div class="k" style="margin-top:8px"><b>처방:</b> 테마는 <b>바스켓</b>으로(MA추세 최적). 단일 사이클 종목은 <b>일봉 ATR 트레일</b>(본체 매도규칙_라우터 3.5ATR/−25%)로 — 월봉은 파라볼릭 단일종목에 너무 거칠어 휩쏘. 10루타 개별베팅은 방어가 상단을 깎음을 인지하고 소액·분할·Track W.</div>
+  </div>
+
+  <h2><span class="n">①</span>시장중립 가치 — 진짜 분산인가</h2>
+  <div class="card">
+    <div class="bar-row"><span class="lab">모멘텀↔LS_PBR</span><span class="val pos">−0.17</span><div class="bar" style="width:17%;background:var(--pass)"></div></div>
+    <div class="bar-row"><span class="lab">모멘텀↔LS_PER</span><span class="val pos">−0.30</span><div class="bar" style="width:30%;background:var(--pass)"></div></div>
+    <div class="bar-row"><span class="lab">롱온리 가치(비교)</span><span class="val neg">+0.70</span><div class="bar" style="width:70%;background:var(--neg)"></div></div>
+    <div class="k" style="margin-top:10px">상관 음수 = <b>구조적 분산 확인</b>(롱온리가 못 준 것). 그러나 LS_PBR 자체는 연 2.8%·Sharpe 0.12·MDD −92%(숏레그 붕괴) = <b>수익 없는 헤지</b>. 오버레이 w=0.25만 Sharpe 1.04→1.08. 개인계좌 숏 실행난 → 가장 확실한 방어는 여전히 <b>MA200 현금(이미 탑재)</b>.</div>
+  </div>
+
+  <h2><span class="n">②</span>G4 재판정 — 손익분기 슬리피지</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>슬리피지(편도)</th><th>50%현금(권고)</th><th>완전현금(원)</th><th>고정 베이스</th></tr></thead>
+      <tbody>
+        <tr><td>0.05%</td><td class="pos">0.833 ✅</td><td class="neg">0.766</td><td>0.781</td></tr>
+        <tr><td>0.15%</td><td class="pos">0.808 ✅</td><td class="neg">0.735</td><td>0.776</td></tr>
+        <tr><td>0.20%</td><td class="pos">0.795 ✅</td><td class="neg">0.719</td><td>0.773</td></tr>
+        <tr class="hl"><td>0.30% (손익분기≈0.31%)</td><td class="pos">0.770 ✅</td><td class="neg">0.687</td><td>0.768</td></tr>
+        <tr><td>0.50%</td><td class="neg">0.719 ✗</td><td class="neg">0.624</td><td>0.758</td></tr>
+      </tbody>
+    </table>
+    <div class="k" style="margin-top:8px"><b>50%현금 방어 손익분기 ≈ 0.31%/편도</b> — 대형주 다올 실집행(0.03~0.15%)은 훨씬 아래 → <b class="pos">모든 현실 비용에서 G4 통과</b>. 완전현금판은 방어가 수익을 너무 깎아 비용우위 없음. → <b>primary를 50%현금으로 확정.</b></div>
+    <div class="k" style="margin-top:6px">남은 1스텝: <code>유니버스_체결로그_템플릿.csv</code>에 체결가 기록 → <code>py 유니버스_G4_손익분기.py --from-log 체결로그.csv</code>로 실측 재판정.</div>
+  </div>
+
+  <div class="k" style="margin-top:22px;text-align:center">작성 2026-07-23 · 상폐포함·다올 비용후·월봉 근사 · 실현손익 아님·투자자문 아님·책임 본인 · 진우퀀트 강화키트</div>
+</div>
+</body>
+</html>

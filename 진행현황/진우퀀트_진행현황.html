@@ -1,0 +1,117 @@
+﻿<!doctype html><html lang=ko><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>진우퀀트 진행현황</title><style>
+:root{--bg:#0b1020;--card:#141b2e;--ink:#e8edf6;--sub:#9fb0c9;--line:#243149;--acc:#5b9dff;--ok:#2ec36b;--go:#e0a32e;--wait:#8a93a6;--red:#e5484d}
+@media(prefers-color-scheme:light){:root{--bg:#f4f6fb;--card:#fff;--ink:#0f1830;--sub:#5a6a86;--line:#e3e9f4;--acc:#2563eb}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;padding:22px;line-height:1.55}
+.wrap{max-width:1000px;margin:0 auto}
+h1{font-size:22px;margin:0 0 3px}.sub{color:var(--sub);font-size:12.5px;margin-bottom:16px}
+.goal{background:linear-gradient(90deg,rgba(91,157,255,.14),rgba(91,157,255,.03));border:1px solid var(--line);border-left:4px solid var(--acc);border-radius:12px;padding:14px 17px;margin-bottom:16px}
+.goal .lab{color:var(--acc);font-weight:700;font-size:12px;letter-spacing:.04em}.goal .big{font-size:16px;font-weight:600;margin-top:4px}.goal .ms{color:var(--sub);font-size:12.5px;margin-top:5px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 17px;margin-bottom:14px}
+h3{font-size:14px;margin:0 0 13px;color:var(--acc)}
+.flow{display:flex;gap:8px;flex-wrap:wrap}
+.step{flex:1;min-width:165px;background:rgba(91,157,255,.06);border:1px solid var(--line);border-radius:12px;padding:12px 13px;position:relative}
+.step.now{border-color:var(--go);box-shadow:0 0 0 1px var(--go) inset;background:rgba(224,163,46,.08)}
+.step .n{font-size:11px;color:var(--sub);font-weight:700}
+.step .t{font-weight:700;font-size:13.5px;margin:3px 0 5px}
+.step .g{font-size:11.5px;color:var(--sub);min-height:46px}
+.badge{display:inline-block;font-size:10.5px;font-weight:700;border-radius:20px;padding:2px 9px;margin-top:8px}
+.b-ok{background:rgba(46,195,107,.15);color:var(--ok)}.b-go{background:rgba(224,163,46,.18);color:var(--go)}.b-wait{background:rgba(138,147,166,.15);color:var(--wait)}
+.arrow{color:var(--sub);align-self:center;font-size:18px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:13px}.kv .k{color:var(--sub)}
+.now-box{border-left:3px solid var(--go);padding-left:12px}
+.mat{display:flex;flex-direction:column;gap:7px}
+.mrow{display:grid;grid-template-columns:130px 1fr 42px;align-items:center;gap:10px;font-size:12.5px}
+.bar{height:8px;border-radius:6px;background:var(--line);overflow:hidden}.bar>i{display:block;height:100%;background:var(--acc)}
+.links a{display:inline-block;background:rgba(91,157,255,.12);border:1px solid var(--line);border-radius:10px;padding:9px 13px;text-decoration:none;color:var(--ink);font-weight:600;font-size:12.5px;margin:4px 6px 0 0}
+.links a span{display:block;color:var(--sub);font-weight:400;font-size:10.5px}
+.warn{color:var(--sub);font-size:11px;margin-top:12px}
+ul{margin:6px 0 0;padding-left:18px}li{margin:3px 0;font-size:12.5px}
+.reco{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}@media(max-width:720px){.reco{grid-template-columns:1fr}}
+.rt{background:rgba(91,157,255,.06);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.rt .rl{font-weight:700;font-size:12px;color:var(--acc);margin-bottom:4px}.rt .rn{font-size:12px}.rt .rc{color:var(--sub);font-size:11px;margin-top:4px}
+.ic{display:flex;flex-direction:column;gap:6px}
+.icr{display:grid;grid-template-columns:96px 1fr 56px;align-items:center;gap:9px;font-size:12px}
+.icb{height:9px;border-radius:6px;background:var(--line);overflow:hidden}.icb>i{display:block;height:100%}
+.icr .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--sub)}
+</style></head><body><div class=wrap>
+
+<h1>진우퀀트 · 진행현황 대시보드</h1>
+<div class=sub>자동 갱신(매일 아침 08:00 KST) · 최종 갱신 <b>2026-07-27 (수정주가·top-3 완료)</b> · 라이브 수치의 진실은 허브(SSOT)</div>
+
+<div class=goal>
+<div class=lab>궁극 목표</div>
+<div class=big>추측이 아니라 30년 데이터의 증거로만 매매하는, <b>실전에서 신뢰할 수 있는</b> 한국주식 퀀트 시스템</div>
+<div class=ms>🎯 마일스톤 — "신뢰할 만한 프로그램" = 실전 트랙레코드 + 하락장 최소 1회 통과 (예상 12~18개월). 병목은 연구가 아니라 <b>달력 시간</b>.</div>
+</div>
+
+<div class=card><h3>진행 프로세스 — 5단계와 각 단계의 목표</h3>
+<div class=flow>
+<div class=step><div class=n>STAGE 1</div><div class=t>연구·검증</div><div class=g>목표: 어떤 전략도 통과 어려운 검증틀(사전등록·OOS·비용·다중검정)로 <b>진짜 엣지만</b> 채택. 배당·가치·2트랙 확정.</div><span class="badge b-ok">✅ 가동중</span></div>
+<div class=arrow>→</div>
+<div class=step><div class=n>STAGE 2</div><div class=t>시스템 경화(안전판)</div><div class=g>목표: "조용한 실패" 제거. fail-open→<b>fail-safe</b>. 낡은 데이터 발송 차단·알림·롤백.</div><span class="badge b-ok">✅ 안전판 7종·93모듈</span></div>
+<div class=arrow>→</div>
+<div class=step><div class=n>STAGE 3</div><div class=t>데이터 수리</div><div class=g>목표: 롱숏·CAGR "<b>크기</b>"를 잠정→확정치로. 조정본 2015~2026 확정(2014이전 커버리지 21%로 제외).</div><span class="badge b-ok">✅ 완료 — 조정본 확정</span></div>
+<div class=arrow>→</div>
+<div class=step><div class=n>STAGE 4</div><div class=t>외부 검증</div><div class=g>목표: 제3자(GPT) red-team + 과최적 지표(PBO/DSR)로 방법·통계·정직성 독립 확인.</div><span class="badge b-ok">✅ GPT 3차 재검증·PBO/DSR</span></div>
+<div class=arrow>→</div>
+<div class="step now"><div class=n>STAGE 5</div><div class=t>실전 트랙레코드</div><div class=g>목표: 전략 동결 후 <b>페이퍼→소액 forward</b>(달력 시간). 하락장 1회 통과로 엣지 실증.</div><span class="badge b-go">◐ 착수 준비 — 동결 사양서 v1</span></div>
+</div>
+</div>
+
+<div class=card><h3>현재 상태 — 지금 하는 것 / 다음</h3>
+<div class="now-box">
+<div class=kv>
+<div class=k>지금(STAGE 5)</div><div><b>forward 착수 준비</b> — 동결 사양서 v1 작성(팩터·유니버스·비용·수정금지기간 6~12개월·평가게이트 사전등록). 다음은 페이퍼/극소액 시작.</div>
+<div class=k>방금 완료 (top-3)</div><div>① 수정주가 재수집·검증(KOSPI 그라운드트루스 불일치 380→0) ② 주도주 규칙화 — 간판 20.1% <b>재현 실패</b>(8.1%&lt;KOSPI 14.2%)로 가설 강등 ③ PBO/DSR — <b>PBO 57%</b>(설정선택 과최적)·<b>DSR 92%</b>(약한 실재 엣지)</div>
+<div class=k>핵심 발견</div><div>배당 롱숏 크기가 미조정에선 <b>부호 역전</b>(−2.5%→조정 +3.4%) — 수정주가 필수성 실증. 방향(IC) 배당 t 4.10·B/P 3.34·E/P 2.36 조정 후에도 유의. 성장 트레일스톱은 무스톱보다 열위(낙폭은 현금방어로).</div>
+<div class=k>다음</div><div>동결 규칙으로 <b>페이퍼→소액 forward</b> → 6~12개월 후 게이트 판정. 백테스트로는 더 증명할 것 없음 = 남은 병목은 <b>달력 시간</b>.</div>
+</div></div>
+</div>
+
+<div class=card><h3>🎯 최근 추천 · 2026-07 (재무 2026-06) · 보유 매도신호 0건</h3>
+<div class=reco>
+<div class=rt><div class=rl>가치 트랙 (저PBR·배당)</div><div class=rn>DB손해보험 · DGB금융지주 · GS · 영원무역홀딩스 · BNK금융지주 · 우리금융지주 · 현대해상 · JB금융지주 …(10)</div><div class=rc>대표: DB손해보험 배당 5.7%·PBR 0.75·PER 4.5</div></div>
+<div class=rt><div class=rl>성장 트랙 (고PBR·ROE·성장)</div><div class=rn>에이피알 · 달바글로벌 · SK하이닉스 · HD현대마린 · SK스퀘어 · KT&G · 제주반도체 · 한국콜마 …(10)</div><div class=rc>대표: 에이피알 비중 4.0%·손절 265,500</div></div>
+<div class=rt><div class=rl>주도주 리더 (시총·모멘텀 top)</div><div class=rn>삼성전기 · SK스퀘어 · SK하이닉스 · 주성엔지니어링 · LG이노텍 · 대우건설 · 삼성전자 · SK …(15)</div><div class=rc>월 1회 동적 재선정(연 42% 교체)</div></div>
+</div>
+<div class=warn>손절·비중은 집행 시트(risk_manager) 기준. 실시간 추천·보유의 진실은 허브(SSOT).</div>
+</div>
+
+<div class=card><h3>📈 팩터 IC · 30년 재검증 (2026-07-26)</h3>
+<div class=ic>
+<div class=icr><span>배당수익률</span><div class=icb><i style="width:97%;background:var(--ok)"></i></div><span class=v>+0.0487</span></div>
+<div class=icr><span>가치 B/P</span><div class=icb><i style="width:74%;background:var(--acc)"></i></div><span class=v>+0.0372</span></div>
+<div class=icr><span>가치 E/P</span><div class=icb><i style="width:61%;background:var(--acc)"></i></div><span class=v>+0.0303</span></div>
+<div class=icr><span>성장 EPS</span><div class=icb><i style="width:40%;background:var(--acc)"></i></div><span class=v>+0.0199</span></div>
+<div class=icr><span>퀄리티 ROE</span><div class=icb><i style="width:36%;background:var(--acc)"></i></div><span class=v>+0.0180</span></div>
+<div class=icr><span>모멘텀 12-1</span><div class=icb><i style="width:17%;background:var(--wait)"></i></div><span class=v>+0.0086</span></div>
+<div class=icr><span>사이즈(소형)</span><div class=icb><i style="width:59%;background:var(--red)"></i></div><span class=v>−0.0293</span></div>
+</div>
+<div class=warn>IC=예측력(t≥2.3이면 유의). <b>배당이 최강</b>·소형주는 마이너스(대형 우위)·횡단면 모멘텀 약함. 월간 재검증마다 이력이 쌓여 '추세'가 됩니다(현재 스냅샷 1시점).</div>
+</div>
+
+<div class=card><h3>성숙도 · ChatGPT 3차 재검증 (2026-07-27) — 종합 3.5/6 유지</h3>
+<div class=mat>
+<div class=mrow><span>검증 방법론</span><div class=bar><i style="width:90%"></i></div><span>A−</span></div>
+<div class=mrow><span>정직성·자기정정</span><div class=bar><i style="width:96%"></i></div><span>A</span></div>
+<div class=mrow><span>연구 등급(종합)</span><div class=bar><i style="width:91%"></i></div><span>A−↑</span></div>
+<div class=mrow><span>팩터 방향성</span><div class=bar><i style="width:82%"></i></div><span>B+</span></div>
+<div class=mrow><span>데이터 인프라</span><div class=bar><i style="width:80%"></i></div><span>B</span></div>
+<div class=mrow><span>성과 등급(크기)</span><div class=bar><i style="width:38%;background:var(--go)"></i></div><span>D+↓</span></div>
+<div class=mrow><span>실전 트랙레코드</span><div class=bar><i style="width:22%;background:var(--red)"></i></div><span>C−</span></div>
+</div>
+<div class=warn><b>정직한 분리:</b> 연구 등급은 올랐고(A− 상단) 성과 등급은 내렸다(D+). 간판 20.1%는 폐기, 살아남은 건 "작지만 실재 가능성 있는 팩터 신호(배당 프리미엄 ~+3.4%)". <b>등급이 오른 건 수익이 입증돼서가 아니라, 불편한 결과도 정확히 측정하는 연구 시스템이 됐기 때문.</b> 남은 격차 = 동결 후 달력 시간.</div>
+</div>
+
+<div class=card><h3>📎 핵심 문서 (열어보기)</h3>
+<div class=links>
+<a href="file:///C:/Users/긍정적인_삶의자세/Desktop/진우퀀트/백서_빌더/out/진우퀀트_백서.html">📘 진우퀀트 작업 백서<span>백서_빌더/out\진우퀀트_백서.html · 근거 레퍼런스</span></a>
+<a href="file:///C:/Users/긍정적인_삶의자세/Desktop/진우퀀트/강화키트/진우퀀트_허브.html">🛰 진우퀀트 허브 (SSOT)<span>강화키트\진우퀀트_허브.html · 라이브 관제탑</span></a>
+</div>
+<div class=warn>링크가 안 열리면 해당 경로를 탐색기에서 직접 열면 됩니다(로컬 파일).</div>
+</div>
+
+<div class=warn>⚠️ 정보·검증용·과거통계. 미래·수익 보장 아님. 투자자문 아님 · 최종 판단·책임 본인. · 백테·검증 수치는 실현손익이 아님.</div>
+</div></body></html>
+

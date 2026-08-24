@@ -1,0 +1,287 @@
+{
+  "asof": "2026-06",
+  "backtest": {
+    "meanIC": 0.0467,
+    "ic_t": 4.4,
+    "ls_ann": 12.4,
+    "ls_sharpe": 0.64,
+    "hit": 60.0
+  },
+  "top": [
+    {
+      "code": "017800",
+      "name": "현대엘리베이터",
+      "theme": "",
+      "pctile": 100.0,
+      "div": 19.7,
+      "per": 9.8,
+      "pbr": 1.9,
+      "g1": 43.0,
+      "trend": false
+    },
+    {
+      "code": "002380",
+      "name": "KCC",
+      "theme": "",
+      "pctile": 99.0,
+      "div": 3.1,
+      "per": 2.3,
+      "pbr": 0.5,
+      "g1": 395.0,
+      "trend": false
+    },
+    {
+      "code": "015760",
+      "name": "한국전력",
+      "theme": "",
+      "pctile": 99.0,
+      "div": 4.2,
+      "per": 2.8,
+      "pbr": 0.5,
+      "g1": 145.0,
+      "trend": false
+    },
+    {
+      "code": "005830",
+      "name": "DB손해보험",
+      "theme": "",
+      "pctile": 98.0,
+      "div": 5.7,
+      "per": 4.5,
+      "pbr": 0.8,
+      "g1": -4.0,
+      "trend": false
+    },
+    {
+      "code": "024110",
+      "name": "기업은행",
+      "theme": "금융",
+      "pctile": 98.0,
+      "div": 5.3,
+      "per": 6.2,
+      "pbr": 0.4,
+      "g1": 2.0,
+      "trend": false
+    },
+    {
+      "code": "139130",
+      "name": "DGB금융지주",
+      "theme": "금융",
+      "pctile": 97.0,
+      "div": 4.2,
+      "per": 6.7,
+      "pbr": 0.4,
+      "g1": 124.0,
+      "trend": false
+    },
+    {
+      "code": "004020",
+      "name": "현대제철",
+      "theme": "",
+      "pctile": 97.0,
+      "div": 1.8,
+      "per": 0.0,
+      "pbr": 0.2,
+      "g1": null,
+      "trend": false
+    },
+    {
+      "code": "030200",
+      "name": "KT",
+      "theme": "통신",
+      "pctile": 96.0,
+      "div": 4.5,
+      "per": 7.4,
+      "pbr": 0.7,
+      "g1": 272.0,
+      "trend": false
+    },
+    {
+      "code": "031210",
+      "name": "서울보증보험",
+      "theme": "",
+      "pctile": 96.0,
+      "div": 6.9,
+      "per": 10.8,
+      "pbr": 0.6,
+      "g1": 26.0,
+      "trend": false
+    },
+    {
+      "code": "001450",
+      "name": "현대해상",
+      "theme": "보험",
+      "pctile": 95.0,
+      "div": 0.0,
+      "per": 2.7,
+      "pbr": 0.5,
+      "g1": 20.0,
+      "trend": true
+    },
+    {
+      "code": "078930",
+      "name": "GS",
+      "theme": "",
+      "pctile": 95.0,
+      "div": 4.5,
+      "per": 7.9,
+      "pbr": 0.4,
+      "g1": 41.0,
+      "trend": false
+    },
+    {
+      "code": "029780",
+      "name": "삼성카드",
+      "theme": "",
+      "pctile": 94.0,
+      "div": 5.8,
+      "per": 7.9,
+      "pbr": 0.6,
+      "g1": -3.0,
+      "trend": false
+    },
+    {
+      "code": "011170",
+      "name": "롯데케미칼",
+      "theme": "",
+      "pctile": 94.0,
+      "div": 1.6,
+      "per": 0.0,
+      "pbr": 0.2,
+      "g1": null,
+      "trend": false
+    },
+    {
+      "code": "035250",
+      "name": "강원랜드",
+      "theme": "",
+      "pctile": 93.0,
+      "div": 6.6,
+      "per": 9.1,
+      "pbr": 0.7,
+      "g1": -30.0,
+      "trend": false
+    },
+    {
+      "code": "138930",
+      "name": "BNK금융지주",
+      "theme": "금융",
+      "pctile": 93.0,
+      "div": 4.3,
+      "per": 6.8,
+      "pbr": 0.5,
+      "g1": 16.0,
+      "trend": false
+    },
+    {
+      "code": "316140",
+      "name": "우리금융지주",
+      "theme": "금융",
+      "pctile": 92.0,
+      "div": 4.7,
+      "per": 7.2,
+      "pbr": 0.6,
+      "g1": 3.0,
+      "trend": false
+    },
+    {
+      "code": "036460",
+      "name": "한국가스공사",
+      "theme": "",
+      "pctile": 92.0,
+      "div": 3.6,
+      "per": 21.8,
+      "pbr": 0.3,
+      "g1": -89.0,
+      "trend": false
+    },
+    {
+      "code": "071050",
+      "name": "한국금융지주",
+      "theme": "증권",
+      "pctile": 91.0,
+      "div": 3.9,
+      "per": 6.4,
+      "pbr": 1.1,
+      "g1": 94.0,
+      "trend": false
+    },
+    {
+      "code": "175330",
+      "name": "JB금융지주",
+      "theme": "",
+      "pctile": 91.0,
+      "div": 4.6,
+      "per": 6.8,
+      "pbr": 0.8,
+      "g1": 5.0,
+      "trend": false
+    },
+    {
+      "code": "000270",
+      "name": "기아",
+      "theme": "",
+      "pctile": 90.0,
+      "div": 4.9,
+      "per": 7.1,
+      "pbr": 0.9,
+      "g1": -22.0,
+      "trend": false
+    },
+    {
+      "code": "088350",
+      "name": "한화생명",
+      "theme": "",
+      "pctile": 90.0,
+      "div": 0.0,
+      "per": 6.5,
+      "pbr": 0.2,
+      "g1": -26.0,
+      "trend": true
+    },
+    {
+      "code": "028670",
+      "name": "팬오션",
+      "theme": "",
+      "pctile": 89.0,
+      "div": 3.2,
+      "per": 8.4,
+      "pbr": 0.4,
+      "g1": 12.0,
+      "trend": false
+    },
+    {
+      "code": "161390",
+      "name": "한국타이어",
+      "theme": "",
+      "pctile": 89.0,
+      "div": 3.7,
+      "per": 6.9,
+      "pbr": 0.6,
+      "g1": -2.0,
+      "trend": false
+    },
+    {
+      "code": "003690",
+      "name": "코리안리",
+      "theme": "",
+      "pctile": 88.0,
+      "div": 4.3,
+      "per": 8.4,
+      "pbr": 0.6,
+      "g1": 2.0,
+      "trend": true
+    },
+    {
+      "code": "251270",
+      "name": "넷마블",
+      "theme": "",
+      "pctile": 88.0,
+      "div": 2.4,
+      "per": 13.6,
+      "pbr": 0.6,
+      "g1": 777.0,
+      "trend": false
+    }
+  ]
+}

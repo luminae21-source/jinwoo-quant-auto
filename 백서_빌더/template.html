@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>진우퀀트 종합 기술 백서</title>
+<style>
+:root{--ink:#1a2233;--navy:#22344b;--navy2:#2b4a6f;--blue:#3d7ab5;--teal:#2c9c8f;--amber:#e0a13a;--red:#c0504d;--green:#4a9d6a;--grey:#6b7683;--line:#e3e9f0;--bg:#f6f8fb;--card:#ffffff;--soft:#eef3f8;}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:"Noto Sans CJK KR","Malgun Gothic",system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+.wrap{display:grid;grid-template-columns:270px 1fr;max-width:1240px;margin:0 auto}
+.cover{grid-column:1/-1;background:linear-gradient(135deg,#1a2233 0%,#22344b 55%,#2b4a6f 100%);color:#fff;padding:64px 56px 56px;position:relative;overflow:hidden}
+.cover:after{content:"";position:absolute;right:-80px;top:-80px;width:360px;height:360px;background:radial-gradient(circle,rgba(61,122,181,.35),transparent 70%);border-radius:50%}
+.cover .kicker{letter-spacing:3px;font-size:12.5px;color:#9fc2e6;text-transform:uppercase;margin-bottom:18px}
+.cover h1{font-size:40px;line-height:1.2;margin:0 0 14px;font-weight:800}
+.cover .sub{font-size:17px;color:#cdd9e6;max-width:640px;margin-bottom:26px}
+.cover .slogan{border-left:3px solid var(--amber);padding:6px 0 6px 16px;font-size:15px;color:#f0d9ad;font-style:italic;max-width:600px}
+.cover .meta{margin-top:30px;display:flex;gap:26px;flex-wrap:wrap;font-size:13px;color:#a9bccf}
+.cover .meta b{color:#fff;font-weight:600}
+aside{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;background:var(--navy);color:#c7d3e0;padding:26px 18px;font-size:13.5px}
+aside .brand{font-weight:800;color:#fff;font-size:15px;margin-bottom:4px;letter-spacing:.5px}
+aside .brandsub{color:#7f93a8;font-size:11.5px;margin-bottom:20px}
+aside ol{list-style:none;padding:0;margin:0;counter-reset:s}
+aside li{counter-increment:s;margin:2px 0}
+aside a{color:#b7c6d6;text-decoration:none;display:block;padding:6px 10px;border-radius:7px;border-left:2px solid transparent;transition:.15s}
+aside a:before{content:counter(s);color:#5f7790;font-size:11px;margin-right:8px;font-weight:700}
+aside a:hover{background:rgba(255,255,255,.06);color:#fff}
+aside a.active{background:rgba(61,122,181,.22);color:#fff;border-left-color:var(--amber)}
+main{padding:44px 52px 90px;max-width:900px}
+h2{font-size:25px;margin:52px 0 6px;padding-top:14px;font-weight:800;color:var(--navy2);border-top:1px solid var(--line);scroll-margin-top:20px}
+h2:first-of-type{border-top:none;margin-top:8px}
+h3{font-size:18.5px;margin:30px 0 8px;font-weight:700;color:var(--ink)}
+h4{font-size:15.5px;margin:20px 0 6px;font-weight:700;color:var(--navy2)}
+p{margin:12px 0}a{color:var(--blue)}strong{color:var(--navy2)}
+hr{border:none;border-top:1px solid var(--line);margin:34px 0}
+code{background:var(--soft);padding:1.5px 6px;border-radius:5px;font-size:13.5px;font-family:"SF Mono",Consolas,monospace;color:#8a4b2f}
+pre{background:var(--navy);color:#dbe6f0;padding:18px 20px;border-radius:12px;overflow-x:auto;font-size:13.5px;line-height:1.6;box-shadow:0 6px 18px rgba(26,34,51,.15)}
+pre code{background:none;color:inherit;padding:0}
+table{border-collapse:collapse;width:100%;margin:18px 0;font-size:14px;background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(26,34,51,.06)}
+thead th{background:linear-gradient(180deg,#2b4a6f,#22344b);color:#fff;text-align:left;padding:11px 14px;font-weight:600;font-size:13px;letter-spacing:.2px}
+tbody td{padding:10px 14px;border-top:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even){background:#fafcfe}tbody tr:hover{background:#eef6ff;transition:.12s}
+figure.chart{margin:26px 0;text-align:center;background:var(--card);padding:16px;border-radius:14px;box-shadow:0 4px 20px rgba(26,34,51,.08);border:1px solid var(--line)}
+figure.chart img{max-width:100%;height:auto;border-radius:6px}
+figure.chart figcaption{font-size:12.5px;color:var(--grey);margin-top:10px}
+blockquote.callout{margin:20px 0;padding:15px 18px;border-radius:12px;font-size:14.5px;border-left:4px solid}
+blockquote.callout p{margin:6px 0}blockquote.callout p:first-child{margin-top:0}blockquote.callout p:last-child{margin-bottom:0}
+.callout.tip{background:#eefbf6;border-color:var(--teal)}.callout.warn{background:#fdf4ec;border-color:var(--amber)}
+.callout.learn{background:#eef4fb;border-color:var(--blue)}.callout.note{background:var(--soft);border-color:var(--grey)}
+#prog{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--amber));width:0;z-index:99}
+@media print{.wrap{display:block;max-width:none}aside,#prog,.backtop{display:none!important}main{max-width:none;padding:0}.cover{padding:40px}h2{page-break-after:avoid}table,figure{page-break-inside:avoid}body{font-size:11pt;background:#fff}}
+@media(max-width:880px){.wrap{grid-template-columns:1fr}aside{display:none}main{padding:28px 20px 70px}.cover{padding:40px 24px}.cover h1{font-size:30px}}
+.backtop{position:fixed;right:24px;bottom:24px;background:var(--navy2);color:#fff;border:none;width:46px;height:46px;border-radius:50%;font-size:20px;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.2);opacity:0;transition:.25s;pointer-events:none}
+.backtop.show{opacity:1;pointer-events:auto}
+</style></head><body>
+<div id="prog"></div>
+<div class="wrap">
+  <div class="cover">
+    <div class="kicker">JINWOO QUANT · TECHNICAL WHITEPAPER</div>
+    <h1>진우퀀트 종합 기술 백서</h1>
+    <div class="sub">한국주식 퀀트 트레이딩 연구·운영 시스템 — 발전 현황 보고서</div>
+    <div class="slogan">"검증된 규칙으로만 매매한다 — 추측이 아니라 30년 데이터의 증거로."</div>
+    <div class="meta">
+      <span><b>최신 갱신</b> {{DATE}}</span>
+      <span><b>현행 코어</b> v3.7.2</span>
+      <span><b>검증 데이터</b> 1996–2026 · 1,470만 행</span>
+      <span><b>자동 갱신</b> 주간</span>
+    </div>
+  </div>
+  <aside>
+    <div class="brand">진우퀀트 백서</div>
+    <div class="brandsub">목차 · Table of Contents</div>
+    <ol>{{TOC}}</ol>
+  </aside>
+  <main>
+    {{BODY}}
+  </main>
+</div>
+<button class="backtop" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
+const prog=document.getElementById('prog'),bt=document.querySelector('.backtop');
+const links=[...document.querySelectorAll('aside a')];
+const secs=links.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+function onScroll(){const h=document.documentElement;const sc=h.scrollTop,max=h.scrollHeight-h.clientHeight;
+prog.style.width=(max>0?sc/max*100:0)+'%';bt.classList.toggle('show',sc>600);
+let cur=secs.length-1;for(let i=0;i<secs.length;i++){if(secs[i].getBoundingClientRect().top>120){cur=i-1;break}}
+links.forEach((a,i)=>a.classList.toggle('active',i===cur));}
+document.addEventListener('scroll',onScroll,{passive:true});onScroll();
+</script>
+</body></html>

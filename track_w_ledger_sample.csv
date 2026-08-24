@@ -1,0 +1,4 @@
+date_signal,source,theme,code,name,signal_type,selected_by_model,selected_by_user,actual_buy,no_buy_reason,buy_date,buy_price,weight,stop_price,benchmark,fwd_1m,fwd_3m,fwd_6m,fwd_12m,reason,result_note
+2026-06-15,theme_heat,AI PCB/HBM,353200,(예시)대덕전자,ON테마후보,N,Y,Y,,2026-06-16,38000,7,34960,v3.7.2픽,,,,,진우 자체발굴·AI기판/HBM 수요,매수기록
+2026-06-15,kosdaq_scan,로봇,000000,(예시)로봇주B,관찰후보,N,Y,N,가드레일 유동성(ADTV) 미달,,,,,v3.7.2픽,,,,,테마는 ON이나 진입조건 미충족,비매수-패스기록(반사실 추적용)
+2026-06-15,점수xheat,반도체,042700,(예시)한미반도체,모델픽,Y,N,N,1Q 어닝쇼크 T2 관찰중,,,,,v3.7.2픽,,,,,모델픽이나 재량 보류,2Q(8/17) 점검 후 판단

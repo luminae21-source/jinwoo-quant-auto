@@ -1,0 +1,5 @@
+# 주석
+REST_API_KEY=abc123
+REFRESH_TOKEN=rt_new
+IMAGE_BASE_URL=https://ex.com/c
+NEW_KEY=v

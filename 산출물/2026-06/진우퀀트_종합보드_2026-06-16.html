@@ -1,0 +1,156 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>진우퀀트 종합보드 · 2026-06-16</title>
+<style>
+:root{--bg:#0d1117;--card:#161b22;--c2:#1c2330;--bd:#30363d;--tx:#e6edf3;--mut:#8b949e;--grn:#3fb950;--yel:#d29922;--red:#f85149;--blu:#58a6ff;--gray:#8b949e}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:'Segoe UI','Malgun Gothic',sans-serif;font-size:16px;line-height:1.5}
+.wrap{max-width:780px;margin:0 auto;padding:14px 12px 60px}
+h1{font-size:1.2rem;margin:0 0 2px}
+.date{color:var(--mut);font-size:.78rem;margin-bottom:12px}
+.tabs{display:flex;gap:6px;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:9;margin-bottom:8px}
+.tab{flex:1;padding:11px 6px;border:1px solid var(--bd);border-radius:10px;background:var(--card);color:var(--mut);font-size:.84rem;font-weight:700;text-align:center;cursor:pointer;user-select:none}
+.tab.on{background:#16263f;color:var(--blu);border-color:var(--blu)}
+h2.sec{font-size:.95rem;margin:18px 0 8px;padding-left:9px;border-left:3px solid var(--blu)}
+.layer{border:1px solid var(--bd);border-radius:11px;padding:11px 12px 11px 14px;margin-bottom:7px;position:relative;background:var(--card)}
+.layer .bar{position:absolute;left:0;top:8px;bottom:8px;width:4px;border-radius:2px}
+.layer .lt{font-size:.92rem;font-weight:700}
+.layer .ls{color:var(--mut);font-size:.78rem;margin-top:3px}
+.badge{float:right;font-size:.68rem;font-weight:700;padding:2px 9px;border-radius:999px}
+.arr{text-align:center;color:var(--mut);font-size:.8rem;line-height:.6;margin:1px 0}
+.verdict{border:1px solid var(--bd);border-radius:11px;padding:11px 13px;background:var(--card);margin-bottom:7px}
+.verdict div{font-size:.82rem;margin:5px 0;display:flex;gap:8px;align-items:flex-start}
+.dot{width:9px;height:9px;border-radius:50%;margin-top:5px;flex:none}
+.tl{display:flex;justify-content:space-between;align-items:flex-start;margin:8px 4px;text-align:center}
+.tl .n{flex:1;font-size:.72rem}
+.tl .n b{display:block;color:var(--tx);font-size:.82rem}
+.tl .n .c{width:11px;height:11px;border-radius:50%;margin:5px auto 4px}
+details{border:1px solid var(--bd);border-radius:10px;margin-bottom:7px;background:var(--card);overflow:hidden}
+summary{padding:11px 13px;cursor:pointer;list-style:none;font-size:.88rem;font-weight:700;display:flex;align-items:center;gap:8px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'＋';margin-left:auto;color:var(--mut);font-weight:400}
+details[open] summary::after{content:'－'}
+.tag{font-size:.64rem;font-weight:700;padding:2px 7px;border-radius:6px;flex:none}
+.body{padding:0 13px 12px;font-size:.82rem;color:#c9d3de}
+.body code{background:var(--c2);padding:1px 6px;border-radius:5px;font-size:.86em;color:var(--blu)}
+.body .o{color:var(--mut);font-size:.78rem;margin-top:5px}
+.note{color:var(--mut);font-size:.76rem;margin-top:14px;border-top:1px solid var(--bd);padding-top:10px}
+.g-grn{background:rgba(63,185,80,.16);color:var(--grn)}.g-yel{background:rgba(210,153,34,.16);color:var(--yel)}
+.g-red{background:rgba(248,81,73,.16);color:var(--red)}.g-blu{background:rgba(88,166,255,.16);color:var(--blu)}.g-gray{background:rgba(139,148,158,.18);color:var(--gray)}
+.bar-grn{background:var(--grn)}.bar-yel{background:var(--yel)}.bar-blu{background:var(--blu)}
+.pill{display:inline-block;font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:999px;margin:2px 4px 2px 0}
+</style></head><body><div class="wrap">
+<h1>진우퀀트 종합보드</h1>
+<div class="date">2026-06-16 · production v3.7.2 고정(천장) · 백테 71.5% ≠ forward(현실 CAGR 20%대·시장+5~10%p) · 탭을 눌러 전환</div>
+
+<div class="tabs">
+  <div class="tab on" onclick="show(0,this)">① 중간점검</div>
+  <div class="tab" onclick="show(1,this)">② 사용 가능</div>
+  <div class="tab" onclick="show(2,this)">③ 미진행·대기</div>
+</div>
+
+<!-- ===== TAB 1 중간점검 ===== -->
+<section class="pane">
+  <h2 class="sec">운영구조 — [신] 4레이어</h2>
+  <div class="layer"><span class="bar bar-grn"></span><span class="badge g-grn">✓ 고정</span>
+    <div class="lt">L1 본체 · v3.7.2 18종 (System)</div><div class="ls">+ MA200 추세방어 · attribution 조기경보</div></div>
+  <div class="arr">↓</div>
+  <div class="layer"><span class="bar bar-yel"></span><span class="badge g-yel">관찰</span>
+    <div class="lt">L2 환경인식 · Heat·Supercycle (Sense)</div><div class="ls">ON 테마 = 전력/전기장비 (detect_supercycle 단일정의)</div></div>
+  <div class="arr">↓</div>
+  <div class="layer"><span class="bar bar-yel"></span><span class="badge g-yel">관찰</span>
+    <div class="lt">L3 발굴 · 전시장풀·KOSDAQ 테마 (Discover)</div><div class="ls">관찰후보 = 매수신호 아님 (기본 관찰만)</div></div>
+  <div class="arr">↓</div>
+  <div class="layer"><span class="bar bar-yel"></span><span class="badge g-yel">진행</span>
+    <div class="lt">L4 실행·검증 · 진입·의사결정뷰·Track W (Act)</div><div class="ls">월간 단일화면 · B전환 · 5단계 진입(돌파확인)</div></div>
+
+  <h2 class="sec">모듈 판정</h2>
+  <div class="verdict">
+    <div><span class="dot bar-grn"></span><span><b>채택</b> — Echo · MA200 추세방어 · grade-cut(토글 대기)</span></div>
+    <div><span class="dot bar-yel"></span><span><b>관찰</b> — C(PEAD ×0.5, 9월 판정) · Track W · KOSDAQ 테마</span></div>
+    <div><span class="dot" style="background:var(--gray)"></span><span><b>기각</b> — D regime · 영역3 univ30 · 매매룰 · 헤지 (9연속, 게이트 정상)</span></div>
+  </div>
+
+  <h2 class="sec">다가오는 일정</h2>
+  <div class="tl">
+    <div class="n"><span class="c bar-grn"></span><b>6월말</b>첫 기입</div>
+    <div class="n"><span class="c bar-yel"></span><b>7/1</b>B전환 T2</div>
+    <div class="n"><span class="c bar-yel"></span><b>8/17</b>한미 2Q</div>
+    <div class="n"><span class="c" style="background:var(--red)"></span><b>9월</b>병목</div>
+  </div>
+  <div class="note">9월 병목 = v3.9(C) 통합판정 · 옵션B(ECHO 1.2) · 통합 재심사. 검증 5종(DSR·PBO·White RC p=0.019·iid·Block) 통과 = 엣지 실재(우연 아님).</div>
+</section>
+
+<!-- ===== TAB 2 사용 가능 ===== -->
+<section class="pane" style="display:none">
+  <h2 class="sec">L1 본체 (production)</h2>
+  <details><summary><span class="tag g-grn">고정</span>v3.7.2 점수엔진</summary><div class="body">매월 모델픽·등급(S+/S/A)·권장비중 산출. <b>무수정 고정.</b><div class="o">실행 <code>score_v37_2.py</code> → dashboard_v37_2.html · GitHub Pages 매일 16:30 자동</div></div></details>
+  <details><summary><span class="tag g-grn">신규</span>월간 단일화면 (액션 우선)</summary><div class="body">실보유·모델픽·heat·관찰후보·TrackW·체크 1화면. 실보유 my_holdings 연동(과집중 경보).<div class="o">실행 <code>make_월간화면.py</code> → 진우퀀트_월간_단일화면.html (폰=카톡 '나에게 보내기')</div></div></details>
+  <details><summary><span class="tag g-blu">조기경보</span>attribution (T1~T5)</summary><div class="body">보유 종목 β분해로 약세 조기 포착. 한미반도체 어닝쇼크를 점수표보다 먼저 잡아낸 트랙.<div class="o">attribution_v40_phase1 · Phase2~4는 재정의 대기(미진행 탭)</div></div></details>
+
+  <h2 class="sec">L2 환경인식</h2>
+  <details><summary><span class="tag g-yel">관찰</span>Heat / 테마 surfacing</summary><div class="body">전시장 테마 랭킹 + 수퍼사이클 ON/OFF + 가속.<div class="o">실행 <code>theme_heat.py</code> → 뜨거운테마 패널</div></div></details>
+  <details><summary><span class="tag g-yel">관찰</span>수퍼사이클 모니터</summary><div class="body">테마 ON/OFF·breadth·감속경고 + 홀딩스 4-way 태깅(수퍼사이클/감속/BAB드래그/정상).<div class="o">실행 <code>supercycle_monitor.py</code> → dashboard_supercycle.html</div></div></details>
+
+  <h2 class="sec">L3 발굴</h2>
+  <details><summary><span class="tag g-yel">관찰</span>KOSDAQ 테마 발굴 + 워치리스트</summary><div class="body">forward 테마 발굴, 가드레일(유동성·시총) 통과분만. <b>관찰후보=매수신호 아님.</b><div class="o"><code>kosdaq_theme_discover.py</code> + <code>kosdaq_theme_guardrail.py</code> → 워치리스트 active</div></div></details>
+  <details><summary><span class="tag g-yel">관찰</span>집중모드 ON테마 관찰후보</summary><div class="body">ON 테마 ∩ 상승참여 ∩ 유동성 ∩ 품질 → 관찰후보. ⚠️백테 기각 경고 동반(매수룰 아님).<div class="o">실행 <code>supercycle_buy.py</code> → dashboard_buy.html</div></div></details>
+  <details><summary><span class="tag g-yel">정보</span>전시장 종목풀</summary><div class="body">광역 스크리닝 풀(정보용).<div class="o">dashboard_pool.html</div></div></details>
+
+  <h2 class="sec">L4 실행·검증</h2>
+  <details><summary><span class="tag g-yel">보조</span>의사결정뷰 (3-라벨·4렌즈)</summary><div class="body">①실보유 / ②production 선별18(모델픽) / 후보 분리. 품질·주도성·타이밍·리스크.<div class="o">실행 <code>decision_view.py</code> → 의사결정뷰_LATEST.html</div></div></details>
+  <details><summary><span class="tag g-yel">진행</span>진입 상태머신 (5단계)</summary><div class="body">관찰만 → 셋업 → 임박 → <b>돌파확인</b> → (사람)매수검토. −8% 손절.<div class="o"><code>entry_signals.py</code> · chart_timing 자동연동은 미진행 탭</div></div></details>
+  <details><summary><span class="tag g-grn">보조</span>보유 집중도 모니터</summary><div class="body">실보유 비중·섹터·테마·베타 집중 점검(에코프로비엠 53% 과집중 경보).<div class="o">보유집중도_모니터.html · my_holdings.csv 기반</div></div></details>
+  <details><summary><span class="tag g-grn">신규</span>Track W 원장 + 자동화</summary><div class="body">재량 매매 기여 반사실 측정(메인=재량−벤치, 보조=패스−매수). 매수 전 기입.<div class="o"><code>track_w_ledger.csv</code> + <code>update_track_w.py</code>(self-test 통과) · 월간 리마인더 연동</div></div></details>
+  <details><summary><span class="tag g-yel">대기</span>B전환 워크시트</summary><div class="body">검증→실증 집행 계산기(T1 대기).<div class="o">B전환_T1_계산기.html</div></div></details>
+  <details><summary><span class="tag g-yel">보조</span>통합 대시보드</summary><div class="body">테마·풀·관찰후보 합본 1파일.<div class="o">실행 <code>build_dashboard_all.py</code> → 진우퀀트_통합대시보드.html</div></div></details>
+
+  <h2 class="sec">검증 · 자동화</h2>
+  <details><summary><span class="tag g-grn">재현</span>학술 robustness 5종</summary><div class="body">DSR(PSR 0.9986)·PBO 0.571·White RC p=0.019·iid·Block Bootstrap. 전부 재현 가능.<div class="o">validate_*.py · block 5th-pctile CAGR > KOSPI</div></div></details>
+  <details><summary><span class="tag g-blu">자동</span>예약 리마인더 13개</summary><div class="body">월간 루틴 · B전환 T2/T3 · 한미 2Q(8/17) · 9월 재심사 · KOSDAQ 스캔 · 진입 스캔(토) · 집중도 · 추세 · 대시보드 생성. 알아서 돈다.</div></details>
+</section>
+
+<!-- ===== TAB 3 미진행·대기 ===== -->
+<section class="pane" style="display:none">
+  <div class="note" style="margin-top:0;border:0;padding:0">여러 대화에 흩어진 미완·대기 항목을 한곳에 모았어. 종결(기각)된 건 맨 아래 참고용.</div>
+
+  <h2 class="sec">🔴 진우 결정 대기</h2>
+  <details><summary><span class="tag g-red">결정</span>grade-cut S+/S 채택 여부</summary><div class="body">S+/S로 좁히면 4년 CAGR +9.7%p, 단 MDD −12.2→−14.3%·반도체 집중↑. <code>score_v37_2.py</code>의 <code>AGGRESSIVE_GRADECUT=False→True</code> 한 줄. 되돌리기 쉬움.</div></details>
+  <details><summary><span class="tag g-red">집행</span>B전환 T1 (실계좌)</summary><div class="body">검증 트랙(production 18)으로 실계좌를 맞추는 첫 트랜치. 에코프로머티 매도 후 집행. propose-not-replace(production 무수정).</div></details>
+  <details><summary><span class="tag g-red">루프</span>GPT cross-check</summary><div class="body">5산출물·점검패킷·정합성 해결로그를 ChatGPT에 검토받아 → 반영/반박 정리. (예전 GPT검증답변 패턴)</div></details>
+
+  <h2 class="sec">🟡 진행 중 · 부분 완성</h2>
+  <details><summary><span class="tag g-yel">시작점</span>A→B 실운영 첫 Track W 기입</summary><div class="body">6월말 라이브 추적 첫 줄 기입 = 모든 측정의 출발점. 매수 전 date_signal·reason·stop_price 선등록.</div></details>
+  <details><summary><span class="tag g-yel">미완</span>진입 상태머신 chart_timing 자동연동</summary><div class="body">5단계 자동판정에 필요한 지표(10주선·30주선·52주고점·RS·20일 거래대금) 산출 보강 필요. 현재 일부 수동.</div></details>
+  <details><summary><span class="tag g-yel">재정의</span>영역4 Phase2~4 (부분 C-1)</summary><div class="body">"universe 확장" 전제 소멸 → fixed18 기준 재설계. 섹터 2팩터(한미 T2-herd가 동기). <b>별도 세션</b> 권장(시작prompt 있음).</div></details>
+  <details><summary><span class="tag g-yel">고도화</span>Track W 정밀 벤치마크</summary><div class="body">현 <code>update_track_w.py</code> 벤치는 지수 프록시(KS11/KQ11). 정밀 v3.7.2 동액 바스켓 수익률은 PC 모델 실행 연동 시 고도화 가능.</div></details>
+  <details><summary><span class="tag g-yel">측정</span>KOSDAQ 테마 lane 라이브</summary><div class="body">워치리스트 thesis·무효화 누적 점검 + Track W 반사실(월간 리마인더가 챙김). 측정 데이터 누적 단계.</div></details>
+
+  <h2 class="sec">🟢 예약 자동 (리마인더가 챙김)</h2>
+  <div class="verdict">
+    <div><span class="dot bar-grn"></span><span>6월말 첫 기입 · 7/1 B-T2 · 8/3 T3 · <b>8/17 한미 2Q</b> · 9/30 통합 재심사</span></div>
+    <div><span class="dot bar-blu"></span><span>매월 1일: 월간화면·집중도·추세·통합대시보드·KOSDAQ 스캔 자동 생성</span></div>
+    <div><span class="dot bar-blu"></span><span>매주 토: 진입 스캔(셋업/돌파/임박 알림)</span></div>
+  </div>
+
+  <h2 class="sec">📋 언젠가 (백로그)</h2>
+  <div class="verdict">
+    <div><span class="dot bar-yel"></span><span>월간 공개 대시보드 daily CI 완전자동화(상류 CSV 안정화 후)</span></div>
+    <div><span class="dot bar-yel"></span><span>의사결정뷰 4렌즈 고도화 · 옵션B(ECHO 1.2) 9월 검토</span></div>
+  </div>
+
+  <h2 class="sec">⏸ 종결 (기각) — 참고만</h2>
+  <div class="note" style="border:0;padding:0;margin-top:2px">D regime 가중치 · 영역3 univ30 확장 · 매매룰 오버레이(추세추종 청산·헤지) · 인버스 헤지 — 전부 시험 후 기각(게이트 정상 작동). 한국 reversal 엣지와 충돌. <b>다시 손대지 않음</b>(9월 확장+regime 1회 재시험만 여지).</div>
+</section>
+
+<div class="note">production v3.7.2 무수정 · 백테 수치 ≠ forward 기대 · 후보 ≠ 매수신호 · 실보유 ≠ 모델픽 · 매매 책임은 본인. 생성 2026-06-16.</div>
+</div>
+<script>
+function show(n,el){
+  var ts=document.querySelectorAll('.tab'),ps=document.querySelectorAll('.pane');
+  for(var i=0;i<ts.length;i++){ts[i].classList.remove('on');ps[i].style.display='none';}
+  el.classList.add('on');ps[n].style.display='block';
+  window.scrollTo(0,0);
+}
+</script>
+</body></html>

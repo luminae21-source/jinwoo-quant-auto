@@ -1,0 +1,109 @@
+{
+  "n_bad": 110,
+  "n_all": 251,
+  "mom_scan": {
+    "0%": {
+      "meanIC": 0.0462,
+      "ic_t": 4.24,
+      "ls_ann": 12.6,
+      "ls_sharpe": 0.65,
+      "hit": 60.0,
+      "mdd": -44.0,
+      "n": 251,
+      "bad_regime_mean_pct": -3.387
+    },
+    "10%": {
+      "meanIC": 0.0448,
+      "ic_t": 4.35,
+      "ls_ann": 10.8,
+      "ls_sharpe": 0.57,
+      "hit": 60.0,
+      "mdd": -49.2,
+      "n": 251,
+      "bad_regime_mean_pct": -3.179
+    },
+    "15%": {
+      "meanIC": 0.0445,
+      "ic_t": 4.51,
+      "ls_ann": 10.2,
+      "ls_sharpe": 0.56,
+      "hit": 60.0,
+      "mdd": -46.7,
+      "n": 251,
+      "bad_regime_mean_pct": -3.0
+    },
+    "20%": {
+      "meanIC": 0.044,
+      "ic_t": 4.69,
+      "ls_ann": 11.2,
+      "ls_sharpe": 0.64,
+      "hit": 60.0,
+      "mdd": -42.5,
+      "n": 251,
+      "bad_regime_mean_pct": -2.499
+    },
+    "25%": {
+      "meanIC": 0.0434,
+      "ic_t": 4.87,
+      "ls_ann": 10.6,
+      "ls_sharpe": 0.65,
+      "hit": 60.0,
+      "mdd": -41.7,
+      "n": 251,
+      "bad_regime_mean_pct": -2.156
+    },
+    "30%": {
+      "meanIC": 0.0427,
+      "ic_t": 5.03,
+      "ls_ann": 11.5,
+      "ls_sharpe": 0.75,
+      "hit": 60.0,
+      "mdd": -37.1,
+      "n": 251,
+      "bad_regime_mean_pct": -1.442
+    },
+    "35%": {
+      "meanIC": 0.0415,
+      "ic_t": 5.04,
+      "ls_ann": 11.5,
+      "ls_sharpe": 0.76,
+      "hit": 60.0,
+      "mdd": -36.5,
+      "n": 251,
+      "bad_regime_mean_pct": -0.981
+    },
+    "40%": {
+      "meanIC": 0.0399,
+      "ic_t": 4.91,
+      "ls_ann": 10.9,
+      "ls_sharpe": 0.74,
+      "hit": 62.0,
+      "mdd": -39.4,
+      "n": 251,
+      "bad_regime_mean_pct": -0.545
+    }
+  },
+  "best_mom": "35%",
+  "value_reduced": {
+    "제안A(밸류0.38)": {
+      "meanIC": 0.0362,
+      "ic_t": 4.6,
+      "ls_ann": 8.0,
+      "ls_sharpe": 0.57,
+      "hit": 58.0,
+      "mdd": -30.8,
+      "n": 251,
+      "bad_regime_mean_pct": -0.907
+    },
+    "제안B(보수)": {
+      "meanIC": 0.0368,
+      "ic_t": 4.44,
+      "ls_ann": 7.7,
+      "ls_sharpe": 0.5,
+      "hit": 60.0,
+      "mdd": -32.6,
+      "n": 251,
+      "bad_regime_mean_pct": -1.49
+    }
+  }
+}

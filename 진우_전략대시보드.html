@@ -1,0 +1,168 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>진우 사냥터 · 전략 대시보드</title>
+<style>
+:root{--bg:#0d1016;--card:#12151c;--bd:#1c2230;--tx:#c8ccd4;--mut:#7a828e;--gold:#ffca3a;--grn:#639922;--red:#e24b4a;--gry:#888780}
+*{box-sizing:border-box}body{background:var(--bg);color:var(--tx);font-family:-apple-system,'Malgun Gothic',sans-serif;margin:0;padding:22px;font-size:14px;line-height:1.5}
+h1{font-size:22px;font-weight:600;margin:0 0 2px}h2{font-size:15px;font-weight:600;margin:0 0 3px}
+.sub{color:var(--mut);font-size:12.5px}.wrap{max-width:1180px;margin:0 auto}
+.grid{display:grid;gap:14px}.g2{grid-template-columns:1fr 1fr}.g4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:15px 17px}
+.hero{background:#141a12;border:1px solid #2b3a22;border-radius:12px;padding:16px 18px}
+.hero .p{font-size:19px;font-weight:600;color:#cfe6b0}.hero .s{color:#9fb89a;font-size:13px;margin-top:5px}
+.pos{color:var(--grn)}.neg{color:var(--red)}.muted{color:var(--mut)}
+.chip{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11.5px;margin:1px}
+.ok{background:#16210f;color:#a8d08a;border:1px solid #2b3a22}.no{background:#241213;color:#e79a9a;border:1px solid #4a2020}
+svg text{font-family:inherit}
+@media(max-width:820px){.g2,.g4{grid-template-columns:1fr}}
+.foot{color:var(--mut);font-size:11.5px;margin-top:14px;text-align:center}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:5px 7px;border-bottom:1px solid var(--bd);text-align:right}td.l,th.l{text-align:left}th{color:var(--mut);font-weight:500}
+</style></head><body><div class="wrap">
+<h1>진우 사냥터 · 전략 대시보드</h1>
+<div class="sub">수급·퀄리티·성장 전방위 검증 → 딥밸류 수익 최대화 · 2002–2026 · 신호효능(이상화)·투자자문 아님 · 2026-07</div>
+
+<div class="hero" style="margin:14px 0">
+  <div class="s" style="margin:0 0 3px">관통 원리 · one edge</div>
+  <div class="p">역발상 하나뿐 — 싸고·얻어맞고·과매도된 걸 산다</div>
+  <div class="s">"좋고 강한 걸 산다"(수급 매집·퀄리티·성장)는 전부 엣지와 반대 → 얹으면 깎인다</div>
+</div>
+
+<div class="grid g2">
+  <div class="card"><h2>검증 판정</h2><div class="sub" style="margin-bottom:8px">채택 vs 기각</div>
+    <div style="margin-bottom:8px"><span class="chip ok">✓ 딥밸류바닥</span><span class="chip ok">✓ 반도체 역발상 사이클</span><span class="chip ok">✓ 즉시매수·분산·강함에 익절</span></div>
+    <div><span class="chip no">✕ 수급 매집(단일·다기간·주봉·숏커버)</span><span class="chip no">✕ 퀄리티·성장</span><span class="chip no">✕ 딥밸류∩기관(OOS −4%p)</span></div>
+    <div class="sub" style="margin-top:10px">기관매집 정직한 위치: 시장 대비 +6.6%p·저변동이나 우측꼬리·OOS KOSPI 동급 → 모니터링용</div>
+  </div>
+  <div class="card"><h2>전략별 수익 · CAGR</h2><div class="sub" style="margin-bottom:6px">12M보유·유동성필터·비용후·vs KOSPI</div>
+    <svg id="cagr" viewBox="0 0 520 210" style="width:100%;height:auto"></svg>
+  </div>
+</div>
+
+<div class="grid g2" style="margin-top:14px">
+  <div class="card"><h2>누적수익 · 딥밸류 vs KOSPI</h2><div class="sub" style="margin-bottom:4px">2002=100 · 로그축 · 이상화 신호효능</div>
+    <svg id="cum" viewBox="0 0 520 260" style="width:100%;height:auto"></svg>
+    <div class="sub"><span class="pos">━ 딥밸류 ~1,140배</span> &nbsp; <span class="muted">━ KOSPI ~7배</span></div>
+  </div>
+  <div class="card"><h2>낙폭 · 입장료</h2><div class="sub" style="margin-bottom:4px">고점 대비 하락 · 반복되는 −30~−50%를 견뎌야 함</div>
+    <svg id="dd" viewBox="0 0 520 240" style="width:100%;height:auto"></svg>
+  </div>
+</div>
+
+<div class="grid g2" style="margin-top:14px">
+  <div class="card"><h2>반도체 사이클 · 어디서 사는가</h2><div class="sub" style="margin-bottom:4px">업황 최악(수축)에 매수 = 역발상</div>
+    <svg viewBox="0 0 520 260" style="width:100%;height:auto">
+    <line x1="30" y1="150" x2="500" y2="150" stroke="#2a3242" stroke-dasharray="3 3"/>
+    <path d="M30,158 C110,80 150,70 175,73 C230,78 270,120 300,150 C345,190 385,215 425,215 C470,215 500,175 500,150" fill="none" stroke="#aab4c2" stroke-width="2.4"/>
+    <rect x="120" y="46" width="150" height="30" rx="7" fill="#241213" stroke="#4a2020"/><text x="195" y="59" fill="#e79a9a" font-size="12" text-anchor="middle" font-weight="600">고점둔화 = 사지마라</text><text x="195" y="71" fill="#c98787" font-size="11" text-anchor="middle">+7.5% · 시장 −3.2%p</text>
+    <circle cx="175" cy="73" r="5" fill="#e24b4a"/>
+    <rect x="300" y="222" width="165" height="30" rx="7" fill="#16210f" stroke="#2b3a22"/><text x="382" y="235" fill="#a8d08a" font-size="12" text-anchor="middle" font-weight="600">수축·바닥 = 사라</text><text x="382" y="247" fill="#8bb06e" font-size="11" text-anchor="middle">+20.2% · 시장 +11.7%p</text>
+    <circle cx="425" cy="215" r="5" fill="#639922"/>
+    <text x="95" y="128" fill="#7a828e" font-size="11" text-anchor="middle">확장 +10.9%</text>
+    </svg>
+  </div>
+  <div class="card"><h2>기관 매집 경로 · 하락 뒤 진입</h2><div class="sub" style="margin-bottom:4px">−11.8% 하락 후 매집 시작 → +17% 상승 (n=28,554)</div>
+    <svg viewBox="0 0 520 260" style="width:100%;height:auto">
+    <line x1="195" y1="30" x2="195" y2="210" stroke="#3a4453" stroke-dasharray="4 3"/><line x1="40" y1="175" x2="495" y2="175" stroke="#2a3242" stroke-dasharray="3 3"/>
+    <text x="43" y="171" fill="#7a828e" font-size="10">기준 100</text>
+    <polyline points="40,95 65,120 90,133 115,145 140,160 170,175 195,175" fill="none" stroke="#d85a30" stroke-width="2.4"/>
+    <polyline points="195,175 220,152 245,130 270,120 295,112 320,103 345,93 370,86 395,81 420,68 445,56 470,50 495,44" fill="none" stroke="#639922" stroke-width="2.4"/>
+    <circle cx="195" cy="175" r="5" fill="#c8ccd4"/><text x="195" y="228" fill="#c8ccd4" font-size="12" text-anchor="middle" font-weight="600">매집 시작</text>
+    <text x="110" y="108" fill="#e79a9a" font-size="12" text-anchor="middle" font-weight="600">−11.8%</text>
+    <text x="420" y="90" fill="#a8d08a" font-size="12" text-anchor="middle" font-weight="600">+17%</text>
+    <text x="40" y="248" fill="#7a828e" font-size="10">−6M</text><text x="195" y="248" fill="#7a828e" font-size="10" text-anchor="middle">0</text><text x="495" y="248" fill="#7a828e" font-size="10" text-anchor="end">+12M</text>
+    </svg>
+  </div>
+</div>
+
+<div class="card" style="margin-top:14px"><h2>바닥은 누가 잡는가 · 딥밸류의 위치</h2>
+  <div class="sub" style="margin-bottom:4px">직전 3개월 주가국면별 순매수 방향 · 개인이 하락을 받고, 기관·외국인은 확인 후 산다 (개인=역산, 검증 예정)</div>
+  <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:14px;align-items:center">
+  <svg viewBox="0 0 680 280" style="width:100%;height:auto">
+    <rect x="70" y="40" width="590" height="120" fill="#1D9E75" opacity="0.16"/>
+    <rect x="70" y="160" width="590" height="95" fill="#e24b4a" opacity="0.14"/>
+    <line x1="70" y1="160" x2="660" y2="160" stroke="#5a626e" stroke-width="1.3"/>
+    <text x="78" y="58" fill="#5dcaa5" font-size="12" font-weight="600">▲ 산다</text>
+    <text x="78" y="250" fill="#e79a9a" font-size="12" font-weight="600">▼ 판다</text>
+    <polyline points="90,58 222,118 355,158 488,193 620,205" fill="none" stroke="#7cbb2b" stroke-width="4"/>
+    <polyline points="90,235 222,192 355,175 488,158 620,150" fill="none" stroke="#e8823c" stroke-width="2.8"/>
+    <polyline points="90,200 222,188 355,168 488,152 620,146" fill="none" stroke="#4d9bf0" stroke-width="2.8"/>
+    <circle cx="90" cy="58" r="6" fill="#7cbb2b"/><circle cx="620" cy="205" r="6" fill="#7cbb2b"/>
+    <text x="110" y="50" fill="#8bd44e" font-size="12.5" font-weight="600">개인 — 바닥을 받는다</text>
+    <text x="430" y="245" fill="#e8823c" font-size="12" font-weight="600">기관·외국인 — 확인 후 산다</text>
+    <text x="90" y="275" fill="#7a828e" font-size="11" text-anchor="middle">급락</text><text x="355" y="275" fill="#7a828e" font-size="11" text-anchor="middle">보합</text><text x="620" y="275" fill="#7a828e" font-size="11" text-anchor="middle">급등</text>
+  </svg>
+  <div style="font-size:12.5px;line-height:1.6">
+    <div style="color:#8bd44e;font-weight:600;margin-bottom:3px">개인</div><div class="sub" style="margin-bottom:8px">바닥을 다 받는다 → 트랩·상폐 포함 → 평균 손해</div>
+    <div style="color:#ffca3a;font-weight:600;margin-bottom:3px">딥밸류 = 필터링된 역발상</div><div class="sub" style="margin-bottom:8px">같은 바닥을 사되, 과매도+턴+저PBR로 이길 것만 골라 반등만 취함 → +38%</div>
+    <div style="color:#e8823c;font-weight:600;margin-bottom:3px">기관·외국인</div><div class="sub">반등 확인 후 따라 산다 → 늦고 비쌈</div>
+  </div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:14px"><h2>어디까지 오르나 · 익절 최적화</h2>
+  <div class="sub" style="margin-bottom:8px">바닥 딥밸류는 크게 오르나 안 팔면 반납 → 강함에 익절이 수익 실현의 핵심</div>
+  <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:16px">
+  <div>
+    <div style="font-size:12.5px;color:var(--mut);margin-bottom:5px">보유 중 최고점 도달 비율 (24M)</div>
+    <table>
+      <tr><td class="l">+50% 이상</td><td class="pos" style="text-align:right;font-weight:600">42%</td></tr>
+      <tr><td class="l">2배 이상</td><td class="pos" style="text-align:right;font-weight:600">23%</td></tr>
+      <tr><td class="l">3배 이상</td><td class="pos" style="text-align:right;font-weight:600">10%</td></tr>
+      <tr><td class="l" style="color:var(--mut)">끝까지 들면(중앙)</td><td style="text-align:right;color:var(--red)">−0%</td></tr>
+    </table>
+    <div class="sub" style="margin-top:6px">주봉(2018~): 러닝맥스 +96% vs 평균보유 +39% = 반납분</div>
+  </div>
+  <div>
+    <div style="font-size:12.5px;color:var(--mut);margin-bottom:5px">익절 트리거 · 포트폴리오 CAGR (vs KOSPI +9.5%)</div>
+    <table>
+      <tr><th class="l">규칙</th><th>전체</th><th>OOS</th><th>Sharpe</th></tr>
+      <tr><td class="l" style="color:var(--red)">고정 12M</td><td style="text-align:right">+32%</td><td style="text-align:right">+29%</td><td style="text-align:right">0.64</td></tr>
+      <tr><td class="l" style="color:#8bd44e">이격≥1.5 ★</td><td style="text-align:right;color:#8bd44e">+38%</td><td style="text-align:right;color:#8bd44e">+35%</td><td style="text-align:right">0.82</td></tr>
+      <tr><td class="l" style="color:#8bd44e">트레일 −20% ★</td><td style="text-align:right">+38%</td><td style="text-align:right;color:#8bd44e">+38%</td><td style="text-align:right">0.74</td></tr>
+      <tr><td class="l" style="color:var(--red)">조합(OR 3트리거)</td><td style="text-align:right;color:var(--red)">+32%</td><td style="text-align:right;color:var(--red)">+23%</td><td style="text-align:right">0.84</td></tr>
+    </table>
+    <div class="sub" style="margin-top:6px">단일 규칙(이격1.5·트레일−20%)이 최고. OR 조합은 조기청산으로 OOS 열위 → 폐기. MDD는 −66%로 불변</div>
+  </div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:14px"><h2>실전 플로우 · 매수 → 보유 → 익절</h2>
+  <div class="grid g4" style="margin-top:8px">
+    <div style="border:1px solid var(--bd);border-radius:10px;padding:11px"><b>1 · 스크린</b><div class="sub" style="margin-top:4px">저PBR20% ∩ 이격&lt;0.85 ∩ 턴 · 유동성필터</div></div>
+    <div style="border:1px solid var(--bd);border-radius:10px;padding:11px"><b>2 · 매수</b><div class="sub" style="margin-top:4px">신호 즉시 · 10~15종 분산 · 못생겨도 담기</div></div>
+    <div style="border:1px solid var(--bd);border-radius:10px;padding:11px"><b>3 · 보유</b><div class="sub" style="margin-top:4px">12~36M · 승자 미절단 · 스톱 없음 · −52% 감내</div></div>
+    <div style="border:1px solid #2b3a22;border-radius:10px;padding:11px;background:#16210f"><b style="color:#a8d08a">4 · 익절</b><div style="margin-top:4px;color:#8bb06e;font-size:12.5px">강함에 판다 · 이격≥1.5 or +100% or PBR≥1.0</div></div>
+  </div>
+  <div class="grid g2" style="margin-top:10px">
+    <div style="background:#0f1520;border:1px solid #24303c;border-radius:10px;padding:10px 13px;font-size:12.5px"><b style="color:var(--gold)">리스크</b> 스톱 아닌 분산·소액. 1종 −100% → 분산이 생존조건</div>
+    <div style="background:#241213;border:1px solid #4a2020;border-radius:10px;padding:10px 13px;font-size:12.5px"><b style="color:#e79a9a">금지</b> 퀄리티·성장·기관·저변동 오버레이 = 수익 깎음(검증)</div>
+  </div>
+</div>
+
+<div class="foot">데이터: 가격 1996~·재무/수급 2002~ · 상폐 −100% 보수 · 신호효능(EW 이상화, 실전은 용량·슬리피지로 낮음) · 문서: 사냥터_기획/진우_세션종합_2026-07.md</div>
+</div>
+<script>
+const NS="http://www.w3.org/2000/svg";
+function el(p,t,a,tx){const e=document.createElementNS(NS,t);for(k in a)e.setAttribute(k,a[k]);if(tx!=null)e.textContent=tx;p.appendChild(e);return e;}
+// CAGR bars
+(function(){const s=document.getElementById('cagr');const d=[["딥밸류바닥",38.6,"#7cbb2b"],["저PBR 밸류",24.7,"#4d9bf0"],["딥밸류∪기관",15.1,"#e0b020"],["기관매집",13.8,"#e8823c"],["딥밸류∩기관",10.4,"#ec5757"],["KOSPI",9.5,"#8aa0be"]];
+d.forEach((r,i)=>{const y=12+i*33;el(s,'text',{x:96,y:y+15,'text-anchor':'end','font-size':12,fill:'#c8ccd4'},r[0]);
+ el(s,'rect',{x:104,y:y,width:360,height:20,rx:5,fill:'#0d1016'});el(s,'rect',{x:104,y:y,width:Math.max(4,r[1]/40*360),height:20,rx:5,fill:r[2]});
+ el(s,'text',{x:104+Math.max(4,r[1]/40*360)+6,y:y+15,'font-size':12,fill:r[2]},'+'+r[1]+'%');});})();
+// cumulative log
+(function(){const s=document.getElementById('cum');const yr=[2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026];
+const dp=[63,127,173,907,943,1621,852,1415,1734,1464,1714,3865,5242,19098,19827,47008,39157,37793,36100,43356,39843,45594,51262,83464,113867];
+const kp=[86,116,125,182,200,266,151,209,236,213,225,231,235,245,247,302,257,263,279,276,256,301,278,455,704];
+const x=y=>45+(y-2002)/24*455,ly=v=>230-(Math.log10(v)-1.5)/3.7*205;
+[100,1000,10000,100000].forEach(t=>{el(s,'line',{x1:45,y1:ly(t),x2:500,y2:ly(t),stroke:'#1c2230','stroke-dasharray':'3 3'});el(s,'text',{x:42,y:ly(t)+4,'text-anchor':'end','font-size':10,fill:'#7a828e'},t>=1000?t/1000+'k':t);});
+const P=(a,c,w)=>el(s,'polyline',{points:a.map((v,i)=>x(yr[i])+','+ly(v)).join(' '),fill:'none',stroke:c,'stroke-width':w});
+P(kp,'#8aa0be',2.2);P(dp,'#7cbb2b',2.8);
+[2002,2008,2014,2020,2026].forEach(y=>el(s,'text',{x:x(y),y:250,'text-anchor':'middle','font-size':10,fill:'#7a828e'},y));})();
+// drawdown
+(function(){const s=document.getElementById('dd');const yr=[2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026];
+const dd=[-37,0,0,0,0,-2,-49,-15,0,-19,-8,-8,-7,-3,-9,-1,-26,-29,-32,-27,-33,-23,-14,0,-19];
+const x=y=>45+(y-2002)/24*455,yv=v=>40+(-v)/60*170;
+[0,-20,-40,-52].forEach(t=>{el(s,'line',{x1:45,y1:yv(t),x2:500,y2:yv(t),stroke:t?'#1c2230':'#2a3242','stroke-dasharray':t?'3 3':'0'});el(s,'text',{x:42,y:yv(t)+4,'text-anchor':'end','font-size':10,fill:'#7a828e'},t+'%');});
+el(s,'path',{d:'M45,'+yv(0)+' L'+yr.map((y,i)=>x(y)+','+yv(dd[i])).join(' L')+' L500,'+yv(0)+' Z',fill:'#e24b4a','fill-opacity':0.42,stroke:'#e24b4a','stroke-width':1.8});
+[2002,2008,2014,2020,2026].forEach(y=>el(s,'text',{x:x(y),y:232,'text-anchor':'middle','font-size':10,fill:'#7a828e'},y));
+el(s,'text',{x:x(2008),y:yv(-49)-6,'text-anchor':'middle','font-size':11,fill:'#e79a9a','font-weight':600},'−52%');})();
+</script></body></html>

@@ -1,0 +1,72 @@
+<!doctype html><html lang=ko><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><title>재조명 리포트 · 진우퀀트</title><style>
+:root{--bg:#0b1020;--card:#141b2e;--ink:#e8edf6;--sub:#9fb0c9;--line:#243149;--acc:#5b9dff;--th:#1b2540}
+@media(prefers-color-scheme:light){:root{--bg:#f4f6fb;--card:#fff;--ink:#0f1830;--sub:#5a6a86;--line:#e3e9f4;--acc:#2563eb;--th:#eef2fa}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);
+font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;padding:22px;line-height:1.65;font-size:14.5px}
+.wrap{max-width:1000px;margin:0 auto}
+.bar{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}
+h1.pt{font-size:21px;margin:0}
+.meta{color:var(--sub);font-size:11.5px;margin-bottom:16px}
+a.back{color:var(--acc);text-decoration:none;font-size:12.5px}
+.toc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 16px;margin-bottom:16px;font-size:12.5px}
+.toc a{display:block;color:var(--sub);text-decoration:none;padding:2px 0}
+.toc a:hover{color:var(--acc)}.toc a.d2{padding-left:14px}.toc a.d3{padding-left:28px}.toc a.d4{padding-left:42px}
+.doc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px 30px}
+.doc>*:first-child{margin-top:0}
+.doc h1{font-size:20px;margin:8px 0 14px;padding-bottom:9px;border-bottom:2px solid var(--line)}
+.doc h2{font-size:17px;margin:28px 0 10px;color:var(--acc)}
+.doc h3{font-size:15.5px;margin:24px 0 8px}
+.doc h4{font-size:14.5px;margin:22px 0 8px}
+.doc h5{font-size:13.5px;margin:18px 0 6px;color:var(--sub)}
+.doc p{margin:9px 0}.doc ul,.doc ol{margin:9px 0;padding-left:22px}.doc li{margin:3px 0}
+.doc table{border-collapse:collapse;margin:14px 0;font-size:13px;width:auto;min-width:55%}
+.doc th{background:var(--th);border:1px solid var(--line);padding:7px 11px;text-align:left;white-space:nowrap}
+.doc td{border:1px solid var(--line);padding:6px 11px;vertical-align:top}
+.doc blockquote{margin:12px 0;padding:10px 16px;background:var(--bg);border-left:4px solid var(--acc);border-radius:0 8px 8px 0}
+.doc blockquote p{margin:5px 0}
+.doc code{background:var(--th);padding:1.5px 5px;border-radius:4px;font:12.5px ui-monospace,Consolas,monospace}
+.doc pre{background:#0d1117;color:#e6edf3;border-radius:9px;padding:13px 15px;overflow-x:auto}
+.doc pre code{background:none;color:inherit;padding:0;font-size:12.3px}
+.doc hr{border:0;border-top:1px solid var(--line);margin:24px 0}
+.doc a{color:var(--acc)}.doc del{color:var(--sub)}
+.warn{color:#e0a32e;font-size:11px;margin-top:16px}
+</style></head><body><div class=wrap>
+<div class=bar><h1 class=pt>재조명 리포트</h1><a class=back href="진우퀀트_허브.html">← 허브</a></div>
+<div class=meta>원본 진우퀀트_재조명_리포트_2026-07-28.md · 88줄 · 생성 2026-08-20 15:05 · <b>원본이 정본이다. 이 페이지는 읽기용 사본.</b></div>
+<div class=toc><a class="d1" href="#s0">진우퀀트 재조명 리포트 — 리빌딩 설계안</a><a class="d2" href="#s1">0. 한 줄 진단</a><a class="d2" href="#s2">1. 층별 판정 요약</a><a class="d2" href="#s3">2. 즉시 수리 목록 (코드 레벨, 리빌딩 전 필수)</a><a class="d2" href="#s4">3. 재조명 — 새 투자 인사이트 3가지</a><a class="d3" href="#s5">인사이트 ① 지금의 &quot;정직한 수치&quot;는 비관 쪽으로 기울어 있다 — 최종 판정은 아직 안 났다</a><a class="d3" href="#s6">인사이트 ② 알파의 위치는 &#x27;종목 고르기&#x27;가 아니라 &#x27;구조&#x27;에 있다</a><a class="d3" href="#s7">인사이트 ③ KOSDAQ은 시장수익이 아니라 &#x27;분산&#x27;을 사는 곳이다</a><a class="d2" href="#s8">4. 리빌딩 설계 — 유지 / 수정 / 폐기</a><a class="d2" href="#s9">5. 90일 로드맵</a><a class="d2" href="#s10">6. 수익률에 대한 현실적 기대 (판단 재료)</a></div>
+<div class=doc><h1 id="s0">진우퀀트 재조명 리포트 — 리빌딩 설계안</h1>
+<p><b>2026-07-28 · 코드·문서 직접 감사 기반</b> (백서 2세대, 감사 리포트, score/backtest/risk 코드, 데이터수리 런북 전수 검토)</p>
+<hr>
+<h2 id="s1">0. 한 줄 진단</h2>
+<blockquote><p><b>진우퀀트의 진짜 자산은 전략이 아니라 검증 체계다. 그리고 지금의 &quot;지수를 못 이긴다&quot;는 정직한 판정조차 아직 최종 결론이 아니다 — 상방 편향 3개는 고쳤지만, 하방 편향 2개(배당 총수익 미반영·소멸 오분류)는 아무도 재지 않았다.</b></p></blockquote>
+<p>이 시스템은 지난 한 달간 룩어헤드(−17.6%p), 시총 12월 결측(+1.6%p), 조정본 붕괴라는 상방 편향 3개를 스스로 찾아 고쳤고, 그 결과 수치가 20.1%→8.6%로 내려앉았다. 그런데 방향이 반대인 편향 2개가 남아 있고, 이 둘은 현재 KOSPI와의 격차(−0.6~+0.9%p)를 <b>뒤집을 수 있는 크기</b>다. 리빌딩의 1순위는 새 전략 탐색이 아니라 이 두 축의 정산이다.</p>
+<hr>
+<h2 id="s2">1. 층별 판정 요약</h2>
+<table><thead><tr><th>층</th><th>등급</th><th>판정</th></tr></thead><tbody><tr><td><b>검증 체계</b></td><td><b>A−</b></td><td>개인 퀀트 기준 이례적 수준. 사전등록·OOS 봉인·게이트 G1~G10·룩어헤드 탐지기·PBO/DSR까지 가동. 결함을 스스로 찾아 수치를 하향하는 루프가 실제로 작동함. 남은 구멍: 배당 TR 축, 소멸 판정, 재무 정정공시, 비용 하드코딩 41파일</td></tr><tr><td><b>팩터·데이터</b></td><td><b>B</b></td><td>배당(HAC t 4.10)·B/P(3.34)·E/P(2.36) 방향은 조정본에서 확정. 단 크기 검증 창은 2008~2026 단서 부착, 30년 크기는 미감사. 수정주가 재수집은 월봉 완료·일봉/주봉 2·3단계 미착수</td></tr><tr><td><b>종목선정</b></td><td><b>C+</b></td><td>v3.7.2 절대점수 체계는 사실상 리스크 필터(체력 12점 지배)이며 18종 유니버스 자체가 힌드사이트(~3/4 자인). <code>apply_weight_caps</code> 재정규화 버그로 cap이 실제로 깨짐. 사전등록 안 된 하드코딩 상수 40개+</td></tr><tr><td><b>리스크 운용</b></td><td><b>C</b></td><td>설계 철학은 좋으나 파편화가 심각: 트레이드 리스크 1%/2%, 종목캡 10/15/20/25%, 보유수 5/15종이 모듈마다 다르고 SSOT인 <code>진우_통합한도.json</code>은 <b>파일 자체가 없음</b>. 그리고 실잔고(대덕전자 90%)는 어떤 버전의 한도로도 정당화 불가</td></tr><tr><td><b>Forward 실측</b></td><td>시작 단계</td><td>1/12개월(+3.97%, n=1은 노이즈). 유일한 진짜 검증이며, 사양서가 약속한 원장 컬럼(spec_sha, NAV, 방어상태)이 아직 CSV에 없음</td></tr></tbody></table>
+<hr>
+<h2 id="s3">2. 즉시 수리 목록 (코드 레벨, 리빌딩 전 필수)</h2>
+<ol><li><b><code>score_v37_2.py</code> L96-98 — cap 파괴 버그.</b> cap 적용 <i>후</i> 합계 정규화를 하므로 picks 3종이면 15% 캡이 <b>33.3%</b>가 된다. 수정: cap→정규화→cap 재검사 반복 구조로.</li><li><b>한도 SSOT 실체화.</b> <code>진우_통합한도.json</code>을 실제로 만들고 사이징_강제(2%)·risk_manager(1%)·리스크차단기(20%)가 전부 이 파일만 읽게 강제. 현재는 &quot;어느 스크립트를 실행하느냐가 곧 리스크 정책&quot;인 상태.</li><li><b>보유잔고 상시 감시 계층 신설.</b> 리스크차단기는 신규 주문만 검사 — <b>기존 초과 보유(90% 집중)는 영원히 안 잡힌다.</b> <code>my_holdings.csv</code>를 매일 읽어 한도 위반을 카톡 경보하는 스크립트 하나면 된다. 현재 시스템 전체에서 가장 큰 실질 리스크는 코드가 아니라 이 잔고다.</li><li><b>매도 규칙 정본 단일화.</b> 폐기 판정된 <code>매도규칙_v2.py</code>(2.5ATR)가 실행키트에 잔존하고 정본인 <code>매도규칙_라우터.py</code>는 부재. 소·중형 트레일이 −15%(증명된_규칙) vs 3.5ATR/25%(v3 정본)로 <b>서로 다른 처방</b> — 조정 문서 없이 공존 중.</li><li><b>fail-open 지점 봉인.</b> MA200 레짐 데이터 없으면 방어 미발동(<code>on=True</code>), preflight.py 없으면 게이트 스킵. 안전장치가 데이터 부재 시 &quot;안전하지 않은 쪽&quot;으로 넘어진다.</li><li><b>죽은 코드 제거.</b> <code>regime_to_exposure</code>(기각된 60% 노출안), <code>ca_flags</code> 기반 판정(오탐 73%·미탐 87%로 폐기 선언됨), Echo/Mom12 창 중복.</li><li><b>보안.</b> <code>.kis_token</code>, <code>krx_authkey.txt</code>, <code>ecos_key.txt</code>, 카카오 토큰이 평문으로 루트에 존재. 체크리스트 문서는 있으니 실행만 남았다.</li></ol>
+<hr>
+<h2 id="s4">3. 재조명 — 새 투자 인사이트 3가지</h2>
+<h3 id="s5">인사이트 ① 지금의 &quot;정직한 수치&quot;는 비관 쪽으로 기울어 있다 — 최종 판정은 아직 안 났다</h3>
+<p>간판 팩터가 <b>배당</b>인데, 모든 백테와 벤치마크(KOSPI PR)가 <b>가격수익만</b> 잰다. 고배당 top30 포트의 실수령 배당은 연 4~5%, KOSPI 평균은 ~2% — 상대성과가 <b>매년 +2~3%p 과소측정</b>되고 있을 개연성이 크다. 현재 격차가 −0.6~+0.9%p 수준이니, 이 한 축이 &quot;못 이긴다&quot;를 &quot;이긴다&quot;로 뒤집을 수 있다.</p>
+<p>둘째, 소멸 판정이 &quot;캐시 마지막 월&quot; 추정이라 <b>이전상장(KOSDAQ→KOSPI)·합병·자진상폐가 전부 −100% 처리</b>될 수 있다. 이것도 하방 편향이다.</p>
+<p>→ <b>리빌딩 검증 1순위: (a) 총수익(TR) 패널 구축 — 배당 실수령 반영, 벤치는 KOSPI TR, (b) KRX [20037] 상장폐지 목록 대조로 소멸 재분류.</b> 이 둘이 끝나기 전까지 &quot;지수 대비&quot; 최종 판정은 유보가 맞다. 상방 편향을 잡을 때와 같은 엄격함으로 하방 편향도 잡아야 대칭적이다.</p>
+<h3 id="s6">인사이트 ② 알파의 위치는 &#x27;종목 고르기&#x27;가 아니라 &#x27;구조&#x27;에 있다</h3>
+<p>30년 감사가 실증한 것: 인샘플 최고 파라미터 고르기는 과최적(PBO 57.5%), 소수 종목 집중은 알파를 희석(N=15에서 지수 미달, N=30에서 +0.9%p), 고회전은 비용이 신호를 먹는다. 반면 살아남은 것들은 전부 <b>저회전 구조 규칙</b>이다:</p>
+<ul><li>배당·B/P·E/P 팩터 방향 (DSR 91.7% — 약하지만 실재)</li><li>현금혼합 방어 (CAGR·Sharpe·MDD 셋 다 개선, 방향 재검증됨)</li><li>하순필터 (OOS p=0.0002), 저변동성 (OOS t 4.7~5.0, 순 +5.7%p), 저PBR 중형 (+5.9%p)</li></ul>
+<p>→ <b>리빌딩 코어 제안: &quot;배당·가치 등가중 z합성 top20~30 EW + 월간 리밸 + 50% 현금방어 + 하순필터·저변동성 오버레이&quot;</b> — 이미 forward 동결사양(v1.1)이 이 방향이다. 수익률을 높이는 길은 종목 수를 줄여 집중하는 것이 아니라, 검증 통과한 오버레이를 <b>겹쳐 쌓고</b> 배당 실수령으로 갭을 메꾸는 것. N=10 병행 라인(8/1 시작)이 집중의 대가를 실측해 줄 것이다.</p>
+<h3 id="s7">인사이트 ③ KOSDAQ은 시장수익이 아니라 &#x27;분산&#x27;을 사는 곳이다</h3>
+<p>수리된 데이터의 실측: KOSDAQ 시총가중 14년 <b>연 3.78%</b> — 시장 자체는 보상이 없다. 그런데 미래참조 프리미엄이 <b>+39.9%p</b>(KOSPI는 +9.9%p)라는 건 횡단면 분산이 그만큼 거대하다는 뜻이다. 분산이 크면 규칙이 실제로 변별력을 가질 때 보상도 크다. v4.1의 사전등록 프레임(성장 50%·퀄리티 35%·모멘텀 15%, rank 합성)은 방법론적으로 올바르니, <b>Stage 4 판정을 수리된 조정본 + TR 패널 위에서</b> 진행하라. 단 결측=중립 0.5 정책은 재무 부재 부실기업이 중위권에 안착하는 구멍이므로, &quot;재무 3년 미만 제외&quot; 하드필터를 앞단에 추가할 것.</p>
+<hr>
+<h2 id="s8">4. 리빌딩 설계 — 유지 / 수정 / 폐기</h2>
+<table><thead><tr><th></th><th>항목</th></tr></thead><tbody><tr><td><b>유지</b></td><td>검증 인프라 전체(게이트 G1~G10, 사전등록, OOS 봉인, PBO/DSR, 카나리 가드), forward 원장 체계, 비용모델 SSOT(0.559%), 배당·가치 팩터 방향, MA 방어, 하순필터·저변동성 규칙, v4.1 사전등록 프레임</td></tr><tr><td><b>수정</b></td><td>§2의 7개 항목 + TR 패널 + 소멸 재분류 + forward 원장 컬럼 보강 + 일봉/주봉 조정본 2·3단계 완료 + 조정종가 하한필터(~100원)</td></tr><tr><td><b>폐기(역사로 이관)</b></td><td>v3.7.2 고정 18종 절대점수 체계(이미 10장으로 이동 — 코드도 <code>_archive</code>로), <code>매도규칙_v2.py</code>, <code>regime_to_exposure</code>, <code>ca_flags</code> 판정, 비용 하드코딩 41파일, 중복 .bak ~180개와 3중 백업 폴더(~180MB 회수 가능)</td></tr></tbody></table>
+<h2 id="s9">5. 90일 로드맵</h2>
+<table><thead><tr><th>기간</th><th>작업</th><th>판정 기준</th></tr></thead><tbody><tr><td><b>주 1~2</b></td><td>데이터수리 마무리: TR 패널, [20037] 상폐 대조, 일봉 adj 2단계</td><td>validate_adjusted 3대 기준 + 카나리 통과</td></tr><tr><td><b>주 3~4</b></td><td>§2 코드 수리 7건 + 잔고 감시 데일리 가동</td><td>게이트에 G11(한도-잔고 정합) 추가·초록</td></tr><tr><td><b>월 2</b></td><td><b>TR 기준 재판정</b>: 배당·가치 top20/30 EW + 방어, 2008~2026, 비용 3시나리오</td><td>&quot;지수 대비&quot; 최종 판정은 여기서 — 그 전엔 유보</td></tr><tr><td><b>월 3</b></td><td>forward 원장 정비 + 실잔고를 규칙 안으로(90% 집중 해소 계획 수립·집행) + v4.1 Stage 4</td><td>forward 2~3개월차 데이터 축적</td></tr></tbody></table>
+<h2 id="s10">6. 수익률에 대한 현실적 기대 (판단 재료)</h2>
+<p>한국 롱온리에서 재현 가능하다고 이 시스템 자신의 데이터가 말하는 수준은 <b>지수 +2~5%p</b> (TR 보정 후 상단). 백테 20%+ 류는 전부 편향이었음이 이미 실증됐다. 복리를 실제로 키우는 레버는 세 개다: ① 방어로 MDD를 −70%대에서 −40~50%대로 — 이것이 &quot;끝까지 굴릴 수 있는가&quot;를 결정하고, ② 배당 실수령 — 측정 밖에서 이미 벌고 있던 수익, ③ <b>규칙 이탈 방지</b> — 지금 이 계좌의 최대 리스크는 어떤 코드 버그도 아니고 한 종목 90%라는 사실이다. 시장은 이대로 끝나지 않는다는 진우님 판단에 동의한다 — 그렇기에 다음 하락장을 &quot;방어 규칙이 처음 실전 검증되는 기회&quot;로 쓸 수 있게, 그 전에 잔고를 규칙 안으로 넣는 것이 리빌딩의 진짜 첫 수다.</p>
+<hr>
+<p><i>본 리포트는 투자 조언이 아니라 시스템 감사·설계 문서입니다. 수치 출처: 백서 부록 B-1a~B-1m, 감사/ 폴더, 데이터수리 런북, 각 코드 파일.</i></p></div>
+<div class=warn>⚠️ 정보·검증용. 투자자문 아님 · 최종 판단과 책임은 본인.</div>
+</div></body></html>

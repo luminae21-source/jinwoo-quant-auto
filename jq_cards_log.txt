@@ -1,0 +1,31 @@
+=== jq_cards run === 
+Python 3.14.4
+
+[notice] A new release of pip is available: 26.0.1 -> 26.2.1
+[notice] To update, run: C:\Users\긍정적인_삶의자세\AppData\Local\Python\pythoncore-3.14-64\python.exe -m pip install --upgrade pip
+주봉 데이터 없음 → A/B 생략
+[산출] 2026-08-24 · 3 장
+   시장브리핑_카톡.png
+   美종목_한국영향_카드.png
+   연준_Fed_동향_카드.png
+--- deriv card --- 
+[산출] 선물옵션_카드.png · errs: []
+EXITCODE=0 
+--- kakao send --- 
+=== jq_kakao_send 2026-08-24  8:15:19.71 === 
+
+[notice] A new release of pip is available: 26.0.1 -> 26.2.1
+[notice] To update, run: C:\Users\긍정적인_삶의자세\AppData\Local\Python\pythoncore-3.14-64\python.exe -m pip install --upgrade pip
+[jq_kakao_send] 폴더=C:\Users\긍정적인_삶의자세\Desktop\진우퀀트\카드뉴스\2026-08-24
+  대상 3장:
+   - 시장브리핑_카톡.png  ->  📊 시황 브리핑
+   - 美종목_한국영향_카드.png  ->  🇺🇸 美 → 한국 영향
+   - 연준_Fed_동향_카드.png  ->  🏛️ 연준(Fed) 동향
+    [링크] https://m.stock.naver.com
+   [OK · feed] 시장브리핑_카톡.png
+    [링크] https://m.stock.naver.com
+   [OK · feed] 美종목_한국영향_카드.png
+    [링크] https://m.stock.naver.com
+   [OK · feed] 연준_Fed_동향_카드.png
+[jq_kakao_send] 완료 3/3 장 전송
+EXITCODE=0 

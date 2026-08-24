@@ -1,0 +1,85 @@
+<!doctype html><html lang=ko><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><title>EV/EBIT·FCF 팩터 검정</title>
+<style>
+:root{--bg:#0b1020;--card:#141b2e;--ink:#e8edf6;--sub:#9fb0c9;--line:#243149;--acc:#5b9dff}
+@media(prefers-color-scheme:light){:root{--bg:#f4f6fb;--card:#fff;--ink:#0f1830;--sub:#5a6a86;--line:#e3e9f4;--acc:#2563eb}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,'Segoe UI',Roboto,'Malgun Gothic',sans-serif;padding:22px}
+.wrap{max-width:860px;margin:0 auto}h1{font-size:20px;margin:0 0 4px}.sub{color:var(--sub);font-size:13px;margin-bottom:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px;border-bottom:1px solid var(--line);text-align:left}
+th{color:var(--sub);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}.nm{font-weight:600}
+.dart{background:rgba(91,157,255,.16);color:var(--acc);border-radius:6px;padding:1px 7px;font-size:10px;font-weight:700;margin-left:4px}
+.mkt{background:rgba(148,163,184,.16);color:var(--sub);border-radius:6px;padding:1px 7px;font-size:10px;font-weight:700;margin-left:4px}
+.note{color:var(--sub);font-size:12.5px;line-height:1.65;margin-top:4px}.note b{color:var(--ink)}
+.warn{color:#e0a32e;font-size:12px;margin-top:12px}.k{color:var(--acc);font-weight:700}
+h3{font-size:14px;margin:16px 0 6px}
+</style></head><body><div class=wrap>
+<h1>EV/EBIT · FCF수익률 팩터 검정 <span style="font-weight:400;color:var(--sub);font-size:14px">— 미국식 밸류, 한국에서 통하나?</span></h1>
+<div class=sub>DART 재무(재무상세_EBITDA.csv) + 시총 결합 · PIT 지연(사업보고서 3월공시→4월반영, 룩어헤드X) · top200 유동 · 2021-04~2026-07 (57개월)</div>
+<div class=card>
+<table><thead><tr><th>팩터</th><th class=r>평균 IC</th><th class=r>IC t</th><th class=r>롱숏 연%</th><th class=r>Sharpe</th><th class=r>승률</th><th class=r>평균종목</th></tr></thead>
+<tbody><tr>
+      <td class=nm>배당수익률 <span class=mkt>시장</span></td>
+      <td class=r>+0.0663</td>
+      <td class=r style="color:#16a34a;font-weight:700">3.0</td>
+      <td class=r>+12.4%</td>
+      <td class=r>0.70</td>
+      <td class=r>55%</td>
+      <td class=r style="color:var(--sub)">198</td></tr><tr>
+      <td class=nm>E/P (이익수익률) <span class=mkt>시장</span></td>
+      <td class=r>+0.0657</td>
+      <td class=r style="color:#16a34a;font-weight:700">2.7</td>
+      <td class=r>+15.5%</td>
+      <td class=r>0.75</td>
+      <td class=r>59%</td>
+      <td class=r style="color:var(--sub)">162</td></tr><tr>
+      <td class=nm>B/P (순자산) <span class=mkt>시장</span></td>
+      <td class=r>+0.0569</td>
+      <td class=r style="color:#16a34a;font-weight:700">2.2</td>
+      <td class=r>+11.5%</td>
+      <td class=r>0.46</td>
+      <td class=r>55%</td>
+      <td class=r style="color:var(--sub)">193</td></tr><tr>
+      <td class=nm>EV/EBIT (EBIT/EV) <span class=dart>DART</span></td>
+      <td class=r>+0.0455</td>
+      <td class=r style="color:#16a34a;font-weight:700">2.1</td>
+      <td class=r>+8.1%</td>
+      <td class=r>0.38</td>
+      <td class=r>55%</td>
+      <td class=r style="color:var(--sub)">167</td></tr><tr>
+      <td class=nm>EV/EBITDA (EBITDA/EV) <span class=dart>DART</span></td>
+      <td class=r>+0.0427</td>
+      <td class=r style="color:#94a3b8;font-weight:700">1.6</td>
+      <td class=r>-0.0%</td>
+      <td class=r>-0.00</td>
+      <td class=r>59%</td>
+      <td class=r style="color:var(--sub)">39</td></tr><tr>
+      <td class=nm>FCF수익률 (FCF/시총) <span class=dart>DART</span></td>
+      <td class=r>+0.0189</td>
+      <td class=r style="color:#94a3b8;font-weight:700">1.1</td>
+      <td class=r>-7.3%</td>
+      <td class=r>-0.38</td>
+      <td class=r>48%</td>
+      <td class=r style="color:var(--sub)">159</td></tr></tbody></table>
+<div class=note style="margin-top:10px">IC t ≥ 2.0 (초록) = 통계적으로 유의한 예측력. <b>DART</b>=이번에 새로 수집한 재무 기반 · <b>시장</b>=기존 PER/PBR/배당.</div>
+</div>
+<div class=card>
+<h3>결론 — 한국에선 '단순 이익·배당 수익률'이 이긴다</h3>
+<div class=note>
+미국에선 EV/EBITDA·FCF수익률이 PER/PBR을 능가하는 경우가 많지만, <b>이 5년 창의 한국 top200에선 반대</b>였어요.<br><br>
+• <span class=k>배당수익률·E/P(이익수익률)</span>가 가장 강력 — IC +0.066, 롱숏 +12~16%/년, Sharpe 0.70~0.75, t≥2.7로 뚜렷이 유의.<br>
+• <span class=k>EV/EBIT</span>는 유의하긴 함(t 2.1, 롱숏 +8%/년)지만 <b>E/P보다 약함</b> — 순부채를 더해도 단순 PER 대비 이점이 안 나왔어요.<br>
+• <span class=k>EV/EBITDA</span>는 감가상각이 26%만 잡혀 표본 39종뿐 → 통계적으로 무의미(t 1.6). 커버리지 한계.<br>
+• <span class=k>FCF수익률</span>은 한국에선 <b>단독 팩터로 작동 안 함</b>(t 1.1, 롱숏 −7%/년). CAPEX가 해마다 들쭉날쭉해 FCF 노이즈가 큰 게 주원인.
+</div>
+<h3>왜 이런 결과인가 (해석)</h3>
+<div class=note>
+한국 시장은 배당·저PER 같은 <b>단순·직관적 밸류</b>에 프리미엄이 몰려 있어요(이미 배당이 최강팩터로 나온 것과 일치). EV·FCF 같은 정교한 미국식 지표는 (1)데이터 창이 5년으로 짧고 (2)감가상각·CAPEX 품질이 낮아 아직 우위를 입증 못 했어요. <b>정교함이 곧 알파는 아니다</b>가 이 검정의 교훈.
+</div>
+<h3>실전 함의</h3>
+<div class=note>
+멀티팩터 스코어에 <b>EV/EBIT을 보조로만</b> 소량 편입할 가치는 있음(유의하나 약함). FCF·EV/EBITDA는 데이터가 더 쌓이고 감가상각 커버리지를 올린 뒤 재검정 권장 — 지금은 <b>배당+E/P+B/P 중심</b>이 한국에 맞는 밸류 코어.
+</div>
+<div class=warn>⚠️ 5년 창·과거통계. 데이터 한계(감가상각 26%·CAPEX 변동성) 있음. 미래·수익 보장 아님. 투자자문 아님 · 최종 판단·책임 본인.</div>
+</div></div></body></html>

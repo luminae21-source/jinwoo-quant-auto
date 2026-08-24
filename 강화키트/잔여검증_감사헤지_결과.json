@@ -1,0 +1,24 @@
+{
+  "dead_pct": 44.0,
+  "final_ret_median": -0.2,
+  "final_lt30_pct": 34.0,
+  "avg_gone_per_yr": 0.2,
+  "hedge": {
+    "0.1": {
+      "cagr": 18.6,
+      "sharpe": 0.87,
+      "mdd": -37.4
+    },
+    "0.2": {
+      "cagr": 17.9,
+      "sharpe": 0.91,
+      "mdd": -32.7
+    },
+    "0.3": {
+      "cagr": 17.0,
+      "sharpe": 0.94,
+      "mdd": -28.2
+    }
+  },
+  "base_sharpe": 0.83
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>가중 개편 백테 — 개편 전후 비교</title>
+<style>
+  :root{--bg:#0f1216;--card:#181d24;--card2:#1f2630;--line:#2b333f;--tx:#e6ebf2;--mut:#95a0ae;
+        --grn:#37d67a;--red:#ff6b6b;--amb:#ffb454;--blu:#5aa9ff;--accent:#7aa2ff;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--tx);font-family:'Segoe UI','Malgun Gothic',system-ui,sans-serif;line-height:1.6;font-size:15px}
+  .wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px}
+  h1{font-size:24px;margin:0 0 4px}
+  .sub{color:var(--mut);font-size:14px;margin-bottom:6px}
+  .meta{color:var(--mut);font-size:12.5px;margin-bottom:22px}
+  .verdict{background:linear-gradient(135deg,#1c3226,#182a20);border:1px solid #2f6b45;border-radius:14px;padding:20px 22px;margin-bottom:26px}
+  .grade{display:inline-block;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px;background:rgba(55,214,122,.14);color:var(--grn);border:1px solid rgba(55,214,122,.4);margin-bottom:10px}
+  .verdict h2{margin:2px 0 8px;font-size:18px}
+  .verdict p{margin:6px 0 0;color:#d3dbe6;font-size:14.5px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .card h3{margin:0 0 4px;font-size:16.5px;display:flex;align-items:center;gap:8px}
+  .num{display:inline-flex;width:26px;height:26px;border-radius:7px;background:var(--card2);color:var(--accent);align-items:center;justify-content:center;font-size:14px;font-weight:700;flex:none}
+  .core{border-color:#2f6b45;box-shadow:0 0 0 1px rgba(55,214,122,.10) inset}
+  .qh{color:var(--mut);font-size:13px;margin:2px 0 12px}
+  table{border-collapse:collapse;width:100%;font-size:13px;margin:6px 0}
+  th,td{padding:6px 8px;text-align:right;border-bottom:1px solid var(--line)}
+  th:first-child,td:first-child{text-align:left;color:var(--mut)}
+  thead th{color:var(--mut);font-weight:600}
+  .pos{color:var(--grn)}.neg{color:var(--red)}.mut{color:var(--mut)}.amb{color:var(--amb)}
+  .note{color:var(--mut);font-size:13px;margin-top:10px}
+  .foot{color:var(--mut);font-size:12px;margin-top:24px;border-top:1px solid var(--line);padding-top:14px}
+  b.hl{color:var(--tx)}.imp{color:var(--amb);font-weight:600}
+  code{background:#11151b;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:12.5px;color:#cdd6e2}
+  pre{background:#11151b;border:1px solid var(--line);border-radius:8px;padding:12px 14px;overflow-x:auto;font-size:12.5px;color:#cdd6e2}
+  tr.best{background:rgba(55,214,122,.12)}
+  tr.cur{background:rgba(255,180,84,.08)}
+  ul.rec{margin:8px 0 0;padding-left:0;list-style:none}
+  ul.rec li{padding:8px 0 8px 22px;position:relative;border-bottom:1px solid var(--line);font-size:14px}
+  ul.rec li:last-child{border-bottom:none}
+  ul.rec li:before{content:"▸";position:absolute;left:2px;color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>가중 개편 백테 — 개편 전후 비교</h1>
+  <div class="sub">합성스코어 분위수 롱숏(상위20−하위20)으로 현행 vs 개편 검증</div>
+  <div class="meta">2003~2026 · 251개월 · top200 · 상폐포함 · 룩어헤드X(t스코어→t+1수익) · 비용 미반영</div>
+
+  <div class="verdict">
+    <span class="grade">검증 완료 · 개편은 트레이드오프가 아니라 개선</span>
+    <h2>모멘텀 헤지축 30%: Sharpe ↑, 낙폭 ↓, 밸류 겨울 방어 ↑ — 동시에</h2>
+    <p>밸류는 모멘텀과 롱숏 상관 <b class="hl">−0.54</b>로 서로를 헤지한다. 밸류 엔진은 그대로 두고 모멘텀을 얹으니 <b class="hl">Sharpe 0.65→0.75, 최대낙폭 −44%→−37%, 밸류 부진기(전체의 44%인 110개월) 월평균 −3.39%→−1.44%</b>로 셋 다 좋아졌다. 이 스레드 출발점의 우려("밸류 3중 베팅은 밸류 겨울에 동시 붕괴")를 실제로 막아준다.</p>
+    <p class="imp">→ multifactor_screen.py 에 모멘텀 팩터 추가 + WEIGHTS를 모멘텀 30%안으로 교체 적용 완료.</p>
+  </div>
+
+  <div class="card core">
+    <h3><span class="num">1</span> 모멘텀 투입량 스캔 — 밸류믹스 유지 + 모멘텀 m</h3>
+    <div class="qh">현행 밸류 앵커 비중은 그대로, 모멘텀 비중 m만 늘리며 관찰. 밸류부진기 = 밸류 롱숏&lt;0인 110개월.</div>
+    <table>
+      <thead><tr><th>모멘텀 비중</th><th>평균IC</th><th>IC t</th><th>롱숏 연%</th><th>Sharpe</th><th>MDD</th><th>밸류부진기/월</th></tr></thead>
+      <tbody>
+        <tr class="cur"><td>0% (현행)</td><td>+0.0462</td><td>4.24</td><td>+12.6%</td><td>0.65</td><td class="neg">−44.0%</td><td class="neg">−3.39%</td></tr>
+        <tr><td>10%</td><td>+0.0448</td><td>4.35</td><td>+10.8%</td><td class="neg">0.57</td><td class="neg">−49.2%</td><td>−3.18%</td></tr>
+        <tr><td>15%</td><td>+0.0445</td><td>4.51</td><td>+10.2%</td><td class="neg">0.56</td><td>−46.7%</td><td>−3.00%</td></tr>
+        <tr><td>20%</td><td>+0.0440</td><td>4.69</td><td>+11.2%</td><td>0.64</td><td>−42.5%</td><td>−2.50%</td></tr>
+        <tr><td>25%</td><td>+0.0434</td><td>4.87</td><td>+10.6%</td><td>0.65</td><td>−41.7%</td><td>−2.16%</td></tr>
+        <tr class="best"><td><b>30% (적용)</b></td><td>+0.0427</td><td>5.03</td><td>+11.5%</td><td class="pos">0.75</td><td>−37.1%</td><td>−1.44%</td></tr>
+        <tr><td>35% (Sharpe정점)</td><td>+0.0415</td><td>5.04</td><td>+11.5%</td><td class="pos">0.76</td><td>−36.5%</td><td>−0.98%</td></tr>
+        <tr><td>40%</td><td>+0.0399</td><td>4.91</td><td>+10.9%</td><td>0.74</td><td>−39.4%</td><td>−0.55%</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><span class="imp">주의:</span> 소량(10~15%)은 오히려 Sharpe·MDD가 나빠진다 — 헤지 효과는 25%↑에서 켜진다. Sharpe 정점은 35%지만, 모멘텀 단독신호가 약한 점(t=0.61)을 감안해 <b class="hl">30%를 적용</b>(정점과 사실상 동률·모멘텀 의존 소폭↓). 밸류부진기 방어(맨 오른쪽)는 모멘텀 비중에 단조 개선.</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">2</span> 참고 — 밸류를 크게 줄인 안(제안A/B)은 오히려 열위</h3>
+    <table>
+      <thead><tr><th>가중안</th><th>롱숏 연%</th><th>Sharpe</th><th>MDD</th><th>밸류부진기/월</th></tr></thead>
+      <tbody>
+        <tr class="best"><td>모멘텀30%(적용)</td><td>+11.5%</td><td class="pos">0.75</td><td>−37.1%</td><td>−1.44%</td></tr>
+        <tr><td>제안A(밸류0.38·성장0.32)</td><td class="neg">+8.0%</td><td class="neg">0.57</td><td class="pos">−30.8%</td><td>−0.91%</td></tr>
+        <tr><td>제안B(보수)</td><td class="neg">+7.7%</td><td class="neg">0.50</td><td>−32.6%</td><td>−1.49%</td></tr>
+      </tbody>
+    </table>
+    <div class="note">축별 Sharpe/상관 휴리스틱(제안A)은 성장 비중을 32%로 키웠지만, <b class="hl">실제 합성 백테에선 수익·Sharpe가 되레 떨어졌다</b>(성장의 합성 기여가 약함 + 밸류 엔진 과다 축소). MDD는 제안A가 가장 낮지만 수익을 너무 내준다. → 결론: <b class="hl">밸류를 줄이기보다, 밸류를 유지하고 모멘텀으로 헤지</b>가 효율적. 휴리스틱보다 실제 백테가 이긴 사례.</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">3</span> 적용된 WEIGHTS (multifactor_screen.py)</h3>
+    <pre>WEIGHTS = {"배당": 0.223, "B/P": 0.168, "E/P": 0.136,   # 밸류 블록 ≈ 0.53(앵커 배당)
+           "성장": 0.091, "ROE": 0.082, "모멘텀": 0.300}   # 모멘텀 = 헤지축</pre>
+    <div class="note">모멘텀 팩터 <code>mom=(PX.shift(1)/PX.shift(12)-1)</code>(12-1·최근월 스킵)를 <code>build_scores</code>에 추가하고 위 가중으로 교체. 통합 실행 결과 합성 IC +0.0426(t 5.2)·롱숏 +11.4%·<b class="pos">Sharpe 0.75</b>·승률 61% 재현.</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">4</span> 정직한 한계</h3>
+    <ul class="rec">
+      <li><b class="hl">비용 미반영.</b> 모멘텀은 회전율이 높다 — 실거래 비용·슬리피지를 넣으면 순 Sharpe 개선폭은 줄어든다. 비용 민감 시 모멘텀 20~25%로 낮추면 Sharpe는 현행 수준 유지하며 MDD만 개선(안전한 절충).</li>
+      <li><b class="hl">모멘텀은 헤지지 알파가 아니다.</b> 한국 top200 단독 모멘텀 t=0.61로 약함. 개선은 밸류와의 −0.54 상관에 의존 — 이 관계가 약해지면 이득도 준다.</li>
+      <li><b class="hl">인샘플.</b> 2003~2026 전 구간 적합. 롱숏(공매도 전제) 총액 기준이며 실제 편입은 리스크·집중도·비용 관문(recommend_verify) 통과 필요.</li>
+      <li>밸류 겨울 방어는 확실한 구조적 이득(모멘텀↔밸류 반대 성질)이나, 상승장 초입 밸류 급반등 국면에선 모멘텀이 약간 발목을 잡을 수 있다(트레이드오프 인지).</li>
+    </ul>
+  </div>
+
+  <div class="foot">
+    방법: 각 월 횡단면 z-score(±3윈저) 합성스코어 = Σ w·z. 분위수 롱숏 = 상위20%−하위20% EW 다음달수익. MDD=롱숏 누적수익 최대낙폭. 밸류부진기=배당·E/P·B/P 등가합성 롱숏&lt;0 월. 데이터: 종목재무_KRX·_월봉종가캐시(상폐포함)·종목시총_30년.<br>
+    ⚠️ 과거통계·미래보장 아님. 비용 미반영. 투자자문 아님·책임 본인.
+  </div>
+</div>
+</body>
+</html>

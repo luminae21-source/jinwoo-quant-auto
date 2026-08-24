@@ -1,0 +1,2 @@
+﻿date,corr_20d_spx,corr_60d_spx,corr_20d_nasdaq,corr_20d_sox,corr_20d_kosdaq_vs_spx,corr_kospi_kosdaq_20d,beta_20d_spx,state,state_change,spx_ret_prev,kospi_ret,source
+2026-07-10,0.4416,0.3128,,0.3444,0.279,0.6916,1.8774,COUPLED,N,-0.0099,5.4218,시장영향_검증_raw(1d lag 사전정렬)

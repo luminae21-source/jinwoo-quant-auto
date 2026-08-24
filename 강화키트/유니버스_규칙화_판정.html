@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>유니버스 규칙화 판정 · 2026-07-23</title>
+<style>
+  :root{
+    --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --ink:#e8eaed; --muted:#9aa0aa;
+    --line:#2a2f3a; --pass:#3fb950; --fail:#f0883e; --accent:#58a6ff; --warn:#d29922;
+    --pos:#3fb950; --neg:#f85149;
+  }
+  @media (prefers-color-scheme: light){
+    :root{--bg:#f6f7f9;--panel:#fff;--panel2:#f0f2f5;--ink:#1a1d23;--muted:#5b626d;--line:#e2e5ea;}
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.55;font-size:15px}
+  .wrap{max-width:1000px;margin:0 auto;padding:32px 22px 80px}
+  h1{font-size:26px;margin:0 0 4px;letter-spacing:-.02em}
+  .sub{color:var(--muted);font-size:13.5px;margin-bottom:24px}
+  .caveat{color:var(--warn);font-size:12.5px;border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin:14px 0 26px;background:var(--panel)}
+  h2{font-size:18px;margin:34px 0 12px;padding-top:20px;border-top:1px solid var(--line);letter-spacing:-.01em}
+  h2 .n{color:var(--accent);font-weight:700;margin-right:8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0}
+  .cores{display:grid;gap:10px}
+  .core{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:12px 16px}
+  .core b{color:var(--accent)}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:6px 0}
+  th,td{padding:7px 10px;text-align:right;border-bottom:1px solid var(--line)}
+  th:first-child,td:first-child{text-align:left}
+  thead th{color:var(--muted);font-weight:600;font-size:12px;text-transform:none;border-bottom:1px solid var(--line)}
+  tr.hl td{background:var(--panel2);font-weight:600}
+  .pass{color:var(--pass);font-weight:700}.fail{color:var(--fail);font-weight:700}
+  .neg{color:var(--neg)}.pos{color:var(--pos)}
+  .gate{display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--line);border-radius:9px;margin:8px 0;background:var(--panel)}
+  .gate .badge{font-size:11px;font-weight:800;padding:3px 9px;border-radius:20px;white-space:nowrap}
+  .badge.p{background:rgba(63,185,80,.15);color:var(--pass);border:1px solid var(--pass)}
+  .badge.f{background:rgba(240,136,62,.15);color:var(--fail);border:1px solid var(--fail)}
+  .gate .g{font-weight:700;font-size:13px;min-width:34px}
+  .gate .d{font-size:13px;color:var(--muted)}
+  .bar-row{display:flex;align-items:center;gap:10px;margin:5px 0;font-size:12.5px}
+  .bar-row .lab{width:96px;color:var(--muted);text-align:right;flex-shrink:0}
+  .bar-row .val{width:64px;flex-shrink:0}
+  .bar{height:16px;border-radius:4px}
+  .verdict{font-size:20px;font-weight:800;text-align:center;padding:16px;border-radius:12px;margin:8px 0;
+    background:linear-gradient(90deg,rgba(63,185,80,.12),rgba(240,136,62,.12));border:1px solid var(--line)}
+  .muted{color:var(--muted)}
+  .k{font-size:12px;color:var(--muted)}
+  svg{max-width:100%;height:auto}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}.bar-row .lab{width:70px}}
+  code{background:var(--panel2);padding:1px 6px;border-radius:4px;font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>유니버스 규칙화 — 사전등록 판정</h1>
+  <div class="sub">동적 리더십 + MA200 방어 vs 고정18 · 30년 상폐포함 · 다올 비용후 · EW·월리밸 · 2026-07-23</div>
+
+  <div class="verdict">게이트 <span class="pass">3 / 4</span> 통과 — 조건부(방향 정당, 비용에 취약)</div>
+
+  <div class="cores">
+    <div class="core">① 동적 리더십+방어는 <b>고정18을 공통구간 위험조정에서 이긴다</b> (Sharpe 0.89&gt;0.83, MDD −37.6%&lt;−44.9%). 그러나 재현가능 대형주 베이스라인 대비 Sharpe 우위는 <b>얇고 고슬리피지에서 소멸</b>.</div>
+    <div class="core">② 진짜 성과는 <b>낙폭제어</b>: 주도주 −64.3% MDD → MA200 방어 <b>−37.6%</b> (전 비용수준 강건). "수익 +1.9%p"가 아니라 "낙폭 −64%→−40%대"가 본질.</div>
+    <div class="core">③ <b>'18'은 특별하지 않다</b>(임의 risk-dial). 주도주는 <b>매년 42% 교체</b>. 최근 대형주 쏠림은 역사 상위 13%(2026 사상최대). → 명단 고정은 stale, <b>규칙 기반 월간 재선정이 답</b>.</div>
+  </div>
+
+  <div class="caveat">⚠️ 고정18은 hindsight 선택 우위(공통구간 참고). EW·단순 12-1 모멘텀 근사. 실현손익 아님 · 투자자문 아님 · 책임 본인.</div>
+
+  <h2><span class="n">1</span>사전등록 게이트 판정</h2>
+  <div class="card" style="padding:14px 16px">
+    <div class="gate"><span class="badge p">PASS</span><span class="g">G1</span><span class="d">공통구간 Sharpe &gt; 고정18 — 주력 <b class="pos">0.89</b> vs 고정18 0.83</span></div>
+    <div class="gate"><span class="badge p">PASS</span><span class="g">G2</span><span class="d">공통구간 |MDD| ≤ 고정18 — 주력 <b class="pos">−37.6%</b> vs 고정18 −44.9%</span></div>
+    <div class="gate"><span class="badge p">PASS</span><span class="g">G3</span><span class="d">30년 OOS 부호 유지 — 전반 +1.61%/월 · 후반 +1.46%/월</span></div>
+    <div class="gate"><span class="badge f">FAIL</span><span class="g">G4</span><span class="d">슬리피지 0.20%에서 주력 Sharpe <b class="neg">0.75 &lt; 기준 0.77</b> — 대형주 대비 우위가 원래 얇아 고비용에서 소멸</span></div>
+    <div class="k" style="margin-top:6px">주력 = 동적_TOP30_리더십 · 완전현금 MA200 방어. 방어의 낙폭개선(−64%→−38%대)은 전 비용수준에서 강건 — 깨진 건 "재현 베이스라인 대비 Sharpe 초과".</div>
+  </div>
+
+  <h2><span class="n">2</span>30년 성과표</h2>
+  <div class="card">
+  <table>
+    <thead><tr><th>유니버스 · 방어</th><th>회전/년</th><th>순 CAGR</th><th>Sharpe</th><th>MDD</th><th>개월</th></tr></thead>
+    <tbody>
+      <tr><td>고정18 <span class="k">(hindsight, 2005~)</span></td><td>0.1x</td><td>17.7%</td><td>0.83</td><td class="neg">−44.9%</td><td>225</td></tr>
+      <tr><td>TOP30_고정 <span class="k">(재현 베이스)</span></td><td>0.7x</td><td>19.8%</td><td>0.78</td><td class="neg">−52.7%</td><td>329</td></tr>
+      <tr><td>동적_TOP30_리더십 <span class="k">(무방어)</span></td><td>2.8x</td><td>21.7%</td><td>0.78</td><td class="neg">−64.3%</td><td>329</td></tr>
+      <tr class="hl"><td>동적_TOP30 · 완전현금 <span class="k">(주력)</span></td><td>1.7x</td><td>17.2%</td><td>0.80</td><td class="pos">−37.6%</td><td>329</td></tr>
+      <tr class="hl"><td>동적_TOP30 · 50%현금 <span class="k">(스윗스팟)</span></td><td>2.2x</td><td class="pos">20.1%</td><td class="pos">0.85</td><td>−44.2%</td><td>329</td></tr>
+      <tr><td>동적_TOP50 · 무방어</td><td>2.6x</td><td>19.2%</td><td>0.73</td><td class="neg">−67.0%</td><td>329</td></tr>
+      <tr><td>동적_TOP50 · 완전현금</td><td>1.5x</td><td>16.1%</td><td>0.78</td><td>−37.4%</td><td>329</td></tr>
+      <tr><td>동적_TOP50 · 50%현금</td><td>2.1x</td><td>18.2%</td><td>0.81</td><td>−42.9%</td><td>329</td></tr>
+      <tr><td class="muted">KOSPI (벤치)</td><td>—</td><td class="muted">6.9%</td><td class="muted">0.37</td><td class="muted">−63.3%</td><td>329</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2><span class="n">3</span>낙폭제어 — 검증됨 (MA200 방어)</h2>
+  <div class="card">
+    <div class="k" style="margin-bottom:10px">동적 TOP30 리더십 · MDD 비교 (30년)</div>
+    <div class="bar-row"><span class="lab">무방어</span><span class="val neg">−64.3%</span><div class="bar" style="width:64%;background:var(--neg)"></div></div>
+    <div class="bar-row"><span class="lab">50% 현금</span><span class="val">−44.2%</span><div class="bar" style="width:44%;background:var(--warn)"></div></div>
+    <div class="bar-row"><span class="lab">완전 현금</span><span class="val pos">−37.6%</span><div class="bar" style="width:38%;background:var(--pass)"></div></div>
+    <div class="k" style="margin-top:12px"><b>50%현금이 스윗스팟</b>: CAGR 20.1% 유지 · Sharpe 0.85(전 유니버스 최고) · 낙폭 20%p↓. 방어 낙폭개선은 슬리피지 0.05~0.20% 전 구간 강건.</div>
+  </div>
+
+  <h2><span class="n">4</span>질문 ① — "종목 수가 18개여야 하나?" → 아니오</h2>
+  <div class="card">
+    <div class="k" style="margin-bottom:8px">동적 리더십 · 무방어 · N-스윕 — <b>18은 연속선의 한 점(임의 risk-dial)</b>, 최적점 아님</div>
+    <table>
+      <thead><tr><th>N</th><th>순 CAGR</th><th>Sharpe</th><th>MDD</th><th>회전/년</th></tr></thead>
+      <tbody>
+        <tr><td>10</td><td>28.6%</td><td>0.85</td><td class="neg">−81.2%</td><td>3.9x</td></tr>
+        <tr><td>15</td><td>25.9%</td><td>0.85</td><td>−70.3%</td><td>3.5x</td></tr>
+        <tr class="hl"><td>18 ← 현 본체</td><td>24.4%</td><td>0.83</td><td>−68.4%</td><td>3.4x</td></tr>
+        <tr><td>20</td><td>23.1%</td><td>0.81</td><td>−66.4%</td><td>3.3x</td></tr>
+        <tr><td>30</td><td>23.6%</td><td>0.82</td><td>−60.0%</td><td>2.9x</td></tr>
+        <tr><td>40</td><td>21.7%</td><td>0.79</td><td>−59.0%</td><td>2.7x</td></tr>
+        <tr><td>50</td><td>20.6%</td><td>0.76</td><td>−62.1%</td><td>2.7x</td></tr>
+      </tbody>
+    </table>
+    <div class="k" style="margin-top:8px">N↓ = 수익↑·낙폭↑ (집중의 대가 = 변동성). Sharpe는 10~30에서 0.81~0.85 <b>평평</b> — 개수가 엣지를 만들지 않음. 실제 동시보유는 5~7종(1%/트레이드)이므로 '18'은 후보 크기이지 포지션 수도 아님. <b>N은 리스크 예산으로 정하라.</b></div>
+  </div>
+
+  <h2><span class="n">5</span>질문 ② — "대형주 장세는 이례적, 주도주는 시대마다 바뀐다"</h2>
+
+  <div class="card">
+    <div class="k" style="margin-bottom:8px"><b>(a) 주도주는 매년 갈린다</b> — 동적 TOP30 리더셋 연 교체율 <b>평균 42%</b>. 시대별 대표 주도주:</div>
+    <table>
+      <thead><tr><th>시기</th><th style="text-align:left">대표 주도주 (모멘텀 리더)</th><th style="text-align:left">테마</th></tr></thead>
+      <tbody>
+        <tr><td>2007</td><td style="text-align:left">HD한국조선해양·현대중공업계</td><td style="text-align:left">조선 슈퍼사이클</td></tr>
+        <tr><td>2008~10</td><td style="text-align:left">LG화학·현대모비스·현대제철·기아</td><td style="text-align:left">차·화·정</td></tr>
+        <tr><td>2016</td><td style="text-align:left">셀트리온·SK이노베이션</td><td style="text-align:left">바이오·정유</td></tr>
+        <tr><td>2017</td><td style="text-align:left">POSCO·SK하이닉스·삼성전자</td><td style="text-align:left">반도체 슈퍼사이클</td></tr>
+        <tr><td>2020</td><td style="text-align:left">카카오·NAVER·더존비즈온</td><td style="text-align:left">언택트</td></tr>
+        <tr><td>2021</td><td style="text-align:left">HMM·두산에너빌리티</td><td style="text-align:left">리오프닝·조선</td></tr>
+        <tr class="hl"><td>2023~25</td><td style="text-align:left">한화에어로·한미반도체·SK하이닉스·HD현대일렉트릭·삼양식품</td><td style="text-align:left">방산·AI반도체·전력기기·K푸드</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="k" style="margin-bottom:8px"><b>(b) 최근 대형주 쏠림은 실재</b> — 상위5 시총비중(상위100 대비)</div>
+      <svg viewBox="0 0 320 150" role="img" aria-label="상위5 집중도 추이">
+        <line x1="34" y1="120" x2="315" y2="120" stroke="var(--line)"/>
+        <line x1="34" y1="30" x2="34" y2="120" stroke="var(--line)"/>
+        <text x="30" y="34" fill="var(--muted)" font-size="9" text-anchor="end">57%</text>
+        <text x="30" y="123" fill="var(--muted)" font-size="9" text-anchor="end">28%</text>
+        <!-- polyline: years 1996..2026 mapped; values 36.8..56.1 -->
+        <polyline fill="none" stroke="var(--accent)" stroke-width="2" points="34,84 43,80 52,64 61,71 70,44 80,68 89,73 98,72 107,85 116,98 125,105 134,120 143,119 152,102 161,105 170,105 179,90 188,86 197,105 207,101 216,66 225,68 234,68 243,64 252,65 261,65 270,72 280,90"/>
+        <circle cx="280" cy="90" r="3" fill="var(--neg)"/>
+        <text x="280" y="105" fill="var(--neg)" font-size="9" text-anchor="middle">2026: 56%</text>
+        <text x="34" y="140" fill="var(--muted)" font-size="9">1996</text>
+        <text x="300" y="140" fill="var(--muted)" font-size="9" text-anchor="end">2026</text>
+      </svg>
+      <div class="k">2023~26 평균 <b>44.5%</b> vs 이전 30년 36.8% · 2026 <b class="neg">56.1% 사상최대</b> · 30년 분포 상위 13% 구간. → 쏠림은 실재(진우 지지).</div>
+    </div>
+    <div class="card">
+      <div class="k" style="margin-bottom:8px"><b>(c) 단, 쏠림 ≠ 초과수익</b> — 미묘한 반전</div>
+      <div class="bar-row"><span class="lab" style="width:120px">메가캡 초과 2023~25</span><span class="val">+2.0%p</span><div class="bar" style="width:20%;background:var(--warn)"></div></div>
+      <div class="bar-row"><span class="lab" style="width:120px">이전 30년 평균</span><span class="val">+4.4%p</span><div class="bar" style="width:44%;background:var(--accent)"></div></div>
+      <div class="k" style="margin-top:10px">최근은 소수 대형이 <b>시총을 크게 차지(집중)</b>하는 구조지, 대형이 중형을 <b>압도해 초과수익</b>을 낸 국면은 아니다. 리더 평균 시총순위도 49위(최근) vs 50위(이전)로 동일.</div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--accent)">
+    <b>종합 함의</b> — 세 지표(개수는 임의 · 리더 42%/년 교체 · 집중 국면은 이동, 2026 극단)가 모두 같은 결론: <b>고정 명단은 구조적으로 취약</b>, 규칙 기반 동적 리더십 + 낙폭제어가 정합. <span class="muted">진우님 직관("주도주를 매번 확인하고 종목선정을 시대에 맞게")은 데이터로 지지된다.</span>
+  </div>
+
+  <h2><span class="n">6</span>권고 — 다음 단계</h2>
+  <div class="card">
+    <p style="margin:4px 0">· <b>방향은 정당</b>(유니버스 정당성 25%→상향 후보)이나 <b>G4 미통과 → 본체 즉시교체 아님</b>. 규칙화는 "추가 검증 후 오버레이".</p>
+    <p style="margin:4px 0">· <b>채택 후보</b>: 규칙 기반 동적 리더십(TOP30, 월간 12-1 모멘텀, EW, pool100) + <b>MA200 50%현금 방어</b>. 실전 집중은 리스크예산(5~7종·1%/트레이드)으로 별개.</p>
+    <p style="margin:4px 0">· <b>검증 경로</b>: 페이퍼/소액 병행으로 (a) 실집행 슬리피지 실측(G4 재판정) (b) 분기 교체상한·세금드래그 재확인.</p>
+    <p style="margin:4px 0">· <b>고정18은 관찰 트랙</b> 병행 — forward Sharpe/MDD로만 비교(hindsight 숫자 인용 금지).</p>
+    <div class="k" style="margin-top:10px">재현: <code>py 강화키트\유니버스_규칙화_검정.py</code> · <code>--self-test</code> · <code>--slippage 0.002</code> · <code>py 강화키트\유니버스_리더십로테이션.py</code></div>
+  </div>
+
+  <div class="k" style="margin-top:24px;text-align:center">작성 2026-07-23 · 게이트는 결과 보기 전 고정(사전등록) · 진우퀀트 강화키트</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,395 @@
+{
+  "ts": "2026-08-10 22:12",
+  "npass": 94,
+  "nfail": 0,
+  "selftests": {
+    "attribution_v40_phase2.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "attribution_v40_phase4_events.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "backtest_ma200_whipsaw.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "backtest_v37_2_pit.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "backtest_v39_pead.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "backtest_v41_kosdaq_sel_pit.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "build_kosdaq_sel_universe.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "entry_signal_backtest.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "fetch_dart_eps.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "fetch_fundamental_panel.py": {
+      "status": "PASS",
+      "detail": "10/10"
+    },
+    "fetch_kosdaq150_v41_kosdaq.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "fetch_kosdaq_daily_panel.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "fetch_kosdaq_index_daily.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "fetch_kospi_daily_full.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "fetch_kospi_daily_panel.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "fetch_kospi_index_daily.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "fetch_monthly_panel_ext.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "fetch_sox_daily.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "fetch_stock_panel_30y.py": {
+      "status": "PASS",
+      "detail": "8/8"
+    },
+    "jq_broker_kis.py": {
+      "status": "PASS",
+      "detail": "19/19"
+    },
+    "jq_discover.py": {
+      "status": "PASS",
+      "detail": "14/14"
+    },
+    "jq_execute.py": {
+      "status": "PASS",
+      "detail": "15/15"
+    },
+    "jq_history.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "kosdaq_catalyst_scan_v1.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "kosdaq_leadlag_v1.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "kosdaq_monthly_scan.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "kosdaq_news_scan_v1.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "kosdaq_theme_discover.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "kosdaq_theme_guardrail.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "overseas_corr.py": {
+      "status": "PASS",
+      "detail": "3/3"
+    },
+    "pit_lag.py": {
+      "status": "PASS",
+      "detail": "3/3"
+    },
+    "score_v39_pead.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "score_v41_kosdaq_sel.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "simulate_atr_montecarlo.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "theme_calendar_v1.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "tier1_risk_rules.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "track_w_v1.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "validate_atr_stop.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "validate_kosdaq_sel_factors.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "validate_v37_2_block_bootstrap.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "validate_voltarget.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "verify_weekly_reconcile.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "거래대금_2주_수집.py": {
+      "status": "PASS",
+      "detail": "4/4"
+    },
+    "검정_30년_패널.py": {
+      "status": "PASS",
+      "detail": "9/9"
+    },
+    "검정_GP수익성_단기창.py": {
+      "status": "PASS",
+      "detail": "15/15"
+    },
+    "검정_고변동성_청산_30년.py": {
+      "status": "PASS",
+      "detail": "9/9"
+    },
+    "검정_상폐처리_무결성.py": {
+      "status": "PASS",
+      "detail": "6/6"
+    },
+    "검정_섹터내_기울기_30년.py": {
+      "status": "PASS",
+      "detail": "9/9"
+    },
+    "검정_진입엣지_30년.py": {
+      "status": "PASS",
+      "detail": "13/13"
+    },
+    "검정_청산규칙_30년.py": {
+      "status": "PASS",
+      "detail": "22/22"
+    },
+    "검정_팩터결합_저변동성_저PBR.py": {
+      "status": "PASS",
+      "detail": "17/17"
+    },
+    "검증_수급_일봉정밀.py": {
+      "status": "PASS",
+      "detail": "5/5"
+    },
+    "검증_수급오버레이_정교화.py": {
+      "status": "PASS",
+      "detail": "7/7"
+    },
+    "관심종목_상태.py": {
+      "status": "PASS",
+      "detail": "6/6"
+    },
+    "급등종목스캔.py": {
+      "status": "PASS",
+      "detail": "27/27"
+    },
+    "매도규칙_라우터.py": {
+      "status": "PASS",
+      "detail": "11/11"
+    },
+    "발굴데이터_갱신.py": {
+      "status": "PASS",
+      "detail": "6/6"
+    },
+    "백테_딥밸류_PIT검증.py": {
+      "status": "PASS",
+      "detail": "2/2"
+    },
+    "백테_딥밸류_실전.py": {
+      "status": "PASS",
+      "detail": "3/3"
+    },
+    "백테_딥밸류_전기간검증.py": {
+      "status": "PASS",
+      "detail": "3/3"
+    },
+    "백테_딥밸류_하락장.py": {
+      "status": "PASS",
+      "detail": "3/3"
+    },
+    "백테_매도규칙_딥밸류진입.py": {
+      "status": "PASS",
+      "detail": "1/1"
+    },
+    "백테_매도규칙_비교.py": {
+      "status": "PASS",
+      "detail": "4/4"
+    },
+    "백테_스타일_시간손절.py": {
+      "status": "PASS",
+      "detail": "6/6"
+    },
+    "백테_주봉스윙.py": {
+      "status": "PASS",
+      "detail": "5/5"
+    },
+    "백테_추세방어_지수.py": {
+      "status": "PASS",
+      "detail": "4/4"
+    },
+    "백테_추세청산_개별종목.py": {
+      "status": "PASS",
+      "detail": "5/5"
+    },
+    "백테_하락장_개별종목.py": {
+      "status": "PASS",
+      "detail": "3/3"
+    },
+    "백테_해외_딥밸류_재현_PC실행.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "뷰생성.py": {
+      "status": "PASS",
+      "detail": "6/6"
+    },
+    "알파_3분해.py": {
+      "status": "PASS",
+      "detail": "3/3"
+    },
+    "오늘_급등_이중바닥스캔.py": {
+      "status": "PASS",
+      "detail": "12/12"
+    },
+    "오늘_상승종목_분류.py": {
+      "status": "PASS",
+      "detail": "12/12"
+    },
+    "유니버스_규칙화_검정.py": {
+      "status": "PASS",
+      "detail": "exit 0"
+    },
+    "진우_데이터점검.py": {
+      "status": "PASS",
+      "detail": "2/2"
+    },
+    "진우_리스크차단기.py": {
+      "status": "PASS",
+      "detail": "34/34"
+    },
+    "진우_매매방식_가이드.py": {
+      "status": "PASS",
+      "detail": "6/6"
+    },
+    "진우_모의매매.py": {
+      "status": "PASS",
+      "detail": "11/11"
+    },
+    "진우_반등후보_스캔.py": {
+      "status": "PASS",
+      "detail": "3/3"
+    },
+    "진우_비용모델.py": {
+      "status": "PASS",
+      "detail": "15/15"
+    },
+    "진우_안전보유_점검.py": {
+      "status": "PASS",
+      "detail": "4/4"
+    },
+    "진우_전략백테스트.py": {
+      "status": "PASS",
+      "detail": "1/1"
+    },
+    "진우_주문생성.py": {
+      "status": "PASS",
+      "detail": "23/23"
+    },
+    "진우_진입신호.py": {
+      "status": "PASS",
+      "detail": "6/6"
+    },
+    "진우_차트뷰.py": {
+      "status": "PASS",
+      "detail": "5/5"
+    },
+    "진우_타점발굴.py": {
+      "status": "PASS",
+      "detail": "14/14"
+    },
+    "진우_타점발굴_표.py": {
+      "status": "PASS",
+      "detail": "6/6"
+    },
+    "진우_테마발굴.py": {
+      "status": "PASS",
+      "detail": "6/6"
+    },
+    "진우_통합대시보드.py": {
+      "status": "PASS",
+      "detail": "6/6"
+    },
+    "진우_한도로더.py": {
+      "status": "PASS",
+      "detail": "7/7"
+    },
+    "진우사냥터_스크리너.py": {
+      "status": "PASS",
+      "detail": "12/12"
+    },
+    "진우사냥터_카드.py": {
+      "status": "PASS",
+      "detail": "6/6"
+    },
+    "진우사냥터_현황판.py": {
+      "status": "PASS",
+      "detail": "7/7"
+    },
+    "진입엣지_스크리너.py": {
+      "status": "PASS",
+      "detail": "11/11"
+    }
+  },
+  "specials": [
+    {
+      "name": "데이터 헬스체크",
+      "status": "WARN",
+      "detail": "WARN"
+    },
+    {
+      "name": "PIT 공시시차 감사",
+      "status": "PASS",
+      "detail": "시차 2개월"
+    }
+  ]
+}

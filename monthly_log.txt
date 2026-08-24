@@ -1,0 +1,115 @@
+ 
+================= 2026-08-22 17:42:06.46 ================= 
+[1/3] score_v37_2 (engine 02 multifactor) 
+^C 
+================= 2026-08-22 17:42:19.25 ================= 
+[1/3] score_v37_2 (engine 02 multifactor) 
+================================================================================
+������Ʈ v3.7.2 �ڵ� ����  (v3.7.1 + Echo Momentum �ܵ�)
+Echo ����ġ: ��1.0
+�ð�: 2026-08-22 17:42:21.986702
+================================================================================
+Traceback (most recent call last):
+  File "C:\Users\��������_�����ڼ�\Desktop\������Ʈ\score_v37_2.py", line 265, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\��������_�����ڼ�\Desktop\������Ʈ\score_v37_2.py", line 216, in main
+    panel = fetch_price_panel()
+  File "C:\Users\��������_�����ڼ�\Desktop\������Ʈ\score_v37.py", line 87, in fetch_price_panel
+    print(f"\n\U0001f4ca ���� ������ ���� (13M, {start.strftime('%Y-%m-%d')} �� {end.strftime('%Y-%m-%d')}):")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'cp949' codec can't encode character '\U0001f4ca' in position 2: illegal multibyte sequence
+[FAIL] score_v37_2 
+[2/3] market regime 
+==============================================================================
+ 🟢 시장국면 [2026-08-20] : 실행(유리) — 시장 1년고점 대비 -25% (−12%↓) — 역발상 진입 유리 국면
+==============================================================================
+   지수 1년고점比 -24.8% · 20일변동성 91.9%(중앙 17.5%) · 강세
+   규칙: 실행=휩쏘 A 진입 유리 · 관찰만=신호 떠도 사지 않음 · 주의=신중.
+   근거: 휩쏘_역사검정_판정문.md (30년)
+[OK] regime 
+[3/3] routine freshness 
+=== ��ƾ �ż��� ���� ===
+ OK ����02 ��Ƽ���� ���� ����              0�� (��� 35��)  v37_2_scores_latest.csv
+ OK ����Ÿ� �������� ����                 4�� (��� 10��)  ����Ÿ�_����.csv
+ OK ��Ŷ�극��Ŀ ����                    0�� (��� 10��)  ��Ŷ����.json
+ OK DART ���� ĳ��(�б�)               0�� (��� 100��)  eps_sue_cache.json
+Traceback (most recent call last):
+  File "C:\Users\��������_�����ڼ�\Desktop\������Ʈ\��ƾ_�ż�������.py", line 54, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\��������_�����ڼ�\Desktop\������Ʈ\��ƾ_�ż�������.py", line 50, in main
+    print("\n���� ���� \u2014 �ڵ�ȭ�� ���� �ִ�.")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'cp949' codec can't encode character '\u2014' in position 8: illegal multibyte sequence
+---- done ---- 
+ 
+================= 2026-08-23  1:25:11.39 ================= 
+[1/5] score_v37_2 (engine 02 quality) 
+Traceback (most recent call last):
+  File "C:\Users\긍정적인_삶의자세\Desktop\진우퀀트\score_v37_2.py", line 48, in <module>
+    from score_v37_1 import bab_to_score
+ModuleNotFoundError: No module named 'score_v37_1'
+[FAIL] score_v37_2 
+[2/5] market regime 
+C:\Users\긍정적인_삶의자세\AppData\Local\Python\pythoncore-3.14-64\python.exe: can't open file 'C:\\Users\\긍정적인_삶의자세\\Desktop\\진우퀀트\\���屹��.py': [Errno 2] No such file or directory
+[FAIL] regime 
+[3/5] style panel (DART) 
+C:\Users\긍정적인_삶의자세\AppData\Local\Python\pythoncore-3.14-64\python.exe: can't open file 'C:\\Users\\긍정적인_삶의자세\\Desktop\\진우퀀트\\��Ÿ���г�_DART.py': [Errno 2] No such file or directory
+[FAIL] style panel 
+[4/5] engine02 forward signal 
+C:\Users\긍정적인_삶의자세\AppData\Local\Python\pythoncore-3.14-64\python.exe: can't open file 'C:\\Users\\긍정적인_삶의자세\\Desktop\\진우퀀트\\����02_��ȣ.py': [Errno 2] No such file or directory
+[FAIL] forward signal 
+[5/5] routine freshness 
+C:\Users\긍정적인_삶의자세\AppData\Local\Python\pythoncore-3.14-64\python.exe: can't open file 'C:\\Users\\긍정적인_삶의자세\\Desktop\\진우퀀트\\��ƾ_�ż�������.py': [Errno 2] No such file or directory
+---- done ---- 
+ 
+================= 2026-08-23  1:28:06.58 ================= 
+[1/5] score_v37_2 (engine 02 quality) 
+Traceback (most recent call last):
+  File "C:\Users\긍정적인_삶의자세\Desktop\진우퀀트\score_v37_2.py", line 48, in <module>
+    from score_v37_1 import bab_to_score
+ModuleNotFoundError: No module named 'score_v37_1'
+[FAIL] score_v37_2 
+[2/5] market regime 
+==============================================================================
+ 🟢 시장국면 [2026-08-21] : 실행(유리) — 시장 1년고점 대비 -24% (−12%↓) — 역발상 진입 유리 국면
+==============================================================================
+   지수 1년고점比 -24.2% · 20일변동성 90.6%(중앙 17.5%) · 강세
+   규칙: 실행=휩쏘 A 진입 유리 · 관찰만=신호 떠도 사지 않음 · 주의=신중.
+   근거: 휩쏘_역사검정_판정문.md (30년)
+[OK] regime 
+[3/5] style panel (DART) 
+[유니버스] 2026-08-21 기준 KOSPI 시총 상위 300종 (우선주 제외)
+  상위5: [('삼성전자', '1646조'), ('SK하이닉스', '1264조'), ('SK스퀘어', '148조'), ('삼성전기', '98조'), ('현대차', '85조')]
+[corp_code] 매핑 중... (300종)
+[캐시] 1202건 재사용 (재수집 생략)
+  50/300 처리 (결측 0)
+  100/300 처리 (결측 1)
+  150/300 처리 (결측 2)
+  200/300 처리 (결측 3)
+  250/300 처리 (결측 7)
+  300/300 처리 (결측 13)
+[캐시] 1202건 저장
+
+완료 — 2026-08: 수집 287종(팩터완비 281) · 신규기록 0 · 결측 13
+저장: 스타일패널_DART.csv
+[OK] style panel 
+[4/5] engine02 forward signal 
+[패널] 2026-08 · 287종
+[중단] 2026-08 이미 기록됨 — 덮어쓰려면 --force
+  (패널이 갱신되지 않았는데 재실행하면 트랙이 멈춘 채 진행 중으로 오인된다)
+[FAIL] forward signal 
+[5/5] routine freshness 
+=== 루틴 신선도 점검 ===
+ OK 엔진02 멀티팩터 월초 점수              0일 (허용 35일)  v37_2_scores_latest.csv
+ OK 가상매매 전진검증 원장                 4일 (허용 10일)  가상매매_원장.csv
+ OK 서킷브레이커 점검                    0일 (허용 10일)  서킷상태.json
+ OK DART 실적 캐시(분기)               0일 (허용 100일)  eps_sue_cache.json
+ OK KRX 일별 스냅숏(PIT 재료)           0일 (허용 5일)  종목스냅숏_일별.csv
+ OK 스타일 패널(엔진02 입력)              0일 (허용 40일)  스타일패널_DART.csv
+ OK 엔진02 forward 원장             25일 (허용 40일)  실전준비/forward_ledger.csv
+ OK KOSPI 지수 일봉                  0일 (허용 5일)  kospi_index_daily.csv
+
+전부 정상 — 자동화가 돌고 있다.
+---- done ---- 

@@ -1,0 +1,63 @@
+{
+  "window": [
+    "2021-04",
+    "2026-07"
+  ],
+  "n_months": 57,
+  "results": {
+    "EV/EBIT (EBIT/EV)": {
+      "meanIC": 0.0451,
+      "ic_t": 2.1,
+      "ls_ann": 9.6,
+      "ls_sharpe": 0.43,
+      "ls_hit": 55.0,
+      "months": 56,
+      "avg_n": 166
+    },
+    "EV/EBITDA (EBITDA/EV)": {
+      "meanIC": 0.0462,
+      "ic_t": 1.8,
+      "ls_ann": 3.6,
+      "ls_sharpe": 0.12,
+      "ls_hit": 57.0,
+      "months": 56,
+      "avg_n": 39
+    },
+    "FCF수익률 (FCF/시총)": {
+      "meanIC": 0.0188,
+      "ic_t": 1.1,
+      "ls_ann": -6.4,
+      "ls_sharpe": -0.33,
+      "ls_hit": 48.0,
+      "months": 56,
+      "avg_n": 158
+    },
+    "E/P (이익수익률)": {
+      "meanIC": 0.0662,
+      "ic_t": 2.7,
+      "ls_ann": 17.3,
+      "ls_sharpe": 0.77,
+      "ls_hit": 59.0,
+      "months": 56,
+      "avg_n": 162
+    },
+    "B/P (순자산)": {
+      "meanIC": 0.0577,
+      "ic_t": 2.2,
+      "ls_ann": 13.3,
+      "ls_sharpe": 0.5,
+      "ls_hit": 55.0,
+      "months": 56,
+      "avg_n": 193
+    },
+    "배당수익률": {
+      "meanIC": 0.0663,
+      "ic_t": 3.0,
+      "ls_ann": 13.1,
+      "ls_sharpe": 0.71,
+      "ls_hit": 55.0,
+      "months": 56,
+      "avg_n": 198
+    }
+  }
+}

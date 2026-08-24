@@ -1,0 +1,6 @@
+=== JQ_PostExpiryCheck 2026-08-21 16:00:03.27 === 
+
+[notice] A new release of pip is available: 26.0.1 -> 26.2.1
+[notice] To update, run: C:\Users\긍정적인_삶의자세\AppData\Local\Python\pythoncore-3.14-64\python.exe -m pip install --upgrade pip
+최근 7일 내 정규 만기 없음 — 사후채점 skip (만기 다음날에만 실행됨).
+EXITCODE=0 

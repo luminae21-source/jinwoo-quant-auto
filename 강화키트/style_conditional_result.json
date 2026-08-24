@@ -1,0 +1,464 @@
+{
+  "pbr": {
+    "sizes": [
+      99,
+      95
+    ],
+    "result": {
+      "성장주": {
+        "배당": {
+          "meanIC": 0.0382,
+          "ic_t": 4.3,
+          "ls_ann": 9.2,
+          "ls_sharpe": 0.47,
+          "ls_hit": 55.0,
+          "months": 247,
+          "avg_n": 99
+        },
+        "E/P": {
+          "meanIC": 0.0145,
+          "ic_t": 1.3,
+          "ls_ann": 2.0,
+          "ls_sharpe": 0.09,
+          "ls_hit": 55.0,
+          "months": 247,
+          "avg_n": 86
+        },
+        "B/P": {
+          "meanIC": 0.026,
+          "ic_t": 2.6,
+          "ls_ann": 4.4,
+          "ls_sharpe": 0.2,
+          "ls_hit": 53.0,
+          "months": 247,
+          "avg_n": 97
+        },
+        "EPS성장": {
+          "meanIC": 0.0227,
+          "ic_t": 2.3,
+          "ls_ann": 7.3,
+          "ls_sharpe": 0.39,
+          "ls_hit": 52.0,
+          "months": 231,
+          "avg_n": 81
+        },
+        "ROE": {
+          "meanIC": 0.025,
+          "ic_t": 2.8,
+          "ls_ann": 8.8,
+          "ls_sharpe": 0.46,
+          "ls_hit": 58.0,
+          "months": 247,
+          "avg_n": 97
+        },
+        "모멘텀12-1": {
+          "meanIC": 0.012,
+          "ic_t": 1.0,
+          "ls_ann": 8.5,
+          "ls_sharpe": 0.37,
+          "ls_hit": 56.0,
+          "months": 239,
+          "avg_n": 95
+        }
+      },
+      "가치주": {
+        "배당": {
+          "meanIC": 0.0456,
+          "ic_t": 4.8,
+          "ls_ann": 6.6,
+          "ls_sharpe": 0.44,
+          "ls_hit": 60.0,
+          "months": 247,
+          "avg_n": 96
+        },
+        "E/P": {
+          "meanIC": 0.0333,
+          "ic_t": 3.2,
+          "ls_ann": 7.6,
+          "ls_sharpe": 0.43,
+          "ls_hit": 60.0,
+          "months": 247,
+          "avg_n": 78
+        },
+        "B/P": {
+          "meanIC": 0.0268,
+          "ic_t": 2.7,
+          "ls_ann": 6.1,
+          "ls_sharpe": 0.39,
+          "ls_hit": 51.0,
+          "months": 247,
+          "avg_n": 88
+        },
+        "EPS성장": {
+          "meanIC": 0.0086,
+          "ic_t": 1.0,
+          "ls_ann": 0.1,
+          "ls_sharpe": 0.01,
+          "ls_hit": 52.0,
+          "months": 231,
+          "avg_n": 78
+        },
+        "ROE": {
+          "meanIC": 0.0212,
+          "ic_t": 2.2,
+          "ls_ann": 1.3,
+          "ls_sharpe": 0.08,
+          "ls_hit": 52.0,
+          "months": 247,
+          "avg_n": 88
+        },
+        "모멘텀12-1": {
+          "meanIC": 0.0158,
+          "ic_t": 1.3,
+          "ls_ann": 8.7,
+          "ls_sharpe": 0.42,
+          "ls_hit": 57.0,
+          "months": 235,
+          "avg_n": 94
+        }
+      }
+    }
+  },
+  "growth": {
+    "sizes": [
+      76,
+      73
+    ],
+    "result": {
+      "성장주": {
+        "배당": {
+          "meanIC": 0.0318,
+          "ic_t": 2.8,
+          "ls_ann": 3.9,
+          "ls_sharpe": 0.22,
+          "ls_hit": 49.0,
+          "months": 231,
+          "avg_n": 81
+        },
+        "E/P": {
+          "meanIC": 0.0239,
+          "ic_t": 1.7,
+          "ls_ann": 2.6,
+          "ls_sharpe": 0.11,
+          "ls_hit": 49.0,
+          "months": 231,
+          "avg_n": 79
+        },
+        "B/P": {
+          "meanIC": 0.0314,
+          "ic_t": 2.2,
+          "ls_ann": 7.8,
+          "ls_sharpe": 0.34,
+          "ls_hit": 55.0,
+          "months": 231,
+          "avg_n": 79
+        },
+        "EPS성장": {
+          "meanIC": -0.0115,
+          "ic_t": -1.2,
+          "ls_ann": 1.8,
+          "ls_sharpe": 0.11,
+          "ls_hit": 54.0,
+          "months": 231,
+          "avg_n": 81
+        },
+        "ROE": {
+          "meanIC": -0.0099,
+          "ic_t": -1.0,
+          "ls_ann": -1.5,
+          "ls_sharpe": -0.09,
+          "ls_hit": 52.0,
+          "months": 231,
+          "avg_n": 79
+        },
+        "모멘텀12-1": {
+          "meanIC": 0.01,
+          "ic_t": 0.7,
+          "ls_ann": 6.3,
+          "ls_sharpe": 0.25,
+          "ls_hit": 51.0,
+          "months": 235,
+          "avg_n": 81
+        }
+      },
+      "가치주": {
+        "배당": {
+          "meanIC": 0.0383,
+          "ic_t": 3.6,
+          "ls_ann": 9.6,
+          "ls_sharpe": 0.53,
+          "ls_hit": 59.0,
+          "months": 231,
+          "avg_n": 79
+        },
+        "E/P": {
+          "meanIC": 0.0291,
+          "ic_t": 2.3,
+          "ls_ann": 4.9,
+          "ls_sharpe": 0.24,
+          "ls_hit": 51.0,
+          "months": 231,
+          "avg_n": 68
+        },
+        "B/P": {
+          "meanIC": 0.0412,
+          "ic_t": 2.8,
+          "ls_ann": 10.9,
+          "ls_sharpe": 0.43,
+          "ls_hit": 55.0,
+          "months": 231,
+          "avg_n": 79
+        },
+        "EPS성장": {
+          "meanIC": 0.0211,
+          "ic_t": 2.2,
+          "ls_ann": 6.7,
+          "ls_sharpe": 0.39,
+          "ls_hit": 54.0,
+          "months": 231,
+          "avg_n": 79
+        },
+        "ROE": {
+          "meanIC": 0.0135,
+          "ic_t": 1.4,
+          "ls_ann": 3.2,
+          "ls_sharpe": 0.18,
+          "ls_hit": 52.0,
+          "months": 231,
+          "avg_n": 79
+        },
+        "모멘텀12-1": {
+          "meanIC": -0.0047,
+          "ic_t": -0.3,
+          "ls_ann": 2.0,
+          "ls_sharpe": 0.08,
+          "ls_hit": 53.0,
+          "months": 231,
+          "avg_n": 79
+        }
+      }
+    }
+  },
+  "composite": {
+    "sizes": [
+      76,
+      73
+    ],
+    "result": {
+      "성장주": {
+        "배당": {
+          "meanIC": 0.0241,
+          "ic_t": 2.7,
+          "ls_ann": 2.4,
+          "ls_sharpe": 0.15,
+          "ls_hit": 52.0,
+          "months": 231,
+          "avg_n": 81
+        },
+        "E/P": {
+          "meanIC": 0.0135,
+          "ic_t": 1.1,
+          "ls_ann": 5.5,
+          "ls_sharpe": 0.23,
+          "ls_hit": 52.0,
+          "months": 231,
+          "avg_n": 77
+        },
+        "B/P": {
+          "meanIC": 0.0225,
+          "ic_t": 1.8,
+          "ls_ann": 4.6,
+          "ls_sharpe": 0.2,
+          "ls_hit": 53.0,
+          "months": 231,
+          "avg_n": 79
+        },
+        "EPS성장": {
+          "meanIC": 0.027,
+          "ic_t": 2.8,
+          "ls_ann": 9.8,
+          "ls_sharpe": 0.55,
+          "ls_hit": 56.0,
+          "months": 231,
+          "avg_n": 81
+        },
+        "ROE": {
+          "meanIC": 0.0132,
+          "ic_t": 1.4,
+          "ls_ann": 6.8,
+          "ls_sharpe": 0.37,
+          "ls_hit": 54.0,
+          "months": 231,
+          "avg_n": 79
+        },
+        "모멘텀12-1": {
+          "meanIC": 0.0062,
+          "ic_t": 0.5,
+          "ls_ann": 6.3,
+          "ls_sharpe": 0.25,
+          "ls_hit": 53.0,
+          "months": 235,
+          "avg_n": 81
+        }
+      },
+      "가치주": {
+        "배당": {
+          "meanIC": 0.0351,
+          "ic_t": 2.8,
+          "ls_ann": 2.7,
+          "ls_sharpe": 0.15,
+          "ls_hit": 51.0,
+          "months": 231,
+          "avg_n": 79
+        },
+        "E/P": {
+          "meanIC": 0.031,
+          "ic_t": 2.5,
+          "ls_ann": 5.5,
+          "ls_sharpe": 0.31,
+          "ls_hit": 55.0,
+          "months": 231,
+          "avg_n": 70
+        },
+        "B/P": {
+          "meanIC": 0.0303,
+          "ic_t": 2.4,
+          "ls_ann": 7.5,
+          "ls_sharpe": 0.41,
+          "ls_hit": 53.0,
+          "months": 231,
+          "avg_n": 79
+        },
+        "EPS성장": {
+          "meanIC": 0.0318,
+          "ic_t": 2.9,
+          "ls_ann": 3.8,
+          "ls_sharpe": 0.24,
+          "ls_hit": 52.0,
+          "months": 231,
+          "avg_n": 79
+        },
+        "ROE": {
+          "meanIC": 0.0187,
+          "ic_t": 1.7,
+          "ls_ann": -0.9,
+          "ls_sharpe": -0.05,
+          "ls_hit": 51.0,
+          "months": 231,
+          "avg_n": 79
+        },
+        "모멘텀12-1": {
+          "meanIC": 0.0114,
+          "ic_t": 0.8,
+          "ls_ann": 4.0,
+          "ls_sharpe": 0.19,
+          "ls_hit": 52.0,
+          "months": 231,
+          "avg_n": 79
+        }
+      }
+    }
+  },
+  "sector": {
+    "sizes": [
+      13,
+      18
+    ],
+    "result": {
+      "성장주": {
+        "배당": {
+          "meanIC": 0.0426,
+          "ic_t": 1.3,
+          "ls_ann": 18.0,
+          "ls_sharpe": 0.55,
+          "ls_hit": 55.0,
+          "months": 53,
+          "avg_n": 25
+        },
+        "E/P": {
+          "meanIC": 0.0407,
+          "ic_t": 0.9,
+          "ls_ann": 26.8,
+          "ls_sharpe": 0.6,
+          "ls_hit": 56.0,
+          "months": 36,
+          "avg_n": 21
+        },
+        "B/P": {
+          "meanIC": 0.0053,
+          "ic_t": 0.1,
+          "ls_ann": -21.2,
+          "ls_sharpe": -0.59,
+          "ls_hit": 47.0,
+          "months": 53,
+          "avg_n": 25
+        },
+        "EPS성장": {
+          "meanIC": -0.0389,
+          "ic_t": -0.8,
+          "ls_ann": -8.6,
+          "ls_sharpe": -0.26,
+          "ls_hit": 48.0,
+          "months": 21,
+          "avg_n": 21
+        },
+        "ROE": {
+          "meanIC": 0.0442,
+          "ic_t": 1.5,
+          "ls_ann": 37.2,
+          "ls_sharpe": 1.05,
+          "ls_hit": 60.0,
+          "months": 53,
+          "avg_n": 25
+        },
+        "모멘텀12-1": {
+          "meanIC": 0.0437,
+          "ic_t": 1.1,
+          "ls_ann": 33.7,
+          "ls_sharpe": 0.73,
+          "ls_hit": 58.0,
+          "months": 48,
+          "avg_n": 24
+        }
+      },
+      "가치주": {
+        "배당": {
+          "meanIC": 0.013,
+          "ic_t": 0.4,
+          "ls_ann": -19.5,
+          "ls_sharpe": -0.76,
+          "ls_hit": 42.0,
+          "months": 52,
+          "avg_n": 20
+        },
+        "B/P": {
+          "meanIC": 0.0081,
+          "ic_t": 0.2,
+          "ls_ann": -18.9,
+          "ls_sharpe": -0.56,
+          "ls_hit": 36.0,
+          "months": 39,
+          "avg_n": 20
+        },
+        "ROE": {
+          "meanIC": -0.014,
+          "ic_t": -0.3,
+          "ls_ann": -11.8,
+          "ls_sharpe": -0.51,
+          "ls_hit": 44.0,
+          "months": 39,
+          "avg_n": 20
+        },
+        "모멘텀12-1": {
+          "meanIC": -0.0078,
+          "ic_t": -0.2,
+          "ls_ann": 19.3,
+          "ls_sharpe": 0.62,
+          "ls_hit": 45.0,
+          "months": 40,
+          "avg_n": 20
+        }
+      }
+    }
+  }
+}
