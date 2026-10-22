@@ -270,7 +270,8 @@ def render(D):
 def save(img,dstamp):
     import shutil
     p=os.path.join(HERE,"선물옵션_카드.png"); img.save(p)
-    dd=os.path.join(HERE,"카드뉴스",dstamp); os.makedirs(dd,exist_ok=True)
+    # 폴더는 실행일 기준(KRX 기준일 T-1과 무관하게 오늘 폴더로) · 기준일은 카드 본문에 표기
+    dd=os.path.join(HERE,"카드뉴스",datetime.date.today().isoformat()); os.makedirs(dd,exist_ok=True)
     for t in [os.path.join(dd,"선물옵션_카드.png"), os.path.join(os.path.expanduser(r"~\OneDrive\문서\Claude\Projects\진우퀀트"),"선물옵션_카드.png")]:
         try:
             if os.path.isdir(os.path.dirname(t)): shutil.copy(p,t)

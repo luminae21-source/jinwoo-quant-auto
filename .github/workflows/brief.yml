@@ -1,0 +1,104 @@
+name: 진우퀀트 브리핑 카드 (아침·마감) + 카톡
+run-name: "brief ${{ inputs.job }} ${{ inputs.day }}"
+# 2026-10-23: Claude 예약 작업(토큰 사용)·PC 작업 스케줄러(PC 꺼지면 멈춤)를 대체. 토큰 0.
+#   morning = PC의 07:30 익일예측 · 18:00 주봉분석 · 08:00 시장브리핑 · 08:15 카드 6장+카톡 을 한 번에
+#   close   = jq_close_fetch.py(KRX 확정치) → 마감 카드 3장 + 카톡
+# 실행은 tick.yml이 정시에 걸어줌(GitHub schedule은 이 저장소에서 5시간+ 지연). 수동: Actions → 이 워크플로 → Run workflow.
+# Secrets: KRX_ID·KRX_PW(pykrx 1.2+ KRX 로그인 — 해외 IP는 로그인 없이 막힘) · KRX_AUTH_KEY(KRX OpenAPI)
+#          KAKAO_CONFIG(jq_kakao_config.txt 전체) · GH_PAT(Secrets 쓰기 — 카톡 리프레시 토큰 갱신 저장용)
+on:
+  workflow_dispatch:
+    inputs:
+      job:
+        description: "morning | close"
+        required: true
+        default: morning
+        type: choice
+        options: [morning, close]
+      day:
+        description: "KST 날짜 (tick이 채움 — 같은 날 중복 실행 방지용 표시)"
+        required: false
+        default: ""
+
+concurrency: brief-${{ inputs.job }}
+
+permissions:
+  contents: write
+
+jobs:
+  brief:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    env:
+      TZ: Asia/Seoul
+      PYTHONUTF8: "1"
+      KRX_ID: ${{ secrets.KRX_ID }}
+      KRX_PW: ${{ secrets.KRX_PW }}
+      KRX_AUTH_KEY: ${{ secrets.KRX_AUTH_KEY }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: 설치 (한글 폰트 + 패키지)
+        run: |
+          sudo apt-get install -y -qq fonts-noto-cjk fonts-nanum > /dev/null
+          pip install -q "pykrx==1.2.9" yfinance pandas pillow certifi curl_cffi
+
+      - name: 카톡 설정 (Secret → 파일. .gitignore 대상이라 커밋 안 됨)
+        env:
+          KAKAO_CONFIG: ${{ secrets.KAKAO_CONFIG }}
+        run: |
+          printf '%s\n' "$KAKAO_CONFIG" > jq_kakao_config.txt
+          sha256sum jq_kakao_config.txt > "$RUNNER_TEMP/kakao.sha"
+
+      # 보조 산출물(익일예측·주봉·선물옵션)은 실패해도 나머지 카드는 진행 — PC 배치와 같은 동작
+      - name: 아침 — 익일예측·주봉분석·시장브리핑·카드 6장
+        if: inputs.job == 'morning'
+        run: |
+          python 익일예측_모델.py                 || echo "::warning::익일예측(코스피) 실패"
+          python 익일예측_모델.py --market kosdaq || echo "::warning::익일예측(코스닥) 실패"
+          python 주봉분석.py                      || echo "::warning::주봉분석 실패"
+          python 시장브리핑_생성.py
+          python 브리핑_카톡.py
+          python jq_cards.py
+          python jq_deriv_card.py                 || echo "::warning::선물옵션 카드 실패"
+
+      - name: 마감 — KRX 확정치 수집 + 카드 3장
+        if: inputs.job == 'close'
+        run: |
+          python jq_close_fetch.py
+          python jq_close_card.py
+          python jq_close_stocks.py
+          python jq_watch_card.py
+
+      - name: 카톡 전송 (나에게)
+        run: python jq_kakao_send.py
+
+      - name: 카톡 리프레시 토큰이 바뀌었으면 Secret 갱신
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          if [ -f jq_kakao_config.txt ] && ! sha256sum -c --quiet "$RUNNER_TEMP/kakao.sha" 2>/dev/null; then
+            gh secret set KAKAO_CONFIG -R "$GITHUB_REPOSITORY" < jq_kakao_config.txt && echo "KAKAO_CONFIG 갱신됨"
+          fi
+          rm -f jq_kakao_config.txt jq_kakao_token.json
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cards-${{ inputs.job }}
+          path: 카드뉴스/
+          retention-days: 7
+          if-no-files-found: ignore
+
+      - name: 상태 파일 커밋 (워치리스트 · 익일예측 채점 로그)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add jq_watchlist.json 익일예측_log.csv 익일예측_log_kosdaq.csv
+          git diff --staged --quiet || git commit -qm "🤖 브리핑 ${{ inputs.job }} 상태 갱신 $(date +'%F %H:%M KST')"
+          for i in 1 2 3; do git pull -q --rebase --autostash origin main && git push -q && break; sleep 5; done

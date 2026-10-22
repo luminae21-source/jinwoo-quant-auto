@@ -67,7 +67,8 @@ def expiries(txt):
 
 def save(img,name,dstamp):
     outs=[os.path.join(HERE,name)]
-    dd=os.path.join(HERE,"카드뉴스",dstamp); os.makedirs(dd,exist_ok=True); outs.append(os.path.join(dd,name))
+    # 폴더는 실행일 기준(카드별 데이터 기준일이 달라도 오늘 폴더에 6장 모음) · 기준일은 카드 본문에 표기
+    dd=os.path.join(HERE,"카드뉴스",datetime.date.today().isoformat()); os.makedirs(dd,exist_ok=True); outs.append(os.path.join(dd,name))
     od=os.path.expanduser(r"~\OneDrive\문서\Claude\Projects\진우퀀트")
     if os.path.isdir(od): outs.append(os.path.join(od,name))
     img.save(outs[0])

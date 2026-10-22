@@ -58,11 +58,12 @@ def render(D):
     if st:
         d.text((pad,y),"■ 주도 섹터 (업종 상승률)",font=F(15),fill=ACC); y+=26
         bh=14+len(st)*30; d.rectangle([pad,y,W-pad,y+bh],fill=(24,27,34),outline=(46,50,60),width=1); d.rectangle([pad,y,pad+5,y+bh],fill=GREEN)
-        mx=max((p for _,p in st),default=1) or 1; yy=y+10; bx0=pad+230; bxw=W-pad-16-bx0
+        mx=max((abs(p) for _,p in st),default=1) or 1; yy=y+10; bx0=pad+230; bxw=W-pad-16-bx0
         for nm,p in st:
             d.text((pad+16,yy),nm,font=F(15),fill=TXT)
-            d.rectangle([bx0,yy+3,bx0+bxw*(p/mx),yy+17],fill=(40,90,64))
-            d.text((bx0+8,yy+1),f"+{p:.2f}%",font=F(14),fill=GREEN); yy+=30
+            w=bxw*(abs(p)/mx)
+            if w>=1: d.rectangle([bx0,yy+3,bx0+w,yy+17],fill=(40,90,64) if p>=0 else (110,45,52))
+            d.text((bx0+8,yy+1),(f"+{p:.2f}%" if p>=0 else f"{p:.2f}%"),font=F(14),fill=(GREEN if p>=0 else RED)); yy+=30
         y+=bh+16
     # 추세 관심종목 (추세 유효 · 조정 시 지지 재확인)
     if tw:
