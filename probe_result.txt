@@ -1,0 +1,22 @@
+== curl
+https://kapi.kakao.com/v2/user/me 401
+https://kauth.kakao.com/oauth/token 400
+http://data-dbg.krx.co.kr/svc/apis/idx/kospi_dd_trd 302
+https://data.krx.co.kr 200
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/utils.py:568: Pandas4Warning: The inplace keyword in DataFrame.sort_index is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  quotes.sort_index(inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/utils.py:514: Pandas4Warning: The inplace keyword in DataFrame.drop is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  df.drop(
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/utils.py:518: Pandas4Warning: The inplace keyword in DataFrame.rename is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  df.rename(columns={
+bday FAIL IndexError('index -1 is out of bounds for axis 0 with size 0')
+bday 20261022
+index_ohlcv FAIL KeyError('지수명')
+investor FAIL KeyError('거래대금')
+ohlcv_kospi FAIL KeyError("None of [Index(['시가', '고가', '저가', '종가'], dtype='str')] are in the [columns]")
+name OK 삼성전자
+idx_change FAIL IndexError('index 0 is out of bounds for axis 0 with size 0')
+yf_sox OK [11505.5595703125, 10870.1796875]
