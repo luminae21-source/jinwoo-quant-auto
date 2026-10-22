@@ -1,0 +1,42 @@
+name: probe (임시 접속 시험 — 끝나면 브랜치째 삭제)
+on:
+  push:
+    branches: [claude/probe]
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with: { python-version: '3.11' }
+      - run: pip install -q pykrx yfinance
+      - name: probe
+        env: { TZ: Asia/Seoul }
+        run: |
+          {
+          echo "== curl"
+          for u in https://kapi.kakao.com/v2/user/me https://kauth.kakao.com/oauth/token http://data-dbg.krx.co.kr/svc/apis/idx/kospi_dd_trd https://data.krx.co.kr; do echo "$u $(curl -s -o /dev/null -m 20 -w '%{http_code}' $u)"; done
+          python - <<'PY'
+          from pykrx import stock
+          def t(n, f):
+              try: print(n, "OK", f())
+              except Exception as e: print(n, "FAIL", repr(e)[:300])
+          d = None
+          try: d = stock.get_nearest_business_day_in_a_week()
+          except Exception as e: print("bday FAIL", repr(e)[:300])
+          d = d or "20261022"; print("bday", d)
+          t("index_ohlcv", lambda: stock.get_index_ohlcv("20261015", d, "1001")["종가"].tail(3).to_dict())
+          t("investor", lambda: stock.get_market_trading_value_by_investor(d, d, "KOSPI")["순매수"].to_dict())
+          t("ohlcv_kospi", lambda: (lambda x: (len(x), list(x.columns), x.head(2).to_dict()))(stock.get_market_ohlcv(d, market="KOSPI")))
+          t("name", lambda: stock.get_market_ticker_name("005930"))
+          t("idx_change", lambda: stock.get_index_price_change(d, d, "KOSPI")["등락률"].to_dict())
+          import yfinance as yf
+          t("yf_sox", lambda: yf.Ticker("^SOX").history(period="5d")["Close"].tail(2).to_list())
+          PY
+          } 2>&1 | tee probe_result.txt
+      - run: |
+          git config user.name "github-actions[bot]"; git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add probe_result.txt && git commit -qm "probe result" && git push -q origin HEAD:claude/probe
