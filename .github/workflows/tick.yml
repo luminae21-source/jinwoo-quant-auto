@@ -1,0 +1,39 @@
+name: tick (브리핑 정시 타이머)
+# GitHub schedule이 이 저장소에서 5시간 넘게 밀려서(daily.yml 16:30 예약 → 22시경 실행) 만든 '스스로 이어지는 타이머'.
+# hotdeal-bot과 같은 방식: tick → environment 'tick' 대기 14분(러너 안 씀) → 다음 tick 예약 + 시간 되면 brief 실행.
+# 준비(1회): Settings → Environments → 'tick' → Wait timer 14
+# 평일 KST 07:45~11:00 → brief morning, 16:05~20:00 → brief close, 매월 1일 09:00~ → brief monthly (하루 1번씩, brief 실행 제목으로 중복 확인)
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 * * * *"   # 체인이 끊겼을 때 재시작용(매시). 돌고 있으면 concurrency 대기열에서 정리됨
+concurrency: tick
+permissions:
+  actions: write
+jobs:
+  tick:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    environment: tick
+    env:
+      GH_TOKEN: ${{ github.token }}
+      R: ${{ github.repository }}
+    steps:
+      - run: |
+          # 안전장치: 대기 타이머가 없으면(환경 설정 누락) 체인이 쉬지 않고 돌므로, 10분 이상 기다린 실행만 다음 tick을 건다
+          made=$(gh run view "$GITHUB_RUN_ID" -R "$R" --json createdAt -q .createdAt)
+          waited=$(( $(date +%s) - $(date -d "$made" +%s) ))
+          if [ "$waited" -ge 600 ]; then
+            for i in 1 2 3 4 5 6 7 8; do gh workflow run tick.yml -R "$R" && break; sleep 30; done
+          else
+            echo "::warning::대기 ${waited}초 — environment 'tick'의 Wait timer(14) 확인. 체인 중단, 매시 cron이 재시작"
+          fi
+          day=$(TZ=Asia/Seoul date +%F); hm=$(TZ=Asia/Seoul date +%H%M); dow=$(TZ=Asia/Seoul date +%u); dom=$(TZ=Asia/Seoul date +%d)
+          run_once() {
+            gh run list -R "$R" --workflow brief.yml --limit 30 --json displayTitle -q '.[].displayTitle' | grep -qx "brief $1 $day" && return 0
+            gh workflow run brief.yml -R "$R" -f job="$1" -f day="$day" && echo "brief $1 $day 실행"
+          }
+          if [ "$dom" = "01" ] && [ "$hm" -ge 0900 ] && [ "$hm" -lt 2200 ]; then run_once monthly; fi   # 매월 1일(주말 포함)
+          [ "$dow" -le 5 ] || exit 0
+          if [ "$hm" -ge 0745 ] && [ "$hm" -lt 1100 ]; then run_once morning; fi
+          if [ "$hm" -ge 1605 ] && [ "$hm" -lt 2000 ]; then run_once close; fi

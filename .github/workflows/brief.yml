@@ -3,6 +3,7 @@ run-name: "brief ${{ inputs.job }} ${{ inputs.day }}"
 # 2026-10-23: Claude 예약 작업(토큰 사용)·PC 작업 스케줄러(PC 꺼지면 멈춤)를 대체. 토큰 0.
 #   morning = PC의 07:30 익일예측 · 18:00 주봉분석 · 08:00 시장브리핑 · 08:15 카드 6장+카톡 을 한 번에
 #   close   = jq_close_fetch.py(KRX 확정치) → 마감 카드 3장 + 카톡
+#   monthly = 매월 1일 월초 체크리스트 카톡 알림 (2026-11-01 Claude 월간 리마인더 2개 대체)
 # 실행은 tick.yml이 정시에 걸어줌(GitHub schedule은 이 저장소에서 5시간+ 지연). 수동: Actions → 이 워크플로 → Run workflow.
 # Secrets: KRX_ID·KRX_PW(pykrx 1.2+ KRX 로그인 — 해외 IP는 로그인 없이 막힘) · KRX_AUTH_KEY(KRX OpenAPI)
 #          KAKAO_CONFIG(jq_kakao_config.txt 전체) · GH_PAT(Secrets 쓰기 — 카톡 리프레시 토큰 갱신 저장용)
@@ -10,11 +11,11 @@ on:
   workflow_dispatch:
     inputs:
       job:
-        description: "morning | close"
+        description: "morning | close | monthly"
         required: true
         default: morning
         type: choice
-        options: [morning, close]
+        options: [morning, close, monthly]
       day:
         description: "KST 날짜 (tick이 채움 — 같은 날 중복 실행 방지용 표시)"
         required: false
@@ -74,7 +75,12 @@ jobs:
           python jq_close_stocks.py
           python jq_watch_card.py
 
+      - name: 월초 — 체크리스트 카톡 알림 (진우퀀트_월초_체크리스트.md)
+        if: inputs.job == 'monthly'
+        run: python jq_monthly_remind.py
+
       - name: 카톡 전송 (나에게)
+        if: inputs.job != 'monthly'
         run: python jq_kakao_send.py
 
       - name: 카톡 리프레시 토큰이 바뀌었으면 Secret 갱신
