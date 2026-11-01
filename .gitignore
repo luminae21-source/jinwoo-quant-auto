@@ -206,3 +206,6 @@ jq_close_stocks.json
 /진우퀀트_테마lane_대시보드.html
 /진우퀀트_플로우차트_모바일.html
 /dashboard_v39_pead.html
+
+# 1회성 도구(GitHub CLI 휴대용, 2026-11-01)
+_tools/
