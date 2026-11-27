@@ -40,6 +40,30 @@ KNOWN_CARDS = [
 ]
 
 
+# 말풍선 제목 아래 '이 카드가 뭔지' 한 줄 (2026-11-27 진우 '설명을 만들어 주고 · 심플하게')
+CARD_DESC = {
+    "시장브리핑_카톡": "국내·미국 지수, 금리·환율, 만기 일정",
+    "美종목_한국영향": "밤사이 美 종목 → 한국 어느 업종에 닿는지",
+    "연준_Fed_동향": "기준금리·FOMC·금리곡선 — 수급의 큰 변수",
+    "선물옵션_카드": "선물·야간선물·옵션 체인 (고위험)",
+    "주봉분석_카드": "종목별 20주선 위/아래와 추세",
+    "주봉_매매가이드": "추세유지·눌림·회피 분류와 매도 신호등",
+    "마감브리핑_카톡": "오늘 지수 마감과 외국인·기관·개인 수급",
+    "마감종목_카톡": "급등·거래대금 상위, 강한 업종, 추세 관심종목",
+    "관심워치리스트_카톡": "지켜보는 종목 상태 (추세 유효·지지 근접·이탈)",
+    "종목발굴_카톡": "오늘 조건에 걸린 발굴 후보",
+    "진우사냥터_카드": "사냥터 후보 요약",
+    "진우_실전카드": "실전 보유·주문 요약",
+}
+
+
+def desc_for(fn, day):
+    """'급등·거래대금 상위… · 11/27 · 추천 아님' — 설명이 없는 카드는 예전 문구."""
+    d = CARD_DESC.get(card_key(fn))
+    md = f"{int(day[5:7])}/{int(day[8:10])}" if len(day) >= 10 and day[4] == "-" else day
+    return f"{d} · {md} · 추천 아님" if d else f"기준일 {day} · 진우퀀트 · 매수매도 추천 아님"
+
+
 def latest_card_dir():
     dirs = sorted(glob.glob(os.path.join(HERE, "카드뉴스", "20*-*-*")))
     return dirs[-1] if dirs else None
@@ -165,7 +189,7 @@ def run(argv):
         title = merged_title or title_for(p)
         if not merged_title and page_of(p) and npages.get(card_key(p), 1) > 1:
             title += f" ({page_of(p)}/{npages[card_key(p)]})"
-        desc = f"기준일 {today} · 진우퀀트 · 매수매도 추천 아님"
+        desc = desc_for(p, today) if not merged_title else f"기준일 {today} · 진우퀀트 · 매수매도 추천 아님"
         ok, how = K.send_image(token, p, title, desc, cfg)
         print(f"   [{'OK' if ok else 'FAIL'} · {how}] {os.path.basename(p)}")
         sent += 1 if ok else 0
@@ -204,13 +228,14 @@ def _selftest():
         mj = [n for n in names if n.startswith("마감종목")]
         chk("여러 쪽: 쪽마다 따로 · 1→2 순서 · 옛 한 장 제외", mj == ["마감종목_카톡_p1.png", "마감종목_카톡_p2.png"])
         chk("쪽 번호 읽기", page_of("마감종목_카톡_p12.png") == 12 and page_of("마감브리핑_카톡.png") == 0)
+        chk("설명 한 줄", desc_for("마감종목_카톡_p1.png", "2026-11-27").startswith("급등·거래대금") and "11/27" in desc_for("마감종목_카톡_p1.png", "2026-11-27"))
         _, none_fresh = discover(fresh_min=0, send_all=False)
         chk("신선도 필터(0분→없음)", len(none_fresh) == 0)
     finally:
         globals()["HERE"] = saved
         shutil.rmtree(tmp, ignore_errors=True)
-    print(f"✅ jq_kakao_send 셀프테스트 ({ok}/11)")
-    return ok == 11
+    print(f"✅ jq_kakao_send 셀프테스트 ({ok}/12)")
+    return ok == 12
 
 
 if __name__ == "__main__":
