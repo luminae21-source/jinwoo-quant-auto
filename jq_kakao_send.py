@@ -88,6 +88,31 @@ def card_key(fn):
     return next((key for key, _ in KNOWN_CARDS if key in stem), stem)
 
 
+def group_cards(cards):
+    """[(카드키, [쪽 파일…]), …] — 보낼 순서 그대로, 같은 카드끼리 묶음 (2026-11-27 진우 '같은 그룹끼리 묶어서')."""
+    groups = []
+    for p in cards:
+        k = card_key(p)
+        if groups and groups[-1][0] == k:
+            groups[-1][1].append(p)
+        else:
+            groups.append((k, [p]))
+    return groups
+
+
+def stitch(paths, out):
+    """쪽 이미지를 세로로 이어 한 장으로 (버튼을 누르면 이 한 장을 위아래로 넘겨 봄)."""
+    from PIL import Image
+    ims = [Image.open(p).convert("RGB") for p in paths]
+    W = max(i.width for i in ims)
+    canvas = Image.new("RGB", (W, sum(i.height for i in ims) + 12 * (len(ims) - 1)), (52, 57, 68))
+    y = 0
+    for im in ims:
+        canvas.paste(im, (0, y)); y += im.height + 12
+    canvas.save(out, optimize=True)
+    return out
+
+
 def _order_index(fn):
     stem = os.path.basename(fn)
     for i, (key, _) in enumerate(KNOWN_CARDS):
@@ -182,20 +207,42 @@ def run(argv):
         return 5
 
     sent = 0
-    npages = {}
-    for p in cards:
-        npages[card_key(p)] = npages.get(card_key(p), 0) + 1
-    for p in cards:
-        title = merged_title or title_for(p)
-        if not merged_title and page_of(p) and npages.get(card_key(p), 1) > 1:
-            title += f" ({page_of(p)}/{npages[card_key(p)]})"
-        desc = desc_for(p, today) if not merged_title else f"기준일 {today} · 진우퀀트 · 매수매도 추천 아님"
-        ok, how = K.send_image(token, p, title, desc, cfg)
-        print(f"   [{'OK' if ok else 'FAIL'} · {how}] {os.path.basename(p)}")
+    if merged_title or "--each" in argv:     # 쪽마다 따로 보내기(예전 방식)
+        npages = {}
+        for p in cards:
+            npages[card_key(p)] = npages.get(card_key(p), 0) + 1
+        for p in cards:
+            title = merged_title or title_for(p)
+            if not merged_title and page_of(p) and npages.get(card_key(p), 1) > 1:
+                title += f" ({page_of(p)}/{npages[card_key(p)]})"
+            desc = desc_for(p, today) if not merged_title else f"기준일 {today} · 진우퀀트 · 매수매도 추천 아님"
+            ok, how = K.send_image(token, p, title, desc, cfg)
+            print(f"   [{'OK' if ok else 'FAIL'} · {how}] {os.path.basename(p)}")
+            sent += 1 if ok else 0
+            time.sleep(0.5)  # 레이트리밋 여유
+        print(f"[jq_kakao_send] 완료 {sent}/{len(cards)} 장 전송")
+        return 0 if sent == len(cards) else 1
+    # 기본: 카드 1종 = 말풍선 1개 (말풍선 = 1쪽 · 버튼 '전체 N쪽 보기' = 모든 쪽을 이은 한 장)
+    import tempfile
+    groups = group_cards(cards)
+    for key, pages in groups:
+        n = len(pages)
+        title = title_for(pages[0]) + (f" · {n}쪽" if n > 1 else "")
+        desc = desc_for(pages[0], today)
+        full = None
+        if n > 1:
+            fd, full = tempfile.mkstemp(suffix=".png"); os.close(fd)
+            stitch(pages, full)
+        ok, how = K.send_image(token, pages[0], title, desc, cfg, full_path=full,
+                               button_title=(f"전체 {n}쪽 보기" if n > 1 else None))
+        print(f"   [{'OK' if ok else 'FAIL'} · {how}] {key} {n}쪽")
         sent += 1 if ok else 0
+        if full:
+            try: os.remove(full)
+            except OSError: pass
         time.sleep(0.5)  # 레이트리밋 여유
-    print(f"[jq_kakao_send] 완료 {sent}/{len(cards)} 장 전송")
-    return 0 if sent == len(cards) else 1
+    print(f"[jq_kakao_send] 완료 {sent}/{len(groups)} 묶음 전송 (카드 {len(cards)}쪽)")
+    return 0 if sent == len(groups) else 1
 
 
 # ------------------------------------------------------------------ 셀프테스트
@@ -228,14 +275,16 @@ def _selftest():
         mj = [n for n in names if n.startswith("마감종목")]
         chk("여러 쪽: 쪽마다 따로 · 1→2 순서 · 옛 한 장 제외", mj == ["마감종목_카톡_p1.png", "마감종목_카톡_p2.png"])
         chk("쪽 번호 읽기", page_of("마감종목_카톡_p12.png") == 12 and page_of("마감브리핑_카톡.png") == 0)
+        gs = group_cards(cards)
+        chk("같은 카드끼리 묶음(마감종목 2쪽 = 1묶음)", any(k == "마감종목_카톡" and len(v) == 2 for k, v in gs) and len(gs) == len({k for k, _ in gs}))
         chk("설명 한 줄", desc_for("마감종목_카톡_p1.png", "2026-11-27").startswith("급등·거래대금") and "11/27" in desc_for("마감종목_카톡_p1.png", "2026-11-27"))
         _, none_fresh = discover(fresh_min=0, send_all=False)
         chk("신선도 필터(0분→없음)", len(none_fresh) == 0)
     finally:
         globals()["HERE"] = saved
         shutil.rmtree(tmp, ignore_errors=True)
-    print(f"✅ jq_kakao_send 셀프테스트 ({ok}/12)")
-    return ok == 12
+    print(f"✅ jq_kakao_send 셀프테스트 ({ok}/13)")
+    return ok == 13
 
 
 if __name__ == "__main__":
