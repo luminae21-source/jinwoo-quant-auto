@@ -379,17 +379,196 @@ def cardA_weekly():
     pb=save(img,"주봉_매매가이드.png",dt)
     return pa,pb,dt
 
+
+# ================= 2026-11-27 카톡 큰 글씨 카드 (jq_mcard) =================
+# 카톡 말풍선이 카드를 1:1로 잘라 손톱만 하게 보이던 문제 → 같은 데이터로 1080×최대1440 쪽 카드를 그림.
+# 데이터 읽기(grab·expiries·event·parse_weekly …)는 위 함수 그대로. 옛 카드는 JQ_OLD_CARDS=1 로 되돌림.
+sys.path.insert(0, HERE)
+import jq_mcard as M
+
+def _mc(v):  # 등락률 → 색
+    return M.GREEN if (v or 0) > 0 else (M.RED if (v or 0) < 0 else M.SUB)
+
+def mS(txt, dt):
+    c = M.Card("시장 브리핑", dt, accent=M.ACC, sub="美 증시가 관통 동인")
+    g = lambda k: grab(txt, k)
+    c.sec("국내")
+    for k in ("코스피", "코스닥"):
+        v, ch = g(k); p = pct(ch); a, _ = arrow(ch)
+        c.stat(k, v, (a + ch) if ch else "", _mc(p), note=("급락" if (p or 0) < -2 else ""))
+    v, ch = g("VKOSPI")
+    try: vv = float(v)
+    except Exception: vv = None
+    if vv is None:   # 수신 실패·휴장 등 — 수준 판정 안 함(없는 값으로 '안정'이라 쓰지 않음)
+        c.row("VKOSPI 공포지수", "N/A", rc=M.SUB, rbold=True, sub=(ch or v or None))
+    else:
+        lvl = "공포 극단" if vv > 60 else ("경계" if vv > 30 else "안정")
+        c.row("VKOSPI 공포지수", v, rc=M.RED if vv > 30 else M.GREEN, rbold=True,
+              sub=f"{arrow(ch)[0]}{ch} · {lvl}".strip(" ·"))
+    c.sec("미국 지수 (밤사이)")
+    for k, tit in [("S&P500", "S&P500"), ("나스닥", "나스닥"), ("다우", "다우"), ("필라델피아반도체", "반도체지수(SOX)")]:
+        v, ch = g(k); p = pct(ch); a, _ = arrow(ch)
+        c.row(tit, v, rc=M.TXT, rbold=True, badge=((a + ch) if ch else "N/A", _mc(p)))
+    c.sec("금리 · 환율 · 변동성")
+    v, ch = g("美10년"); c.row("美 10년물", (v + "%") if v != "N/A" else v, rbold=True, sub=ch.replace("전일대비 ", "") or None)
+    v, ch = g("원/달러"); p = pct(ch); a, _ = arrow(ch)
+    c.row("원/달러", v, rbold=True, badge=((a + ch) if ch else "N/A", M.GREEN if (p or 0) < 0 else M.RED),
+          sub=("원화강세" if (p or 0) < 0 else "원화약세") if p is not None else None)
+    vx, _ = g("VIX"); dz, _ = g("달러인덱스")
+    c.row("VIX", vx, rbold=True); c.row("달러인덱스", dz, rbold=True)
+    ev = expiries(txt)
+    def mmdd(x): return x[5:] if len(x) >= 10 else x
+    opt = sorted([e for e in ev if "옵션만기" in e[1] and "위클리" not in e[1]], key=lambda e: e[0])
+    thu = next((e for e in ev if "위클리" in e[1] and "목" in e[1]), None)
+    mon = next((e for e in ev if "위클리" in e[1] and "월" in e[1]), None)
+    quad = next((e for e in ev if ("동시만기" in e[1] or "네 마녀" in e[1] or "네마녀" in e[1])), None)
+    v_opt = (f"{mmdd(opt[0][0])} {opt[0][2]}" + (f" · 다음 {mmdd(opt[1][0])}" if len(opt) > 1 else "")) if opt else "N/A"
+    v_wk = " · ".join([x for x in [(f"목 {mmdd(thu[0])} {thu[2]}" if thu else ""), (f"월 {mmdd(mon[0])} {mon[2]}" if mon else "")] if x]) or "N/A"
+    v_quad = (f"{mmdd(quad[0])} {quad[2]}") if quad else "N/A"
+    c.sec("만기 일정")
+    c.row("옵션만기(월간)", "", lc=M.RED, sub=v_opt)
+    c.row("위클리옵션", "", lc=M.YEL, sub=v_wk)
+    c.row("동시만기(네마녀)", "", lc=M.GREEN, sub=v_quad + (" · 분기 선물·옵션 동시만기" if quad else ""))
+    c.para("美 증시 방향이 익일 코스피의 상위 변수 · 만기주는 수급 변동성 주의 · VKOSPI 높을수록 변동성↑",
+           color=M.SUB, size=M.SMALL)
+    return c.save("시장브리핑_카톡", HERE, dt, folder_date=datetime.date.today().isoformat())
+
+def mU(txt, dt):
+    ex = yf_extra([tk for tk, _, _, mk in US_MAP if mk in ("TSM", "AVGO", "AMD", "TSLA", "AAPL")])
+    c = M.Card("美 → 한국 증시 영향", dt, accent=M.BLUE, sub="美 지표·종목 → 국내")
+    c.para("한국증시 = 美증시의 메아리 — SOX·S&P500·외국인·달러가 관통 동인", color=(190, 215, 255), box=M.BLUE)
+    for tk, us, kr, mk in US_MAP:
+        val = None; p = None
+        if mk in ("필라델피아반도체", "엔비디아", "마이크론", "인텔"):
+            v, ch = grab(txt, mk); val = v; p = pct(ch)
+        elif tk in ex:
+            val, p = ex[tk]
+        if val is None or val == "N/A": continue
+        col = M.GREEN if (p or 0) > 0.3 else (M.RED if (p or 0) < -0.3 else M.SUB)
+        dr = "우호" if (p or 0) > 0.3 else ("부정" if (p or 0) < -0.3 else "중립")
+        chg = f"{'▲' if (p or 0) > 0 else ('▼' if (p or 0) < 0 else '')} {p:+.2f}%" if p is not None else ""
+        name = "반도체지수(SOX)" if "SOX" in us else us.split(" (")[0]
+        c.row(name, chg, rc=col, rbold=True, badge=(dr, col), sub=f"{val} → {kr}")
+    dz, _ = grab(txt, "달러인덱스"); wd, wc = grab(txt, "원/달러"); vx, _ = grab(txt, "VIX")
+    up = (pct(wc) or 0) < 0
+    c.row("달러인덱스·원/달러", "", badge=("우호" if up else "중립", M.GREEN if up else M.SUB),
+          sub=f"{dz} · {wd} {'원화강세' if up else ''} → 외국인 수급 유입 여건".replace("  ", " "))
+    c.row("VIX 공포지수", "", badge=("중립", M.SUB), sub=f"{vx} → 위험선호 → 신흥국 영향")
+    c.para("공포 비대칭: 美 급락 충격이 급등의 1.4~1.6배 (예측 신호로만 참고) · 방향 힌트일 뿐 매매신호 아님 · 실데이터(yfinance)",
+           color=M.SUB, size=M.SMALL)
+    return c.save("美종목_한국영향_카드", HERE, dt, folder_date=datetime.date.today().isoformat())
+
+def mF(txt, dt):
+    cfg = {}
+    cp = os.path.join(HERE, "jq_fed_config.txt")
+    if os.path.exists(cp):
+        for ln in open(cp, encoding="utf-8"):
+            if "=" in ln: k, v = ln.rstrip("\n").split("=", 1); cfg[k] = v
+    c = M.Card("연준(Fed) 동향", dt, accent=M.ACC, sub="원화·외국인 수급의 상위 변수")
+    c.stat("현재 기준금리 (target range)", cfg.get("FFR_RANGE", "N/A"), "", M.ACC)
+    if cfg.get("FFR_NOTE") or cfg.get("FFR_SUB"):
+        c.para(" · ".join(x for x in [cfg.get("FFR_NOTE", ""), cfg.get("FFR_SUB", "")] if x), color=M.YEL)
+    c.sec("주요 동향 · 뉴스")
+    for k in ["NEWS1", "NEWS2", "NEWS3"]:
+        if cfg.get(k):
+            h, t = (cfg[k].split("|", 1) + [""])[:2]
+            c.row(h, "", sub=t or None)
+    fomc_d, fomc_dd = event(txt, "FOMC")
+    c.row("다음 FOMC", fomc_d, rbold=True, rc=M.TXT, sub=" · ".join(x for x in [fomc_dd, cfg.get("FEDWATCH", "")] if x) or None)
+    dl = [x for x in [cfg.get("DOT1", ""), cfg.get("DOT2", ""), cfg.get("DOT3", "")] if x]
+    if dl:
+        c.sec("점도표(Dot Plot) 해설", color=(190, 150, 240))
+        if cfg.get("DOT_INTRO"): c.para(cfg["DOT_INTRO"], color=M.SUB, size=M.SMALL)
+        for x in dl: c.para("· " + x)
+    pts = []
+    for lab, key in [("13주", "美13주"), ("5년", "美5년"), ("10년", "美10년"), ("30년", "美30년")]:
+        v, _ = grab(txt, key)
+        try: pts.append((lab, float(v)))
+        except Exception: pass
+    if pts:
+        c.sec("美 국채 금리곡선")
+        lo = min(v for _, v in pts); hi = max(v for _, v in pts)
+        for lab, v in pts:
+            c.row(lab, f"{v:.2f}%", rc=M.BLUE, rbold=True)
+        d = dict(pts)
+        if "10년" in d and "13주" in d:
+            sp = d["10년"] - d["13주"]
+            c.para(f"10년 − 13주 = {sp:+.2f}%p → {'우상향(정상)' if sp > 0 else '역전'}", color=M.SUB, size=M.SMALL)
+    _hmm = re.search(r"한미 금리차[^\n]*?([+-]?\d+\.\d+)%p", txt); hm = _hmm.group(1) if _hmm else "N/A"
+    kb_d, _ = event(txt, "금통위")
+    c.sec("한미 금리차 · 일정")
+    c.row("한미 금리차", (f"{hm}%p" if hm != "N/A" else "N/A"), rc=M.BLUE, rbold=True, sub="美 10년 − 한국 기준금리")
+    c.row("한국 금통위", kb_d or "N/A", rbold=True, rc=M.TXT)
+    c.row("美 FOMC", fomc_d or "N/A", rbold=True, rc=M.TXT)
+    c.para("함의: 매파 연준·고금리 장기화 = 원화·외국인 수급 변수 · 정책 사실=jq_fed_config.txt"
+           + (f"({cfg.get('UPDATED')})" if cfg.get("UPDATED") else "") + " · 금리곡선·일정=자동", color=M.SUB, size=M.SMALL)
+    return c.save("연준_Fed_동향_카드", HERE, dt, folder_date=datetime.date.today().isoformat())
+
+def mWeekly():
+    secs = load_sectors(); wk, dt = parse_weekly()
+    if not secs or not wk: print("주봉 데이터 없음 → A/B 생략"); return None, None, dt
+    today = datetime.date.today().isoformat()
+    flat = [(nm, sec) for sec, names in secs for nm in names if nm in wk]
+    a = M.Card(f"주봉 분석 · {len(flat)}종", dt, accent=M.ACC, sub="20주선 이격·추세·캔들")
+    for sec, names in secs:
+        rows = [(nm,) + wk[nm] for nm in names if nm in wk]
+        if not rows: continue
+        above = sum(1 for r in rows if r[2] == 1)
+        a.sec(f"{sec} · 20주선 위 {above}/{len(rows)}")
+        if MEME.get(sec): a.para("재료: " + MEME[sec], color=(240, 175, 115), size=M.SMALL)
+        for (nm, g, ab, sl, cd, dj) in rows:
+            col = M.GREEN if sl == "상승" else (M.RED if sl == "하락" else M.YEL)
+            a.row(nm, f"{'▲' if ab else '▼'} {g:+.1f}%", rc=M.GREEN if ab else M.RED, rbold=True,
+                  badge=(f"{sl} {cd}{'·도지' if dj else ''}", col))
+    a.para("▲=20주선 위 · ▼=아래 · %=20주선과 거리 · 배지=20주선 추세 + 직전주 캔들 · pykrx 실데이터 · 사실 나열",
+           color=M.SUB, size=M.SMALL)
+    pa = a.save("주봉분석_카드", HERE, dt, folder_date=today)
+    keep = [(nm, wk[nm][0]) for nm in wk if wk[nm][1] and wk[nm][2] == "상승"]
+    avoid = [(nm, wk[nm][0]) for nm in wk if (not wk[nm][1]) and wk[nm][2] == "하락"]
+    watch = [(nm, wk[nm][0]) for nm in wk if not ((wk[nm][1] and wk[nm][2] == "상승") or ((not wk[nm][1]) and wk[nm][2] == "하락"))]
+    keep.sort(key=lambda x: -x[1]); watch.sort(key=lambda x: -x[1]); avoid.sort(key=lambda x: x[1])
+    nk, nw, na = len(keep), len(watch), len(avoid)
+    b = M.Card("주봉 매매방법 가이드", dt, accent=M.ACC, sub="20주선 배열 → 행동지침")
+    b.sec("이번주 신호 분포")
+    b.stack([(nk, M.GREEN, "추세유지"), (nw, M.YEL, "눌림"), (na, M.RED, "회피")])
+    b.sec("20주선 4분면 — 내 위치 찾기")
+    for col, cond, title, desc, cnt in [
+            (M.GREEN, "20주선 위 + 상승", "추세유지", "보유=트레일링으로 끝까지 · 신규=눌림 대기", nk),
+            (M.YEL, "20주선 아래 + 상승·횡보", "눌림·관찰", "진입은 손절가 동시설정 · 소량·분할", nw),
+            (M.SUB, "20주선 위 + 하락", "관망", "돌파/이탈 확인 전 관망 · 규칙 점검", 0),
+            (M.RED, "20주선 아래 + 하락", "하락·회피", "신규 자제 · 보유는 손절선·thesis 점검", na)]:
+        b.row(title, f"{cnt}종", lc=col, rc=col, rbold=True, sub=f"{cond} · {desc}")
+    for title, col, items, note in [(f"추세유지 {nk}종", M.GREEN, keep, "20주선 위+상승 · 보유는 트레일링"),
+                                    (f"눌림·관찰 {nw}종", M.YEL, watch, "아래+상승/횡보 · 진입 시 손절 동시"),
+                                    (f"하락·회피 {na}종", M.RED, avoid, "아래+하락 · 신규 자제")]:
+        b.sec(title, color=col)
+        b.para(note, color=M.SUB, size=M.SMALL)
+        b.para("  ·  ".join(f"{n}({g:+.0f}%)" for n, g in items) or "(없음)")
+    b.sec("매도 신호등")
+    for col, tag, desc in [(M.RED, "손절", "종가 < 손절선(-2.5ATR/-20%) 또는 트레일링 이탈 → 다음날 매도"),
+                           (M.YEL, "익절", "+1R 도달 → 절반 확정, 나머지 트레일링"),
+                           (M.YEL, "시간", "20거래일 ±5% 횡보·무반응 → 청산 검토"),
+                           (M.RED, "무효화", "thesis 붕괴(실적쇼크·테마소멸) → 즉시 매도"),
+                           (M.GREEN, "유지", "위 어디에도 없음 → 보유·관찰")]:
+        b.row(tag, "", lc=col, sub=desc)
+    b.para("핵심: 살 때 팔 자리를 정하고, 그 자리가 오면 감정 없이 실행 · 투자자문 아님 · 집행·책임 진우",
+           color=(255, 230, 160), box=M.YEL)
+    pb = b.save("주봉_매매가이드", HERE, dt, folder_date=today)
+    return pa[0] if pa else None, pb[0] if pb else None, dt
+
 def main():
     txt,dt=brief()
     if not txt:
         print("[오류] 시장브리핑_*.md 없음"); return 2
     made=[]
-    for fn in (cardS,cardU,cardF):
-        try: made.append(fn(txt,dt))
+    old = os.environ.get("JQ_OLD_CARDS") == "1"   # 옛 820px 카드로 되돌릴 때만 1
+    for fn in ((cardS,cardU,cardF) if old else (mS,mU,mF)):
+        try:
+            r = fn(txt,dt); made += (r if isinstance(r, list) else [r])
         except Exception as e: print("카드 실패",fn.__name__,e)
     # 주봉 카드 A/B 는 jq_cards_weekly 로 분리(존재 시)
     try:
-        pa,pb,_=cardA_weekly()
+        pa,pb,_=(cardA_weekly() if old else mWeekly())
         made+= [x for x in (pa,pb) if x]
     except Exception as e: print("주봉 카드 실패",e)
     print("[산출]",dt,"·",len(made),"장"); 
