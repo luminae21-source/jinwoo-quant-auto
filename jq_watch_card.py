@@ -2,76 +2,54 @@
 """jq_watch_card.py — 관심 워치리스트 카드뉴스.
 데이터: 같은 폴더 jq_watchlist.json (스케줄이 매일 유지·갱신). 실데이터만·가짜 금지.
 성격: '추천' 아님. 내가 며칠간 지켜보는 관심종목 + 진입/손절 규율 추적.
-산출: 관심워치리스트_카톡.png → 메인 + 카드뉴스/YYYY-MM-DD/ + OneDrive.
+산출: 카드뉴스/YYYY-MM-DD/관심워치리스트_카톡_p1.png … (카톡 말풍선용 1080×최대1440, 큰 글씨)
+      + 메인 폴더 관심워치리스트_카톡.png (쪽을 이은 한 장, 예전 이름 호환)
+2026-11-27: 카톡 말풍선에서 글씨가 안 보이던 문제 → jq_mcard(큰 글씨·3:4 쪽 나누기)로 다시 그림.
+            종목 순서·내용은 그대로(목록 순서 = 진우가 관리하는 순서), 상태는 오른쪽 배지.
 """
-import os, sys, json
-HERE=os.path.dirname(os.path.abspath(__file__))
+import os, sys, json, re
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
 try: sys.stdout.reconfigure(encoding="utf-8")
 except Exception: pass
-from PIL import Image, ImageDraw, ImageFont
-def _fp():
-    for p in [r"C:\Windows\Fonts\malgun.ttf","/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"]:
-        if os.path.exists(p): return p
-    return None
-FP=_fp()
-def F(s): return ImageFont.truetype(FP,s) if FP else ImageFont.load_default()
-BG=(15,17,21); ACC=(255,122,69); GREEN=(63,179,122); RED=(226,96,106); YEL=(224,176,32); BLUE=(90,160,240); TXT=(232,234,237); SUB=(150,156,166)
+import jq_mcard as M
+
 
 def _status_color(s):
-    if any(k in s for k in ["이탈","제외","손절","약화"]): return RED,(34,22,24)
-    if any(k in s for k in ["근접","관찰","주의"]): return YEL,(34,30,20)
-    return GREEN,(22,30,26)
+    if any(k in s for k in ["이탈", "제외", "손절", "약화"]): return M.RED
+    if any(k in s for k in ["근접", "관찰", "주의"]): return M.YEL
+    return M.GREEN
 
-def render(D):
-    W=820; pad=26
-    items=D.get('items',[])
-    H=360+len(items)*60
-    img=Image.new("RGB",(W,H),BG); d=ImageDraw.Draw(img); d.rectangle([0,0,W,6],fill=BLUE); y=24
-    d.text((pad,y),f"관심 워치리스트 · 기준일 {D['updated']}",font=F(29),fill=(255,255,255)); y+=42
-    d.text((pad,y),"내가 지켜보는 종목 · 추천 아님 · 진입 시 손절가 동시 설정 · 결정·책임 본인",font=F(14),fill=SUB); y+=32
-    # 상태 범례
-    lx=pad; d.text((lx,y),"상태:",font=F(13),fill=SUB); lx+=44
-    for lab,(c,_) in [("추세 유효",(GREEN,0)),("지지 근접",(YEL,0)),("이탈·제외후보",(RED,0))]:
-        d.rectangle([lx,y+2,lx+12,y+14],fill=c); lx+=18
-        d.text((lx,y),lab,font=F(13),fill=TXT); lx+=int(d.textlength(lab,font=F(13)))+22
-    y+=30
-    # 종목 카드들
+
+def build(D):
+    items = D.get('items', [])
+    c = M.Card("관심 워치리스트", D['updated'], accent=M.BLUE, sub=M.src_label(D.get('sources')) + " · 지켜보는 종목",
+               foot="추천 아님 · 진입 시 손절가 먼저 · 결정·책임 본인")
     for it in items:
-        nm=it.get('name',''); th=it.get('theme',''); stt=it.get('status','관찰')
-        note=it.get('note',''); sup=it.get('support',''); stp=it.get('stop','')
-        col,tint=_status_color(stt)
-        rh=54; d.rectangle([pad,y,W-pad,y+rh],fill=(22,25,31),outline=(44,48,58),width=1); d.rectangle([pad,y,pad+5,y+rh],fill=col)
-        d.text((pad+18,y+8),nm,font=F(17),fill=(255,255,255))
-        if th:
-            bw=d.textlength(th,font=F(12)); d.rectangle([pad+200,y+9,pad+200+bw+14,y+29],fill=(24,34,30),outline=GREEN,width=1); d.text((pad+207,y+11),th,font=F(12),fill=(120,220,170))
-        # 상태 배지(우측)
-        sw=d.textlength(stt,font=F(13)); bx1=W-pad-10; bx0=bx1-sw-16
-        d.rectangle([bx0,y+8,bx1,y+30],fill=tint,outline=col,width=1); d.text((bx0+8,y+10),stt,font=F(13),fill=col)
-        # 2행: 근거 + 규율(지지/손절)
-        if note: d.text((pad+18,y+32),"· "+note,font=F(12),fill=SUB)
-        disc=f"지지 {sup} · 손절 {stp}" if (sup or stp) else ""
-        if disc:
-            dw=d.textlength(disc,font=F(12)); d.text((W-pad-10-dw,y+32),disc,font=F(12),fill=YEL)
-        y+=rh+6
-    y+=6
-    d.text((pad,y),"규율 · 추세 유효 종목만 유지 · 이탈 시 제외 후보 · 진입은 지지 재확인 후 · 손절가 먼저 정하기",font=F(13),fill=(224,176,80)); y+=22
-    d.text((pad,y),"해설 · 급등 추격이 아니라 조정 시 지지에서 관심 · 구체 진입가·손절가는 본인이 차트로 확정",font=F(13),fill=(120,165,210)); y+=22
-    d.text((pad,y),f"출처: {D.get('sources','공개 뉴스·주도주/순환매')} · 추천 아님 · 결정·책임 본인",font=F(13),fill=(88,94,104)); y+=26
-    return img.crop((0,0,W,y+6))
+        nm = it.get('name', ''); th = it.get('theme', ''); stt = it.get('status', '관찰')
+        note = it.get('note', ''); sup = it.get('support', ''); stp = it.get('stop', '')
+        m = re.search(r"([-+]\d+(?:\.\d+)?)%", note)
+        chg = float(m.group(1)) if m else None
+        right = f"{chg:+.2f}%" if chg is not None else ""
+        parts = [p for p in [th, (f"지지 {sup}" if sup else ""), (f"손절 {stp}" if stp else "")] if p]
+        if chg is None and note:
+            parts.insert(0, note)
+        c.row(nm, right, rc=M.up_down(chg), rbold=True, badge=(stt, _status_color(stt)),
+              sub=" · ".join(parts) or None)
+    c.sec("규율", color=M.YEL)
+    c.para("추세 유효 종목만 유지 · 이탈 시 제외 후보 · 진입은 지지 재확인 후 · 손절가 먼저 정하기"
+           " · 목록·상태는 수동 관리", color=(255, 230, 160), box=M.YEL)
+    return c
+
 
 def main():
-    p=os.path.join(HERE,"jq_watchlist.json")
+    p = os.path.join(HERE, "jq_watchlist.json")
     if not os.path.exists(p):
         print("[오류] jq_watchlist.json 없음"); return 2
-    D=json.load(open(p,encoding="utf-8")); dt=D['updated']
-    img=render(D)
-    out=os.path.join(HERE,"관심워치리스트_카톡.png"); img.save(out)
-    dd=os.path.join(HERE,"카드뉴스",dt); os.makedirs(dd,exist_ok=True)
-    import shutil
-    for t in [os.path.join(dd,"관심워치리스트_카톡.png"), os.path.join(os.path.expanduser(r"~\OneDrive\문서\Claude\Projects\진우퀀트"),"관심워치리스트_카톡.png")]:
-        try:
-            if os.path.isdir(os.path.dirname(t)): shutil.copy(out,t)
-        except Exception: pass
-    print("[산출] 관심워치리스트_카톡.png ·",dt)
+    D = json.load(open(p, encoding="utf-8"))
+    paths = build(D).save("관심워치리스트_카톡", HERE, D['updated'])
+    print(f"[산출] 관심워치리스트_카톡 {len(paths)}쪽 ·", D['updated'])
     return 0
-if __name__=="__main__": sys.exit(main())
+
+
+if __name__ == "__main__": sys.exit(main())
