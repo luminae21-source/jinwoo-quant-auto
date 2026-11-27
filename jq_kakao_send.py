@@ -14,7 +14,7 @@
 설정 : jq_kakao_config.txt 의 FRESH_MIN(기본 120), 인증정보는 jq_kakao.py 참조.
 실행 : jq_kakao_send.bat  (배치가 SSL 환경변수 세팅)
 """
-import os, sys, glob, time, datetime
+import os, re, sys, glob, time, datetime
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import jq_kakao as K
@@ -53,6 +53,17 @@ def title_for(fn):
     return stem
 
 
+def page_of(fn):
+    """'마감종목_카톡_p2.png' → 2 (쪽 번호, 2026-11-27 큰 글씨 카드). 쪽 표시가 없으면 0."""
+    m = re.search(r"_p(\d+)$", os.path.splitext(os.path.basename(fn))[0])
+    return int(m.group(1)) if m else 0
+
+
+def card_key(fn):
+    stem = os.path.basename(fn)
+    return next((key for key, _ in KNOWN_CARDS if key in stem), stem)
+
+
 def _order_index(fn):
     stem = os.path.basename(fn)
     for i, (key, _) in enumerate(KNOWN_CARDS):
@@ -70,14 +81,18 @@ def discover(fresh_min=120, send_all=False):
     if not send_all:
         cutoff = time.time() - fresh_min * 60
         cards = [p for p in cards if os.path.getmtime(p) >= cutoff]
-    # 같은 카드가 날짜접미사/무접미사로 중복되면 최신 1개만
+    # 같은 카드가 날짜접미사/무접미사로 중복되면 최신 1개만 (여러 쪽 카드는 쪽마다 따로)
+    # 한 카드에 쪽 파일(_p1…)이 있으면 같은 카드의 옛 한 장짜리는 보내지 않음
+    paged = {card_key(p) for p in cards if page_of(p)}
     picked = {}
     for p in cards:
-        stem = os.path.basename(p)
-        keymatch = next((key for key, _ in KNOWN_CARDS if key in stem), stem)
-        if keymatch not in picked or os.path.getmtime(p) > os.path.getmtime(picked[keymatch]):
-            picked[keymatch] = p
-    out = sorted(picked.values(), key=lambda p: (_order_index(p), p))
+        keymatch = card_key(p)
+        if keymatch in paged and not page_of(p):
+            continue
+        k = (keymatch, page_of(p))
+        if k not in picked or os.path.getmtime(p) > os.path.getmtime(picked[k]):
+            picked[k] = p
+    out = sorted(picked.values(), key=lambda p: (_order_index(p), page_of(p), p))
     return base, out
 
 
@@ -143,8 +158,13 @@ def run(argv):
         return 5
 
     sent = 0
+    npages = {}
+    for p in cards:
+        npages[card_key(p)] = npages.get(card_key(p), 0) + 1
     for p in cards:
         title = merged_title or title_for(p)
+        if not merged_title and page_of(p) and npages.get(card_key(p), 1) > 1:
+            title += f" ({page_of(p)}/{npages[card_key(p)]})"
         desc = f"기준일 {today} · 진우퀀트 · 매수매도 추천 아님"
         ok, how = K.send_image(token, p, title, desc, cfg)
         print(f"   [{'OK' if ok else 'FAIL'} · {how}] {os.path.basename(p)}")
@@ -170,7 +190,8 @@ def _selftest():
     tmp = tempfile.mkdtemp()
     d = os.path.join(tmp, "카드뉴스", "2026-07-21")
     os.makedirs(d)
-    for fn in ["시장브리핑_카톡.png", "마감브리핑_카톡.png", "주봉분석_카드_2026-07-21.png", "주봉분석_카드.png", "잡음.png"]:
+    for fn in ["시장브리핑_카톡.png", "마감브리핑_카톡.png", "주봉분석_카드_2026-07-21.png", "주봉분석_카드.png", "잡음.png",
+               "마감종목_카톡_p2.png", "마감종목_카톡_p1.png", "마감종목_카톡.png"]:
         open(os.path.join(d, fn), "wb").write(b"\x89PNG\r\n")
     saved = globals()["HERE"]
     globals()["HERE"] = tmp
@@ -180,13 +201,16 @@ def _selftest():
         chk("알려진 카드만 선별(잡음 제외)", "잡음.png" not in names)
         chk("주봉 중복 1개만", sum(1 for n in names if n.startswith("주봉분석")) == 1)
         chk("순서: 시황 먼저", names and names[0] == "시장브리핑_카톡.png")
+        mj = [n for n in names if n.startswith("마감종목")]
+        chk("여러 쪽: 쪽마다 따로 · 1→2 순서 · 옛 한 장 제외", mj == ["마감종목_카톡_p1.png", "마감종목_카톡_p2.png"])
+        chk("쪽 번호 읽기", page_of("마감종목_카톡_p12.png") == 12 and page_of("마감브리핑_카톡.png") == 0)
         _, none_fresh = discover(fresh_min=0, send_all=False)
         chk("신선도 필터(0분→없음)", len(none_fresh) == 0)
     finally:
         globals()["HERE"] = saved
         shutil.rmtree(tmp, ignore_errors=True)
-    print(f"✅ jq_kakao_send 셀프테스트 ({ok}/9)")
-    return ok == 9
+    print(f"✅ jq_kakao_send 셀프테스트 ({ok}/11)")
+    return ok == 11
 
 
 if __name__ == "__main__":
