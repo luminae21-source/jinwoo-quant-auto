@@ -258,7 +258,7 @@ def _png_size(path):
         return None
 
 
-def _build_feed(image_url, title, description, link_url=None, size=None):
+def _build_feed(image_url, title, description, link_url=None, size=None, button_title=None):
     """feed 카드 페이로드. link_url 이 없으면 content.link 자체를 넣지 않음.
     카카오 '자세히 보기' 기본 버튼은 content.link 로부터 생성되므로,
     link 를 아예 빼면 버튼이 생기지 않는다(공식 문서: 링크 미설정 시 버튼 미노출).
@@ -276,7 +276,11 @@ def _build_feed(image_url, title, description, link_url=None, size=None):
         content["image_height"] = int(size[1])
     if link_url:
         content["link"] = {"web_url": link_url, "mobile_web_url": link_url}
-    return {"object_type": "feed", "content": content}
+    obj = {"object_type": "feed", "content": content}
+    if link_url and button_title:   # 2026-11-27: '자세히 보기' 대신 무엇을 하는지 알 수 있는 버튼 이름
+        obj["buttons"] = [{"title": button_title[:14],
+                           "link": {"web_url": link_url, "mobile_web_url": link_url}}]
+    return obj
 
 
 def _build_text(text, link_url=None):
@@ -294,8 +298,8 @@ def _to_https(url):
     return url
 
 
-def send_feed(access_token, image_url, title, description, link_url=None, size=None):
-    obj = _build_feed(image_url, title, description, link_url, size=size)
+def send_feed(access_token, image_url, title, description, link_url=None, size=None, button_title=None):
+    obj = _build_feed(image_url, title, description, link_url, size=size, button_title=button_title)
     st, res = _post_form(MEMO_SEND_URL,
                          {"template_object": json.dumps(obj, ensure_ascii=False)},
                          headers={"Authorization": "Bearer " + access_token})
@@ -312,12 +316,14 @@ def send_text(access_token, text, link_url=None):
 
 # ------------------------------------------------------------------ 상위 API
 def card_link(image_url, cfg):
-    """버튼(자세히 보기)이 열 링크 결정.
-    - CARD_LINK_URL 이 설정돼 있으면 그 값(그 도메인을 웹 도메인에 등록해야 열림).
-    - 없으면 업로드된 카드 이미지의 https URL → 누르면 카드 이미지가 브라우저에 뜸.
-      (이때 image 호스트 k.kakaocdn.net 를 앱 웹 도메인에 등록해야 치환 안 됨)"""
+    """버튼이 열 링크 결정. (2026-11-27 진우 '누르면 네이버로 넘어가서 UI가 안 좋다' → 카드 이미지 우선)
+    - 기본: 업로드된 카드 이미지의 https URL → 누르면 그 카드만 전체 화면(손가락으로 확대).
+      (image 호스트 https://k.kakaocdn.net 은 앱 [제품 링크 관리 > 웹 도메인]에 등록돼 있음 — 11/27 확인)
+    - 이미지 주소가 없을 때, 또는 CARD_LINK_FORCE=1 일 때만 CARD_LINK_URL(예: 네이버 증권)."""
     custom = cfg.get("CARD_LINK_URL", "").strip()
-    return custom or _to_https(image_url)
+    if custom and (str(cfg.get("CARD_LINK_FORCE", "")).strip() == "1" or not image_url):
+        return custom
+    return _to_https(image_url) if image_url else custom
 
 
 def send_image(access_token, filepath, title, description="", cfg=None):
@@ -339,8 +345,9 @@ def send_image(access_token, filepath, title, description="", cfg=None):
     if image_url:
         link = card_link(image_url, cfg)
         try:
+            bt = "카드 크게 보기" if link == _to_https(image_url) else None
             ok, res = send_feed(access_token, image_url, title, description, link_url=link,
-                                size=_png_size(filepath))
+                                size=_png_size(filepath), button_title=bt)
             if ok:
                 print(f"    [링크] {link}")  # 이 호스트를 웹 도메인에 등록하면 버튼이 정상 오픈
                 return True, "feed"
@@ -400,7 +407,10 @@ def _selftest():
     # 버튼 링크 로직: http→https 변환, 기본=이미지 https, custom 우선
     chk("http→https 변환", _to_https("http://k.kakaocdn.net/dn/a/i.png") == "https://k.kakaocdn.net/dn/a/i.png")
     chk("card_link 기본=이미지https", card_link("http://k.kakaocdn.net/dn/a/i.png", {}) == "https://k.kakaocdn.net/dn/a/i.png")
-    chk("card_link custom 우선", card_link("http://k.kakaocdn.net/dn/a/i.png", {"CARD_LINK_URL": "https://my.site/x"}) == "https://my.site/x")
+    chk("card_link 이미지 우선(CARD_LINK_URL 있어도)", card_link("http://k.kakaocdn.net/dn/a/i.png", {"CARD_LINK_URL": "https://my.site/x"}) == "https://k.kakaocdn.net/dn/a/i.png")
+    chk("card_link FORCE=1 이면 custom", card_link("http://k.kakaocdn.net/dn/a/i.png", {"CARD_LINK_URL": "https://my.site/x", "CARD_LINK_FORCE": "1"}) == "https://my.site/x")
+    ob = _build_feed("https://ex.com/i.png", "t", "d", link_url="https://ex.com/i.png", button_title="카드 크게 보기")
+    chk("버튼 이름 = 카드 크게 보기", ob.get("buttons", [{}])[0].get("title") == "카드 크게 보기")
     # 콘솔 인코딩 자동 감지
     chk("enc: 비Windows→utf-8", _pick_encoding(False, 0) == "utf-8")
     chk("enc: 콘솔 949→cp949", _pick_encoding(True, 949) == "cp949")
@@ -411,8 +421,8 @@ def _selftest():
     except Exception:
         pass
     globals()["CONFIG"] = os.path.join(HERE, "jq_kakao_config.txt")
-    print(f"✅ jq_kakao 셀프테스트 ({ok}/21)")
-    return ok == 21
+    print(f"✅ jq_kakao 셀프테스트 ({ok}/23)")
+    return ok == 23
 
 
 if __name__ == "__main__":
