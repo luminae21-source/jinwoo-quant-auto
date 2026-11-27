@@ -116,8 +116,9 @@ class Card:
         self._add(h, fn, keep=True)
 
     def row(self, left, right="", lc=TXT, rc=SUB, lbold=True, rbold=False, size=BODY,
-            sub=None, sub_color=SUB, badge=None, line=True):
-        """한 행: 왼쪽 글(굵게) · 오른쪽 값(오른쪽 정렬) · 아래 작은 줄(sub) · 오른쪽 배지(badge=(글, 색))."""
+            sub=None, sub_color=SUB, badge=None, line=True, shrink=True):
+        """한 행: 왼쪽 글(굵게) · 오른쪽 값(오른쪽 정렬) · 아래 작은 줄(sub) · 오른쪽 배지(badge=(글, 색)).
+        shrink=True 면 왼쪽 글이 길 때 글씨를 SMALL 까지 줄여서 다 보이게(그래도 길면 …)."""
         subs = wrap(sub, SMALL, W - 2 * PAD - 20) if sub else []
         h = lh(size) + 10 + len(subs) * lh(SMALL)
 
@@ -133,7 +134,10 @@ class Card:
             if right:
                 d.text((rx - rw, y), right, font=font(size, rbold), fill=rc)
             room = rx - rw - (28 if right else 0) - PAD
-            d.text((PAD, y), fit(left, size, room, lbold), font=font(size, lbold), fill=lc)
+            ls = size
+            while shrink and ls > SMALL and tw(left, ls, lbold) > room:
+                ls -= 2
+            d.text((PAD, y + (size - ls) // 2), fit(left, ls, room, lbold), font=font(ls, lbold), fill=lc)
             yy = y + lh(size)
             for s in subs:
                 d.text((PAD + 4, yy), s, font=font(SMALL), fill=sub_color); yy += lh(SMALL)
@@ -175,6 +179,42 @@ class Card:
             d.line([PAD, y + h - 4, W - PAD, y + h - 4], fill=LINE, width=2)
         self._add(h, fn)
 
+    def stack(self, segs):
+        """비율 막대 한 줄: segs = [(개수, 색, 이름), …] — 막대 위에 '이름 n' 글씨."""
+        tot = sum(max(n, 0) for n, _, _ in segs) or 1
+        h = lh(BODY) + 30
+
+        def fn(d, y):
+            x = PAD; bw = W - 2 * PAD
+            for n, col, lab in segs:
+                w = bw * max(n, 0) / tot
+                if w <= 0:
+                    continue
+                d.rectangle([x, y, x + w, y + lh(BODY) + 10], fill=col)
+                t = f"{lab} {n}"
+                if tw(t, SMALL, True) + 20 < w:
+                    d.text((x + 14, y + 14), t, font=font(SMALL, True), fill=(16, 18, 22))
+                elif tw(str(n), SMALL, True) + 12 < w:
+                    d.text((x + 8, y + 14), str(n), font=font(SMALL, True), fill=(16, 18, 22))
+                x += w
+        self._add(h, fn)
+
+    def cols(self, cells, size=BODY, hl=None, line=True):
+        """여러 칸 한 줄: cells = [(글, 색, x, 'l'|'r', 굵게), …] · hl=배경색(강조 행)."""
+        h = lh(size) + 10
+
+        def fn(d, y):
+            if hl:
+                d.rounded_rectangle([PAD - 10, y - 2, W - PAD + 10, y + h - 6], radius=10, fill=hl)
+            for c in cells:
+                t, col, x, al = c[:4]
+                b = c[4] if len(c) > 4 else False
+                xx = x - tw(t, size, b) if al == "r" else x
+                d.text((xx, y), t, font=font(size, b), fill=col)
+            if line:
+                d.line([PAD, y + h - 4, W - PAD, y + h - 4], fill=LINE, width=2)
+        self._add(h, fn)
+
     def para(self, text, color=TXT, size=BODY, bold=False, box=None):
         """여러 줄 글. box=색 이면 왼쪽 색띠 상자."""
         inset = 34 if box else 0
@@ -209,7 +249,8 @@ class Card:
                 j, grp = i + 1, h                  # 한 묶음(제목~다음 제목 전)이 한 쪽에 들어가면 안 쪼갬
                 while j < n and not self.blocks[j][2]:
                     grp += self.blocks[j][0]; j += 1
-                if grp <= avail:
+                # 남은 자리가 넉넉하면(쪽의 35% 이상) 그냥 이어 쓰고, 좁으면 묶음째 다음 쪽으로
+                if grp <= avail and (avail - used) < avail * 0.35:
                     need = grp
             if cur and used + need > avail:
                 pages.append(cur); cur, used = [], 0
