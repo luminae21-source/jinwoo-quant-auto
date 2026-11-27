@@ -4,7 +4,8 @@
 pykrx(KRX 확정치)로 아래 3개 JSON을 오늘자로 채운다 → jq_close_card/stocks/watch_card.py가 그린다.
   jq_close_data.json   지수·투자자 수급·동인(데이터로 만든 1줄)
   jq_close_stocks.json 급등 상위·거래대금 상위·업종 상승률·시장 폭·추세 관심종목 등락
-  jq_watchlist.json    종목 목록·상태는 그대로, updated·note(오늘 등락)만 갱신
+  jq_watchlist.json    종목 목록·상태는 그대로, updated·note(오늘 등락)·lv(가격선)만 갱신
+                       lv = 현재가·20일선·60일선·손절선(최근 20거래일 저가 최저, 오늘 제외) — 11-28 진우 '워치리스트에 실제 가격'
 오늘 데이터가 아직 없으면 3분 간격 재시도(최대 30분). 끝내 없으면 exit 1, 파일은 안 건드림.
 사용: py -3 jq_close_fetch.py            (jq_close_auto.bat가 카드 렌더 전에 호출)
       py -3 jq_close_fetch.py --self-test
@@ -65,6 +66,38 @@ def market_ohlcv(stock, d):
         df["name"] = [str(stock.get_market_ticker_name(t)) for t in df.index]
         parts.append(df)
     return pd.concat(parts)
+
+
+def watch_levels(stock, d, wl, ohlcv):
+    """워치 종목 가격선 {이름: {close, ma20, ma60, low20}} — KRX 확정 일봉(수정 안 한 값)에서만 계산(지어내는 값 없음).
+    ma20·ma60 = 종가 20·60일 평균(오늘 포함) · low20 = 최근 20거래일 저가 최저(오늘 제외) = 손절선(직전 저점).
+    이름이 안 맞거나 자료가 61일 미만이거나 마지막 날이 오늘이 아니면 그 종목은 뺀다 → 카드는 예전 글자 표기.
+    adjusted=False 인 이유(11-28 실측): pykrx 수정주가 경로는 11-27 종가가 거래소 확정치와 달랐다
+    (LG전자 146,100 vs 확정 144,800 · 카드 등락률 +7.10%와 모순). 거래소 값(진우퀀트 일봉 CSV)과 맞는 건 수정 안 한 경로.
+    shortcut: 60일 안에 액면분할·병합이 있으면 선이 틀어진다 — 생기면 그 종목만 수정주가로 바꿀 것."""
+    out = {}
+    if not wl or ohlcv is None:
+        return out
+    code_of = {n: t for t, n in zip(ohlcv.index, ohlcv["name"])}
+    s = (datetime.datetime.strptime(d, "%Y%m%d") - datetime.timedelta(days=130)).strftime("%Y%m%d")
+    for it in wl.get("items", []):
+        nm = it.get("name"); t = code_of.get(nm)
+        if not t:
+            continue
+        try:
+            h = stock.get_market_ohlcv(s, d, t, adjusted=False)
+        except Exception as e:
+            print(f"  [가격선] {nm} 수집 실패 → 글자 표기: {e}"); continue
+        if h is None or not len(h):
+            continue
+        h = h[h["종가"] > 0]
+        if len(h) < 61 or h.index[-1].strftime("%Y%m%d") != d:
+            continue
+        c, lo = h["종가"].astype(float), h["저가"].astype(float)
+        out[nm] = {"close": int(round(c.iloc[-1])), "ma20": int(round(c.iloc[-20:].mean())),
+                   "ma60": int(round(c.iloc[-60:].mean())), "low20": int(round(lo.iloc[-21:-1].min()))}
+        time.sleep(0.2)
+    return out
 
 
 def sectors(stock, d, kospi_chg):
@@ -134,6 +167,11 @@ def build(today, r, wl):
         for it in wl.get("items", []):
             c = chg.get(it.get("name"))
             it["note"] = f"{mmdd} {c:+.2f}%" if c is not None else f"{mmdd} 등락 미확인(종목명 불일치)"
+            lv = (r.get("levels") or {}).get(it.get("name"))
+            if lv:
+                it["lv"] = lv
+            else:
+                it.pop("lv", None)          # 어제 값이 남아 오늘 것처럼 보이지 않게
             if c is not None and it.get("status") != "이탈·제외후보" and len(stocks["trend_watch"]) < 5:
                 stocks["trend_watch"].append([it["name"], it.get("theme", ""), f"{c:+.2f}%"])
         wl["updated"] = iso
@@ -163,11 +201,17 @@ def main():
         print(f"[중단] {today} 마감 데이터 미발표(휴장·지연) — JSON 그대로 둠"); return 1
     wp = os.path.join(HERE, "jq_watchlist.json")
     wl = json.load(open(wp, encoding="utf-8")) if os.path.exists(wp) else None
+    try:
+        r["levels"] = watch_levels(stock, today, wl, r["ohlcv"])
+    except Exception as e:
+        print("  [가격선] 전체 실패 → 글자 표기:", e); r["levels"] = {}
     data, stocks, wl = build(today, r, wl)
     _save("jq_close_data.json", data); _save("jq_close_stocks.json", stocks)
     if wl: _save("jq_watchlist.json", wl)
     print(f"[수집] {data['date']} 코스피 {data['kospi']:,} ({data['kospi_chg']:+.2f}%) · 코스닥 {data['kosdaq']:,} ({data['kosdaq_chg']:+.2f}%)")
     print(f"[수집] 급등 {len(stocks['gainers'])} · 거래대금 {len(stocks['value_top'])} · 업종 {len(stocks['sector_top'])} · 워치 {len(stocks['trend_watch'])}")
+    if wl:
+        print(f"[수집] 워치 가격선 {len(r['levels'])}/{len(wl.get('items', []))}종")
     return 0
 
 
@@ -185,7 +229,12 @@ def self_test():
             return pd.DataFrame({"종가": c}, index=days)
         def get_market_trading_value_by_investor(self, s, e, m):
             return pd.DataFrame({"순매수": [-6834e8, -3991e8, 10364e8]}, index=["기관합계", "외국인", "개인"])
-        def get_market_ohlcv(self, d, market):
+        def get_market_ohlcv(self, d, e=None, t=None, market=None, adjusted=True):
+            if t is not None:                 # 종목 일봉(가격선): 005930 = 70일, 247540 = 30일(모자람)
+                n = 70 if t == "005930" else 30
+                idx = pd.bdate_range(end="2026-10-23", periods=n)
+                c = [1000.0 + i for i in range(n)]
+                return pd.DataFrame({"저가": [x - 5 for x in c], "종가": c, "거래량": [1] * n}, index=idx)
             if market == "KOSPI":
                 return pd.DataFrame({"종가": [1, 2, 3], "거래량": [10, 10, 10], "거래대금": [3e12, 5e11, 1e9],
                                      "등락률": [2.0, -1.0, 30.0]}, index=["005930", "000660", "123456"])
@@ -204,7 +253,15 @@ def self_test():
         {"name": "삼성전자", "theme": "반도체", "status": "추세 유효", "note": "x"},
         {"name": "없는종목", "theme": "?", "status": "추세 유효", "note": "x"},
         {"name": "에코프로비엠", "theme": "2차전지", "status": "이탈·제외후보", "note": "x"}]}
+    lv = watch_levels(st, D, wl, r["ohlcv"])
+    chk("가격선: 이름 맞고 61일+ 인 종목만", sorted(lv) == ["삼성전자"])
+    chk("가격선: 현재가·20일선·60일선·손절선(오늘 제외 20일 저가)",
+        lv["삼성전자"] == {"close": 1069, "ma20": 1060, "ma60": 1040, "low20": 1044})
+    r["levels"] = lv
+    wl["items"][2]["lv"] = {"close": 1}            # 어제 값 — 오늘 못 구하면 지워져야 함
     data, stocks, wl2 = build(D, r, wl)
+    chk("워치: 가격선 붙음 · 못 구한 종목은 옛 값 지움", wl2["items"][0].get("lv", {}).get("close") == 1069
+        and "lv" not in wl2["items"][1] and "lv" not in wl2["items"][2])
     chk("수급 억원 변환", data["inv"] == {"기관": -6834, "외국인": -3991, "개인": 10364})
     chk("동인에 수급·업종 포함", "외국인 순매도·기관 순매도" in data["driver"] and "강세 전기·전자" in data["driver"])
     chk("급등 1위 상한가 표기", stocks["gainers"][0] == ["급등주", 30.0, "상한가"])
