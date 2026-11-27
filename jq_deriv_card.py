@@ -278,10 +278,99 @@ def save(img,dstamp):
         except Exception: pass
     return p
 
+
+# ===== 2026-11-27 카톡 큰 글씨 카드 (jq_mcard) — 옛 카드는 JQ_OLD_CARDS=1 =====
+import jq_mcard as M
+
+def render_m(D):
+    _eo, _eq = next_expiries()
+    c = M.Card("선물 · 옵션", D['date'], accent=M.ACC, sub="KRX 파생 T-1 종가 · 고위험")
+    c.para("만기: 매월 둘째 목요일" + (f" · 다음 월물 {_eo}" if _eo else "") + (f" · 분기 동시만기 {_eq}" if _eq else ""),
+           color=M.ACC, size=M.SMALL)
+    fut = D.get('k200_fut'); spot = D.get('k200_spot'); basis = D.get('basis'); oi = D.get('k200_oi')
+    c.sec("KOSPI200 선물 (근월물)")
+    if fut:
+        bc = M.GREEN if (basis or 0) > 0 else M.RED
+        c.stat("선물 지수", f"{fut:,.2f}", (f"베이시스 {basis:+.2f}" if basis is not None else ""), bc,
+               note=("콘탱고" if (basis or 0) > 0 else "백워데이션") if basis is not None else "")
+        if spot: c.row("현물", f"{spot:,.2f}", rbold=True, rc=M.TXT)
+        if oi is not None: c.row("미결제약정", f"{oi:,.0f}", rbold=True, rc=M.TXT)
+        nom = fut * K200_MULT
+        c.row("1계약 명목가치", eok(nom), rc=M.BLUE, rbold=True, sub="선물지수 × 25만원/pt")
+        c.row("개시증거금 8.1%", "약 " + eok(nom * INIT_M), rc=M.YEL, rbold=True)
+        c.row("유지증거금 5.4%", "약 " + eok(nom * MAINT_M), rc=M.SUB, rbold=True)
+    else:
+        c.para("데이터부족 (KRX 인증키/응답 확인)", color=M.SUB)
+    c.sec("KOSDAQ150 선물", color=M.GREEN)
+    kq = D.get('kq150_fut')
+    if kq:
+        c.row("선물 지수", f"{kq:,.2f}", rbold=True, rc=M.TXT)
+        c.row("미결제약정", f"{D.get('kq150_oi', 0):,.0f}", rbold=True, rc=M.TXT)
+        c.row("1계약 명목가치", eok(kq * KQ150_MULT), rc=M.BLUE, rbold=True, sub="승수 1만원/pt")
+    else:
+        c.para("데이터부족", color=M.SUB)
+    kn = D.get('k200_night'); qn = D.get('kq150_night')
+    if kn or qn:
+        try:
+            _d0 = datetime.date.fromisoformat(D.get('date', '')); _d1 = _d0 + datetime.timedelta(days=1)
+            _nl = f" · {_d0.month}/{_d0.day} 밤→{_d1.month}/{_d1.day} 새벽"
+        except Exception:
+            _nl = ""
+        c.sec("야간 선물" + _nl, color=M.BLUE)
+        _gs = []
+        for lab, night, day in [("KOSPI200", kn, D.get('k200_fut')), ("KOSDAQ150", qn, D.get('kq150_fut'))]:
+            if not (night and day): continue
+            g = (night / day - 1) * 100; _gs.append(g)
+            badge = "급등 주의" if g >= 3 else ("강세" if g >= 2 else ("급락 주의" if g <= -3 else ("약세" if g <= -2 else "")))
+            col = M.up_down(g)
+            ar = '▲' if g > 0 else ('▼' if g < 0 else '·')
+            c.row(lab, f"{ar} {g:+.2f}%", rc=col, rbold=True, badge=(badge, col) if badge else None,
+                  sub=f"야간 {night:,.2f} · 주간 종가 대비")
+        if _gs:
+            avg = sum(_gs) / len(_gs)
+            if avg >= 2: sig, sc = "야간 강세 → 익일 국내 개장 상승 압력(참고)", M.GREEN
+            elif avg <= -2: sig, sc = "야간 약세 → 익일 국내 개장 하락 압력(참고)", M.RED
+            elif abs(avg) < 0.5: sig, sc = "야간 보합 → 뚜렷한 방향성 약함", M.SUB
+            else: sig, sc = ("야간 소폭 강세" if avg > 0 else "야간 소폭 약세") + " → 참고", M.up_down(avg)
+            c.para("→ " + sig, color=sc)
+    chain = D.get('chain') or []
+    if chain:
+        _om = D.get('opt_month'); _oml = (f"{_om[2:4]}년 {int(_om[4:6])}월물" if _om and len(_om) >= 6 else "근월물")
+        c.sec(f"KOSPI200 옵션 체인 · {_oml}")
+        xC, xP = 700, M.W - M.PAD
+        c.cols([("행사가", M.SUB, M.PAD, "l"), ("콜", M.GREEN, xC, "r", True), ("풋", M.RED, xP, "r", True)], size=M.SMALL)
+        atm = D.get('atm')
+        for strike, call, put in chain:
+            isa = bool(atm and abs(strike - atm) < 0.6)
+            c.cols([(f"{strike:,.1f}" + (" ATM" if isa else ""), (255, 215, 120) if isa else M.TXT, M.PAD, "l", isa),
+                    ((f"{call:,.2f}" if call is not None else "-"), M.GREEN, xC, "r", True),
+                    ((f"{put:,.2f}" if put is not None else "-"), M.RED, xP, "r", True)],
+                   hl=(48, 42, 28) if isa else None)
+        if D.get('pcr'): c.row("풋/콜 비율", f"{D['pcr']:.3f}", rbold=True, rc=M.TXT, sub="옵션 1pt = 25만원")
+    else:
+        c.sec("KOSPI200 옵션", color=M.YEL)
+        if D.get('pcr'): c.row("풋/콜 비율(거래량)", f"{D['pcr']:.3f}", rbold=True, rc=M.TXT)
+        c.para(D.get('opt_note') or "옵션 체인 데이터부족", color=M.SUB, size=M.SMALL)
+    if D.get('errs'):
+        c.para("※ 미수신: " + " · ".join(D['errs']), color=(220, 160, 120), size=M.SMALL)
+    c.sec("1틱(최소 호가) 금액", color=M.YEL)
+    for lab, val, col in [("KOSPI200 선물", "0.05pt = 12,500원", M.BLUE),
+                          ("KOSPI200 옵션", "0.01pt = 2,500원 (프리미엄<10pt) · 0.05pt = 12,500원 (10pt 이상)", M.GREEN),
+                          ("KOSDAQ150 선물", "0.10pt = 1,000원", M.GREEN)]:
+        c.row(lab, "", lc=col, sub=val)
+    c.para("명목가치=계약 규모 · 증거금=진입 자금 · 풋콜비율=심리 · 증거금률은 KRX 고시로 바뀜 · 파생 고위험",
+           color=M.SUB, size=M.SMALL)
+    return c
+
 def main():
     D=fetch()
-    img=render(D)
-    p=save(img,D['date'])
+    if os.environ.get("JQ_OLD_CARDS") == "1":
+        img=render(D)
+        p=save(img,D['date'])
+    else:   # 폴더는 실행일 기준(옛 save와 같음) · 기준일은 카드 본문
+        ps=render_m(D).save("선물옵션_카드", HERE, D['date'], folder_date=datetime.date.today().isoformat())
+        p=ps[0]
+        print(f"[산출] 선물옵션_카드 {len(ps)}쪽")
     print("[산출]",os.path.basename(p),"· errs:",D.get('errs'))
     return 0
 if __name__=="__main__": sys.exit(main())
