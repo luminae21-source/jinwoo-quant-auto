@@ -1,72 +1,49 @@
 # -*- coding: utf-8 -*-
 """jq_close_card.py — 국내증시 마감 브리핑 카드뉴스.
-데이터: 같은 폴더 jq_close_data.json (스케줄이 웹검색값으로 채움). 실데이터만·가짜 금지.
-산출: 마감브리핑_카톡.png → 메인 + 카드뉴스/YYYY-MM-DD/ + OneDrive.
+데이터: 같은 폴더 jq_close_data.json (jq_close_fetch.py가 KRX 확정치로 채움). 실데이터만·가짜 금지.
+산출: 카드뉴스/YYYY-MM-DD/마감브리핑_카톡_p1.png … (카톡 말풍선용 1080×최대1440, 큰 글씨)
+      + 메인 폴더 마감브리핑_카톡.png (쪽을 이은 한 장, 예전 이름 호환)
+2026-11-27: 카톡 말풍선에서 글씨가 안 보이던 문제 → jq_mcard(큰 글씨·3:4 쪽 나누기)로 다시 그림.
 """
-import os, sys, json, datetime
-HERE=os.path.dirname(os.path.abspath(__file__))
+import os, sys, json
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
 try: sys.stdout.reconfigure(encoding="utf-8")
 except Exception: pass
-from PIL import Image, ImageDraw, ImageFont
-def _fp():
-    for p in [r"C:\Windows\Fonts\malgun.ttf","/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"]:
-        if os.path.exists(p): return p
-    return None
-FP=_fp()
-def F(s): return ImageFont.truetype(FP,s) if FP else ImageFont.load_default()
-BG=(15,17,21); ACC=(255,122,69); GREEN=(63,179,122); RED=(226,96,106); YEL=(224,176,32); GREY=(150,156,166); BLUE=(90,160,240); TXT=(232,234,237); SUB=(150,156,166)
+import jq_mcard as M
 
-def render(D):
-    W=820; pad=26; img=Image.new("RGB",(W,900),BG); d=ImageDraw.Draw(img); d.rectangle([0,0,W,6],fill=ACC); y=24
-    d.text((pad,y),f"국내증시 마감 브리핑 · 기준일 {D['date']}",font=F(29),fill=(255,255,255)); y+=42
-    d.text((pad,y),"장 마감 실데이터(공개 뉴스) · 매수·매도 추천 아님 · 결정·책임 본인",font=F(14),fill=SUB); y+=34
-    cw=(W-2*pad-14)//2
-    def block(x,title,val,chg):
-        up=chg>=0; col=RED if up==False else GREEN  # 국내: 상승=빨강? → 표준 초록/빨강 유지: 상승=초록
-        col=GREEN if up else RED; ar='▲' if up else '▼'; tint=(22,30,26) if up else (34,22,24)
-        d.rectangle([x,y,x+cw,y+96],fill=tint,outline=(46,50,60),width=1); d.rectangle([x,y,x+5,y+96],fill=col)
-        d.text((x+16,y+12),title,font=F(15),fill=SUB); d.text((x+16,y+32),f"{val:,.2f}",font=F(30),fill=(255,255,255))
-        d.text((x+16,y+74),f"{ar} {chg:+.2f}%",font=F(19),fill=col)
-    d.text((pad,y),"■ 지수 마감",font=F(15),fill=ACC); y+=26
-    block(pad,"코스피",D['kospi'],D['kospi_chg']); block(pad+cw+14,"코스닥",D['kosdaq'],D['kosdaq_chg']); y+=112
-    # 수급
-    d.text((pad,y),"■ 투자자별 수급 (순매수, 억원)",font=F(15),fill=ACC); y+=26
-    bh=58; d.rectangle([pad,y,W-pad,y+bh],fill=(24,27,34),outline=(46,50,60),width=1); d.rectangle([pad,y,pad+5,y+bh],fill=BLUE)
-    inv=D.get('inv',{}); xx=pad+18
-    for who in ["기관","외국인","개인"]:
-        v=inv.get(who)
-        if v is None: continue
-        col=GREEN if v>0 else RED; sign='+' if v>0 else ''
-        d.text((xx,y+8),who,font=F(14),fill=SUB); d.text((xx,y+28),f"{sign}{v:,}",font=F(18),fill=col); xx+=(W-2*pad)//3
-    y+=bh+16
-    # 동인
+
+def build(D):
+    c = M.Card("국내증시 마감 브리핑", D['date'], accent=M.ACC, sub=M.src_label(D.get('sources')) + " · 장 마감",
+               foot="상승 초록 · 하락 빨강 · 추천 아님 · 결정·책임 본인")
+    c.sec("지수 마감")
+    for nm, k in (("코스피", "kospi"), ("코스닥", "kosdaq")):
+        v, ch = D.get(k), D.get(k + "_chg")
+        c.stat(nm, f"{v:,.2f}" if v is not None else "N/A", M.arrow_pct(ch), M.up_down(ch))
+    inv = {k: v for k, v in (D.get('inv') or {}).items() if v is not None}
+    if inv:
+        c.sec("투자자별 수급 (코스피 · 억원)")
+        for who in ("외국인", "기관", "개인"):
+            if who in inv:
+                v = inv[who]
+                c.row(who, f"{v:+,}", rc=M.up_down(v), rbold=True)
     if D.get('driver'):
-        d.text((pad,y),"■ 오늘의 동인",font=F(15),fill=ACC); y+=26
-        d.text((pad+8,y),D['driver'],font=F(16),fill=TXT); y+=32
-    # 인사이트
+        c.sec("오늘의 동인")
+        c.para(D['driver'], box=M.ACC)
     if D.get('insight'):
-        d.text((pad,y),"■ 인사이트 (야간 선물 연계)",font=F(15),fill=ACC); y+=26
-        bh=52; d.rectangle([pad,y,W-pad,y+bh],fill=(20,28,24),outline=(50,80,60),width=1); d.rectangle([pad,y,pad+5,y+bh],fill=GREEN)
-        d.text((pad+16,y+8),"→ "+D['insight'][:64],font=F(14),fill=(150,220,170))
-        if len(D['insight'])>64: d.text((pad+16,y+28),D['insight'][64:128],font=F(14),fill=(150,220,170))
-        y+=bh+16
-    d.text((pad,y),"해설 · 상승=초록·하락=빨강 · 수급 순매수(+)/순매도(-) · 야간 선물이 미국장 반영해 방향 선행",font=F(13),fill=(120,165,210)); y+=22
-    d.text((pad,y),f"출처: {D.get('sources','공개 뉴스')} · 매수·매도 추천 아님 · 결정·책임 본인",font=F(13),fill=(88,94,104)); y+=26
-    return img.crop((0,0,W,y+6))
+        c.sec("참고 (코스닥 수급 등)", color=M.GREEN)
+        c.para(D['insight'], color=(190, 240, 210), box=M.GREEN)
+    return c
+
 
 def main():
-    p=os.path.join(HERE,"jq_close_data.json")
+    p = os.path.join(HERE, "jq_close_data.json")
     if not os.path.exists(p):
         print("[오류] jq_close_data.json 없음"); return 2
-    D=json.load(open(p,encoding="utf-8"))
-    img=render(D); dt=D['date']
-    out=os.path.join(HERE,"마감브리핑_카톡.png"); img.save(out)
-    dd=os.path.join(HERE,"카드뉴스",dt); os.makedirs(dd,exist_ok=True)
-    import shutil
-    for t in [os.path.join(dd,"마감브리핑_카톡.png"), os.path.join(os.path.expanduser(r"~\OneDrive\문서\Claude\Projects\진우퀀트"),"마감브리핑_카톡.png")]:
-        try:
-            if os.path.isdir(os.path.dirname(t)): shutil.copy(out,t)
-        except Exception: pass
-    print("[산출] 마감브리핑_카톡.png ·",dt)
+    D = json.load(open(p, encoding="utf-8"))
+    paths = build(D).save("마감브리핑_카톡", HERE, D['date'])
+    print(f"[산출] 마감브리핑_카톡 {len(paths)}쪽 ·", D['date'])
     return 0
-if __name__=="__main__": sys.exit(main())
+
+
+if __name__ == "__main__": sys.exit(main())
