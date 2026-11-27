@@ -244,7 +244,10 @@ def upload_image(access_token, filepath):
     st, res = _post_multipart(IMG_UPLOAD_URL, "file", filepath,
                               headers={"Authorization": "Bearer " + access_token})
     try:
-        return res["infos"]["original"]["url"]
+        org = res["infos"]["original"]
+        if org.get("width"):
+            print(f"    [업로드] {os.path.basename(filepath)} → {org.get('width')}x{org.get('height')}")
+        return org["url"]
     except Exception:
         return None
 
@@ -326,7 +329,7 @@ def card_link(image_url, cfg):
     return _to_https(image_url) if image_url else custom
 
 
-def send_image(access_token, filepath, title, description="", cfg=None):
+def send_image(access_token, filepath, title, description="", cfg=None, full_path=None, button_title=None):
     """카드 1장 발송. IMAGE_BASE_URL 있으면 그 URL, 없으면 업로드 → feed(버튼 링크 포함).
     content.link 는 카카오 필수(-2 방지). 버튼 링크는 card_link()로 결정하며,
     해당 도메인을 앱 [제품 링크 관리 > 웹 도메인]에 등록하면 localhost 치환 없이 실제로 열림.
@@ -344,8 +347,17 @@ def send_image(access_token, filepath, title, description="", cfg=None):
             print(f"    [업로드 실패] {fn}: {e}")
     if image_url:
         link = card_link(image_url, cfg)
+        # 2026-11-27: 여러 쪽 카드는 말풍선 = 1쪽, 버튼 = 모든 쪽을 이은 한 장(full_path)
+        full_url = None
+        if full_path and not base and os.path.exists(full_path):
+            try:
+                full_url = upload_image(access_token, full_path)
+            except Exception as e:
+                print(f"    [전체본 업로드 실패] {os.path.basename(full_path)}: {e}")
+        if full_url:
+            link = _to_https(full_url)
         try:
-            bt = "카드 크게 보기" if link == _to_https(image_url) else None
+            bt = (button_title or "전체 보기") if full_url else ("카드 크게 보기" if link == _to_https(image_url) else None)
             ok, res = send_feed(access_token, image_url, title, description, link_url=link,
                                 size=_png_size(filepath), button_title=bt)
             if ok:
