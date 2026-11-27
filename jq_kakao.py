@@ -258,17 +258,22 @@ def _png_size(path):
         return None
 
 
-def _build_feed(image_url, title, description, link_url=None):
+def _build_feed(image_url, title, description, link_url=None, size=None):
     """feed 카드 페이로드. link_url 이 없으면 content.link 자체를 넣지 않음.
     카카오 '자세히 보기' 기본 버튼은 content.link 로부터 생성되므로,
     link 를 아예 빼면 버튼이 생기지 않는다(공식 문서: 링크 미설정 시 버튼 미노출).
     → 죽은 localhost 링크가 카드에 노출되지 않음. 이미지 탭은 확대뷰로 동작.
-    link_url 을 명시하면(등록된 웹 도메인 사용 시) 그 링크로 버튼이 생성됨."""
+    link_url 을 명시하면(등록된 웹 도메인 사용 시) 그 링크로 버튼이 생성됨.
+    size=(가로, 세로) 를 주면 image_width/height 를 넣는다(2026-11-27). 안 주면 카톡이
+    말풍선을 1:1로 잘라 카드가 손톱만 하게 보였다. 비율은 2:1~3:4 안에서 그대로 보인다."""
     content = {
         "title": title[:100],
         "description": (description or "")[:200],
         "image_url": image_url,
     }
+    if size and size[0] and size[1]:
+        content["image_width"] = int(size[0])
+        content["image_height"] = int(size[1])
     if link_url:
         content["link"] = {"web_url": link_url, "mobile_web_url": link_url}
     return {"object_type": "feed", "content": content}
@@ -289,8 +294,8 @@ def _to_https(url):
     return url
 
 
-def send_feed(access_token, image_url, title, description, link_url=None):
-    obj = _build_feed(image_url, title, description, link_url)
+def send_feed(access_token, image_url, title, description, link_url=None, size=None):
+    obj = _build_feed(image_url, title, description, link_url, size=size)
     st, res = _post_form(MEMO_SEND_URL,
                          {"template_object": json.dumps(obj, ensure_ascii=False)},
                          headers={"Authorization": "Bearer " + access_token})
@@ -334,7 +339,8 @@ def send_image(access_token, filepath, title, description="", cfg=None):
     if image_url:
         link = card_link(image_url, cfg)
         try:
-            ok, res = send_feed(access_token, image_url, title, description, link_url=link)
+            ok, res = send_feed(access_token, image_url, title, description, link_url=link,
+                                size=_png_size(filepath))
             if ok:
                 print(f"    [링크] {link}")  # 이 호스트를 웹 도메인에 등록하면 버튼이 정상 오픈
                 return True, "feed"
@@ -382,6 +388,9 @@ def _selftest():
     # 링크 명시 시에는 link 포함(등록 도메인 사용 케이스)
     obj_feed_l = _build_feed("https://ex.com/i.png", "t", "d", link_url="https://ex.com/i.png")
     chk("링크 feed: content.link 포함", obj_feed_l["content"].get("link", {}).get("web_url") == "https://ex.com/i.png")
+    obj_sz = _build_feed("https://ex.com/i.png", "t", "d", size=(1080, 1440))
+    chk("크기 feed: image_width/height 포함", obj_sz["content"].get("image_width") == 1080 and obj_sz["content"].get("image_height") == 1440)
+    chk("크기 없음: image_width 없음", "image_width" not in obj_feed["content"])
     obj_text = _build_text("hello")
     chk("무링크 text: link 없음", "link" not in obj_text)
     # 이미지 URL 조합 로직(base 있을 때)
@@ -402,8 +411,8 @@ def _selftest():
     except Exception:
         pass
     globals()["CONFIG"] = os.path.join(HERE, "jq_kakao_config.txt")
-    print(f"✅ jq_kakao 셀프테스트 ({ok}/19)")
-    return ok == 19
+    print(f"✅ jq_kakao 셀프테스트 ({ok}/21)")
+    return ok == 21
 
 
 if __name__ == "__main__":
